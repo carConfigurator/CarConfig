@@ -12,6 +12,7 @@ public class ReadConfigTEST {
 	public static void main(String[] args) {
 		//Llamada al método de prueba de lectura del XML
 		getDocument();
+		System.out.println("GetProvaDario");
 		
 	}
 	
