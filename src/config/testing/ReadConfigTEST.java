@@ -18,21 +18,25 @@ public class ReadConfigTEST {
 	/*
 	 * Método que muestra la información del Documento XML
 	 */
-	public static void getDocument() {
+	private static void getDocument() {
 		try {
-			FileInputStream fis = new FileInputStream(new File("cv_config.xml"));
-			int content;
+			FileInputStream fis = new FileInputStream(new File("src\\config\\cv_config.xml"));
+			readDocument(fis);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void readDocument(FileInputStream fis) {
+		int content;
+		try {
 			while((content = fis.read()) != -1) {
 				System.out.print((char) content);
 			}
 			fis.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 }

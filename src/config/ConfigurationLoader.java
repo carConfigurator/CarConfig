@@ -21,12 +21,11 @@ public class ConfigurationLoader {
 	private DocumentBuilder builder;
 	private Document document;
 	
-
 	private ConfigurationLoader() {
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
 			this.builder = factory.newDocumentBuilder();
-			this.document = builder.parse(new File("cv_config.xml"));
+			this.document = builder.parse(new File("src\\config\\cv_config.xml"));
 		} catch (ParserConfigurationException e) {
 			System.out.println("[ERROR] - No se ha podido parsear la configuración. Más información del error: " + e);
 		} catch (SAXException e) {
@@ -39,8 +38,7 @@ public class ConfigurationLoader {
 	public static ConfigurationLoader getConfigurationLoaderInstance() {
 		if(configLoad == null) {
 			System.out.println("[INFO] - Generando instancia...");
-			configLoad = new ConfigurationLoader();
-			return configLoad;
+			return configLoad = new ConfigurationLoader();
 		}else {
 			System.out.println("[INFO] - Ya existe una instancia");
 			return null;
