@@ -123,10 +123,97 @@ public class ConfigurationLoader {
 		return nNode.getTextContent();
 	}
 	
+	public String getLanguage() {
+		return language;
+	}
+
+	public String getLanguage_default() {
+		return language_default;
+	}
+
+	public String getPostfix_language_file_name() {
+		return postfix_language_file_name;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public String getLanguage_files_path() {
+		return language_files_path;
+	}
+
+	public String getCar_configuration_path() {
+		return car_configuration_path;
+	}
+
+	public String getCar_configuration_file_name() {
+		return car_configuration_file_name;
+	}
+
+	public String getEmployee_list() {
+		return employee_list;
+	}
+
+	public String getEmployee_version() {
+		return employee_version;
+	}
+
+	public String getEmployee_password() {
+		return employee_password;
+	}
+
+	public String getSpecifications_file_path() {
+		return specifications_file_path;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public void setLanguage_default(String language_default) {
+		this.language_default = language_default;
+	}
+
+	public void setPostfix_language_file_name(String postfix_language_file_name) {
+		this.postfix_language_file_name = postfix_language_file_name;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public void setLanguage_files_path(String language_files_path) {
+		this.language_files_path = language_files_path;
+	}
+
+	public void setCar_configuration_path(String car_configuration_path) {
+		this.car_configuration_path = car_configuration_path;
+	}
+
+	public void setCar_configuration_file_name(String car_configuration_file_name) {
+		this.car_configuration_file_name = car_configuration_file_name;
+	}
+
+	public void setEmployee_list(String employee_list) {
+		this.employee_list = employee_list;
+	}
+
+	public void setEmployee_version(String employee_version) {
+		this.employee_version = employee_version;
+	}
+
+	public void setEmployee_password(String employee_password) {
+		this.employee_password = employee_password;
+	}
+
+	public void setSpecifications_file_path(String specifications_file_path) {
+		this.specifications_file_path = specifications_file_path;
+	}
+
 	@Override
 	public String toString() {
-		return "ConfigurationLoader [factory=" + factory + ", builder=" + builder + ", document=" + document
-				+ ", language=" + language + ", language_default=" + language_default + ", postfix_language_file_name="
+		return "ConfigurationLoader language=" + language + ", language_default=" + language_default + ", postfix_language_file_name="
 				+ postfix_language_file_name + ", version=" + version + ", language_files_path=" + language_files_path
 				+ ", car_configuration_path=" + car_configuration_path + ", car_configuration_file_name="
 				+ car_configuration_file_name + ", employee_list=" + employee_list + ", employee_version="
