@@ -7,6 +7,7 @@ import java.awt.Insets;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -71,7 +72,8 @@ public class part12 {
 		constraints.insets=new Insets(0,0,0,30);//top, left, bottom, right
 		panelGBC.add(panelBox, constraints);
 		
-		b1=new JButton("Coche1");
+		b1=new JButton();
+		b1.setIcon(new ImageIcon("/src/config/car/images/Ateca.jpeg"));//new ImageIcon(ConfigurationLoader.getImageIcon[0]);//cargamos la imagen en el singelton
 		panelBox.add(b1);
 
 		b2=new JButton("Coche2");
