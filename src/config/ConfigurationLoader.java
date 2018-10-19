@@ -40,11 +40,11 @@ public class ConfigurationLoader {
 			this.employee_password=loadEmployee_password();
 			this.specifications_file_path=loadSpecifications_file_path();
 		} catch (ParserConfigurationException e) {
-			System.out.println("[ERROR] - No se ha podido parsear la configuraci髇. M醩 informaci髇 del error: " + e);
+			System.out.println("[ERROR] - No se ha podido parsear la configuraci贸n. M谩s informaci贸n del error: " + e);
 		} catch (SAXException e) {
-			System.out.println("[ERROR] - No se ha podido parsear el archivo XML. M醩 informaci髇 del error: " + e);
+			System.out.println("[ERROR] - No se ha podido parsear el archivo XML. M谩s informaci贸n del error: " + e);
 		} catch (IOException e) {
-			System.out.println("[ERROR] - Error de E/S. M醩 informaci髇 del error: " + e);
+			System.out.println("[ERROR] - Error de E/S. M谩s informaci贸n del error: " + e);
 		}
 	}
 	
