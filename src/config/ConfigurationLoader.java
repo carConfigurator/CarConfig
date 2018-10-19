@@ -21,6 +21,8 @@ public class ConfigurationLoader {
 	private DocumentBuilder builder;
 	private Document document;
 	
+	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,employee_list,employee_version,employee_password,specifications_file_path;
+	
 	private ConfigurationLoader() {
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
@@ -44,7 +46,4 @@ public class ConfigurationLoader {
 			return null;
 		}
 	}
-	
-	
-	
 }
