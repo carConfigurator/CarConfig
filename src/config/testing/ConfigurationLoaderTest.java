@@ -8,6 +8,7 @@ public class ConfigurationLoaderTest {
 		// Pruebo de instanciar dos veces el Singleton, debe de indicar en la segunda instancia que ya existe una instancia, valga la rebundancia.
 		ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
 		ConfigurationLoader configLoad2 = ConfigurationLoader.getConfigurationLoaderInstance();
+		System.out.println(configLoad.toString());
 	}
 	
 }
