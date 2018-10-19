@@ -17,6 +17,8 @@ import config.ConfigurationLoader;
  */
 public class Login extends javax.swing.JFrame {
 
+	private ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
+	
     /**
      * Creates new form Login
      */
@@ -119,12 +121,35 @@ public class Login extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    	ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
-    	
         String login = tfLogin.getText();
+        
+        String[] listEmployee = configLoad.getEmployee_list();
+        String[] listPassword = configLoad.getEmployee_password();
         char[] array = pfPassword.getPassword();
         String password = new String(array);
-        JOptionPane.showMessageDialog(null, "Login: " + login + "\n" + "Contrasena: " + password, "Datos", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Cuento los intentos que hace de conectar.
+        int countTries = 1;
+//        System.out.println(listEmployee.length);
+        
+        for (int i = 0; i < listEmployee.length; i++) {
+//        	System.out.println(countTries);
+			if(countTries == listEmployee.length) {
+				JOptionPane.showMessageDialog(null, "El usuario introducido no existe.", "Error de Autenticación", JOptionPane.ERROR_MESSAGE);
+			}else {
+				if(listEmployee[i].equals(login)) {
+					if(listPassword[i].equals(password)) {
+						System.out.println("[INFO] - Conexión Establecida");
+						JOptionPane.showMessageDialog(null, "Login: " + login + "\n" + "Contrasena: " + password, "Datos", JOptionPane.INFORMATION_MESSAGE);
+					}else {
+						System.out.println("[ERROR] - El usuario/contraseña es incorrecto");
+						JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.", "Error de Autenticación", JOptionPane.ERROR_MESSAGE);
+					}
+				}else {
+					countTries++;
+				}
+			}
+		}
     }                                         
     
     public Image getIconImage() {
