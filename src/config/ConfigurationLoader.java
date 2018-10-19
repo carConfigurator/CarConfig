@@ -35,7 +35,7 @@ public class ConfigurationLoader {
 			this.language_files_path=loadLanguage_files_path();
 			this.car_configuration_path=loadCar_configuration_path();
 			this.car_configuration_file_name=loadCar_configuration_file_name();
-			this.employee_list= loadEmployee_list();
+			this.employee_list=loadEmployee_list();
 			this.employee_version=loadEmployee_version();
 			this.employee_password=loadEmployee_password();
 			this.specifications_file_path=loadSpecifications_file_path();
