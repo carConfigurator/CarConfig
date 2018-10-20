@@ -19,12 +19,17 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import config.ConfigurationLoader;
+import daoImplFactory.LanguageFactory;
+import idao.ILanguage;
 import net.miginfocom.swing.MigLayout;
 
 public class Login extends JFrame{
 	
+	private ConfigurationLoader configLoad;
+	private ILanguage language;
+	
 	// Atributos de la Clase.
-	JFrame frame = new JFrame("Autenticación de Usuarios");
 	JPanel panel = new JPanel();
 	JLabel label_username, label_password;
 	JTextField tfield_username;
@@ -44,13 +49,15 @@ public class Login extends JFrame{
 	 * Constructor de la Clase
 	 */
 	public Login() {
+		this.configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
+		this.language = LanguageFactory.getLanguage(configLoad.getLanguage_default());
 		// Configuracion de los Componentes:
 		// Añado el Layout al Panel y le indico que este haga un padding de 20 en el Panel.
 		this.panel.setLayout(new MigLayout("insets 20"));
 		this.panel.setBackground(new Color(255,255,255));
-		this.label_username = new JLabel("Nombre de Usuario");
+		this.label_username = new JLabel(language.labelUsername());
 		this.label_username.setFont(new java.awt.Font("Tahoma", 0, 12));
-		this.label_password = new JLabel("Contraseña");
+		this.label_password = new JLabel(language.labelPassword());
 		this.label_password.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.label_password.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 		this.tfield_username = new JTextField(30);
@@ -66,7 +73,7 @@ public class Login extends JFrame{
 				));
 		this.pfield_password.setMargin(new Insets(0, 10, 10, 10));
 		this.pfield_password.setFont(new java.awt.Font("Tahoma", 0, 12));
-		this.btn_login = new JButton("Iniciar Sesión");
+		this.btn_login = new JButton(language.btnLogin());
 		this.btn_login.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.btn_login.setBackground(new Color(215,18,43));
 		this.btn_login.setForeground(new Color(255,255,255));
@@ -133,25 +140,22 @@ public class Login extends JFrame{
 	private void loginActionPerformed(ActionEvent e) {
 		String username = tfield_username.getText();
 		String password = String.valueOf(pfield_password.getPassword());
-		String[] listEmployee = {"alexis.mengual", "dario.delcore", "david.uson"};
-		String[] listPassword = {"1234", "5678", "111"};
+		String[] listEmployee = configLoad.getEmployee_list();
+		String[] listPassword = configLoad.getEmployee_password();
 		
 		int countTries = 1;
 		
 		for (int i = 0; i < listEmployee.length; i++) {
-//        	System.out.println(countTries);
 			if(countTries == listEmployee.length) {
-				JOptionPane.showMessageDialog(null, "El usuario introducido no existe.", "Error de Autenticación", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null,language.errorLoginUser(),language.errorLoginUserTitle(), JOptionPane.ERROR_MESSAGE);
 			}else {
 				if(listEmployee[i].equals(username)) {
 					if(listPassword[i].equals(password)) {
 						System.out.println("[INFO] - Conexión Establecida");
-//						JOptionPane.showMessageDialog(null, "Login: " + username + "\n" + "Contrasena: " + password, "Datos", JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
-//						new MFigure2(panel, username);
 					}else {
 						System.out.println("[ERROR] - El usuario/contraseña es incorrecto");
-						JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.", "Error de Autenticación", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null,language.errorLoginPassword(),language.errorLoginPasswordTitle(), JOptionPane.ERROR_MESSAGE);
 					}
 				}else {
 					countTries++;

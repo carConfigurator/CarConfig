@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 
 public class ConfigurationLoader {
 	
+	// Atributos de la Clase:
 	private static ConfigurationLoader configLoad;
 	
 	private DocumentBuilderFactory factory;
@@ -23,6 +24,9 @@ public class ConfigurationLoader {
 	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path;
 	private String[] employee_list,employee_password,employee_version;
 	
+	/*
+	 * Constructor de la Clase
+	 */
 	private ConfigurationLoader() {
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
@@ -48,6 +52,10 @@ public class ConfigurationLoader {
 		}
 	}
 	
+	/*
+	 * Método para comprobar si ya hay una instancia generada.
+	 * @return Devuelve la instancia a la clase o un null en caso de si ya hay una.
+	 */
 	public static ConfigurationLoader getConfigurationLoaderInstance() {
 		if(configLoad == null) {
 			System.out.println("[INFO] - Generando instancia...");
@@ -168,6 +176,11 @@ public class ConfigurationLoader {
 		return specifications_file_path;
 	}
 
+	/*
+	 * Método toString() para comprobar que los datos se recojan bien, (uso únicamente para la DEMO).
+	 * @see java.lang.Object#toString()
+	 * @return Devuelve en una cadena de texto todos los atributos de la clase junto a sus datos.
+	 */
 	@Override
 	public String toString() {
 		return "ConfigurationLoader language=" + language + ", language_default=" + language_default + ", postfix_language_file_name="
