@@ -56,7 +56,42 @@ public class LanguageDAOCA implements ILanguage{
 
 	@Override
 	public String labelClientFirstLastName() {
-		return "Primer Congom: *";
+		return "Primer Cognom: *";
+	}
+
+	@Override
+	public String labelClientSecondLastName() {
+		return "Segon Cognom: *";
+	}
+
+	@Override
+	public String labelClientAddress() {
+		return "Adreça: *";
+	}
+
+	@Override
+	public String labelClientEmail() {
+		return "Adrecça Electronica: *";
+	}
+
+	@Override
+	public String labelClientGender() {
+		return "Genere: ";
+	}
+
+	@Override
+	public String radioGenderMale() {
+		return "Home";
+	}
+
+	@Override
+	public String radioGenderFemale() {
+		return "Dona";
+	}
+
+	@Override
+	public String radioGenderUnknown() {
+		return "Desconegut";
 	}
 
 }

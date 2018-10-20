@@ -57,5 +57,40 @@ public class LanguageDAOES implements ILanguage{
 	public String labelClientFirstLastName() {
 		return "Primer Apellido: *";
 	}
+
+	@Override
+	public String labelClientSecondLastName() {
+		return "Segundo Apellido: *";
+	}
+
+	@Override
+	public String labelClientAddress() {
+		return "Dirección: *";
+	}
+
+	@Override
+	public String labelClientEmail() {
+		return "Correo Eléctronico: *";
+	}
+
+	@Override
+	public String labelClientGender() {
+		return "Género: ";
+	}
+
+	@Override
+	public String radioGenderMale() {
+		return "Hombre";
+	}
+
+	@Override
+	public String radioGenderFemale() {
+		return "Mujer";
+	}
+
+	@Override
+	public String radioGenderUnknown() {
+		return "Desconocido";
+	}
 	
 }

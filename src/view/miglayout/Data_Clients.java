@@ -6,9 +6,11 @@ import java.awt.Toolkit;
 import java.io.File;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import config.ConfigurationLoader;
@@ -23,7 +25,9 @@ public class Data_Clients extends JFrame{
 	JPanel panel;
 	JLabel label_client_title, label_username, label_client_name, label_client_first_lastname, label_client_second_lastname,
 	label_client_email, label_client_address, label_client_gender, label_client_birthdate;
-	JTextField tfield_client_name, tfield_client_first_lastname;
+	JTextField tfield_client_name, tfield_client_first_lastname, tfield_client_second_lastname, tfield_client_address, tfield_client_email;
+	JRadioButton rb_male, rb_female, rb_unknown;
+	ButtonGroup bg_gender;
 	
 	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username) {
 		this.language = language;
@@ -59,12 +63,81 @@ public class Data_Clients extends JFrame{
 				));
 		this.tfield_client_first_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
+		this.label_client_second_lastname = new JLabel(this.language.labelClientSecondLastName());
+		this.label_client_second_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.label_client_second_lastname.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
+		
+		this.tfield_client_second_lastname = new JTextField(30);
+		this.tfield_client_second_lastname.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
+				BorderFactory.createEmptyBorder(5, 0, 5, 0)
+				));
+		this.tfield_client_second_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
+		
+		this.label_client_address = new JLabel(this.language.labelClientAddress());
+		this.label_client_address.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.label_client_address.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
+		
+		this.tfield_client_address = new JTextField(30);
+		this.tfield_client_address.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
+				BorderFactory.createEmptyBorder(5, 0, 5, 0)
+				));
+		this.tfield_client_address.setFont(new java.awt.Font("Tahoma", 0, 12));
+		
+		this.label_client_email = new JLabel(this.language.labelClientEmail());
+		this.label_client_email.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.label_client_email.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
+		
+		this.tfield_client_email = new JTextField(30);
+		this.tfield_client_email.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
+				BorderFactory.createEmptyBorder(5, 0, 5, 0)
+				));
+		this.tfield_client_email.setFont(new java.awt.Font("Tahoma", 0, 12));
+		
+		this.label_client_gender = new JLabel(this.language.labelClientGender());
+		this.label_client_gender.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.label_client_gender.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
+		
+		this.rb_male = new JRadioButton(this.language.radioGenderMale());
+		this.rb_male.setBackground(new Color(255,255,255));
+		this.rb_male.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.rb_female = new JRadioButton(this.language.radioGenderFemale());
+		this.rb_female.setBackground(new Color(255,255,255));
+		this.rb_female.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.rb_unknown = new JRadioButton(this.language.radioGenderUnknown());
+		this.rb_unknown.setBackground(new Color(255,255,255));
+		this.rb_unknown.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.bg_gender = new ButtonGroup();
+		
+		this.bg_gender.add(rb_male);
+		this.bg_gender.add(rb_female);
+		this.bg_gender.add(rb_unknown);
+		
+		this.rb_unknown.setSelected(true);
+		
+		this.label_client_birthdate = new JLabel();
+		this.label_client_birthdate.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.label_client_birthdate.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
+		
+		
 		this.panel.add(this.label_client_title);
 		this.panel.add(this.label_username, "wrap, skip, align right");
-		this.panel.add(this.label_client_name);
+		this.panel.add(this.label_client_name, "align right");
 		this.panel.add(this.tfield_client_name, "wrap, pushx, growx");
-		this.panel.add(this.label_client_first_lastname);
+		this.panel.add(this.label_client_first_lastname, "align right");
 		this.panel.add(this.tfield_client_first_lastname, "wrap, pushx, growx");
+		this.panel.add(this.label_client_second_lastname, "align right");
+		this.panel.add(this.tfield_client_second_lastname, "wrap, pushx, growx");
+		this.panel.add(this.label_client_address, "align right");
+		this.panel.add(this.tfield_client_address, "wrap, pushx, growx");
+		this.panel.add(this.label_client_email, "align right");
+		this.panel.add(this.tfield_client_email, "wrap, pushx, growx");
+		this.panel.add(this.label_client_gender, "align right");
+		this.panel.add(this.rb_male, "split 3"); // Ocupa tres celdas
+		this.panel.add(this.rb_female); // Este elemento y el siguiente formaran parte de la misma celda que el elemento anterior, por culpa del split.
+		this.panel.add(this.rb_unknown);
 		JFrame();
 	}
 

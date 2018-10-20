@@ -1,5 +1,7 @@
 package idao;
 
+import javax.swing.Icon;
+
 public interface ILanguage {
 
 	// Métodos que se usarán para el Login.
@@ -16,5 +18,11 @@ public interface ILanguage {
 	String labelAuthIn();
 	String labelClientName();
 	String labelClientFirstLastName();
-	
+	String labelClientSecondLastName();
+	String labelClientAddress();
+	String labelClientEmail();
+	String labelClientGender();
+	String radioGenderMale();
+	String radioGenderFemale();
+	String radioGenderUnknown();
 }

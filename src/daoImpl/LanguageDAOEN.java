@@ -59,4 +59,39 @@ public class LanguageDAOEN implements ILanguage{
 		return "First Last Name: *";
 	}
 
+	@Override
+	public String labelClientSecondLastName() {
+		return "Second Last Name: *";
+	}
+
+	@Override
+	public String labelClientAddress() {
+		return "Address: *";
+	}
+
+	@Override
+	public String labelClientEmail() {
+		return "Email: *";
+	}
+
+	@Override
+	public String labelClientGender() {
+		return "Gender: ";
+	}
+
+	@Override
+	public String radioGenderMale() {
+		return "Male";
+	}
+
+	@Override
+	public String radioGenderFemale() {
+		return "Female";
+	}
+
+	@Override
+	public String radioGenderUnknown() {
+		return "Unknown";
+	}
+
 }
