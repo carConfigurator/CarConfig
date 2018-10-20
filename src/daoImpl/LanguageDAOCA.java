@@ -39,4 +39,24 @@ public class LanguageDAOCA implements ILanguage{
 		return "[ERROR] - Fallada d'Autenticació";
 	}
 
+	@Override
+	public String labelClientTitle() {
+		return "Dades del Client";
+	}
+
+	@Override
+	public String labelAuthIn() {
+		return "Usuari: ";
+	}
+
+	@Override
+	public String labelClientName() {
+		return "Nom: *";
+	}
+
+	@Override
+	public String labelClientFirstLastName() {
+		return "Primer Congom: *";
+	}
+
 }

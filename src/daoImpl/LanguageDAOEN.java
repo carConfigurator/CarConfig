@@ -39,4 +39,24 @@ public class LanguageDAOEN implements ILanguage{
 		return "[ERROR] - Failed Login";
 	}
 
+	@Override
+	public String labelClientTitle() {
+		return "Client's Data";
+	}
+
+	@Override
+	public String labelAuthIn() {
+		return "User: ";
+	}
+
+	@Override
+	public String labelClientName() {
+		return "Name: *";
+	}
+
+	@Override
+	public String labelClientFirstLastName() {
+		return "First Last Name: *";
+	}
+
 }

@@ -7,6 +7,8 @@ package view;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
+
 import javax.swing.JOptionPane;
 
 import config.ConfigurationLoader;
@@ -153,7 +155,8 @@ public class Login extends javax.swing.JFrame {
     }                                         
     
     public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("resources/log.jpg"));
+    	File image = new File("src/config/favicon.png");
+        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
         return retValue;
     }
     

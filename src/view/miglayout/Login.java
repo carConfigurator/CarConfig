@@ -151,8 +151,10 @@ public class Login extends JFrame{
 			}else {
 				if(listEmployee[i].equals(username)) {
 					if(listPassword[i].equals(password)) {
-						System.out.println("[INFO] - Conexión Establecida");
+						System.out.println("[INFO] - Conexión Establecida. Cambiando de Frame...");
+						// Oculto este Frame y llamo al siguiente:
 						setVisible(false);
+						new Data_Clients(this.configLoad, this.language, username);
 					}else {
 						System.out.println("[ERROR] - El usuario/contraseña es incorrecto");
 						JOptionPane.showMessageDialog(null,language.errorLoginPassword(),language.errorLoginPasswordTitle(), JOptionPane.ERROR_MESSAGE);

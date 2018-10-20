@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Proyecto_1;
+package view;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
 
 /**
  *
@@ -266,7 +267,8 @@ public class DatosCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_tfSecApellidoActionPerformed
 
     public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("resources\\log.jpg"));
+    	File image = new File("src/config/favicon.png");
+        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
         return retValue;
     }
     

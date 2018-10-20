@@ -37,5 +37,25 @@ public class LanguageDAOES implements ILanguage{
 	public String errorLoginPasswordTitle() {
 		return "[ERROR] - Fallo de Autenticación";
 	}
+
+	@Override
+	public String labelClientTitle() {
+		return "Datos del Cliente";
+	}
+
+	@Override
+	public String labelAuthIn() {
+		return "Usuario: ";
+	}
+
+	@Override
+	public String labelClientName() {
+		return "Nombre: *";
+	}
+
+	@Override
+	public String labelClientFirstLastName() {
+		return "Primer Apellido: *";
+	}
 	
 }
