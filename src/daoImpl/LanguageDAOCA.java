@@ -94,4 +94,19 @@ public class LanguageDAOCA implements ILanguage{
 		return "Desconegut";
 	}
 
+	@Override
+	public String labelClientBirhdate() {
+		return "Data Naixement: ";
+	}
+
+	@Override
+	public String btnSave() {
+		return "Guardar";
+	}
+
+	@Override
+	public String btnNext() {
+		return "Següent";
+	}
+
 }

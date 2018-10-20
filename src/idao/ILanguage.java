@@ -25,4 +25,7 @@ public interface ILanguage {
 	String radioGenderMale();
 	String radioGenderFemale();
 	String radioGenderUnknown();
+	String labelClientBirhdate();
+	String btnSave();
+	String btnNext();
 }

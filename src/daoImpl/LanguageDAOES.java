@@ -92,5 +92,20 @@ public class LanguageDAOES implements ILanguage{
 	public String radioGenderUnknown() {
 		return "Desconocido";
 	}
+
+	@Override
+	public String labelClientBirhdate() {
+		return "Fecha nacimiento: ";
+	}
+
+	@Override
+	public String btnSave() {
+		return "Guardar";
+	}
+
+	@Override
+	public String btnNext() {
+		return "Siguiente";
+	}
 	
 }

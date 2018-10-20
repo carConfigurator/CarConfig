@@ -7,11 +7,14 @@ import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
+import com.toedter.calendar.JDateChooser;
 
 import config.ConfigurationLoader;
 import idao.ILanguage;
@@ -28,6 +31,8 @@ public class Data_Clients extends JFrame{
 	JTextField tfield_client_name, tfield_client_first_lastname, tfield_client_second_lastname, tfield_client_address, tfield_client_email;
 	JRadioButton rb_male, rb_female, rb_unknown;
 	ButtonGroup bg_gender;
+	JDateChooser dc_birthdate;
+	JButton btn_save, btn_next;
 	
 	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username) {
 		this.language = language;
@@ -117,10 +122,31 @@ public class Data_Clients extends JFrame{
 		
 		this.rb_unknown.setSelected(true);
 		
-		this.label_client_birthdate = new JLabel();
+		this.label_client_birthdate = new JLabel(this.language.labelClientBirhdate());
 		this.label_client_birthdate.setFont(new java.awt.Font("Tahoma", 0, 12));
-		this.label_client_birthdate.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
+		this.label_client_birthdate.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 5));
 		
+		this.dc_birthdate = new JDateChooser();
+		this.dc_birthdate.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+		this.dc_birthdate.setBackground(new Color(255, 255, 255));
+		
+		this.btn_save = new JButton(this.language.btnSave());
+		this.btn_save.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.btn_save.setBackground(new Color(215,18,43));
+		this.btn_save.setForeground(new Color(255,255,255));
+		this.btn_save.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createLineBorder(new Color(215, 18, 43)),
+				BorderFactory.createEmptyBorder(5,10,5,10)
+				));
+		
+		this.btn_next = new JButton(this.language.btnNext());
+		this.btn_next.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.btn_next.setBackground(new Color(215,18,43));
+		this.btn_next.setForeground(new Color(255,255,255));
+		this.btn_next.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createLineBorder(new Color(215, 18, 43)),
+				BorderFactory.createEmptyBorder(5,10,5,10)
+				));
 		
 		this.panel.add(this.label_client_title);
 		this.panel.add(this.label_username, "wrap, skip, align right");
@@ -137,7 +163,11 @@ public class Data_Clients extends JFrame{
 		this.panel.add(this.label_client_gender, "align right");
 		this.panel.add(this.rb_male, "split 3"); // Ocupa tres celdas
 		this.panel.add(this.rb_female); // Este elemento y el siguiente formaran parte de la misma celda que el elemento anterior, por culpa del split.
-		this.panel.add(this.rb_unknown);
+		this.panel.add(this.rb_unknown, "wrap");
+		this.panel.add(label_client_birthdate, "align right");
+		this.panel.add(dc_birthdate, "wrap, pushx, growx");
+		this.panel.add(btn_save, "skip, align right, split 2");
+		this.panel.add(btn_next);
 		JFrame();
 	}
 

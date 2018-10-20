@@ -94,4 +94,19 @@ public class LanguageDAOEN implements ILanguage{
 		return "Unknown";
 	}
 
+	@Override
+	public String labelClientBirhdate() {
+		return "Birthdate: ";
+	}
+
+	@Override
+	public String btnSave() {
+		return "Save";
+	}
+
+	@Override
+	public String btnNext() {
+		return "Next";
+	}
+
 }
