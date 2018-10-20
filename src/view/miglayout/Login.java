@@ -50,6 +50,7 @@ public class Login extends JFrame{
 	 */
 	public Login() {
 		this.configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
+		System.out.println("[INFO] - Obteniendo idioma del Archivo de Configuración...");
 		this.language = LanguageFactory.getLanguage(configLoad.getLanguage_default());
 		// Configuracion de los Componentes:
 		// Añado el Layout al Panel y le indico que este haga un padding de 20 en el Panel.

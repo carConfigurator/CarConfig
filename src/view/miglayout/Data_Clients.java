@@ -35,6 +35,7 @@ public class Data_Clients extends JFrame{
 	JButton btn_save, btn_next;
 	
 	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username) {
+		System.out.println("[INFO] - Mostrando nuevo Frame...");
 		this.language = language;
 		this.panel = new JPanel();
 		this.panel.setLayout(new MigLayout("insets 20"));
