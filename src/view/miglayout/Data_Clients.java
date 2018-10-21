@@ -3,13 +3,20 @@ package view.miglayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -149,6 +156,15 @@ public class Data_Clients extends JFrame{
 				BorderFactory.createEmptyBorder(5,10,5,10)
 				));
 		
+		btn_save.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Save Action Performed");
+				saveActionPerformed();
+			}
+		});
+		
 		this.panel.add(this.label_client_title);
 		this.panel.add(this.label_username, "wrap, skip, align right");
 		this.panel.add(this.label_client_name, "align right");
@@ -170,6 +186,33 @@ public class Data_Clients extends JFrame{
 		this.panel.add(btn_save, "skip, align right, split 2");
 		this.panel.add(btn_next);
 		JFrame();
+	}
+
+	protected void saveActionPerformed() {
+		
+		tfield_client_address.setText(tfield_client_address.getText().replaceAll("^\\s*", ""));
+		tfield_client_name.setText(tfield_client_name.getText().replaceAll("^\\s*", ""));
+		tfield_client_first_lastname.setText(tfield_client_first_lastname.getText().replaceAll("^\\s*", ""));
+		tfield_client_second_lastname.setText(tfield_client_second_lastname.getText().replaceAll("^\\s*", ""));
+		tfield_client_email.setText(tfield_client_email.getText().replaceAll("^\\s*", ""));
+		
+		if (tfield_client_name.getText().length() == 0 || tfield_client_first_lastname.getText().length() == 0 || tfield_client_second_lastname.getText().length() == 0 || tfield_client_address.getText().length() == 0 || tfield_client_email.getText().length() == 0 ){
+            JOptionPane.showMessageDialog(null, "Faltan campos por rellenar. Rellene todos los campos obligatorios.", "Informacion Incompleta", JOptionPane.ERROR_MESSAGE);
+        }else {
+    		//  Filtro para que el correo sea valido buscando en el contenido de este un "@".
+            String email = tfield_client_email.getText();
+            String regex = "^(.+)@(.+).(.+)$";
+
+            Pattern pattern = Pattern.compile("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b");
+            Matcher matcher = pattern.matcher(email);
+
+            if (matcher.find() == false) {
+                JOptionPane.showMessageDialog(null, "El correo no es valido.", "Error de correo", JOptionPane.ERROR_MESSAGE);
+                tfield_client_email.setText("");
+            }else {
+            	System.out.println("[INFO] - Todos los campos son correctos. Guardando...");
+            }
+        }
 	}
 
 	private void JFrame() {

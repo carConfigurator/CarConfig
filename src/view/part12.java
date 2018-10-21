@@ -1,12 +1,18 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
+import java.io.File;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -40,6 +46,8 @@ public class part12 {
 		panelBox=new JPanel();
 		panelGBC.setLayout(new GridBagLayout());
 		panelBox.setLayout(new BoxLayout(panelBox, BoxLayout.Y_AXIS));
+		panelGBC.setBackground(new Color(255,255,255));
+		panelBox.setBackground(new Color(255,255,255));
 		GridBagConstraints constraints= new GridBagConstraints();
 		frame.add(panelGBC);
 		
@@ -73,10 +81,15 @@ public class part12 {
 		panelGBC.add(panelBox, constraints);
 		
 		b1=new JButton();
-		b1.setIcon(new ImageIcon("/src/config/car/images/Ateca.jpeg"));//new ImageIcon(ConfigurationLoader.getImageIcon[0]);//cargamos la imagen en el singelton
+		b1.setIcon(getIconImage());//new ImageIcon(ConfigurationLoader.getImageIcon[0]);//cargamos la imagen en el singelton
+		b1.setBackground(new Color(255,255,255));
+		b1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		panelBox.add(b1);
 
-		b2=new JButton("Coche2");
+		b2=new JButton();
+		b2.setIcon(new ImageIcon("src/config/car/images/Mii_5P.jpeg"));//new ImageIcon(ConfigurationLoader.getImageIcon[0]);//cargamos la imagen en el singelton
+		b2.setBackground(new Color(255,255,255));
+		b2.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		panelBox.add(b2);
 		
 		b3=new JButton("Coche3");
@@ -153,6 +166,11 @@ public class part12 {
 		frame.pack();
 		frame.setVisible(true);
 		
+	}
+
+	private Icon getIconImage() {
+        Icon icon = new ImageIcon("src/config/car/images/Ateca.jpeg");
+        return icon;
 	}
 
 }

@@ -3,10 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Conf_Vehiculo;
+package view;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,7 +57,7 @@ public class DatosCliente_NB extends javax.swing.JFrame {
         lblFecha = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
-        dcFecha = new com.toedter.calendar.JDateChooser();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Concesionario ESTEVE");
@@ -65,8 +71,8 @@ public class DatosCliente_NB extends javax.swing.JFrame {
 
         lblNombreUser.setFont(new java.awt.Font("Tahoma", 0, 12));
         lblNombreUser.setText("-----");
-        Login l = new Login();
-        lblNombreUser.setText(l.getNombre());
+        //Login l = new Login();
+        //lblNombreUser.setText(l.getNombre());
 
         lblNombre.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         lblNombre.setText("Nombre *");
@@ -120,6 +126,28 @@ public class DatosCliente_NB extends javax.swing.JFrame {
         lblFecha.setText("Fecha Nacimiento");
 
         btnGuardar.setText("GUARDAR");
+        // FUNCIONES PARA GUARDAR LA INFORMACION DE LOS CLIENTES.
+        btnGuardar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //  Filtro para rellenar todos los campos obligatorios.
+                if (tfNombre.getText() == null || tfPriApellido.getText() == null || tfSecApellido.getText() == null || tfDireccion.getText() == null || tfCorreo.getText() == null){
+                    JOptionPane.showMessageDialog(null, "Faltan campos por rellenar. Rellene todos los campos obligatorios.", "Informacion Incompleta", JOptionPane.ERROR_MESSAGE);
+                };
+                //  Filtro para que el correo sea valido busqcando en el contenido de este un "@".
+                String email = (String)tfCorreo.getText();
+                if (!email.equals(email) && email.equals("@")){
+                    JOptionPane.showMessageDialog(null, "Debe poner un correo valido.");
+                };
+                //  Filtro para que tenga un minimo de caracteres todos los TextArea.
+                if (tfNombre.getText().length() < 1 || tfPriApellido.getText().length() < 1 || tfSecApellido.getText().length() < 1 || tfDireccion.getText().length() < 1 || tfCorreo.getText().length() < 1){
+                    JOptionPane.showMessageDialog(null, "Cantidad de caracteres insuficientes.", "Error de caracteres", JOptionPane.ERROR_MESSAGE);
+                };
+                //  Filtro para que el primer caracter de cada TextArea no sea un Espacio en blanco.
+                if(String.valueOf(tfNombre.getText().charAt(0)).equals(" ") || String.valueOf(tfPriApellido.getText().charAt(0)).equals(" ") || String.valueOf(tfSecApellido.getText().charAt(0)).equals(" ") || String.valueOf(tfDireccion.getText().charAt(0)).equals(" ") || String.valueOf(tfCorreo.getText().charAt(0)).equals(" ")) {
+                    JOptionPane.showMessageDialog(null,"El primer caracter no puede estar en blanco.", "Error de caracteres", JOptionPane.ERROR_MESSAGE);
+                };
+            }
+        });
 
         btnSiguiente.setText("SIGUIENTE");
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
@@ -166,23 +194,23 @@ public class DatosCliente_NB extends javax.swing.JFrame {
                 .addComponent(tfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(lblGenero)
-                .addGap(103, 103, 103)
-                .addComponent(rbHombre)
-                .addGap(7, 7, 7)
-                .addComponent(rbMujer)
-                .addGap(7, 7, 7)
-                .addComponent(rbNulo))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(lblFecha)
-                .addGap(35, 35, 35)
-                .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
                 .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblGenero)
+                    .addComponent(lblFecha))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(rbHombre)
+                        .addGap(7, 7, 7)
+                        .addComponent(rbMujer)
+                        .addGap(7, 7, 7)
+                        .addComponent(rbNulo))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,15 +249,23 @@ public class DatosCliente_NB extends javax.swing.JFrame {
                     .addComponent(rbHombre)
                     .addComponent(rbMujer)
                     .addComponent(rbNulo))
-                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFecha)
-                    .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(lblFecha))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGuardar)
                     .addComponent(btnSiguiente)))
         );
+
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(rbHombre);
+        bg.add(rbMujer);
+        bg.add(rbNulo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -239,7 +275,9 @@ public class DatosCliente_NB extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
@@ -266,7 +304,8 @@ public class DatosCliente_NB extends javax.swing.JFrame {
     }//GEN-LAST:event_tfSecApellidoActionPerformed
 
     public Image getIconImage() {
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("resources\\log.jpg"));
+    	File image = new File("src/config/favicon.png");
+        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
         return retValue;
     }
     
@@ -309,7 +348,7 @@ public class DatosCliente_NB extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSiguiente;
-    private com.toedter.calendar.JDateChooser dcFecha;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblDireccion;
