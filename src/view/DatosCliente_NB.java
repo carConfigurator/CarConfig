@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Conf_Vehiculo;
+package view;
 
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -66,7 +66,7 @@ public class DatosCliente_NB extends javax.swing.JFrame {
         lblNombreUser.setFont(new java.awt.Font("Tahoma", 0, 12));
         lblNombreUser.setText("-----");
         Login l = new Login();
-        lblNombreUser.setText(l.getNombre());
+        lblNombreUser.setText(l.getName());
 
         lblNombre.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         lblNombre.setText("Nombre *");

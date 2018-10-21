@@ -1,18 +1,32 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+
+import com.toedter.calendar.JDateChooser;
+
+import net.miginfocom.swing.MigLayout;
 
 public class part12 {
 	
@@ -23,9 +37,18 @@ public class part12 {
 	private JFrame frame;
 	private JPanel panelGBC,panelBox;
 	private List<JButton> listBotones;
-	private JButton b1,b2,b3,b4,b5,b6,b7,siguiente,anterior;
+	private JButton siguiente,anterior,coches;
 	private JLabel l1,l2;
-	private JTextArea area, areaInfo;
+	private JTextArea areaInfo;
+	private JTextPane area;
+	private ImageIcon coche;
+	private ImageIcon cocheBoton;
+	
+	String i1="src\\config\\car\\images\\Ateca.jpeg";
+	String i2="src\\config\\car\\images\\Mii_5P.jpeg";
+	String i3="src\\config\\car\\images\\Nuevo_Arona.jpeg";
+	String i4="src\\config\\car\\images\\Nuevo_Ibiza.jpeg";
+	List<Image> aux;
 	
 	public part12() {
 		setComp();
@@ -72,33 +95,29 @@ public class part12 {
 		constraints.insets=new Insets(0,0,0,30);//top, left, bottom, right
 		panelGBC.add(panelBox, constraints);
 		
-		b1=new JButton();
-		b1.setIcon(new ImageIcon("/src/config/car/images/Ateca.jpeg"));//new ImageIcon(ConfigurationLoader.getImageIcon[0]);//cargamos la imagen en el singelton
-		panelBox.add(b1);
-
-		b2=new JButton("Coche2");
-		panelBox.add(b2);
-		
-		b3=new JButton("Coche3");
-		panelBox.add(b3);
-		
-		b4=new JButton("Coche4");
-		panelBox.add(b4);
-
-		b5=new JButton("Coche5");
-		panelBox.add(b5);
-		
-		b6=new JButton("Coche6");
-		panelBox.add(b6);
-		
-		b7=new JButton("Coche7");
-		panelBox.add(b7);
-		
-	//quitamos los insets y posicion
+		//quitamos los insets
 		constraints.insets=new Insets(0,0,0,0);//top, left, bottom, right
+		
+		//cambiarlo por las variables
+		List<String> listAux=new ArrayList<>();
+		listAux.add(i1);
+		listAux.add(i2);
+		listAux.add(i3);
+		listAux.add(i4);
+		
+		//creamos una lista de los botones
+		listBotones=new ArrayList<JButton>();
+		crearBoton(listAux);
+		
+		//añadimos los botones al panel
+		for (JButton jButton : listBotones) {
+			panelBox.add(jButton);
+		}
+
+	//quitamos la posicion
 		constraints.gridheight=1;
 		
-		area=new JTextArea("<nombre> y sus cosas");
+		area=new JTextPane();
 		constraints.gridx=1;
 		constraints.gridy=1;
 		constraints.gridwidth=2;
@@ -141,18 +160,39 @@ public class part12 {
 		constraints.insets=new Insets(0, 0, 0, 0);
 		constraints.fill=GridBagConstraints.NONE;
 		
-		
-		
-		
-		
-		
-		
-		
-		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
 		
+	}
+	
+	public void crearBoton(List<String> nom) {
+		for (String string : nom) {
+			coches=new JButton();
+			coche=new ImageIcon(string);
+			cocheBoton= new ImageIcon(coche.getImage().getScaledInstance(coche.getIconWidth()/4, coche.getIconHeight()/4, Image.SCALE_DEFAULT));
+			coches.setIcon(cocheBoton);//new ImageIcon(Model.getImageIcon[0]);//cargamos la imagen en el modelo
+			coches.setMargin(new Insets(0, 0, 0, 0));
+			listBotones.add(coches);
+			
+			aux=new ArrayList<Image>();
+			aux.add(coche.getImage());
+			
+			listener(coche, coches);  
+		}
+	}
+	public void listener(ImageIcon coch, JButton b) {
+		b.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				area.setContentType("text/html");
+				area.setText("<html><div style='text-align: center;'><span style='background-red'>" + "NombreCoche" + "</span></div><br></html>");
+				area.insertIcon(coch);
+				area.setEditable(false);
+				frame.pack();
+			}
+		});
 	}
 
 }
