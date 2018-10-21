@@ -50,19 +50,17 @@ public class part12 {
 	String i4="src\\config\\car\\images\\Nuevo_Ibiza.jpeg";
 	List<Image> aux;
 	
-	public part12() {
-		setComp();
-	}
-	
 	/*
 	 * Añado los componentes del concesionaro del coche (parte 12)
 	 */
-	private void setComp() {
+	public part12() {
 		frame=new JFrame(variables.Lenguaje.tituloConcesionario);
 		panelGBC= new JPanel();
 		panelBox=new JPanel();
 		panelGBC.setLayout(new GridBagLayout());
+		panelGBC.setBackground(new Color(255, 255, 255));
 		panelBox.setLayout(new BoxLayout(panelBox, BoxLayout.Y_AXIS));
+		panelBox.setBackground(new Color(255, 255, 255));
 		GridBagConstraints constraints= new GridBagConstraints();
 		frame.add(panelGBC);
 		
@@ -161,7 +159,9 @@ public class part12 {
 		constraints.fill=GridBagConstraints.NONE;
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(600,600);
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
 	}
@@ -187,7 +187,7 @@ public class part12 {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				area.setContentType("text/html");
-				area.setText("<html><div style='text-align: center;'><span style='background-red'>" + "NombreCoche" + "</span></div><br></html>");
+				area.setText("<html><div style='text-align: center;'><span style='background: red'>" + "NombreCoche" + "</span></div><br></html>");
 				area.insertIcon(coch);
 				area.setEditable(false);
 				frame.pack();

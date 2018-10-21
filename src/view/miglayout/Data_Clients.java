@@ -26,6 +26,7 @@ import com.toedter.calendar.JDateChooser;
 import config.ConfigurationLoader;
 import idao.ILanguage;
 import net.miginfocom.swing.MigLayout;
+import view.part12;
 
 public class Data_Clients extends JFrame{
 
@@ -160,7 +161,6 @@ public class Data_Clients extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Save Action Performed");
 				saveActionPerformed();
 			}
 		});
@@ -210,6 +210,7 @@ public class Data_Clients extends JFrame{
                 tfield_client_email.setText("");
             }else {
             	System.out.println("[INFO] - Todos los campos son correctos. Guardando...");
+            	new part12();
             }
         }
 	}
