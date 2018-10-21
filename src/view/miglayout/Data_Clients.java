@@ -201,7 +201,6 @@ public class Data_Clients extends JFrame{
         }else {
     		//  Filtro para que el correo sea valido buscando en el contenido de este un "@".
             String email = tfield_client_email.getText();
-            String regex = "^(.+)@(.+).(.+)$";
 
             Pattern pattern = Pattern.compile("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b");
             Matcher matcher = pattern.matcher(email);
