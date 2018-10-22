@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,10 +130,11 @@ public class part12 {
 		constraints.gridheight=1;
 
 	//linia 5
-		areaInfo=new JTextArea();
+		areaInfo=new JTextArea("Info coche");
 		constraints.gridx=2;
 		constraints.gridy=5;
 		constraints.gridheight=2;
+		constraints.insets=new Insets(5, 0, 0, 0);
 		panelGBC.add(areaInfo, constraints);
 		
 		//Volvemos a dejar que sea todo en su posicion
@@ -182,10 +185,14 @@ public class part12 {
 		}
 	}
 	public void listener(ImageIcon coch, JButton b) {
-		b.addActionListener(new ActionListener() {
+		b.addFocusListener(new FocusListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void focusLost(FocusEvent arg0) {
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
 				area.setContentType("text/html");
 				area.setText("<html><div style='text-align: center;'><span style='background: red'>" + "NombreCoche" + "</span></div><br></html>");
 				area.insertIcon(coch);
