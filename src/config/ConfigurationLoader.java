@@ -21,8 +21,8 @@ public class ConfigurationLoader {
 	private DocumentBuilder builder;
 	private Document document;
 	
-	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path;
-	private String[] employee_list,employee_password,employee_version;
+	private String language,language_default,postfix_language_file_name,version,language_files_path,employee_version,car_configuration_path,car_configuration_file_name,specifications_file_path;
+	private String[] employee_list,employee_password;
 	
 	/*
 	 * Constructor de la Clase
@@ -114,10 +114,10 @@ public class ConfigurationLoader {
 		return nNode.getTextContent().split(",");
 	}
 	
-	private String[] loadEmployee_version() {
+	private String loadEmployee_version() {
 		NodeList nList = document.getElementsByTagName("employee_version");
 		Node nNode = nList.item(0);
-		return nNode.getTextContent().split(",");
+		return nNode.getTextContent();
 	}
 	
 	private String[] loadEmployee_password() {
@@ -164,7 +164,7 @@ public class ConfigurationLoader {
 		return employee_list;
 	}
 
-	public String[] getEmployee_version() {
+	public String getEmployee_version() {
 		return employee_version;
 	}
 
