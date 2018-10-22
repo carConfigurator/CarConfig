@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -9,6 +11,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
@@ -16,19 +20,23 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -45,7 +53,7 @@ public class part12 extends JFrame{
 //	private JFrame frame;
 	private JPanel panelGBC=new JPanel(),panelBox=new JPanel();
 	private List<JButton> listBotones;
-	private JButton siguiente,anterior,coches;
+	private JButton siguiente,anterior,btnCoches;
 	private JLabel l1,luser;
 	private JTextArea areaInfo;
 	private JTextPane area;
@@ -66,17 +74,20 @@ public class part12 extends JFrame{
 	public part12(/*language, configLoader*/){
 		//migLayout
 		this.panelGBC.setLayout(new MigLayout("insets 20"));
-		this.panelBox.setLayout(new BoxLayout(panelBox, BoxLayout.Y_AXIS));
+//		this.panelBox.setLayout(new BoxLayout(panelBox, BoxLayout.Y_AXIS));
+//		this.panelBox.setLayout(new BorderLayout());
 		/*this.panelGBC.setBackground(new Color(255, 255, 255));
 		this.panelBox.setBackground(new Color(255, 255, 255));*/
+//		panelBox.setPreferredSize(new Dimension(50, 50));
 		
 		this.l1=new JLabel(variables.Lenguaje.tituloTexto);
 		Font font=l1.getFont();
 		this.l1.setFont(new Font(font.getFontName(), font.getStyle(), 15));
 		this.luser=new JLabel(variables.Lenguaje.textoUser);
 		
-		this.scroll = new JScrollPane(panelBox);
 		this.area=new JTextPane();
+			area.setContentType("text/html");
+			area.setEditable(false);
 		this.areaInfo=new JTextArea("Info coche");
 		this.anterior=new JButton(variables.Lenguaje.bAnterior);
 		this.siguiente=new JButton(variables.Lenguaje.bSiguiente);
@@ -87,37 +98,47 @@ public class part12 extends JFrame{
 		listAux.add(i2);
 		listAux.add(i3);
 		listAux.add(i4);
-//		listAux.add(i4);
-//		listAux.add(i4);
-//		listAux.add(i4);
-//		listAux.add(i4);
-//		listAux.add(i4);
-//		listAux.add(i4);
-//		listAux.add(i4);
-//		listAux.add(i4);
-//		listAux.add(i4);
-//		listAux.add(i4);
-//		listAux.add(i4);
+		listAux.add(i4);
+		listAux.add(i4);
+		listAux.add(i4);
+		listAux.add(i4);
+		listAux.add(i4);
+		listAux.add(i4);
+		listAux.add(i4);
+		listAux.add(i4);
+		listAux.add(i4);
+		listAux.add(i4);
+		listAux.add(i4);
 		
 		
+		Box box = Box.createVerticalBox();
+	
 		//creamos una lista de los botones
 		this.listBotones=new ArrayList<JButton>();
 		crearBoton(listAux);//lista ruta imagen
 		
 		//añadimos los botones al panel
 		for (JButton jButton : listBotones) {
-			this.panelBox.add(jButton);
+//			this.panelBox.add(jButton);
+			box.add(jButton);
 		}
+		
+		
+		panelBox.add(box);
 
-
-		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		scroll.setPreferredSize(new Dimension(coche.getImage().getWidth(null)/3-10, coche.getImage().getHeight(null)*2));
-		scroll.requestFocus();
+		JScrollBar scrollBar = new JScrollBar(JScrollBar.VERTICAL);
+		panelBox.add(scrollBar, BorderLayout.EAST);
+//		panelBox.add(scrollBar);
+		
+//		this.scroll = new JScrollPane(lista);
+//		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+//        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+//		scroll.setPreferredSize(new Dimension(coche.getImage().getWidth(null)/3-10, coche.getImage().getHeight(null)*2));
+//		scroll.requestFocus();
 		
 		this.panelGBC.add(l1, "span 2");
 		this.panelGBC.add(luser, "wrap, align right");
-		this.panelGBC.add(scroll, "align right");
+		this.panelGBC.add(panelBox, "align right");//scroll
 		this.panelGBC.add(area, "wrap, pushx, growx, pushy, growy, span 2");
 		this.panelGBC.add(areaInfo, "span 2, skip, wrap, align right, pushx, growx");
 		this.panelGBC.add(anterior, "skip");
@@ -142,47 +163,45 @@ public class part12 extends JFrame{
 	
 	public void crearBoton(List<String> nom) {
 		for (String string : nom) {
-			coches=new JButton();
+			btnCoches=new JButton();
 			coche=new ImageIcon(string);
 			cocheBoton= new ImageIcon(coche.getImage().getScaledInstance(coche.getIconWidth()/4, coche.getIconHeight()/4, Image.SCALE_DEFAULT));
-			coches.setIcon(cocheBoton);//new ImageIcon(Model.getImageIcon[0]);//cargamos la imagen en el modelo
-			coches.setMargin(new Insets(0, 0, 0, 0));
-			listBotones.add(coches);
+			btnCoches.setIcon(cocheBoton);//new ImageIcon(Model.getImageIcon[0]);//cargamos la imagen en el modelo
+			btnCoches.setMargin(new Insets(0, 0, 0, 0));
+			listBotones.add(btnCoches);
 			
 			listImg=new ArrayList<Image>();
 			listImg.add(coche.getImage());
 			
-			listener(coche, coches);  
+			listener(coche, btnCoches);  
 		}
 		
 		
 	}
 	public void listener(ImageIcon coch, JButton b) {
-//		b.addFocusListener(new FocusListener() {
-//			
-//			@Override
-//			public void focusLost(FocusEvent e) {
-//			}
-//			
-//			@Override
-//			public void focusGained(FocusEvent e) {
-//				area.setContentType("text/html");
-//				area.setText("<html><div style='text-align: center;'><span style='background: red'>" + "NombreCoche" + "</span></div><br></html>");
-//				area.insertIcon(coch);
-//				area.setEditable(false);
-//			}
-//		});
-		b.addActionListener(new ActionListener() {
+		b.addFocusListener(new FocusListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+			public void focusLost(FocusEvent e) {
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
 				area.setContentType("text/html");
 				area.setText("<html><div style='text-align: center;'><span style='background: red'>" + "NombreCoche" + "</span></div><br></html>");
 				area.insertIcon(coch);
 				area.setEditable(false);
 			}
 		});
+//		b.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {
+//				// TODO Auto-generated method stub
+//				area.setText("<html><div style='text-align: center;'><span style='background: red'>" + "NombreCoche" + "</span></div><br></html>");
+//				area.insertIcon(coch);
+//			}
+//		});
 	}
 
 }
