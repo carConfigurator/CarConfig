@@ -15,7 +15,9 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -43,9 +45,20 @@ import com.toedter.calendar.JDateChooser;
 import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
+import model.Model;
 import net.miginfocom.swing.MigLayout;
 
 public class part12 extends JFrame{
+	
+	public static void main(String[] args) {
+		ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
+		ILanguage language = LanguageFactory.getLanguage(configLoad.getLanguage_default());
+		part12 p = new part12(configLoad, language, "alexis.mengual");
+	}
+	
+	private ConfigurationLoader configLoad;
+	private ILanguage language;
+	private Model model;
 	
 //	private JFrame frame;
 	private JPanel panelGBC=new JPanel(),panelBox=new JPanel();
@@ -59,6 +72,8 @@ public class part12 extends JFrame{
 	private JScrollPane scroll;
 	int i=0;
 	
+	String[] imatge_nom;
+	String root = "src\\config\\car\\images\\";
 	String i1="src\\config\\car\\images\\Ateca.jpeg";
 	String i2="src\\config\\car\\images\\Mii_5P.jpeg";
 	String i3="src\\config\\car\\images\\Nuevo_Arona.jpeg";
@@ -68,18 +83,17 @@ public class part12 extends JFrame{
 	/*
 	 * Añado los componentes del concesionaro del coche (parte 12)
 	 */
-	public part12(ConfigurationLoader configLoad, ILanguage language){
+	public part12(ConfigurationLoader configLoad, ILanguage language, String username){
+		this.configLoad = configLoad;
+		this.language = language;
+		this.model = new Model(this.configLoad);
 		//migLayout
 		this.panelGBC.setLayout(new MigLayout("insets 50, fillx, filly"));
-//		this.panelBox.setLayout(new BoxLayout(panelBox, BoxLayout.Y_AXIS));
-//		this.panelBox.setLayout(new BorderLayout());
 		this.panelGBC.setBackground(new Color(255, 255, 255));
 		this.panelBox.setBackground(new Color(255, 255, 255));
-//		panelBox.setPreferredSize(new Dimension(50, 50));
 		
 		this.l1=new JLabel(variables.Lenguaje.tituloTexto);
-		Font font=l1.getFont();
-		this.l1.setFont(new Font(font.getFontName(), font.getStyle(), 15));
+		this.l1.setFont(new java.awt.Font("Tahoma", 0, 16));
 		this.luser=new JLabel(variables.Lenguaje.textoUser);
 		
 		this.area=new JTextPane();
@@ -104,11 +118,12 @@ public class part12 extends JFrame{
 				));
 		
 		//cambiarlo por las variables
+		this.imatge_nom = this.model.getImage_name();
 		List<String> listAux=new ArrayList<>();
-		listAux.add(i1);
-		listAux.add(i2);
-		listAux.add(i3);
-		listAux.add(i4);		
+		for (int i = 0; i < imatge_nom.length; i++) {
+			listAux.add(this.root + this.imatge_nom[i]);
+		}
+		
 		Box box = Box.createVerticalBox();
 	
 		//creamos una lista de los botones
@@ -169,8 +184,9 @@ public class part12 extends JFrame{
 					BorderFactory.createEmptyBorder(1, 1, 1, 1)
 					));
 			coche=new ImageIcon(string);
-			cocheBoton= new ImageIcon(coche.getImage().getScaledInstance(coche.getIconWidth()/4, coche.getIconHeight()/4, Image.SCALE_DEFAULT));
-			btnCoches.setIcon(cocheBoton);//new ImageIcon(Model.getImageIcon[0]);//cargamos la imagen en el modelo
+			System.out.println(coche.getIconWidth());
+			cocheBoton= new ImageIcon(coche.getImage().getScaledInstance(coche.getIconWidth()*4/4, coche.getIconHeight()*4/4, Image.SCALE_DEFAULT));
+			btnCoches.setIcon(cocheBoton);
 			btnCoches.setMargin(new Insets(0, 0, 0, 0));
 			listBotones.add(btnCoches);
 			

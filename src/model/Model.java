@@ -8,6 +8,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import config.ConfigurationLoader;
@@ -19,9 +22,9 @@ public class Model {
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
 	private Document document;
-	private int id;
-	private double price;
-	private String name, description, image_name;
+	private int[] id;
+	private double[] price;
+	private String[] name, description, image_name;
 	
 	public Model(ConfigurationLoader configLoad) {
 		this.configLoad = configLoad;
@@ -44,25 +47,89 @@ public class Model {
 		this.image_name = loadImage_Name();
 	}
 
-	private String loadImage_Name() {
-		return null;
+	private String[] loadImage_Name() {
+		NodeList nList = document.getElementsByTagName("Model");
+		String[] image = new String[nList.getLength()];
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element) nNode;
+				image[temp] = eElement.getElementsByTagName("imatge_nom").item(0).getTextContent();
+			}
+		}
+		return image;
 	}
 
-	private String loadDescription() {
-		return null;
+	private String[] loadDescription() {
+		NodeList nList = document.getElementsByTagName("Model");
+		String[] description = new String[nList.getLength()];
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element) nNode;
+				description[temp] = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
+			}
+		}
+		return description;
 	}
 
-	private String loadName() {
-		return null;
+	private String[] loadName() {
+		NodeList nList = document.getElementsByTagName("Model");
+		String[] name = new String[nList.getLength()];
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element) nNode;
+				name[temp] = eElement.getElementsByTagName("nom").item(0).getTextContent();
+			}
+		}
+		return name;
 	}
 
-	private double loadPrice() {
-		return 0;
+	private double[] loadPrice() {
+		NodeList nList = document.getElementsByTagName("Model");
+		double[] price = new double[nList.getLength()];
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element) nNode;
+				price[temp] = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+			}
+		}
+		return price;
 	}
 
-	private int loadId() {
-		return 0;
+	private int[] loadId() {
+		NodeList nList = document.getElementsByTagName("Model");
+		int[] id = new int[nList.getLength()];
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element) nNode;
+				id[temp] = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+			}
+		}
+		return id;
 	}
-	
+
+	public int[] getId() {
+		return id;
+	}
+
+	public double[] getPrice() {
+		return price;
+	}
+
+	public String[] getName() {
+		return name;
+	}
+
+	public String[] getDescription() {
+		return description;
+	}
+
+	public String[] getImage_name() {
+		return image_name;
+	}
 	
 }

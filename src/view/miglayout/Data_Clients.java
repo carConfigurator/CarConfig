@@ -285,8 +285,10 @@ addWindowListener(new WindowListener() {
 				JOptionPane.showConfirmDialog(null, "¿Desea Guardar los Cambios?", "¿Desea Guardar los Cambios?", dialogButton);
 				if(dialogButton == JOptionPane.YES_OPTION) {
 					System.out.println("[INFO] - Guardando los datos del cliente...");
+					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				}else if(dialogButton == JOptionPane.YES_NO_OPTION) {
 					System.out.println("[INFO] - No se guardarán los datos del cliente nuevo");
+					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				}else {
 					System.out.println("[INFO] - No se hará nada.");
 					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

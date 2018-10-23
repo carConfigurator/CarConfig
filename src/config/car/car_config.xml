@@ -3,45 +3,29 @@
 	<Model>
 		<id>1</id>
 		<nom>SEAT MiiP5</nom>
-		<descripcio>Descripción del Vehículo con el nombre SEAT MiiP5</descripcio>
-		<imatge_nom>miip5.jpg</imatge_nom>
+		<descripcio>Observaciones del SEAT Mii5P</descripcio>
+		<imatge_nom>miip5.jpeg</imatge_nom>
 		<preu>7500.50</preu>
 	</Model>
 	<Model>
 		<id>2</id>
-		<nom>SEAT MiiP5</nom>
-		<descripcio>Descripción del Vehículo con el nombre SEAT MiiP5</descripcio>
-		<imatge_nom>miip5.jpg</imatge_nom>
+		<nom>SEAT Ateca</nom>
+		<descripcio>Observaciones del SEAT Ateca</descripcio>
+		<imatge_nom>Ateca.jpeg</imatge_nom>
 		<preu>7500.50</preu>
 	</Model>
 	<Model>
 		<id>3</id>
-		<nom>SEAT MiiP5</nom>
-		<descripcio>Descripción del Vehículo con el nombre SEAT MiiP5</descripcio>
-		<imatge_nom>miip5.jpg</imatge_nom>
+		<nom>SEAT Nuevo Arona</nom>
+		<descripcio>Observaciones del SEAT Nuevo Arona</descripcio>
+		<imatge_nom>Nuevo_Arona.jpeg</imatge_nom>
 		<preu>7500.50</preu>
 	</Model>
 	<Model>
 		<id>4</id>
-		<nom>SEAT MiiP5</nom>
-		<descripcio>Descripción del Vehículo con el nombre SEAT MiiP5</descripcio>
-		<imatge_nom>miip5.jpg</imatge_nom>
+		<nom>SEAT Nuevo Ibiza</nom>
+		<descripcio>Observaciones del SEAT Nuevo Ibiza</descripcio>
+		<imatge_nom>Nuevo_Ibiza.jpeg</imatge_nom>
 		<preu>7500.50</preu>
 	</Model>
-	<Engine>
-		<id>1</id>
-		<nom>Motor 1</nom>
-		<descripcio>Descripción de Motor 1</descripcio>
-		<imatge_nom>motor1.jpg</imatge_nom>
-		<preu>100</preu>
-		<models_disponibles></models_disponibles>
-	</Engine>
-	<Accesory>
-		<id></id>
-		<nom></nom>
-		<descripcio></descripcio>
-		<imatge_nom></imatge_nom>
-		<preu></preu>
-		<models_disponibles></models_disponibles>
-	</Accesory>
-<CarConfiguration>
+</CarConfiguration>
