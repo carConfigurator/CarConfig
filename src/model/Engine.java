@@ -40,5 +40,28 @@ public class Engine {
 	private int loadId() {
 		return 0;
 	}
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getImage_name() {
+		return image_name;
+	}
+
+	public int[] getModels_available() {
+		return models_available;
+	}	
 }

@@ -28,9 +28,13 @@ import javax.swing.JTextPane;
 
 import com.toedter.calendar.JDateChooser;
 
+import config.ConfigurationLoader;
+import model.Model;
 import net.miginfocom.swing.MigLayout;
 
 public class part12 {
+	
+	private ConfigurationLoader configLoad;
 	
 	public static void main(String[] args) {
 		new part12();
@@ -56,6 +60,8 @@ public class part12 {
 	 * Añado los componentes del concesionaro del coche (parte 12)
 	 */
 	public part12() {
+		this.configLoad = configLoad.getConfigurationLoaderInstance();
+		Model model = new Model(configLoad);
 		frame=new JFrame(variables.Lenguaje.tituloConcesionario);
 		panelGBC= new JPanel();
 		panelBox=new JPanel();

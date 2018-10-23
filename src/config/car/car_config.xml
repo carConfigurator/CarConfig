@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf8" standalone="no"?>
+<CarConfiguration>
+	<Model>
+		<id>1</id>
+		<nom>SEAT MiiP5</nom>
+		<descripcio>Descripción del Vehículo con el nombre SEAT MiiP5</descripcio>
+		<imatge_nom>miip5.jpg</imatge_nom>
+		<preu>7500.50</preu>
+	</Model>
+	<Model>
+		<id>2</id>
+		<nom>SEAT MiiP5</nom>
+		<descripcio>Descripción del Vehículo con el nombre SEAT MiiP5</descripcio>
+		<imatge_nom>miip5.jpg</imatge_nom>
+		<preu>7500.50</preu>
+	</Model>
+	<Model>
+		<id>3</id>
+		<nom>SEAT MiiP5</nom>
+		<descripcio>Descripción del Vehículo con el nombre SEAT MiiP5</descripcio>
+		<imatge_nom>miip5.jpg</imatge_nom>
+		<preu>7500.50</preu>
+	</Model>
+	<Model>
+		<id>4</id>
+		<nom>SEAT MiiP5</nom>
+		<descripcio>Descripción del Vehículo con el nombre SEAT MiiP5</descripcio>
+		<imatge_nom>miip5.jpg</imatge_nom>
+		<preu>7500.50</preu>
+	</Model>
+	<Engine>
+		<id>1</id>
+		<nom>Motor 1</nom>
+		<descripcio>Descripción de Motor 1</descripcio>
+		<imatge_nom>motor1.jpg</imatge_nom>
+		<preu>100</preu>
+		<models_disponibles></models_disponibles>
+	</Engine>
+	<Accesory>
+		<id></id>
+		<nom></nom>
+		<descripcio></descripcio>
+		<imatge_nom></imatge_nom>
+		<preu></preu>
+		<models_disponibles></models_disponibles>
+	</Accesory>
+<CarConfiguration>
