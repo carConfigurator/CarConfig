@@ -70,7 +70,7 @@ public class part12 extends JFrame{
 	private ImageIcon coche;
 	private ImageIcon cocheBoton;
 	private JScrollPane scroll;
-	int i=0;
+	int posicion=0;
 	
 	String[] imatge_nom;
 	String root = "src\\config\\car\\images\\";
@@ -89,6 +89,7 @@ public class part12 extends JFrame{
 		this.model = new Model(this.configLoad);
 		//migLayout
 		this.panelGBC.setLayout(new MigLayout("insets 50, fillx, filly"));
+//		this.panelBox.setLayout(new BoxLayout(panelBox, BoxLayout.Y_AXIS));
 		this.panelGBC.setBackground(new Color(255, 255, 255));
 		this.panelBox.setBackground(new Color(255, 255, 255));
 		
@@ -117,18 +118,21 @@ public class part12 extends JFrame{
 				BorderFactory.createEmptyBorder(5,10,5,10)
 				));
 		
-		//cambiarlo por las variables
+		
+												//se añade la ruta de la imagen en una lista
 		this.imatge_nom = this.model.getImage_name();
-		List<String> listAux=new ArrayList<>();
+		List<String> listImg=new ArrayList<>();
 		for (int i = 0; i < imatge_nom.length; i++) {
-			listAux.add(this.root + this.imatge_nom[i]);
+			listImg.add(this.root + this.imatge_nom[i]);
 		}
 		
+		
+												// BOX (en caso de utilizar BorderLayout)
 		Box box = Box.createVerticalBox();
 	
-		//creamos una lista de los botones
+		//creamos una lista de los botones con las rutas de las imagenes
 		this.listBotones=new ArrayList<JButton>();
-		crearBoton(listAux);//lista ruta imagen
+		crearBoton(listImg);//lista ruta imagen
 		
 		//añadimos los botones al panel
 		for (JButton jButton : listBotones) {
@@ -136,7 +140,7 @@ public class part12 extends JFrame{
 			box.add(jButton);
 		}
 		
-		
+											//	SCROLL
 		panelBox.add(box);
 
 		JScrollBar scrollBar = new JScrollBar(JScrollBar.VERTICAL);
@@ -148,6 +152,8 @@ public class part12 extends JFrame{
 //      scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 //		scroll.setPreferredSize(new Dimension(coche.getImage().getWidth(null)/3-10, coche.getImage().getHeight(null)*2));
 //		scroll.requestFocus();
+
+//		listBotones.get(0).doClick();
 		
 		this.panelGBC.add(l1, "span 2");
 		this.panelGBC.add(luser, "wrap, align right");
@@ -158,7 +164,6 @@ public class part12 extends JFrame{
 		this.panelGBC.add(siguiente, "align right");
 		
 		JFrame();
-		listBotones.get(0).doClick();
 	}
 	
 	/*
@@ -216,10 +221,13 @@ public class part12 extends JFrame{
 						BorderFactory.createLineBorder(new Color(215, 18, 43)),
 						BorderFactory.createEmptyBorder(1, 1, 1, 1)
 						));
-				area.setContentType("text/html");
-				area.setText("<html><div style='text-align: center;'><span style='background: red; padding:10px;'>Nombre del Coche</span></div><br></html>");
+				for (int i = 0; i < imatge_nom.length; i++) {
+					if ((root+imatge_nom[i]).equals(coch.getDescription())) {//la descripcion es del objeto, que devuelve la ruta de la imagen
+						posicion=i;
+					}
+				}
+				area.setText("<html><div style='text-align: center;'><span style='background: red; padding:10px;'>"+model.getName()[posicion]+"</span></div><br></html>");
 				area.insertIcon(coch);
-				area.setEditable(false);
 			}
 		});
 //		b.addActionListener(new ActionListener() {
