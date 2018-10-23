@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.FocusEvent;
@@ -30,7 +32,7 @@ import model.Client;
 import model.Model;
 import net.miginfocom.swing.MigLayout;
 
-public class part12 extends JFrame{
+public class Seleccion_Modelo extends JFrame{
 	
 //	public static void main(String[] args) {
 //		ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
@@ -38,10 +40,12 @@ public class part12 extends JFrame{
 //		part12 p = new part12(configLoad, language, "alexis.mengual");
 //	}
 	
-	private ConfigurationLoader configLoad;
+
 	private ILanguage language;
-	private Model model;
+	private ConfigurationLoader configLoad;
 	private Client client;
+	private String username;
+	private Model model;
 	
 //	private JFrame frame;
 	private JPanel panelGBC=new JPanel(),panelBox=new JPanel();
@@ -53,7 +57,7 @@ public class part12 extends JFrame{
 	private ImageIcon coche;
 	private ImageIcon cocheBoton;
 	private JScrollPane scroll;
-	int posicion=0;
+	private int posicion=0;
 	
 	String[] imatge_nom;
 	String root = "src\\config\\car\\images\\";
@@ -62,10 +66,11 @@ public class part12 extends JFrame{
 	/*
 	 * Añado los componentes del concesionaro del coche (parte 12)
 	 */
-	public part12(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
+	public Seleccion_Modelo(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
 		this.configLoad = configLoad;
 		this.language = language;
 		this.client = client;
+		this.username = username;
 		this.model = new Model(this.configLoad);
 		//migLayout
 		this.panelGBC.setLayout(new MigLayout("insets 50, fillx, filly"));
@@ -75,7 +80,7 @@ public class part12 extends JFrame{
 		
 		this.l1=new JLabel(variables.Lenguaje.tituloTexto);
 		this.l1.setFont(new java.awt.Font("Tahoma", 0, 16));
-		this.luser=new JLabel(username);
+		this.luser=new JLabel(this.language.labelAuthIn() + username);
 		
 		this.area=new JTextPane();
 			area.setContentType("text/html");
@@ -160,6 +165,22 @@ public class part12 extends JFrame{
 			}
 		});
 		
+		anterior.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				anteriorActionPerformed();
+			}
+		});
+		
+		siguiente.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				siguienteActionPerformed();
+			}
+		});
+		
 		
 		JFrame();
 	}
@@ -167,9 +188,9 @@ public class part12 extends JFrame{
 	/*
 	 * Método para configurar la ventana actual.
 	 */
-	public void JFrame() {
+	private void JFrame() {
 		add(panelGBC);
-		setTitle("SEAT Configurador");
+		setTitle("SEAT Configurador - Selección de modelo");
 		setIconImage(getIconImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600,600);
@@ -178,7 +199,7 @@ public class part12 extends JFrame{
 		setVisible(true);
 	}
 	
-	public void crearBoton(List<String> nom) {
+	private void crearBoton(List<String> nom) {
 		for (String string : nom) {
 			btnCoches=new JButton();
 			btnCoches.setBackground(new Color(255,255,255));
@@ -200,7 +221,7 @@ public class part12 extends JFrame{
 		
 		
 	}
-	public void listener(ImageIcon coch, JButton b) {
+	private void listener(ImageIcon coch, JButton b) {
 		b.addFocusListener(new FocusListener() {
 			
 			@Override
@@ -224,13 +245,8 @@ public class part12 extends JFrame{
 					}
 				}
 				File fImg = new File(coch.getDescription());
-<<<<<<< HEAD
-				area.setText("<html><div style='text-align: center;'><span style='background: rgb(215,18,43); color: rgb(255,255,255);  font-family: Tahoma; font-size:12; padding:10;'>"+model.getName()[posicion]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
-				areaInfo.setText("<html><div style='text-align: center; font-family: Tahoma; font-size:12'><span style=padding:10px'>"+model.getDescription()[posicion]+"</span></div><br></html>");
-=======
 				area.setText("<html><div style='text-align: center;'><span style='background: rgb(215,18,43); color: rgb(255,255,255); padding:10px'>"+model.getName()[posicion]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
 				areaInfo.setText("<html><div style='text-align: center;'><span style=padding:10px'>"+model.getDescription()[posicion]+"</span></div><br></html>");
->>>>>>> 6fc07f9742998fd932152364ec69ec59ed266a7b
 				System.out.println("[INFO] - Cambiando modelo a: "+model.getName()[posicion]);
 			}
 		});
@@ -242,4 +258,12 @@ public class part12 extends JFrame{
         return retValue;
     }
 
+	protected void anteriorActionPerformed() {
+		setVisible(false);
+		new Data_Clients(configLoad, language, username, client);
+	}
+	
+	protected void siguienteActionPerformed() {
+		
+	}
 }

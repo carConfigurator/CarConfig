@@ -29,7 +29,7 @@ import config.ConfigurationLoader;
 import idao.ILanguage;
 import model.Client;
 import net.miginfocom.swing.MigLayout;
-import view.miglayout.part12;
+import view.miglayout.Seleccion_Modelo;
 
 public class Data_Clients extends JFrame{
 
@@ -50,12 +50,13 @@ public class Data_Clients extends JFrame{
 	
 	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username, Client client) {
 		System.out.println("[INFO] - Mostrando nuevo Frame...");
-		this.client = new Client();
+		this.client = client;
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
 		
 		createFrame();
+		setInformation();
 	}
 	
 	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username) {
@@ -231,6 +232,14 @@ public class Data_Clients extends JFrame{
 		this.panel.add(btn_next);
 		JFrame();
 	}
+	
+	private void setInformation() {
+		tfield_client_name.setText(client.getName());
+		tfield_client_first_lastname.setText(client.getFirst_last_name());
+		tfield_client_second_lastname.setText(client.getSecond_last_name());
+		tfield_client_address.setText(client.getAddress());
+		tfield_client_email.setText(client.getEmail());
+	}
 
 	protected void nextActionPerformed() {
 		tfield_client_address.setText(tfield_client_address.getText().replaceAll("^\\s*", ""));
@@ -253,8 +262,8 @@ public class Data_Clients extends JFrame{
                 tfield_client_email.setText("");
             }else {
             	System.out.println("[INFO] - Todos los campos son correctos. Cambiando de Frame...");
-            	Client new_client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText());
-            	new part12(this.configLoad, this.language, this.label_username.getText(), client);
+            	client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText());
+            	new Seleccion_Modelo(this.configLoad, this.language, this.username, client);
             	setVisible(false);
             }
         }
@@ -292,7 +301,7 @@ public class Data_Clients extends JFrame{
 		setIconImage(getIconImage());
 		pack();
 		setLocationRelativeTo(null);
-addWindowListener(new WindowListener() {
+		addWindowListener(new WindowListener() {
 			
 			@Override
 			public void windowOpened(WindowEvent e) {}
