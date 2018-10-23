@@ -1,46 +1,27 @@
 package view.miglayout;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
+import java.awt.Toolkit;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.SwingConstants;
-
-import com.toedter.calendar.JDateChooser;
 
 import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
@@ -65,7 +46,7 @@ public class part12 extends JFrame{
 	private List<JButton> listBotones;
 	private JButton siguiente,anterior,btnCoches;
 	private JLabel l1,luser;
-	private JTextArea areaInfo;
+	private JTextPane areaInfo;
 	private JTextPane area;
 	private ImageIcon coche;
 	private ImageIcon cocheBoton;
@@ -74,10 +55,6 @@ public class part12 extends JFrame{
 	
 	String[] imatge_nom;
 	String root = "src\\config\\car\\images\\";
-	String i1="src\\config\\car\\images\\Ateca.jpeg";
-	String i2="src\\config\\car\\images\\Mii_5P.jpeg";
-	String i3="src\\config\\car\\images\\Nuevo_Arona.jpeg";
-	String i4="src\\config\\car\\images\\Nuevo_Ibiza.jpeg";
 	List<Image> listImg;
 	
 	/*
@@ -89,18 +66,20 @@ public class part12 extends JFrame{
 		this.model = new Model(this.configLoad);
 		//migLayout
 		this.panelGBC.setLayout(new MigLayout("insets 50, fillx, filly"));
-//		this.panelBox.setLayout(new BoxLayout(panelBox, BoxLayout.Y_AXIS));
+		this.panelBox.setLayout(new BoxLayout(panelBox, BoxLayout.Y_AXIS));
 		this.panelGBC.setBackground(new Color(255, 255, 255));
 		this.panelBox.setBackground(new Color(255, 255, 255));
 		
 		this.l1=new JLabel(variables.Lenguaje.tituloTexto);
 		this.l1.setFont(new java.awt.Font("Tahoma", 0, 16));
-		this.luser=new JLabel(variables.Lenguaje.textoUser);
+		this.luser=new JLabel(username);
 		
 		this.area=new JTextPane();
 			area.setContentType("text/html");
 			area.setEditable(false);
-		this.areaInfo=new JTextArea("Info coche");
+		this.areaInfo=new JTextPane();
+			areaInfo.setContentType("text/html");
+			areaInfo.setEditable(false);
 		this.anterior=new JButton(variables.Lenguaje.bAnterior);
 		this.anterior.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.anterior.setBackground(new Color(215,18,43));
@@ -118,17 +97,13 @@ public class part12 extends JFrame{
 				BorderFactory.createEmptyBorder(5,10,5,10)
 				));
 		
-		
 												//se añade la ruta de la imagen en una lista
 		this.imatge_nom = this.model.getImage_name();
 		List<String> listImg=new ArrayList<>();
 		for (int i = 0; i < imatge_nom.length; i++) {
 			listImg.add(this.root + this.imatge_nom[i]);
+			listImg.add(this.root + this.imatge_nom[i]);
 		}
-		
-		
-												// BOX (en caso de utilizar BorderLayout)
-		Box box = Box.createVerticalBox();
 	
 		//creamos una lista de los botones con las rutas de las imagenes
 		this.listBotones=new ArrayList<JButton>();
@@ -136,32 +111,52 @@ public class part12 extends JFrame{
 		
 		//añadimos los botones al panel
 		for (JButton jButton : listBotones) {
-//			this.panelBox.add(jButton);
-			box.add(jButton);
+			this.panelBox.add(jButton);
 		}
-		
-											//	SCROLL
-		panelBox.add(box);
 
-		JScrollBar scrollBar = new JScrollBar(JScrollBar.VERTICAL);
-		panelBox.add(scrollBar, BorderLayout.EAST);
-//		panelBox.add(scrollBar);
+
 		
-//		this.scroll = new JScrollPane(lista);
-//		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//      scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-//		scroll.setPreferredSize(new Dimension(coche.getImage().getWidth(null)/3-10, coche.getImage().getHeight(null)*2));
-//		scroll.requestFocus();
+		this.scroll = new JScrollPane(panelBox);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	    scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	    scroll.setMinimumSize(new Dimension(coche.getImage().getWidth(null)/3-10, coche.getImage().getHeight(null)*3/2));
+		scroll.setPreferredSize(new Dimension(coche.getImage().getWidth(null)/3-10, coche.getImage().getHeight(null)*3/2));
+		scroll.setBorder(null);
+		
+							//Añadimos las dimensiones aqui porque si hago como el scroll me dice que son 0,0, asi, me lo pilla bien
+		area.setMinimumSize(new Dimension((scroll.getMinimumSize().width+10)*3,scroll.getMinimumSize().height*2/3));
 
 //		listBotones.get(0).doClick();
 		
 		this.panelGBC.add(l1, "span 2");
 		this.panelGBC.add(luser, "wrap, align right");
-		this.panelGBC.add(panelBox, "align right");//scroll
+		this.panelGBC.add(scroll, "align right");
 		this.panelGBC.add(area, "wrap, pushx, growx, pushy, growy, span 2");
 		this.panelGBC.add(areaInfo, "span 2, skip, wrap, align right, pushx, growx");
 		this.panelGBC.add(anterior, "skip");
 		this.panelGBC.add(siguiente, "align right");
+		
+		
+		area.addComponentListener(new ComponentListener() {
+			
+			@Override
+			public void componentShown(ComponentEvent e) {
+			}
+			
+			@Override
+			public void componentResized(ComponentEvent e) {
+				area.setMargin(new Insets(area.getBounds().height/2-area.getBounds().y, 0, 0, 0));
+			}
+			
+			@Override
+			public void componentMoved(ComponentEvent e) {
+			}
+			
+			@Override
+			public void componentHidden(ComponentEvent e) {
+			}
+		});
+		
 		
 		JFrame();
 	}
@@ -225,19 +220,18 @@ public class part12 extends JFrame{
 						posicion=i;
 					}
 				}
-				area.setText("<html><div style='text-align: center;'><span style='background: red; padding:10px;'>"+model.getName()[posicion]+"</span></div><br></html>");
-				area.insertIcon(coch);
+				File fImg = new File(coch.getDescription());
+				area.setText("<html><div style='text-align: center;'><span style='background: rgb(215,18,43); color: rgb(255,255,255); padding:10px'>"+model.getName()[posicion]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
+				areaInfo.setText("<html><div style='text-align: center;'><span style=padding:10px'>"+model.getDescription()[posicion]+"</span></div><br></html>");
+				System.out.println("[INFO] - Cambiando modelo a: "+model.getName()[posicion]);
 			}
 		});
-//		b.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				// TODO Auto-generated method stub
-//				area.setText("<html><div style='text-align: center;'><span style='background: red'>" + "NombreCoche" + "</span></div><br></html>");
-//				area.insertIcon(coch);
-//			}
-//		});
 	}
+	
+	public Image getIconImage() {
+		File image = new File("src/config/favicon.png");
+        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
+        return retValue;
+    }
 
 }
