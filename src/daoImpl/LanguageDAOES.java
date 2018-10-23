@@ -70,7 +70,7 @@ public class LanguageDAOES implements ILanguage{
 
 	@Override
 	public String labelClientEmail() {
-		return "Correo Eléctronico: *";
+		return "Correo Electrónico: *";
 	}
 
 	@Override

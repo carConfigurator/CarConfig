@@ -9,7 +9,7 @@
 		<car_configuration_path>src\\config\\car\\</car_configuration_path>
 		<car_configuration_file_name>car_config.xml</car_configuration_file_name>
 		<employee_list>alexis.mengual,dario.delcore,david.uson</employee_list>
-		<employee_version>false,true,true</employee_version>
+		<employee_version>true</employee_version>
 		<employee_password>1234,5678,1234</employee_password>
 		<specifications_file_path>src\\config\\specifications</specifications_file_path>
 	</configuration>

@@ -7,6 +7,8 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 
 import javax.swing.BorderFactory;
@@ -51,7 +53,9 @@ public class Login extends JFrame{
 	 */
 	public Login() {
 		this.configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
+		ConfigurationLoader configLoad2 = ConfigurationLoader.getConfigurationLoaderInstance();
 		System.out.println("[INFO] - Obteniendo idioma del Archivo de Configuración...");
+		System.out.println("\t[DEMO] - El idioma para este sprint será únicamente en Castellano,\n\tpero está planteado para multilenguajes.");
 		this.language = LanguageFactory.getLanguage(configLoad.getLanguage_default());
 		// Configuracion de los Componentes:
 		// Añado el Layout al Panel y le indico que este haga un padding de 20 en el Panel.
@@ -150,10 +154,11 @@ public class Login extends JFrame{
 		for (int i = 0; i < listEmployee.length; i++) {
 			if(countTries == listEmployee.length) {
 				JOptionPane.showMessageDialog(null,language.errorLoginUser(),language.errorLoginUserTitle(), JOptionPane.ERROR_MESSAGE);
+				System.out.println("[ERROR] - El usuario no existe.");
 			}else {
 				if(listEmployee[i].equals(username)) {
 					if(listPassword[i].equals(password)) {
-						System.out.println("[INFO] - Conexión Establecida. Cambiando de Frame...");
+						System.out.println("[INFO] - Conexión Establecida. Cambiando de Frame...\n\t Enviando configuración, idioma y nombre de usuario...");
 						// Oculto este Frame y llamo al siguiente:
 						setVisible(false);
 						new Data_Clients(this.configLoad, this.language, username);

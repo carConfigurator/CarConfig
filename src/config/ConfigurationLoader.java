@@ -21,8 +21,9 @@ public class ConfigurationLoader {
 	private DocumentBuilder builder;
 	private Document document;
 	
-	private String language,language_default,postfix_language_file_name,version,language_files_path,employee_version,car_configuration_path,car_configuration_file_name,specifications_file_path;
+	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path;
 	private String[] employee_list,employee_password;
+	private boolean employee_version;
 	
 	/*
 	 * Constructor de la Clase
@@ -61,7 +62,7 @@ public class ConfigurationLoader {
 			System.out.println("[INFO] - Generando instancia...");
 			return configLoad = new ConfigurationLoader();
 		}else {
-			System.out.println("[INFO] - Ya existe una instancia");
+			System.out.println("[ERROR] - No puedes volver a generar una instancia, comprueba tú código.");
 			return null;
 		}
 	}
@@ -114,10 +115,10 @@ public class ConfigurationLoader {
 		return nNode.getTextContent().split(",");
 	}
 	
-	private String loadEmployee_version() {
+	private boolean loadEmployee_version() {
 		NodeList nList = document.getElementsByTagName("employee_version");
 		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return Boolean.valueOf(nNode.getTextContent());
 	}
 	
 	private String[] loadEmployee_password() {
@@ -164,7 +165,7 @@ public class ConfigurationLoader {
 		return employee_list;
 	}
 
-	public String getEmployee_version() {
+	public boolean getEmployee_version() {
 		return employee_version;
 	}
 

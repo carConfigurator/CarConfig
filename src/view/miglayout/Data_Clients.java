@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,6 +49,12 @@ public class Data_Clients extends JFrame{
 		System.out.println("[INFO] - Mostrando nuevo Frame...");
 		this.language = language;
 		this.configLoad = configLoad;
+		boolean descuento = this.configLoad.getEmployee_version();
+		if(descuento) {
+			System.out.println("[INFO] - ¡Se dispondrá de un 20% de descuento en la siguiente compra!");
+		}else {
+			System.out.println("[INFO] - No habrá descuento para la siguiente compra.");
+		}
 		this.panel = new JPanel();
 		this.panel.setLayout(new MigLayout("insets 20"));
 		this.panel.setBackground(new Color(255,255,255));
@@ -257,6 +265,40 @@ public class Data_Clients extends JFrame{
 		setIconImage(getIconImage());
 		pack();
 		setLocationRelativeTo(null);
+addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				int dialogButton = JOptionPane.YES_NO_CANCEL_OPTION;
+				JOptionPane.showConfirmDialog(null, "¿Desea Guardar los Cambios?", "¿Desea Guardar los Cambios?", dialogButton);
+				if(dialogButton == JOptionPane.YES_OPTION) {
+					System.out.println("[INFO] - Guardando los datos del cliente...");
+				}else if(dialogButton == JOptionPane.YES_NO_OPTION) {
+					System.out.println("[INFO] - No se guardarán los datos del cliente nuevo");
+				}else {
+					System.out.println("[INFO] - No se hará nada.");
+					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+				}
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
