@@ -26,12 +26,13 @@ import com.toedter.calendar.JDateChooser;
 import config.ConfigurationLoader;
 import idao.ILanguage;
 import net.miginfocom.swing.MigLayout;
-import view.part12;
+import view.miglayout.part12;
 
 public class Data_Clients extends JFrame{
 
 	// Atributos de la Clase:
-	ILanguage language;
+	private ILanguage language;
+	private ConfigurationLoader configLoad;
 	
 	JPanel panel;
 	JLabel label_client_title, label_username, label_client_name, label_client_first_lastname, label_client_second_lastname,
@@ -45,6 +46,7 @@ public class Data_Clients extends JFrame{
 	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username) {
 		System.out.println("[INFO] - Mostrando nuevo Frame...");
 		this.language = language;
+		this.configLoad = configLoad;
 		this.panel = new JPanel();
 		this.panel.setLayout(new MigLayout("insets 20"));
 		this.panel.setBackground(new Color(255,255,255));
@@ -165,6 +167,14 @@ public class Data_Clients extends JFrame{
 			}
 		});
 		
+		btn_next.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nextActionPerformed();
+			}
+		});
+		
 		this.panel.add(this.label_client_title);
 		this.panel.add(this.label_username, "wrap, skip, align right");
 		this.panel.add(this.label_client_name, "align right");
@@ -186,6 +196,33 @@ public class Data_Clients extends JFrame{
 		this.panel.add(btn_save, "skip, align right, split 2");
 		this.panel.add(btn_next);
 		JFrame();
+	}
+	
+	protected void nextActionPerformed() {
+		tfield_client_address.setText(tfield_client_address.getText().replaceAll("^\\s*", ""));
+		tfield_client_name.setText(tfield_client_name.getText().replaceAll("^\\s*", ""));
+		tfield_client_first_lastname.setText(tfield_client_first_lastname.getText().replaceAll("^\\s*", ""));
+		tfield_client_second_lastname.setText(tfield_client_second_lastname.getText().replaceAll("^\\s*", ""));
+		tfield_client_email.setText(tfield_client_email.getText().replaceAll("^\\s*", ""));
+		
+		if (tfield_client_name.getText().length() == 0 || tfield_client_first_lastname.getText().length() == 0 || tfield_client_second_lastname.getText().length() == 0 || tfield_client_address.getText().length() == 0 || tfield_client_email.getText().length() == 0 ){
+            JOptionPane.showMessageDialog(null, "Faltan campos por rellenar. Rellene todos los campos obligatorios.", "Informacion Incompleta", JOptionPane.ERROR_MESSAGE);
+        }else {
+    		//  Filtro para que el correo sea valido buscando en el contenido de este un "@".
+            String email = tfield_client_email.getText();
+
+            Pattern pattern = Pattern.compile("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b");
+            Matcher matcher = pattern.matcher(email);
+
+            if (matcher.find() == false) {
+                JOptionPane.showMessageDialog(null, "El correo no es valido.", "Error de correo", JOptionPane.ERROR_MESSAGE);
+                tfield_client_email.setText("");
+            }else {
+            	System.out.println("[INFO] - Todos los campos son correctos. Cambiando de Frame...");
+            	new part12(this.configLoad, this.language);
+            	setVisible(false);
+            }
+        }
 	}
 
 	protected void saveActionPerformed() {
@@ -210,7 +247,6 @@ public class Data_Clients extends JFrame{
                 tfield_client_email.setText("");
             }else {
             	System.out.println("[INFO] - Todos los campos son correctos. Guardando...");
-            	new part12();
             }
         }
 	}

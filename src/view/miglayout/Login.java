@@ -23,6 +23,7 @@ import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
 import net.miginfocom.swing.MigLayout;
+import view.miglayout.Data_Clients;
 
 public class Login extends JFrame{
 	
