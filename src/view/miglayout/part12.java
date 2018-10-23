@@ -216,7 +216,6 @@ public class part12 extends JFrame{
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				System.out.println(b.getIcon().toString());
 				b.setBorder(BorderFactory.createCompoundBorder(
 						BorderFactory.createLineBorder(new Color(215, 18, 43)),
 						BorderFactory.createEmptyBorder(1, 1, 1, 1)
