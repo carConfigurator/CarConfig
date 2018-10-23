@@ -27,6 +27,7 @@ import com.toedter.calendar.JDateChooser;
 
 import config.ConfigurationLoader;
 import idao.ILanguage;
+import model.Client;
 import net.miginfocom.swing.MigLayout;
 import view.miglayout.part12;
 
@@ -35,6 +36,8 @@ public class Data_Clients extends JFrame{
 	// Atributos de la Clase:
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
+	private Client client;
+	private String username;
 	
 	JPanel panel;
 	JLabel label_client_title, label_username, label_client_name, label_client_first_lastname, label_client_second_lastname,
@@ -45,10 +48,28 @@ public class Data_Clients extends JFrame{
 	JDateChooser dc_birthdate;
 	JButton btn_save, btn_next;
 	
-	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username) {
+	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username, Client client) {
 		System.out.println("[INFO] - Mostrando nuevo Frame...");
+		this.client = new Client();
 		this.language = language;
 		this.configLoad = configLoad;
+		this.username = username;
+		
+		createFrame();
+	}
+	
+	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username) {
+		System.out.println("[INFO] - Mostrando nuevo Frame...");
+		this.client = new Client();
+		this.language = language;
+		this.configLoad = configLoad;
+		this.username = username;
+		
+		createFrame();
+		
+	}
+	
+	private void createFrame() {
 		boolean descuento = this.configLoad.getEmployee_version();
 		if(descuento) {
 			System.out.println("[INFO] - ¡Se dispondrá de un 20% de descuento en la siguiente compra!");
@@ -70,6 +91,7 @@ public class Data_Clients extends JFrame{
 		this.label_client_name.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
 		this.tfield_client_name = new JTextField(30);
+		this.tfield_client_name.setText(this.client.getName());
 		this.tfield_client_name.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
@@ -81,6 +103,7 @@ public class Data_Clients extends JFrame{
 		this.label_client_first_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
 		this.tfield_client_first_lastname = new JTextField(30);
+		this.tfield_client_first_lastname.setText(this.client.getFirst_last_name());
 		this.tfield_client_first_lastname.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
@@ -92,6 +115,7 @@ public class Data_Clients extends JFrame{
 		this.label_client_second_lastname.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
 		
 		this.tfield_client_second_lastname = new JTextField(30);
+		this.tfield_client_second_lastname.setText(this.client.getSecond_last_name());
 		this.tfield_client_second_lastname.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
@@ -103,6 +127,7 @@ public class Data_Clients extends JFrame{
 		this.label_client_address.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
 		
 		this.tfield_client_address = new JTextField(30);
+		this.tfield_client_address.setText(this.client.getAddress());
 		this.tfield_client_address.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
@@ -114,6 +139,7 @@ public class Data_Clients extends JFrame{
 		this.label_client_email.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
 		
 		this.tfield_client_email = new JTextField(30);
+		this.tfield_client_email.setText(this.client.getEmail());
 		this.tfield_client_email.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
@@ -205,7 +231,7 @@ public class Data_Clients extends JFrame{
 		this.panel.add(btn_next);
 		JFrame();
 	}
-	
+
 	protected void nextActionPerformed() {
 		tfield_client_address.setText(tfield_client_address.getText().replaceAll("^\\s*", ""));
 		tfield_client_name.setText(tfield_client_name.getText().replaceAll("^\\s*", ""));
@@ -227,7 +253,8 @@ public class Data_Clients extends JFrame{
                 tfield_client_email.setText("");
             }else {
             	System.out.println("[INFO] - Todos los campos son correctos. Cambiando de Frame...");
-            	new part12(this.configLoad, this.language, this.label_username.getText());
+            	Client new_client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText());
+            	new part12(this.configLoad, this.language, this.label_username.getText(), client);
             	setVisible(false);
             }
         }
