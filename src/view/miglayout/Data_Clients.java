@@ -227,7 +227,7 @@ public class Data_Clients extends JFrame{
                 tfield_client_email.setText("");
             }else {
             	System.out.println("[INFO] - Todos los campos son correctos. Cambiando de Frame...");
-            	new part12(this.configLoad, this.language);
+            	new part12(this.configLoad, this.language, this.label_username.getText());
             	setVisible(false);
             }
         }
