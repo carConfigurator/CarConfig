@@ -184,8 +184,7 @@ public class part12 extends JFrame{
 					BorderFactory.createEmptyBorder(1, 1, 1, 1)
 					));
 			coche=new ImageIcon(string);
-			System.out.println(coche.getIconWidth());
-			cocheBoton= new ImageIcon(coche.getImage().getScaledInstance(coche.getIconWidth()*4/4, coche.getIconHeight()*4/4, Image.SCALE_DEFAULT));
+			cocheBoton= new ImageIcon(coche.getImage().getScaledInstance(coche.getIconWidth()/4, coche.getIconHeight()/4, Image.SCALE_DEFAULT));
 			btnCoches.setIcon(cocheBoton);
 			btnCoches.setMargin(new Insets(0, 0, 0, 0));
 			listBotones.add(btnCoches);
@@ -212,6 +211,7 @@ public class part12 extends JFrame{
 			
 			@Override
 			public void focusGained(FocusEvent e) {
+				System.out.println(b.getIcon().toString());
 				b.setBorder(BorderFactory.createCompoundBorder(
 						BorderFactory.createLineBorder(new Color(215, 18, 43)),
 						BorderFactory.createEmptyBorder(1, 1, 1, 1)

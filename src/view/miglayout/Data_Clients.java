@@ -227,7 +227,7 @@ public class Data_Clients extends JFrame{
                 tfield_client_email.setText("");
             }else {
             	System.out.println("[INFO] - Todos los campos son correctos. Cambiando de Frame...");
-            	new part12(this.configLoad, this.language);
+            	new part12(this.configLoad, this.language, this.label_username.getText());
             	setVisible(false);
             }
         }
@@ -286,12 +286,12 @@ addWindowListener(new WindowListener() {
 				if(dialogButton == JOptionPane.YES_OPTION) {
 					System.out.println("[INFO] - Guardando los datos del cliente...");
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				}else if(dialogButton == JOptionPane.YES_NO_OPTION) {
+				}else if(dialogButton == JOptionPane.NO_OPTION) {
 					System.out.println("[INFO] - No se guardarán los datos del cliente nuevo");
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				}else {
+				}else if(dialogButton == JOptionPane.CANCEL_OPTION){
 					System.out.println("[INFO] - No se hará nada.");
-					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+					setDefaultCloseOperation(JFrame.ABORT);
 				}
 			}
 			

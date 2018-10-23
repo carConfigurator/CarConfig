@@ -55,7 +55,7 @@ public class Login extends JFrame{
 		this.configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
 		ConfigurationLoader configLoad2 = ConfigurationLoader.getConfigurationLoaderInstance();
 		System.out.println("[INFO] - Obteniendo idioma del Archivo de Configuración...");
-		System.out.println("\t[DEMO] - El idioma para este sprint será únicamente en Castellano,\n\tpero está planteado para multilenguajes.");
+		System.out.println("\t [DEMO] - El idioma para este sprint será únicamente en Castellano,\n\t pero está planteado para multilenguajes.");
 		this.language = LanguageFactory.getLanguage(configLoad.getLanguage_default());
 		// Configuracion de los Componentes:
 		// Añado el Layout al Panel y le indico que este haga un padding de 20 en el Panel.
