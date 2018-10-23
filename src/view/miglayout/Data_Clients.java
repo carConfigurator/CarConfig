@@ -1,7 +1,6 @@
 package view.miglayout;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -51,21 +50,21 @@ public class Data_Clients extends JFrame{
 		this.panel.setBackground(new Color(255,255,255));
 		
 		this.label_client_title = new JLabel(this.language.labelClientTitle());
-		this.label_client_title.setFont(new Font("Tahoma", 0, 16));
+		this.label_client_title.setFont(new java.awt.Font("Tahoma", 0, 16));
 		
 		this.label_username = new JLabel(this.language.labelAuthIn() + username);
-		this.label_username.setFont(new Font("Tahoma", 0, 10));
+		this.label_username.setFont(new java.awt.Font("Tahoma", 0, 10));
 		
 		this.label_client_name = new JLabel(this.language.labelClientName());
 		this.label_client_name.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
-		this.label_client_name.setFont(new Font("Tahoma", 0, 12));
+		this.label_client_name.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
 		this.tfield_client_name = new JTextField(30);
 		this.tfield_client_name.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
 				));
-		this.tfield_client_name.setFont(new Font("Tahoma", 0, 12));
+		this.tfield_client_name.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
 		this.label_client_first_lastname = new JLabel(this.language.labelClientFirstLastName());
 		this.label_client_first_lastname.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
