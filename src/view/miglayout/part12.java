@@ -105,6 +105,7 @@ public class part12 extends JFrame{
 		List<String> listImg=new ArrayList<>();
 		for (int i = 0; i < imatge_nom.length; i++) {
 			listImg.add(this.root + this.imatge_nom[i]);
+			listImg.add(this.root + this.imatge_nom[i]);
 		}
 	
 		//creamos una lista de los botones con las rutas de las imagenes
@@ -223,8 +224,13 @@ public class part12 extends JFrame{
 					}
 				}
 				File fImg = new File(coch.getDescription());
+<<<<<<< HEAD
 				area.setText("<html><div style='text-align: center;'><span style='background: rgb(215,18,43); color: rgb(255,255,255);  font-family: Tahoma; font-size:12; padding:10;'>"+model.getName()[posicion]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
 				areaInfo.setText("<html><div style='text-align: center; font-family: Tahoma; font-size:12'><span style=padding:10px'>"+model.getDescription()[posicion]+"</span></div><br></html>");
+=======
+				area.setText("<html><div style='text-align: center;'><span style='background: rgb(215,18,43); color: rgb(255,255,255); padding:10px'>"+model.getName()[posicion]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
+				areaInfo.setText("<html><div style='text-align: center;'><span style=padding:10px'>"+model.getDescription()[posicion]+"</span></div><br></html>");
+>>>>>>> 6fc07f9742998fd932152364ec69ec59ed266a7b
 				System.out.println("[INFO] - Cambiando modelo a: "+model.getName()[posicion]);
 			}
 		});
