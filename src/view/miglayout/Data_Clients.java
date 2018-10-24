@@ -319,17 +319,13 @@ public class Data_Clients extends JFrame{
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int dialogButton = JOptionPane.YES_NO_CANCEL_OPTION;
-				JOptionPane.showConfirmDialog(null, "¿Desea Guardar los Cambios?", "¿Desea Guardar los Cambios?", dialogButton);
+				int dialogButton = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los Cambios?", "¿Desea Guardar los Cambios?", JOptionPane.OK_CANCEL_OPTION);
 				if(dialogButton == JOptionPane.YES_OPTION) {
 					System.out.println("[INFO] - Guardando los datos del cliente...");
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				}else if(dialogButton == JOptionPane.NO_OPTION) {
-					System.out.println("[INFO] - No se guardarán los datos del cliente nuevo");
-					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				}else if(dialogButton == JOptionPane.CANCEL_OPTION){
 					System.out.println("[INFO] - No se hará nada.");
-					setDefaultCloseOperation(JFrame.ABORT);
+					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				}
 			}
 			
