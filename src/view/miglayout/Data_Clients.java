@@ -49,7 +49,8 @@ public class Data_Clients extends JFrame{
 	JButton btn_save, btn_next;
 	
 	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username, Client client) {
-		System.out.println("[INFO] - Mostrando nuevo Frame...");
+		System.out.println("[INFO] - Mostrando nuevamente el Frame de Datos Clientes...");
+		System.out.println("[INFO] - Recuperando información del cliente añadido anteriormente...");
 		this.client = client;
 		this.language = language;
 		this.configLoad = configLoad;
@@ -298,6 +299,7 @@ public class Data_Clients extends JFrame{
 	private void JFrame() {
 		add(this.panel);
 		setSize(600,600);
+		setTitle("SEAT Configurador - Datos Clientes");
 		setIconImage(getIconImage());
 		pack();
 		setLocationRelativeTo(null);

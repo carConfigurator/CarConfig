@@ -31,6 +31,7 @@ public class Model {
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
 			System.out.println("[INFO] - Ruta de car: " + configLoad.getCar_configuration_path()+this.configLoad.getCar_configuration_file_name());
+			System.out.println("[INFO] - Cargando Modelos a la Vista...");
 			this.builder = factory.newDocumentBuilder();
 			this.document = this.builder.parse(new File(this.configLoad.getCar_configuration_path() + this.configLoad.getCar_configuration_file_name()));
 		} catch (ParserConfigurationException e) {

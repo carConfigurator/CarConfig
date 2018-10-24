@@ -81,6 +81,7 @@ public class Seleccion_Modelo extends JFrame{
 		this.l1=new JLabel(variables.Lenguaje.tituloTexto);
 		this.l1.setFont(new java.awt.Font("Tahoma", 0, 16));
 		this.luser=new JLabel(this.language.labelAuthIn() + username);
+		this.luser.setFont(new java.awt.Font("Tahoma", 0, 10));
 		
 		this.area=new JTextPane();
 			area.setContentType("text/html");
@@ -245,8 +246,8 @@ public class Seleccion_Modelo extends JFrame{
 					}
 				}
 				File fImg = new File(coch.getDescription());
-				area.setText("<html><div style='text-align: center;'><span style='background: rgb(215,18,43); color: rgb(255,255,255); padding:10px'>"+model.getName()[posicion]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
-				areaInfo.setText("<html><div style='text-align: center;'><span style=padding:10px'>"+model.getDescription()[posicion]+"</span></div><br></html>");
+				area.setText("<html><div style='text-align: center;'><span style='background: rgb(215,18,43); color: rgb(255,255,255); padding:10px; font-family: Tahoma;'>"+model.getName()[posicion]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
+				areaInfo.setText("<html><div style='text-align: center; font-family: Tahoma;'><span style=padding:10px;'>"+model.getDescription()[posicion]+"</span></div><br></html>");
 				System.out.println("[INFO] - Cambiando modelo a: "+model.getName()[posicion]);
 			}
 		});
