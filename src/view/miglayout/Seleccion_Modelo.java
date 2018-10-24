@@ -28,7 +28,9 @@ import javax.swing.JTextPane;
 import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
+import model.Accessory;
 import model.Client;
+import model.Engine;
 import model.Model;
 import net.miginfocom.swing.MigLayout;
 
@@ -46,6 +48,8 @@ public class Seleccion_Modelo extends JFrame{
 	private Client client;
 	private String username;
 	private Model model;
+	private Engine engine;
+	private Accessory accessory;
 	
 //	private JFrame frame;
 	private JPanel panelGBC=new JPanel(),panelBox=new JPanel();
@@ -72,6 +76,8 @@ public class Seleccion_Modelo extends JFrame{
 		this.client = client;
 		this.username = username;
 		this.model = new Model(this.configLoad);
+		this.engine = new Engine(this.configLoad);
+		this.accessory = new Accessory(this.configLoad);
 		//migLayout
 		this.panelGBC.setLayout(new MigLayout("insets 50, fillx, filly"));
 		this.panelBox.setLayout(new BoxLayout(panelBox, BoxLayout.Y_AXIS));

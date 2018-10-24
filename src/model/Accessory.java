@@ -1,14 +1,27 @@
 package model;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+
+import config.ConfigurationLoader;
+
 public class Accessory {
 	
-	// Atributos de la Clase:
-	private int id;
-	private double price;
-	private String name, description, image_name;
+	// Atributos de la Clase
+	private ConfigurationLoader configLoad;
+	private DocumentBuilderFactory factory;
+	private DocumentBuilder builder;
+	private Document document;
+	private int[] id;
+	private double[] price;
+	private String[] name, description, image_name;
 	private int[] models_available;
 	
-	public Accessory() {
+	public Accessory(ConfigurationLoader configLoad) {
+		System.out.println("[INFO] - Cargando Accesorios...");
+		this.configLoad = configLoad;
 		this.id = loadId();
 		this.price = loadPrice();
 		this.name = loadName();
@@ -21,24 +34,24 @@ public class Accessory {
 		return null;
 	}
 
-	private String loadImage_Name() {
+	private String[] loadImage_Name() {
 		return null;
 	}
 
-	private String loadDescription() {
+	private String[] loadDescription() {
 		return null;
 	}
 
-	private String loadName() {
+	private String[] loadName() {
 		return null;
 	}
 
-	private double loadPrice() {
-		return 0;
+	private double[] loadPrice() {
+		return null;
 	}
 
-	private int loadId() {
-		return 0;
+	private int[] loadId() {
+		return null;
 	}
 
 }
