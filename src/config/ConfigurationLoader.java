@@ -21,7 +21,7 @@ public class ConfigurationLoader {
 	private DocumentBuilder builder;
 	private Document document;
 	
-	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path;
+	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path, car_image_path;
 	private String[] employee_list,employee_password;
 	private boolean employee_version;
 	
@@ -40,6 +40,7 @@ public class ConfigurationLoader {
 			this.language_files_path=loadLanguage_files_path();
 			this.car_configuration_path=loadCar_configuration_path();
 			this.car_configuration_file_name=loadCar_configuration_file_name();
+			this.car_image_path = loadCar_image_path();
 			this.employee_list=loadEmployee_list();
 			this.employee_version=loadEmployee_version();
 			this.employee_password=loadEmployee_password();
@@ -103,6 +104,12 @@ public class ConfigurationLoader {
 		return nNode.getTextContent();
 	}
 	
+	private String loadCar_image_path() {
+		NodeList nList = document.getElementsByTagName("car_image_path");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+	
 	private String loadCar_configuration_file_name() {
 		NodeList nList = document.getElementsByTagName("car_configuration_file_name");
 		Node nNode = nList.item(0);
@@ -155,6 +162,10 @@ public class ConfigurationLoader {
 
 	public String getCar_configuration_path() {
 		return car_configuration_path;
+	}
+	
+	public String getCar_image_path() {
+		return car_image_path;
 	}
 
 	public String getCar_configuration_file_name() {

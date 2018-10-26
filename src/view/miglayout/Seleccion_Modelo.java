@@ -64,7 +64,7 @@ public class Seleccion_Modelo extends JFrame{
 	private int posicion=0;
 	
 	String[] imatge_nom;
-	String root = "src\\config\\car\\images\\";
+	String root_images;
 	List<Image> listImg;
 	
 	/*
@@ -73,6 +73,7 @@ public class Seleccion_Modelo extends JFrame{
 	public Seleccion_Modelo(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
 		this.configLoad = configLoad;
 		this.language = language;
+		this.root_images = this.configLoad.getCar_image_path();
 		this.client = client;
 		this.username = username;
 		this.model = new Model(this.configLoad);
@@ -116,8 +117,8 @@ public class Seleccion_Modelo extends JFrame{
 		this.imatge_nom = this.model.getImage_name();
 		List<String> listImg=new ArrayList<>();
 		for (int i = 0; i < imatge_nom.length; i++) {
-			listImg.add(this.root + this.imatge_nom[i]);
-			listImg.add(this.root + this.imatge_nom[i]);
+			listImg.add(this.root_images + this.imatge_nom[i]);
+			listImg.add(this.root_images + this.imatge_nom[i]);
 		}
 	
 		//creamos una lista de los botones con las rutas de las imagenes
@@ -247,7 +248,7 @@ public class Seleccion_Modelo extends JFrame{
 						BorderFactory.createEmptyBorder(1, 1, 1, 1)
 						));
 				for (int i = 0; i < imatge_nom.length; i++) {
-					if ((root+imatge_nom[i]).equals(coch.getDescription())) {//la descripcion es del objeto, que devuelve la ruta de la imagen
+					if ((root_images+imatge_nom[i]).equals(coch.getDescription())) {//la descripcion es del objeto, que devuelve la ruta de la imagen
 						posicion=i;
 					}
 				}
