@@ -21,7 +21,7 @@ public class ConfigurationLoader {
 	private DocumentBuilder builder;
 	private Document document;
 	
-	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path, car_image_path;
+	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path, car_image_path, temporal_path_file;
 	private String[] employee_list,employee_password;
 	private boolean employee_version;
 	
@@ -45,12 +45,13 @@ public class ConfigurationLoader {
 			this.employee_version=loadEmployee_version();
 			this.employee_password=loadEmployee_password();
 			this.specifications_file_path=loadSpecifications_file_path();
+			this.temporal_path_file = loadTemporalPathFile();
 		} catch (ParserConfigurationException e) {
-			System.out.println("[ERROR] - No se ha podido parsear la configuraci贸n. M谩s informaci贸n del error: " + e);
+			System.out.println("[ERROR] - No se ha podido parsear la configuraci髇. M醩 informaci髇 del error: " + e);
 		} catch (SAXException e) {
-			System.out.println("[ERROR] - No se ha podido parsear el archivo XML. M谩s informaci贸n del error: " + e);
+			System.out.println("[ERROR] - No se ha podido parsear el archivo XML. M醩 informaci髇 del error: " + e);
 		} catch (IOException e) {
-			System.out.println("[ERROR] - Error de E/S. M谩s informaci贸n del error: " + e);
+			System.out.println("[ERROR] - Error de E/S. M醩 informaci髇 del error: " + e);
 		}
 	}
 	
@@ -140,6 +141,12 @@ public class ConfigurationLoader {
 		return nNode.getTextContent();
 	}
 	
+	private String loadTemporalPathFile() {
+		NodeList nList = document.getElementsByTagName("temporal_path_file");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+	
 	public String getLanguage() {
 		return language;
 	}
@@ -188,6 +195,10 @@ public class ConfigurationLoader {
 		return specifications_file_path;
 	}
 
+	public String getTemporalPathFile() {
+		return temporal_path_file;
+	}
+	
 	/*
 	 * M閠odo toString() para comprobar que los datos se recojan bien, (uso 鷑icamente para la DEMO).
 	 * @see java.lang.Object#toString()

@@ -178,6 +178,7 @@ public class Data_Clients extends JFrame{
 		this.label_client_birthdate.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 5));
 		
 		this.dc_birthdate = new JDateChooser();
+		this.dc_birthdate.setDateFormatString("dd-M-yyyy");
 		this.dc_birthdate.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		this.dc_birthdate.setBackground(new Color(255, 255, 255));
 		
@@ -288,13 +289,13 @@ public class Data_Clients extends JFrame{
 	protected void saveActionPerformed() {
 		
 		if(checkData()) {
-			DateFormat format = new SimpleDateFormat("dd MMMM yyyy");
+			DateFormat format = new SimpleDateFormat(dc_birthdate.getDateFormatString());
 			String getInformation = label_client_name.getText() + tfield_client_name.getText()
 					+ "\n" + label_client_first_lastname.getText() + tfield_client_first_lastname.getText()
 					+ "\n" + label_client_second_lastname.getText() + tfield_client_second_lastname.getText()
 					+ "\n" + label_client_address.getText() + tfield_client_address.getText()
 					+ "\n" + label_client_email.getText() + tfield_client_email.getText()
-					+ "\n" + label_client_birthdate.getText() + format.format(dc_birthdate.getDate());
+					+ "\n" + label_client_birthdate.getText() + dc_birthdate.getDate();
 			
 			String getGender = label_client_gender.getText();
 			
