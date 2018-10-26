@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,8 +25,7 @@ public class Accessory {
 	private Document document;
 	private int[] id;
 	private double[] price;
-	private String[] name, description, image_name;
-	private int[] models_available;
+	private String[] name, description, image_name, models_available;//models son ints, pero para manejarlos utilizamos string
 	
 	public Accessory(ConfigurationLoader configLoad) {
 		System.out.println("[INFO] - Cargando Accesorios...");
@@ -47,18 +47,24 @@ public class Accessory {
 		this.description = loadDescription();
 		this.image_name = loadImage_Name();
 		this.models_available = loadModels_Available();
+		System.out.println(getInformation());
 	}
 	
-	private int[] loadModels_Available() {
+	//son ints en un array de string, al usarlos pasarlo a int
+	private String[] loadModels_Available() {
 		NodeList nList = document.getElementsByTagName("Accessory");
-		int[] mod_avaliable = new int[nList.getLength()];
+//		int[] mod_avaliable = new int[nList.getLength()];
+		String[] mod_avaliable = new String[nList.getLength()];
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
-				mod_avaliable[temp] = Integer.parseInt(eElement.getElementsByTagName("models_disponibles").item(0).getTextContent());
+				mod_avaliable[temp] = eElement.getElementsByTagName("models_disponibles").item(0).getTextContent();
 			}
 		}
+//		for (int i = 0; i < modelosString.length; i++) {
+//			mod_avaliable[i]=Integer.parseInt(modelosString[i]);
+//		}
 		return mod_avaliable;
 	}
 
@@ -147,7 +153,11 @@ public class Accessory {
 		return image_name;
 	}
 
-	public int[] getModels_available() {
+	public String[] getModels_available() {
 		return models_available;
+	}
+	
+	private String getInformation() {
+		return "Id: "+Arrays.toString(id)+", precio: "+Arrays.toString(price)+", nomobre: "+Arrays.toString(name)+", descripcion: "+Arrays.toString(description)+", ruta imagen: "+Arrays.toString(image_name)+", modelos disponibles: "+Arrays.toString(models_available);
 	}
 }
