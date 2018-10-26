@@ -12,8 +12,6 @@ public class ConfigurationCarTEST {
 		Engine engine = new Engine(configLoad);
 		Model model = new Model(configLoad);
 		Accessory accessory = new Accessory(configLoad);
-		
-		// Falta añadir al constructor de cada Clase la llamada a un método, que haga lo mismo que el toString(), para printar toda la información de estos.
 	}
 
 }

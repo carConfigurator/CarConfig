@@ -28,7 +28,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-public class Selection_Engine extends JFrame {
+public class prueba extends JFrame {
 
 	private ConfigurationLoader configLoad;
 	private ILanguage language;
@@ -62,7 +62,7 @@ public class Selection_Engine extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username) {
+	public prueba(ConfigurationLoader configLoad, ILanguage language, String username) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
@@ -83,7 +83,7 @@ public class Selection_Engine extends JFrame {
 		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		this.panel.setLayout(new MigLayout("", "[200px][][200px][4px][200px][50px]", "[23px][40px][31px][100px][][]"));
 		this.panel.add(lblTitulo, "cell 1 0 2 1,alignx right,aligny top");
-		 
+		
 		JList list = new JList();
 		DefaultListModel modelo = new DefaultListModel(); // Sirve para introducir elementos de forma indirecta (Ej: Haciendo un bucle para añadir elementos).
 		// Ejemplo para añadir contenido dentro del JList.
