@@ -32,7 +32,7 @@
 		<id>1</id>
 		<nom>Ibiza 1.6 TDI CR 70 KW (95 CV)</nom>
 		<description>Diesel / 5 Velocidades Manual</description>
-		<image_name></image_name>
+		<image_name>ruta_imagen</image_name>
 		<price>18.590</price>
 		<models_avaliable>2,3,4</models_avaliable>
 	</Engine>
@@ -40,7 +40,7 @@
 		<id>2</id>
 		<nom>Mii 1.0 55 KW (75 CV)</nom>
 		<description>Gasolina / 5 Velocidades Manual</description>
-		<image_name></image_name>
+		<image_name>ruta_imagen</image_name>
 		<price>9.590</price>
 		<models_avaliable>1</models_avaliable>
 	</Engine>
@@ -48,7 +48,7 @@
 		<id>1</id>
 		<nom>Elevaduras electricas</nom>
 		<descripcio>Elevaduras electricas</descripcio>
-		<imatge_nom></imatge_nom>
+		<imatge_nom>ruta_imagen</imatge_nom>
 		<preu>120</preu>
 		<models_disponibles>1,2,3,4</models_disponibles>
 	</Accessory>
@@ -56,7 +56,7 @@
 		<id>2</id>
 		<nom>Navegador</nom>
 		<descripcio>Navegador</descripcio>
-		<imatge_nom></imatge_nom>
+		<imatge_nom>ruta_imagen</imatge_nom>
 		<preu>70</preu>
 		<models_disponibles>1,2,3,4</models_disponibles>
 	</Accessory>
@@ -64,7 +64,7 @@
 		<id>3</id>
 		<nom>Yantas de aleacion</nom>
 		<descripcio>Yantas de aleacion</descripcio>
-		<imatge_nom></imatge_nom>
+		<imatge_nom>ruta_imagen</imatge_nom>
 		<preu>120</preu>
 		<models_disponibles>3,4</models_disponibles>
 	</Accessory>
@@ -72,7 +72,7 @@
 		<id>4</id>
 		<nom>Asientos calefactados</nom>
 		<descripcio>Asientos calefactados</descripcio>
-		<imatge_nom></imatge_nom>
+		<imatge_nom>ruta_imagen</imatge_nom>
 		<preu>350</preu>
 		<models_disponibles>2,3,4</models_disponibles>
 	</Accessory>
@@ -80,7 +80,7 @@
 		<id>5</id>
 		<nom>Velocidad de crucero</nom>
 		<descripcio>Velocidad de crucero</descripcio>
-		<imatge_nom></imatge_nom>
+		<imatge_nom>ruta_imagen</imatge_nom>
 		<preu>100</preu>
 		<models_disponibles>2,4</models_disponibles>
 	</Accessory>
@@ -88,7 +88,7 @@
 		<id>6</id>
 		<nom>Aparcamiento automatico</nom>
 		<descripcio>Aparcamiento automatico</descripcio>
-		<imatge_nom></imatge_nom>
+		<imatge_nom>ruta_imagen</imatge_nom>
 		<preu>530</preu>
 		<models_disponibles>2,3,4</models_disponibles>
 	</Accessory>
@@ -96,7 +96,7 @@
 		<id>7</id>
 		<nom>Conectores USB</nom>
 		<descripcio>Conectores USB</descripcio>
-		<imatge_nom></imatge_nom>
+		<imatge_nom>ruta_imagen</imatge_nom>
 		<preu>200</preu>
 		<models_disponibles>1,2,3,4</models_disponibles>
 	</Accessory>
@@ -104,7 +104,7 @@
 		<id>8</id>
 		<nom>Pintura metalizada</nom>
 		<descripcio>Pintura metalizada</descripcio>
-		<imatge_nom></imatge_nom>
+		<imatge_nom>ruta_imagen</imatge_nom>
 		<preu>500</preu>
 		<models_disponibles>1,2,3,4</models_disponibles>
 	</Accessory>
