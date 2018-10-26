@@ -1,4 +1,4 @@
-package view.miglayout;
+package view_miglayout;
 
 import java.awt.Color;
 import java.awt.Dimension;

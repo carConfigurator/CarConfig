@@ -1,4 +1,4 @@
-package view.miglayout;
+package view_miglayout;
 
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
@@ -25,7 +25,7 @@ import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
 import net.miginfocom.swing.MigLayout;
-import view.miglayout.Data_Clients;
+import view_miglayout.Data_Clients;
 
 public class Login extends JFrame{
 	

@@ -1,4 +1,4 @@
-package view.miglayout;
+package view_miglayout;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -10,6 +10,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,9 +29,10 @@ import com.toedter.calendar.JDateChooser;
 
 import config.ConfigurationLoader;
 import idao.ILanguage;
+import javafx.scene.input.DataFormat;
 import model.Client;
 import net.miginfocom.swing.MigLayout;
-import view.miglayout.Seleccion_Modelo;
+import view_miglayout.Seleccion_Modelo;
 
 public class Data_Clients extends JFrame{
 
@@ -285,12 +288,13 @@ public class Data_Clients extends JFrame{
 	protected void saveActionPerformed() {
 		
 		if(checkData()) {
+			DateFormat format = new SimpleDateFormat("dd MMMM yyyy");
 			String getInformation = label_client_name.getText() + tfield_client_name.getText()
 					+ "\n" + label_client_first_lastname.getText() + tfield_client_first_lastname.getText()
 					+ "\n" + label_client_second_lastname.getText() + tfield_client_second_lastname.getText()
 					+ "\n" + label_client_address.getText() + tfield_client_address.getText()
 					+ "\n" + label_client_email.getText() + tfield_client_email.getText()
-					+ "\n" + label_client_birthdate.getText() + dc_birthdate.getDate();
+					+ "\n" + label_client_birthdate.getText() + format.format(dc_birthdate.getDate());
 			
 			String getGender = label_client_gender.getText();
 			
@@ -329,8 +333,7 @@ public class Data_Clients extends JFrame{
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int dialogButton = JOptionPane.YES_NO_CANCEL_OPTION;
-				JOptionPane.showConfirmDialog(null, "¿Desea Guardar los Cambios?", "¿Desea Guardar los Cambios?", dialogButton);
+				int dialogButton = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los Cambios?", "¿Desea Guardar los Cambios?", JOptionPane.YES_NO_CANCEL_OPTION);
 				if(dialogButton == JOptionPane.YES_OPTION) {
 					System.out.println("[INFO] - Guardando los datos del cliente...");
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -339,7 +342,7 @@ public class Data_Clients extends JFrame{
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				}else if(dialogButton == JOptionPane.CANCEL_OPTION){
 					System.out.println("[INFO] - No se hará nada.");
-					setDefaultCloseOperation(JFrame.ABORT);
+					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				}
 			}
 			
