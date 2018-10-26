@@ -366,5 +366,4 @@ public class Data_Clients extends JFrame{
         Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
         return retValue;
     }
-	
 }
