@@ -13,5 +13,5 @@
 		<employee_version>true</employee_version>
 		<employee_password>1234,5678,1234</employee_password>
 		<specifications_file_path>src\\config\\specifications</specifications_file_path>
-		</configuration>
+	</configuration>
 </ConfigurationLoader>
