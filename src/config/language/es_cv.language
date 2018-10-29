@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf8" standalone="no"?>
+<Lenguage>
+	<login_label_username>Nombre de Usuario</login_label_username>
+	<login_label_password>Contraseña</login_label_password>
+	<login_btn_login>Iniciar Sesión</login_btn_login>
+	<login_title>SEAT Configurador - Log In</login_title>
+
+	<login_error_login_user>El usuario introducido no es correcto o no existe</login_error_login_user>
+	<login_error_login_user_title>[ERROR] - Nombre de Usuario no encontrado</login_error_loginUser_title>
+//boton error aceptar
+	<login_error_login_password>Nombre de Usuario</login_error_login_password>
+	<login_label_username>Nombre de Usuario</login_label_username>
+	<login_label_username>Nombre de Usuario</login_label_username>
+</Lenguage>
