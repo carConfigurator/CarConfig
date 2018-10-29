@@ -109,4 +109,34 @@ public class LanguageDAOCA implements ILanguage{
 		return "Següent";
 	}
 
+	@Override
+	public String errorNullField() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String errorNullFieldTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String errorEmail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String errorEmailTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String btnSaveInfo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

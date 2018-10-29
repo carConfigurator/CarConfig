@@ -107,5 +107,30 @@ public class LanguageDAOES implements ILanguage{
 	public String btnNext() {
 		return "Siguiente";
 	}
+
+	@Override
+	public String errorNullField() {
+		return "Faltan campos por rellenar. Rellene todos los campos obligatorios.";
+	}
+
+	@Override
+	public String errorNullFieldTitle() {
+		return "Informacion Incompleta";
+	}
+
+	@Override
+	public String errorEmail() {
+		return "El correo no es valido.";
+	}
+
+	@Override
+	public String errorEmailTitle() {
+		return "Error de correo";
+	}
+
+	@Override
+	public String btnSaveInfo() {
+		return "¿Desea Guardar los Cambios?";
+	}
 	
 }

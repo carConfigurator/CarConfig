@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="utf8" standalone="no"?>
 <Lenguage>
-	<login_label_username>Nombre de Usuario</login_label_username>
-	<login_label_password>Contraseña</login_label_password>
-	<login_btn_login>Iniciar Sesión</login_btn_login>
-	<login_title>SEAT Configurador - Log In</login_title>
-
-	<login_error_login_user>El usuario introducido no es correcto o no existe</login_error_login_user>
-	<login_error_login_user_title>[ERROR] - Nombre de Usuario no encontrado</login_error_loginUser_title>
-//boton error aceptar
-	<login_error_login_password>Nombre de Usuario</login_error_login_password>
-	<login_label_username>Nombre de Usuario</login_label_username>
-	<login_label_username>Nombre de Usuario</login_label_username>
+	<Login>
+		<title>SEAT Configurador - Log In</title>
+		<label_username>Nombre de Usuario</label_username>
+		<label_password>Contraseña</label_password>
+		<btn_login>Iniciar Sesión</btn_login>
+		<error_login_user>El usuario introducido no es correcto o no existe</error_login_user>
+		<error_login_user_title>[ERROR] - Nombre de Usuario no encontrado</error_loginUser_title>
+		<error_login_password>[ERROR] - Fallo de Autenticación</error_login_password>
+		<error_login_password_title>El usuario o contraseñas no son correctos<error_login_password_title>
+	</Login>
+	<Data_clients>
+		<title>SEAT Configurador - Datos Clientes</title>
+		<label_client_title>Datos del Cliente</label_client_title>
+		<label_username>Usuario: </label_username>
+		<label_client_name>Nombre: *</label_client_name>
+		<label_client_first_lastname>Primer Apellido: *</label_client_first_lastname>
+		<label_client_second_lastname>Segundo Apellido: *</label_client_second_lastname>
+		<label_client_address>Dirección: *</label_client_address>
+		<label_client_email>Correo Electrónico: *</label_client_email>
+		<label_client_gender>Género:</label_client_gender>
+		<rb_male>Hombre</rb_male>
+		<rb_female>Mujer</rb_female>
+		<rb_unknown>Desconocido</rb_unknown>
+		<label_client_birthdate>Fecha nacimiento:</label_client_birthdate>
+		<btn_save>Guardar</btn_save>
+		<btn_next>Siguiente</btn_next>
+		<error_null_field>Faltan campos por rellenar. Rellene todos los campos obligatorios</error_null_field>
+		<error_null_field_title>Informacion Incompleta</error_null_field_title>
+		<error_email></error_email>
+		<error_email_title></error_email_title>
+		<btn_save_info></btn_save_info>
+	</Data_clients>
 </Lenguage>
