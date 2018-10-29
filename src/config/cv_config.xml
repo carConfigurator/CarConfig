@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf8" standalone="no"?>
+<ConfigurationLoader>
+	<configuration>
+		<language>es,ca,en</language>
+		<language_default>en</language_default>
+		<postfix_language_file_name>_cv.language</postfix_language_file_name>
+		<version>0.0.0</version>
+		<language_files_path>src\\config\\language\\</language_files_path>
+		<car_configuration_path>src\\config\\car\\</car_configuration_path>
+		<car_image_path>src\\config\\car\\images\\</car_image_path>
+		<car_configuration_file_name>car_config.xml</car_configuration_file_name>
+		<employee_list>alexis.mengual,dario.delcore,david.uson</employee_list>
+		<employee_version>true</employee_version>
+		<employee_password>1234,5678,1234</employee_password>
+		<specifications_file_path>src\\config\\specifications</specifications_file_path>
+		<temporal_path_file>employees\\temp\\fs_employee.txt</temporal_path_file>
+	</configuration>
+</ConfigurationLoader>
