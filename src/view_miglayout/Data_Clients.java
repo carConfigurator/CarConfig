@@ -285,7 +285,7 @@ public class Data_Clients extends JFrame{
 		tfield_client_email.setText(tfield_client_email.getText().replaceAll("^\\s*", ""));
 		
 		if (tfield_client_name.getText().length() == 0 || tfield_client_first_lastname.getText().length() == 0 || tfield_client_second_lastname.getText().length() == 0 || tfield_client_address.getText().length() == 0 || tfield_client_email.getText().length() == 0 ){
-            JOptionPane.showMessageDialog(null, "Faltan campos por rellenar. Rellene todos los campos obligatorios.", "Informacion Incompleta", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, this.language.errorNullField(), this.language.errorNullFieldTitle(), JOptionPane.ERROR_MESSAGE);
             return false;
         }else {
     		//  Filtro para que el correo sea valido buscando en el contenido de este un "@".
@@ -295,7 +295,7 @@ public class Data_Clients extends JFrame{
             Matcher matcher = pattern.matcher(email);
 
             if (matcher.find() == false) {
-                JOptionPane.showMessageDialog(null, "El correo no es valido.", "Error de correo", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, this.language.errorEmail(), this.language.errorEmailTitle(), JOptionPane.ERROR_MESSAGE);
                 tfield_client_email.setText("");
                 return false;
             }else {
@@ -325,7 +325,7 @@ public class Data_Clients extends JFrame{
 				getGender = getGender + rb_unknown.getText();
 			}
 			
-			JOptionPane.showMessageDialog(null, getInformation + "\n" + getGender, "Datos del Cliente", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, getInformation + "\n" + getGender, this.label_client_title.getText(), JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
@@ -352,7 +352,7 @@ public class Data_Clients extends JFrame{
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int dialogButton = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los Cambios?", "¿Desea Guardar los Cambios?", JOptionPane.YES_NO_CANCEL_OPTION);
+				int dialogButton = JOptionPane.showConfirmDialog(null, language.btnSaveInfo(), language.btnSaveInfo(), JOptionPane.YES_NO_CANCEL_OPTION);
 				if(dialogButton == JOptionPane.YES_OPTION) {
 					System.out.println("[INFO] - Guardando los datos del cliente...");
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

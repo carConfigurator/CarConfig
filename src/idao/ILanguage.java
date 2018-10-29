@@ -28,4 +28,10 @@ public interface ILanguage {
 	String labelClientBirhdate();
 	String btnSave();
 	String btnNext();
+	String errorNullField();
+	String errorNullFieldTitle();
+	String errorEmail();
+	String errorEmailTitle();
+	String btnSaveInfo();
+	
 }
