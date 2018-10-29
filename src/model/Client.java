@@ -35,21 +35,12 @@ public class Client {
 		return email;
 	}
 
-	/*public void setName(String name) {
-		this.name = name;
+	@Override
+	public String toString() {
+		return name + ", " + first_last_name + ", " + second_last_name + ", " + address + ", " + email;
 	}
-	public void setFirst_last_name(String first_last_name) {
-		this.first_last_name = first_last_name;
-	}
-	public void setSecond_last_name(String second_last_name) {
-		this.second_last_name = second_last_name;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}*/
+
+	
 	
 	
 	

@@ -9,7 +9,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
@@ -39,6 +42,7 @@ public class Data_Clients extends JFrame{
 	// Atributos de la Clase:
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
+	private File temp;
 	private Client client;
 	private String username;
 	
@@ -58,6 +62,7 @@ public class Data_Clients extends JFrame{
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
+		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		createFrame();
 		setInformation();
@@ -69,6 +74,7 @@ public class Data_Clients extends JFrame{
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
+		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		createFrame();
 		
@@ -254,6 +260,18 @@ public class Data_Clients extends JFrame{
 		if(checkData()) {
 			System.out.println("[INFO] - Todos los campos son correctos. Cambiando de Frame...");
         	client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText());
+        	try {
+				FileWriter fw = new FileWriter(this.temp, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.newLine();
+				bw.write(client.toString());
+				bw.newLine();
+				bw.write("------");
+				bw.close();
+				fw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
         	new Seleccion_Modelo(this.configLoad, this.language, this.username, client);
         	setVisible(false);
 		}
