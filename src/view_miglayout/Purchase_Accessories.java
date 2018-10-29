@@ -1,24 +1,38 @@
 package view_miglayout;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import config.ConfigurationLoader;
+import daoImplFactory.LanguageFactory;
+import idao.ILanguage;
+import model.Client;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Font;
 
 public class Purchase_Accessories extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField;
+	// Atributos de la Clase:
+	private ILanguage language;
+	private ConfigurationLoader configLoad;
+	private Client client;
+	private String username;
+	
+	JPanel contentPane;
+	JLabel lblTitulo, lblModeloCoche, lblPrecioBasee, lblAumento, lblTotalPrecio;
+	JTextField tfAumento, tfTotalPrecio, tfPrecioBase;
+	JCheckBox cbElevadurasElectricas, cbNavegador, cbLlantasAl, cbAsientosCal, cbVelCrucero, cbAparcamietnoAuto, cbConectorUSB, cbPinturaMetal;
+	JButton btnAtras, btnFinalizar;
 
 	/**
 	 * Launch the application.
@@ -27,7 +41,10 @@ public class Purchase_Accessories extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Purchase_Accessories frame = new Purchase_Accessories();
+					ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
+					ILanguage language = LanguageFactory.getLanguage(configLoad.getLanguage_default());
+					String username = "user1";
+					Purchase_Accessories frame = new Purchase_Accessories(configLoad, language, username);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,101 +56,132 @@ public class Purchase_Accessories extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Purchase_Accessories() {
+	public Purchase_Accessories(ConfigurationLoader configLoad, ILanguage language, String username) {
+		this.language = language;
+		this.configLoad = configLoad;
+		this.username = username;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 628, 537);
+		setBounds(100, 100, 604, 537);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.contentPane.setBackground(new Color(255,255,255));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[30px][200px][60px][200px][grow]", "[45px][50px][20px][40px][40px][40px][40px][20px][40px][40px][40px][40px]"));
+		contentPane.setLayout(new MigLayout("", "[30px][200px][60px][200px][grow]", "[45px][50px][20px][40px][40px][40px][40px][20px][40px][40px][40px][60px]"));
 		
-		JLabel lblCompraDeAccesorios = new JLabel("Compra de Accesorios");
-		lblCompraDeAccesorios.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		contentPane.add(lblCompraDeAccesorios, "cell 3 0");
+		this.lblTitulo = new JLabel("Compra de Accesorios");
+		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		this.contentPane.add(lblTitulo, "cell 3 0");
 		
-		JLabel lblModeloDe = new JLabel("Caracteristicas seleccionadas anteriormetne.");
-		lblModeloDe.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		contentPane.add(lblModeloDe, "cell 0 1 5 1");
+		this.lblModeloCoche = new JLabel("Caracteristicas seleccionadas anteriormetne.");
+		this.lblModeloCoche.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		this.contentPane.add(lblModeloCoche, "cell 0 1 5 1");
 		
-		JCheckBox chckbxElevadurasElectricas = new JCheckBox("Elevaduras electricas");
-		chckbxElevadurasElectricas.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(chckbxElevadurasElectricas, "cell 1 3");
+		this.cbElevadurasElectricas = new JCheckBox("Elevaduras electricas");
+		this.cbElevadurasElectricas.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbElevadurasElectricas.setBackground(new Color(255,255,255));
+		this.cbElevadurasElectricas.setFocusable(false);
+		this.contentPane.add(cbElevadurasElectricas, "cell 1 3");
 		
-		JCheckBox chckbxNavegador = new JCheckBox("Navegador");
-		chckbxNavegador.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(chckbxNavegador, "cell 3 3");
+		this.cbNavegador = new JCheckBox("Navegador");
+		this.cbNavegador.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbNavegador.setBackground(new Color(255,255,255));
+		this.cbNavegador.setFocusable(false);
+		this.contentPane.add(cbNavegador, "cell 3 3");
 		
-		JCheckBox chckbxYantasDeAleacion = new JCheckBox("Yantas de aleacion");
-		chckbxYantasDeAleacion.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(chckbxYantasDeAleacion, "cell 1 4");
+		this.cbLlantasAl = new JCheckBox("Llantas de aleacion");
+		this.cbLlantasAl.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbLlantasAl.setBackground(new Color(255,255,255));
+		this.cbLlantasAl.setFocusable(false);
+		this.contentPane.add(cbLlantasAl, "cell 1 4");
 		
-		JCheckBox chckbxAsientosCalefactados = new JCheckBox("Asientos calefactados");
-		chckbxAsientosCalefactados.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(chckbxAsientosCalefactados, "cell 3 4");
+		this.cbAsientosCal = new JCheckBox("Asientos calefactados");
+		this.cbAsientosCal.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbAsientosCal.setBackground(new Color(255,255,255));
+		this.cbAsientosCal.setFocusable(false);
+		this.contentPane.add(cbAsientosCal, "cell 3 4");
 		
-		JCheckBox chckbxVelocidadDeCrucero = new JCheckBox("Velocidad de crucero");
-		chckbxVelocidadDeCrucero.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(chckbxVelocidadDeCrucero, "cell 1 5");
+		this.cbVelCrucero = new JCheckBox("Velocidad de crucero");
+		this.cbVelCrucero.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbVelCrucero.setBackground(new Color(255,255,255));
+		this.cbVelCrucero.setFocusable(false);
+		this.contentPane.add(cbVelCrucero, "cell 1 5");
 		
-		JCheckBox chckbxAparcamientoAutomatico = new JCheckBox("Aparcamiento automatico");
-		chckbxAparcamientoAutomatico.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(chckbxAparcamientoAutomatico, "cell 3 5");
+		this.cbAparcamietnoAuto = new JCheckBox("Aparcamiento automatico");
+		this.cbAparcamietnoAuto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbAparcamietnoAuto.setBackground(new Color(255,255,255));
+		this.cbAparcamietnoAuto.setFocusable(false);
+		this.contentPane.add(cbAparcamietnoAuto, "cell 3 5");
 		
-		JCheckBox chckbxConectoresUsb = new JCheckBox("Conectores USB");
-		chckbxConectoresUsb.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(chckbxConectoresUsb, "cell 1 6");
+		this.cbConectorUSB = new JCheckBox("Conectores USB");
+		this.cbConectorUSB.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbConectorUSB.setBackground(new Color(255,255,255));
+		this.cbConectorUSB.setFocusable(false);
+		this.contentPane.add(cbConectorUSB, "cell 1 6");
 		
-		JCheckBox chckbxPinturaMetalizada = new JCheckBox("Pintura metalizada");
-		chckbxPinturaMetalizada.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(chckbxPinturaMetalizada, "cell 3 6");
+		this.cbPinturaMetal = new JCheckBox("Pintura metalizada");
+		this.cbPinturaMetal.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbPinturaMetal.setBackground(new Color(255,255,255));
+		this.cbPinturaMetal.setFocusable(false);
+		this.contentPane.add(cbPinturaMetal, "cell 3 6");
 		
-		JLabel lblPrecioBasee = new JLabel("Precio Base:");
-		lblPrecioBasee.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		contentPane.add(lblPrecioBasee, "cell 1 8,alignx left,aligny center");
+		this.lblPrecioBasee = new JLabel("Precio Base:");
+		this.lblPrecioBasee.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		this.contentPane.add(lblPrecioBasee, "cell 1 8,alignx left,aligny center");
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField.setText("0");
-		textField.setOpaque(false);
-		contentPane.add(textField, "cell 3 8,growx,aligny center");
-		textField.setColumns(10);
+		this.tfPrecioBase = new JTextField();
+		this.tfPrecioBase.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.tfPrecioBase.setText("0");
+		this.tfPrecioBase.setOpaque(false);
+		this.contentPane.add(tfPrecioBase, "cell 3 8,growx,aligny center");
+		this.tfPrecioBase.setColumns(10);
 		
-		JLabel lblAumentoEnEl = new JLabel("Aumento en el precio:");
-		lblAumentoEnEl.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		contentPane.add(lblAumentoEnEl, "cell 1 9,alignx left,aligny center");
+		this.lblAumento = new JLabel("Aumento en el precio:");
+		this.lblAumento.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		this.contentPane.add(lblAumento, "cell 1 9,alignx left,aligny center");
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField_1.setText("0");
-		textField_1.setOpaque(false);
-		contentPane.add(textField_1, "cell 3 9,growx");
-		textField_1.setColumns(10);
+		this.tfAumento = new JTextField();
+		this.tfAumento.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.tfAumento.setText("0");
+		this.tfAumento.setOpaque(false);
+		this.contentPane.add(tfAumento, "cell 3 9,growx");
+		this.tfAumento.setColumns(10);
 		
-		JLabel lblTotalPrecio = new JLabel("Total precio:");
-		lblTotalPrecio.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		contentPane.add(lblTotalPrecio, "cell 1 10,alignx left,aligny center");
+		this.lblTotalPrecio = new JLabel("Total precio:");
+		this.lblTotalPrecio.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		this.contentPane.add(lblTotalPrecio, "cell 1 10,alignx left,aligny center");
 		
 		// Esta parte del codigo sirve para sumar los dos campos de precios y mostrar el total.
 		// Solo se puede mostrar en forma de String por lo que se deben pasar los valores de formato.
-		String pb = textField.getText();
+		String pb = tfPrecioBase.getText();
 		int numero1 = Integer.parseInt(pb);
-		String ap = textField_1.getText();
+		String ap = tfAumento.getText();
 		int numero2 = Integer.parseInt(ap);
 		int resultado = numero1 + numero2;
 		String resultSt = Integer.toString(resultado);
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField_2.setText(resultSt); // Resultado do los dos campos.
-		textField_2.setOpaque(false);
-		contentPane.add(textField_2, "cell 3 10,growx");
-		textField_2.setColumns(10);
+		this.tfTotalPrecio = new JTextField();
+		this.tfTotalPrecio.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.tfTotalPrecio.setText(resultSt); // Resultado do los dos campos.
+		this.tfTotalPrecio.setOpaque(false);
+		this.contentPane.add(tfTotalPrecio, "cell 3 10,growx");
+		this.tfTotalPrecio.setColumns(10);
 		
-		JButton btnAtras = new JButton("ATRAS");
-		contentPane.add(btnAtras, "cell 1 11,growx");
+		this.btnAtras = new JButton("ATRAS");
+		this.btnAtras.setBackground(new Color(215,18,43));
+		this.btnAtras.setForeground(new Color(255,255,255));
+		this.btnAtras.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createLineBorder(new Color(215, 18, 43)),
+				BorderFactory.createEmptyBorder(5,10,5,10)));
+		this.contentPane.add(btnAtras, "cell 1 11,growx");
 		
-		JButton btnFinalizar = new JButton("FINALIZAR");
-		contentPane.add(btnFinalizar, "cell 3 11,growx");
+		this.btnFinalizar = new JButton("FINALIZAR");
+		this.btnFinalizar.setBackground(new Color(215,18,43));
+		this.btnFinalizar.setForeground(new Color(255,255,255));
+		this.btnFinalizar.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createLineBorder(new Color(215, 18, 43)),
+				BorderFactory.createEmptyBorder(5,10,5,10)));
+		this.contentPane.add(btnFinalizar, "cell 3 11,growx");
 	}
 
 }
