@@ -14,7 +14,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,6 +65,19 @@ public class Data_Clients extends JFrame{
 		this.configLoad = configLoad;
 		this.username = username;
 		this.temp = new File(this.configLoad.getTemporalPathFile());
+		
+		try {
+			FileWriter fw = new FileWriter(this.temp);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(username);
+			bw.newLine();
+			bw.write("------");
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		
 		createFrame();
 		setInformation();
@@ -184,6 +199,15 @@ public class Data_Clients extends JFrame{
 		this.label_client_birthdate.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 5));
 		
 		this.dc_birthdate = new JDateChooser();
+		if(client.getBirthdate() != null) {
+			this.dc_birthdate = new JDateChooser();
+			DateFormat df = new SimpleDateFormat("dd-M-yyyy");		
+			try {
+				this.dc_birthdate.setDate(df.parse(client.getBirthdate()));
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+		}
 		this.dc_birthdate.setDateFormatString("dd-M-yyyy");
 		this.dc_birthdate.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		this.dc_birthdate.setBackground(new Color(255, 255, 255));
@@ -259,7 +283,12 @@ public class Data_Clients extends JFrame{
 	protected void nextActionPerformed() {
 		if(checkData()) {
 			System.out.println("[INFO] - Todos los campos son correctos. Cambiando de Frame...");
-        	client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText());
+			if(this.dc_birthdate.getDateFormatString().equals(null)) {
+				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText());
+			}else {
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText(), sdf.format(dc_birthdate.getDate()));
+			}
         	try {
 				FileWriter fw = new FileWriter(this.temp, true);
 				BufferedWriter bw = new BufferedWriter(fw);
