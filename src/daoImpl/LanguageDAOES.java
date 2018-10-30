@@ -1,12 +1,54 @@
 package daoImpl;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import config.ConfigurationLoader;
 import idao.ILanguage;
 
 public class LanguageDAOES implements ILanguage{
 
+	private DocumentBuilderFactory factory;
+	private DocumentBuilder builder;
+	private Document document;
+	
+	public LanguageDAOES(ConfigurationLoader configLoad) {
+		this.factory = DocumentBuilderFactory.newInstance();
+		try {
+			this.builder = factory.newDocumentBuilder();
+			this.document = builder.parse(new File(configLoad.getLanguage_files_path()+configLoad.getLanguage_default()+configLoad.getPostfix_language_file_name()));
+		} catch (ParserConfigurationException e) {
+			System.out.println("[ERROR] - No se ha podido parsear la configuración. Más información del error: " + e);
+		} catch (SAXException e) {
+			System.out.println("[ERROR] - No se ha podido parsear el archivo XML. Más información del error: " + e);
+		} catch (IOException e) {
+			System.out.println("[ERROR] - Error de E/S. Más información del error: " + e);
+		}
+	}
+	
 	@Override
 	public String labelUsername() {
-		return "Nombre de Usuario";
+		NodeList nList = document.getElementsByTagName("Login");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
+		}
+		return null;
+//		NodeList nList = document.getElementsByTagName("language");
+//		Node nNode = nList.item(0);
+//		return nNode.getTextContent();
+//		return "Nombre de Usuario";
 	}
 
 	@Override

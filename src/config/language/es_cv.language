@@ -6,9 +6,9 @@
 		<label_password>Contraseña</label_password>
 		<btn_login>Iniciar Sesión</btn_login>
 		<error_login_user>El usuario introducido no es correcto o no existe</error_login_user>
-		<error_login_user_title>[ERROR] - Nombre de Usuario no encontrado</error_loginUser_title>
+		<error_login_user_title>[ERROR] - Nombre de Usuario no encontrado</error_login_user_title>
 		<error_login_password>[ERROR] - Fallo de Autenticación</error_login_password>
-		<error_login_password_title>El usuario o contraseñas no son correctos<error_login_password_title>
+		<error_login_password_title>El usuario o contraseñas no son correctos</error_login_password_title>
 	</Login>
 	<Data_clients>
 		<title>SEAT Configurador - Datos Clientes</title>
@@ -32,4 +32,12 @@
 		<error_email_title></error_email_title>
 		<btn_save_info></btn_save_info>
 	</Data_clients>
+	<Seleccion_modelo>
+		<label_select_title>Seleccionar el Modelo del Coche</label_select_title>
+		<btn_previous>Anterior</btn_previous>
+		<menu>Opciones de coches</menu>
+		<menu_item_add>Añadir un coche</menu_item_add>
+		<menu_item_delete>Suprimir un coche</menu_item_delete>
+		<menu_item_modify>Modificar un coche</menu_item_modify>
+	</Seleccion_modelo>
 </Lenguage>

@@ -1,7 +1,5 @@
 package idao;
 
-import javax.swing.Icon;
-
 public interface ILanguage {
 
 	// Métodos que se usarán para el Login.

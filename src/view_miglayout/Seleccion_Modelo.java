@@ -35,6 +35,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextPane;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.MenuEvent;
@@ -221,6 +223,27 @@ public class Seleccion_Modelo extends JFrame{
 				siguienteActionPerformed();
 			}
 		});
+		lMenuItem.get(0).addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				add();
+			}
+		});
+		lMenuItem.get(1).addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				delete();
+			}
+		});
+		lMenuItem.get(2).addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				modify();
+			}
+		});
 		
 		JFrame();
 	}
@@ -306,5 +329,15 @@ public class Seleccion_Modelo extends JFrame{
 	
 	protected void siguienteActionPerformed() {
 		
+	}
+	
+	private void add() {
+		System.out.println("add");
+	}
+	private void delete() {
+		System.out.println("delete");
+	}
+	private void modify() {
+		System.out.println("modify");
 	}
 }

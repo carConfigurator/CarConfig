@@ -2,7 +2,7 @@
 <ConfigurationLoader>
 	<configuration>
 		<language>es,ca,en</language>
-		<language_default>en</language_default>
+		<language_default>es</language_default>
 		<postfix_language_file_name>_cv.language</postfix_language_file_name>
 		<version>0.0.0</version>
 		<language_files_path>src\\config\\language\\</language_files_path>

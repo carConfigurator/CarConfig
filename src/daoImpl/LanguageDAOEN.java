@@ -139,4 +139,40 @@ public class LanguageDAOEN implements ILanguage{
 		return null;
 	}
 
+	@Override
+	public String labelSelectTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String btnPrevious() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String menu() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String menuItemAdd() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String menuItemDelete() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String menuItemModify() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
