@@ -45,7 +45,7 @@ public class Selection_Engine extends JFrame {
 			public void run() {
 				try {
 					ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
-					ILanguage language = LanguageFactory.getLanguage(configLoad.getLanguage_default());
+					ILanguage language = LanguageFactory.getLanguage(configLoad.getLanguage_default(), configLoad);
 					String username = "user1";
 					Selection_Engine frame = new Selection_Engine(configLoad, language, username);
 					

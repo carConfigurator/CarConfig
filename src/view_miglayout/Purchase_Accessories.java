@@ -42,7 +42,7 @@ public class Purchase_Accessories extends JFrame {
 			public void run() {
 				try {
 					ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
-					ILanguage language = LanguageFactory.getLanguage(configLoad.getLanguage_default());
+					ILanguage language = LanguageFactory.getLanguage(configLoad.getLanguage_default(), configLoad);
 					String username = "user1";
 					Purchase_Accessories frame = new Purchase_Accessories(configLoad, language, username);
 					frame.setVisible(true);

@@ -42,171 +42,353 @@ public class LanguageDAOES implements ILanguage{
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
+			return ""+eElement.getElementsByTagName("label_username").item(0).getTextContent();
 		}
 		return null;
-//		NodeList nList = document.getElementsByTagName("language");
-//		Node nNode = nList.item(0);
-//		return nNode.getTextContent();
-//		return "Nombre de Usuario";
 	}
 
 	@Override
 	public String labelPassword() {
-		return "Contraseña";
+		NodeList nList = document.getElementsByTagName("Login");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_password").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String btnLogin() {
-		return "Iniciar Sesión";
+		NodeList nList = document.getElementsByTagName("Login");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("btn_login").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String errorLoginUser() {
-		return "El usuario introducido no es correcto o no existe.";
+		NodeList nList = document.getElementsByTagName("Login");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_login_user").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String errorLoginUserTitle() {
-		return "[ERROR] - Nombre de Usuario no encontrado";
+		NodeList nList = document.getElementsByTagName("Login");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_login_user_title").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String errorLoginPassword() {
-		return "El usuario o contraseñas no son correctos.";
+		NodeList nList = document.getElementsByTagName("Login");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_login_password").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String errorLoginPasswordTitle() {
-		return "[ERROR] - Fallo de Autenticación";
+		NodeList nList = document.getElementsByTagName("Login");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_login_password_title").item(0).getTextContent();
+		}
+		return null;
 	}
 	
 	//		-------------------Métodos que se usarán para el Data_Clients.-------------------
 
 	@Override
 	public String labelClientTitle() {
-		return "Datos del Cliente";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_client_title").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String labelAuthIn() {
-		return "Usuario: ";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_username").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String labelClientName() {
-		return "Nombre: *";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_client_name").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String labelClientFirstLastName() {
-		return "Primer Apellido: *";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_client_first_lastname").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String labelClientSecondLastName() {
-		return "Segundo Apellido: *";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_client_second_lastname").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String labelClientAddress() {
-		return "Dirección: *";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_client_address").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String labelClientEmail() {
-		return "Correo Electrónico: *";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_client_email").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String labelClientGender() {
-		return "Género: ";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_client_gender").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String radioGenderMale() {
-		return "Hombre";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("rb_male").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String radioGenderFemale() {
-		return "Mujer";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("rb_female").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String radioGenderUnknown() {
-		return "Desconocido";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("rb_unknown").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String labelClientBirhdate() {
-		return "Fecha nacimiento: ";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_client_birthdate").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String btnSave() {
-		return "Guardar";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("btn_save").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String btnNext() {
-		return "Siguiente";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("btn_next").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String errorNullField() {
-		return "Faltan campos por rellenar. Rellene todos los campos obligatorios.";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_null_field").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String errorNullFieldTitle() {
-		return "Informacion Incompleta";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_null_field_title").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String errorEmail() {
-		return "El correo no es valido.";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_email").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String errorEmailTitle() {
-		return "Error de correo";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_email_title").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String btnSaveInfo() {
-		return "¿Desea Guardar los Cambios?";
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("btn_save_info").item(0).getTextContent();
+		}
+		return null;
 	}
 	
 	//		-------------------Métodos que se usarán para el Seleccion_Modelo.-------------------
 	
 	@Override
 	public String labelSelectTitle() {
-		return "Seleccionar el Modelo del Coche";
+		NodeList nList = document.getElementsByTagName("Seleccion_modelo");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_select_title").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String btnPrevious() {
-		return "Anterior";
+		NodeList nList = document.getElementsByTagName("Seleccion_modelo");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("btn_previous").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String menu() {
-		return "Opciones de coches";
+		NodeList nList = document.getElementsByTagName("Seleccion_modelo");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("menu").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String menuItemAdd() {
-		return "Añadir un coche";
+		NodeList nList = document.getElementsByTagName("Seleccion_modelo");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("menu_item_add").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String menuItemDelete() {
-		return "Suprimir un coche";
+		NodeList nList = document.getElementsByTagName("Seleccion_modelo");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("menu_item_delete").item(0).getTextContent();
+		}
+		return null;
 	}
 
 	@Override
 	public String menuItemModify() {
-		return "Modificar un coche";
+		NodeList nList = document.getElementsByTagName("Seleccion_modelo");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("menu_item_modify").item(0).getTextContent();
+		}
+		return null;
 	}
 }
