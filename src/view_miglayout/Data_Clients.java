@@ -283,7 +283,7 @@ public class Data_Clients extends JFrame{
 	protected void nextActionPerformed() {
 		if(checkData()) {
 			System.out.println("[INFO] - Todos los campos son correctos. Cambiando de Frame...");
-			if(this.dc_birthdate.getDateFormatString().equals(null)) {
+			if(this.dc_birthdate.getDate()==null) {
 				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText());
 			}else {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");

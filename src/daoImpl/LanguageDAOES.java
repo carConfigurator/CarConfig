@@ -4,6 +4,7 @@ import idao.ILanguage;
 
 public class LanguageDAOES implements ILanguage{
 
+	@Override
 	public String labelUsername() {
 		return "Nombre de Usuario";
 	}
@@ -37,6 +38,8 @@ public class LanguageDAOES implements ILanguage{
 	public String errorLoginPasswordTitle() {
 		return "[ERROR] - Fallo de Autenticación";
 	}
+	
+	//		-------------------Métodos que se usarán para el Data_Clients.-------------------
 
 	@Override
 	public String labelClientTitle() {
@@ -133,4 +136,35 @@ public class LanguageDAOES implements ILanguage{
 		return "¿Desea Guardar los Cambios?";
 	}
 	
+	//		-------------------Métodos que se usarán para el Seleccion_Modelo.-------------------
+	
+	@Override
+	public String labelSelectTitle() {
+		return "Seleccionar el Modelo del Coche";
+	}
+
+	@Override
+	public String btnPrevious() {
+		return "Anterior";
+	}
+
+	@Override
+	public String menu() {
+		return "Opciones de coches";
+	}
+
+	@Override
+	public String menuItemAdd() {
+		return "Añadir un coche";
+	}
+
+	@Override
+	public String menuItemDelete() {
+		return "Suprimir un coche";
+	}
+
+	@Override
+	public String menuItemModify() {
+		return "Modificar un coche";
+	}
 }
