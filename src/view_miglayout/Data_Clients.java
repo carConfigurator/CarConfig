@@ -1,4 +1,4 @@
-package view.miglayout;
+package view_miglayout;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -9,7 +9,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,15 +34,17 @@ import com.toedter.calendar.JDateChooser;
 
 import config.ConfigurationLoader;
 import idao.ILanguage;
+import javafx.scene.input.DataFormat;
 import model.Client;
 import net.miginfocom.swing.MigLayout;
-import view.miglayout.Seleccion_Modelo;
+import view_miglayout.Seleccion_Modelo;
 
 public class Data_Clients extends JFrame{
 
 	// Atributos de la Clase:
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
+	private File temp;
 	private Client client;
 	private String username;
 	
@@ -55,6 +64,20 @@ public class Data_Clients extends JFrame{
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
+		this.temp = new File(this.configLoad.getTemporalPathFile());
+		
+		try {
+			FileWriter fw = new FileWriter(this.temp);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(username);
+			bw.newLine();
+			bw.write("------");
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		
 		createFrame();
 		setInformation();
@@ -66,6 +89,7 @@ public class Data_Clients extends JFrame{
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
+		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		createFrame();
 		
@@ -78,6 +102,7 @@ public class Data_Clients extends JFrame{
 		}else {
 			System.out.println("[INFO] - No habrá descuento para la siguiente compra.");
 		}
+		// JPanel:
 		this.panel = new JPanel();
 		this.panel.setLayout(new MigLayout("insets 20"));
 		this.panel.setBackground(new Color(255,255,255));
@@ -174,6 +199,16 @@ public class Data_Clients extends JFrame{
 		this.label_client_birthdate.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 5));
 		
 		this.dc_birthdate = new JDateChooser();
+		if(client.getBirthdate() != null) {
+			this.dc_birthdate = new JDateChooser();
+			DateFormat df = new SimpleDateFormat("dd-M-yyyy");		
+			try {
+				this.dc_birthdate.setDate(df.parse(client.getBirthdate()));
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+		}
+		this.dc_birthdate.setDateFormatString("dd-M-yyyy");
 		this.dc_birthdate.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		this.dc_birthdate.setBackground(new Color(255, 255, 255));
 		
@@ -234,6 +269,9 @@ public class Data_Clients extends JFrame{
 		JFrame();
 	}
 	
+	/*
+	 * 
+	 */
 	private void setInformation() {
 		tfield_client_name.setText(client.getName());
 		tfield_client_first_lastname.setText(client.getFirst_last_name());
@@ -243,6 +281,32 @@ public class Data_Clients extends JFrame{
 	}
 
 	protected void nextActionPerformed() {
+		if(checkData()) {
+			System.out.println("[INFO] - Todos los campos son correctos. Cambiando de Frame...");
+			if(this.dc_birthdate.getDate()==null) {
+				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText());
+			}else {
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText(), sdf.format(dc_birthdate.getDate()));
+			}
+        	try {
+				FileWriter fw = new FileWriter(this.temp, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.newLine();
+				bw.write(client.toString());
+				bw.newLine();
+				bw.write("------");
+				bw.close();
+				fw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        	new Seleccion_Modelo(this.configLoad, this.language, this.username, client);
+        	setVisible(false);
+		}
+	}
+	
+	private boolean checkData() {
 		tfield_client_address.setText(tfield_client_address.getText().replaceAll("^\\s*", ""));
 		tfield_client_name.setText(tfield_client_name.getText().replaceAll("^\\s*", ""));
 		tfield_client_first_lastname.setText(tfield_client_first_lastname.getText().replaceAll("^\\s*", ""));
@@ -250,7 +314,8 @@ public class Data_Clients extends JFrame{
 		tfield_client_email.setText(tfield_client_email.getText().replaceAll("^\\s*", ""));
 		
 		if (tfield_client_name.getText().length() == 0 || tfield_client_first_lastname.getText().length() == 0 || tfield_client_second_lastname.getText().length() == 0 || tfield_client_address.getText().length() == 0 || tfield_client_email.getText().length() == 0 ){
-            JOptionPane.showMessageDialog(null, "Faltan campos por rellenar. Rellene todos los campos obligatorios.", "Informacion Incompleta", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, this.language.errorNullField(), this.language.errorNullFieldTitle(), JOptionPane.ERROR_MESSAGE);
+            return false;
         }else {
     		//  Filtro para que el correo sea valido buscando en el contenido de este un "@".
             String email = tfield_client_email.getText();
@@ -259,41 +324,38 @@ public class Data_Clients extends JFrame{
             Matcher matcher = pattern.matcher(email);
 
             if (matcher.find() == false) {
-                JOptionPane.showMessageDialog(null, "El correo no es valido.", "Error de correo", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, this.language.errorEmail(), this.language.errorEmailTitle(), JOptionPane.ERROR_MESSAGE);
                 tfield_client_email.setText("");
+                return false;
             }else {
-            	System.out.println("[INFO] - Todos los campos son correctos. Cambiando de Frame...");
-            	client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText());
-            	new Seleccion_Modelo(this.configLoad, this.language, this.username, client);
-            	setVisible(false);
+            	return true;
             }
         }
 	}
 
 	protected void saveActionPerformed() {
 		
-		tfield_client_address.setText(tfield_client_address.getText().replaceAll("^\\s*", ""));
-		tfield_client_name.setText(tfield_client_name.getText().replaceAll("^\\s*", ""));
-		tfield_client_first_lastname.setText(tfield_client_first_lastname.getText().replaceAll("^\\s*", ""));
-		tfield_client_second_lastname.setText(tfield_client_second_lastname.getText().replaceAll("^\\s*", ""));
-		tfield_client_email.setText(tfield_client_email.getText().replaceAll("^\\s*", ""));
-		
-		if (tfield_client_name.getText().length() == 0 || tfield_client_first_lastname.getText().length() == 0 || tfield_client_second_lastname.getText().length() == 0 || tfield_client_address.getText().length() == 0 || tfield_client_email.getText().length() == 0 ){
-            JOptionPane.showMessageDialog(null, "Faltan campos por rellenar. Rellene todos los campos obligatorios.", "Informacion Incompleta", JOptionPane.ERROR_MESSAGE);
-        }else {
-    		//  Filtro para que el correo sea valido buscando en el contenido de este un "@".
-            String email = tfield_client_email.getText();
-
-            Pattern pattern = Pattern.compile("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b");
-            Matcher matcher = pattern.matcher(email);
-
-            if (matcher.find() == false) {
-                JOptionPane.showMessageDialog(null, "El correo no es valido.", "Error de correo", JOptionPane.ERROR_MESSAGE);
-                tfield_client_email.setText("");
-            }else {
-            	System.out.println("[INFO] - Todos los campos son correctos. Guardando...");
-            }
-        }
+		if(checkData()) {
+			DateFormat format = new SimpleDateFormat(dc_birthdate.getDateFormatString());
+			String getInformation = label_client_name.getText() + tfield_client_name.getText()
+					+ "\n" + label_client_first_lastname.getText() + tfield_client_first_lastname.getText()
+					+ "\n" + label_client_second_lastname.getText() + tfield_client_second_lastname.getText()
+					+ "\n" + label_client_address.getText() + tfield_client_address.getText()
+					+ "\n" + label_client_email.getText() + tfield_client_email.getText()
+					+ "\n" + label_client_birthdate.getText() + dc_birthdate.getDate();
+			
+			String getGender = label_client_gender.getText();
+			
+			if(rb_female.isSelected()) {
+				getGender = getGender + rb_female.getText();
+			}else if(rb_male.isSelected()) {
+				getGender = getGender + rb_male.getText();
+			}else if(rb_unknown.isSelected()) {
+				getGender = getGender + rb_unknown.getText();
+			}
+			
+			JOptionPane.showMessageDialog(null, getInformation + "\n" + getGender, this.label_client_title.getText(), JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	private void JFrame() {
@@ -319,7 +381,11 @@ public class Data_Clients extends JFrame{
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
+<<<<<<< HEAD:src/view/miglayout/Data_Clients.java
 				int dialogButton = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los Cambios?", "¿Desea Guardar los Cambios?", JOptionPane.OK_CANCEL_OPTION);
+=======
+				int dialogButton = JOptionPane.showConfirmDialog(null, language.btnSaveInfo(), language.btnSaveInfo(), JOptionPane.YES_NO_CANCEL_OPTION);
+>>>>>>> 94086a0ea8173b3f93979079846545d7e12e29dd:src/view_miglayout/Data_Clients.java
 				if(dialogButton == JOptionPane.YES_OPTION) {
 					System.out.println("[INFO] - Guardando los datos del cliente...");
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -349,5 +415,4 @@ public class Data_Clients extends JFrame{
         Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
         return retValue;
     }
-	
 }

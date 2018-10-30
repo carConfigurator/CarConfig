@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -30,7 +31,7 @@ public class Model {
 		this.configLoad = configLoad;
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
-			System.out.println("[INFO] - Ruta de car: " + configLoad.getCar_configuration_path()+this.configLoad.getCar_configuration_file_name());
+			System.out.println("[INFO] - Ruta de car: " + this.configLoad.getCar_configuration_path()+this.configLoad.getCar_configuration_file_name());
 			System.out.println("[INFO] - Cargando Modelos a la Vista...");
 			this.builder = factory.newDocumentBuilder();
 			this.document = this.builder.parse(new File(this.configLoad.getCar_configuration_path() + this.configLoad.getCar_configuration_file_name()));
@@ -46,6 +47,7 @@ public class Model {
 		this.name = loadName();
 		this.description = loadDescription();
 		this.image_name = loadImage_Name();
+		System.out.println(getInformation());
 	}
 
 	private String[] loadImage_Name() {
@@ -131,6 +133,10 @@ public class Model {
 
 	public String[] getImage_name() {
 		return image_name;
+	}
+	
+	private String getInformation() {
+		return "Id: "+Arrays.toString(id)+", precio: "+Arrays.toString(price)+", nomobre: "+Arrays.toString(name)+", descripcion: "+Arrays.toString(description)+", ruta imagen: "+Arrays.toString(image_name);
 	}
 	
 }

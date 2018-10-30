@@ -3,7 +3,7 @@ package model;
 public class Client {
 
 	// Atributos de la clase:
-	private String name, first_last_name, second_last_name, address, email;
+	private String name, first_last_name, second_last_name, address, email, birthdate;
 	
 	public Client() {}
 
@@ -13,6 +13,16 @@ public class Client {
 		this.second_last_name = second_last_name;
 		this.address = address;
 		this.email = email;
+		this.birthdate = null;
+	}
+	
+	public Client(String name, String first_last_name, String second_last_name, String address, String email, String birthdate) {
+		this.name = name;
+		this.first_last_name = first_last_name;
+		this.second_last_name = second_last_name;
+		this.address = address;
+		this.email = email;
+		this.birthdate = birthdate;
 	}
 
 	public String getName() {
@@ -34,22 +44,17 @@ public class Client {
 	public String getEmail() {
 		return email;
 	}
+	
+	public String getBirthdate() {
+		return birthdate;
+	}
 
-	/*public void setName(String name) {
-		this.name = name;
+	@Override
+	public String toString() {
+		return name + ", " + first_last_name + ", " + second_last_name + ", " + address + ", " + email + ", " + birthdate;
 	}
-	public void setFirst_last_name(String first_last_name) {
-		this.first_last_name = first_last_name;
-	}
-	public void setSecond_last_name(String second_last_name) {
-		this.second_last_name = second_last_name;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}*/
+
+	
 	
 	
 	

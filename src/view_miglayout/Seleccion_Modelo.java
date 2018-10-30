@@ -1,5 +1,6 @@
-package view.miglayout;
+package view_miglayout;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -9,8 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +28,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTextPane;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
@@ -36,13 +53,6 @@ import net.miginfocom.swing.MigLayout;
 
 public class Seleccion_Modelo extends JFrame{
 	
-//	public static void main(String[] args) {
-//		ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
-//		ILanguage language = LanguageFactory.getLanguage(configLoad.getLanguage_default());
-//		part12 p = new part12(configLoad, language, "alexis.mengual");
-//	}
-	
-
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
 	private Client client;
@@ -63,8 +73,14 @@ public class Seleccion_Modelo extends JFrame{
 	private JScrollPane scroll;
 	private int posicion=0;
 	
+	//menu
+	private JMenuBar pMenu;
+	private JMenu menu;
+	private List<JMenuItem> lMenuItem;
+	private JSeparator menuSeparator;
+	
 	String[] imatge_nom;
-	String root = "src\\config\\car\\images\\";
+	String root_images;
 	List<Image> listImg;
 	
 	/*
@@ -73,18 +89,38 @@ public class Seleccion_Modelo extends JFrame{
 	public Seleccion_Modelo(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
 		this.configLoad = configLoad;
 		this.language = language;
+		this.root_images = this.configLoad.getCar_image_path();
 		this.client = client;
 		this.username = username;
 		this.model = new Model(this.configLoad);
 		this.engine = new Engine(this.configLoad);
 		this.accessory = new Accessory(this.configLoad);
 		//migLayout
-		this.panelGBC.setLayout(new MigLayout("insets 50, fillx, filly"));
+		this.panelGBC.setLayout(new MigLayout("insets 20 50 50 50, fillx, filly"));
 		this.panelBox.setLayout(new BoxLayout(panelBox, BoxLayout.Y_AXIS));
 		this.panelGBC.setBackground(new Color(255, 255, 255));
 		this.panelBox.setBackground(new Color(255, 255, 255));
 		
-		this.l1=new JLabel(variables.Lenguaje.tituloTexto);
+		//menu
+		pMenu=new JMenuBar();
+		pMenu.setBorder(BorderFactory.createEmptyBorder(10, 50, 0, 0));
+		pMenu.setBackground(new Color(255, 255, 255));
+		menu=new JMenu(language.menu());
+		menuSeparator=new JSeparator();
+		menuSeparator.setBackground(Color.RED);
+		lMenuItem=new ArrayList<JMenuItem>();
+		lMenuItem.add(new JMenuItem(language.menuItemAdd()));
+		lMenuItem.add(new JMenuItem(language.menuItemDelete()));
+		lMenuItem.add(new JMenuItem(language.menuItemModify()));
+		for (JMenuItem item : lMenuItem) {
+			menu.add(menuSeparator);//solo se pone la ultima vez que se llama
+			menu.add(item);
+			item.setBackground(new Color(255, 255, 255));
+		}
+		pMenu.add(menu);
+		
+		
+		this.l1=new JLabel(language.labelSelectTitle());
 		this.l1.setFont(new java.awt.Font("Tahoma", 0, 16));
 		this.luser=new JLabel(this.language.labelAuthIn() + username);
 		this.luser.setFont(new java.awt.Font("Tahoma", 0, 10));
@@ -95,7 +131,7 @@ public class Seleccion_Modelo extends JFrame{
 		this.areaInfo=new JTextPane();
 			areaInfo.setContentType("text/html");
 			areaInfo.setEditable(false);
-		this.anterior=new JButton(variables.Lenguaje.bAnterior);
+		this.anterior=new JButton(language.btnPrevious());
 		this.anterior.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.anterior.setBackground(new Color(215,18,43));
 		this.anterior.setForeground(new Color(255,255,255));
@@ -103,7 +139,7 @@ public class Seleccion_Modelo extends JFrame{
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)
 				));
-		this.siguiente=new JButton(variables.Lenguaje.bSiguiente);
+		this.siguiente=new JButton(language.btnNext());
 		this.siguiente.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.siguiente.setBackground(new Color(215,18,43));
 		this.siguiente.setForeground(new Color(255,255,255));
@@ -116,8 +152,8 @@ public class Seleccion_Modelo extends JFrame{
 		this.imatge_nom = this.model.getImage_name();
 		List<String> listImg=new ArrayList<>();
 		for (int i = 0; i < imatge_nom.length; i++) {
-			listImg.add(this.root + this.imatge_nom[i]);
-			listImg.add(this.root + this.imatge_nom[i]);
+			listImg.add(this.root_images + this.imatge_nom[i]);
+			listImg.add(this.root_images + this.imatge_nom[i]);
 		}
 	
 		//creamos una lista de los botones con las rutas de las imagenes
@@ -187,7 +223,27 @@ public class Seleccion_Modelo extends JFrame{
 				siguienteActionPerformed();
 			}
 		});
-		
+		lMenuItem.get(0).addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				add();
+			}
+		});
+		lMenuItem.get(1).addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				delete();
+			}
+		});
+		lMenuItem.get(2).addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				modify();
+			}
+		});
 		
 		JFrame();
 	}
@@ -196,6 +252,7 @@ public class Seleccion_Modelo extends JFrame{
 	 * Método para configurar la ventana actual.
 	 */
 	private void JFrame() {
+		setJMenuBar(pMenu);
 		add(panelGBC);
 		setTitle("SEAT Configurador - Selección de modelo");
 		setIconImage(getIconImage());
@@ -247,7 +304,7 @@ public class Seleccion_Modelo extends JFrame{
 						BorderFactory.createEmptyBorder(1, 1, 1, 1)
 						));
 				for (int i = 0; i < imatge_nom.length; i++) {
-					if ((root+imatge_nom[i]).equals(coch.getDescription())) {//la descripcion es del objeto, que devuelve la ruta de la imagen
+					if ((root_images+imatge_nom[i]).equals(coch.getDescription())) {//la descripcion es del objeto, que devuelve la ruta de la imagen
 						posicion=i;
 					}
 				}
@@ -272,5 +329,15 @@ public class Seleccion_Modelo extends JFrame{
 	
 	protected void siguienteActionPerformed() {
 		
+	}
+	
+	private void add() {
+		System.out.println("add");
+	}
+	private void delete() {
+		System.out.println("delete");
+	}
+	private void modify() {
+		System.out.println("modify");
 	}
 }

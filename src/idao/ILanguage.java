@@ -1,7 +1,5 @@
 package idao;
 
-import javax.swing.Icon;
-
 public interface ILanguage {
 
 	// Métodos que se usarán para el Login.
@@ -28,4 +26,19 @@ public interface ILanguage {
 	String labelClientBirhdate();
 	String btnSave();
 	String btnNext();
+	String errorNullField();
+	String errorNullFieldTitle();
+	String errorEmail();
+	String errorEmailTitle();
+	String btnSaveInfo();
+	
+	// Métodos que se usarán para el Seleccion_Modelo.
+	String labelSelectTitle();
+	String btnPrevious();
+	//boton siguiente en Data_clients
+	String menu();
+	String menuItemAdd();
+	String menuItemDelete();
+	String menuItemModify();
+	
 }
