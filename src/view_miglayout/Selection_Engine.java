@@ -1,4 +1,4 @@
-package view_miglayout;
+package src.view_miglayout;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,10 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import config.ConfigurationLoader;
-import daoImplFactory.LanguageFactory;
-import idao.ILanguage;
-import model.Client;
+import src.config.ConfigurationLoader;
+import src.daoImplFactory.LanguageFactory;
+import src.idao.ILanguage;
+import src.model.Client;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -34,30 +34,9 @@ public class Selection_Engine extends JFrame {
 	private ILanguage language;
 	private String username;
 	
-	JPanel panel = new JPanel();
+	JPanel panel;
 	JLabel lblTitulo;
-	JButton btn_Anterior, btn_Siguiente;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
-					ILanguage language = LanguageFactory.getLanguage(configLoad.getLanguage_default(), configLoad);
-					String username = "user1";
-					Selection_Engine frame = new Selection_Engine(configLoad, language, username);
-					
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	
+	JButton btn_Anterior, btn_Siguiente;	
 	
 	/**
 	 * Create the frame.
@@ -69,33 +48,26 @@ public class Selection_Engine extends JFrame {
 		
 		// Panel
 		this.panel = new JPanel();
-		this.panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.panel.setLayout(new MigLayout("insets 20"));
 		this.panel.setBackground(new Color(255,255,255));
-		
-		// JFrame
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 605, 424);
-		setContentPane(panel);
-		setIconImage(getIconImage());
 		
 		// Elementos del JPanel
 		this.lblTitulo = new JLabel("Seleccion de caracteristicas del modelo");
 		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		this.panel.setLayout(new MigLayout("", "[200px][][200px][4px][200px][50px]", "[23px][40px][31px][100px][][]"));
-		this.panel.add(lblTitulo, "cell 1 0 2 1,alignx right,aligny top");
 		 
 		JList list = new JList();
 		DefaultListModel modelo = new DefaultListModel(); // Sirve para introducir elementos de forma indirecta (Ej: Haciendo un bucle para añadir elementos).
+		
 		// Ejemplo para añadir contenido dentro del JList.
 		for (int i = 1; i < 4; i++) {
 			modelo.addElement("texto "+i);
 		}
+		
 		// PARA AÑADIR CONTENIDO A LA LISTA DEBE SER CON STRINGS.
 		list.setModel(modelo);
 		list.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		list.setBackground(new Color(157, 157, 157));
 		list.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		this.panel.add(list, "cell 0 2 6 1,growx,aligny top");
 		
 		this.btn_Anterior = new JButton("Anterior");
 		this.btn_Anterior.setFont(new Font("Tahoma", 0, 12));
@@ -104,7 +76,6 @@ public class Selection_Engine extends JFrame {
 		this.btn_Anterior.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
-		this.panel.add(btn_Anterior, "cell 1 5,alignx left,aligny top");
 		
 		this.btn_Siguiente = new JButton("Siguiente");
 		this.btn_Siguiente.setFont(new Font("Tahoma", 0, 12));
@@ -113,10 +84,31 @@ public class Selection_Engine extends JFrame {
 		this.btn_Siguiente.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
-		this.panel.add(btn_Siguiente, "cell 2 5,alignx right,aligny top");
 		
+		// Add Components to Panel
+		this.panel.add(this.lblTitulo, "wrap, align right");
+		this.panel.add(list, "wrap, span 3, growx, growy, pushx");
+		this.panel.add(this.btn_Anterior, "span 2, align left");
+		this.panel.add(this.btn_Siguiente, "align right");
 		
+		JFrame();
 	}
+	
+	
+	/*
+	 * Método para configurar la ventana actual.
+	 */
+	private void JFrame() {
+		add(this.panel);
+		setTitle("SEAT Configurador - Selección de modelo");
+		setIconImage(getIconImage());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(600,600);
+		pack();
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+	
 	/*
 	 * Método que obtiene la imagen para el JFrame.
 	 * @return La imagen que hay en carpeta.

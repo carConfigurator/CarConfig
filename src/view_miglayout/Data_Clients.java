@@ -1,4 +1,4 @@
-package view_miglayout;
+package src.view_miglayout;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -32,12 +32,12 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-import config.ConfigurationLoader;
-import idao.ILanguage;
+import src.config.ConfigurationLoader;
+import src.idao.ILanguage;
 import javafx.scene.input.DataFormat;
-import model.Client;
+import src.model.Client;
 import net.miginfocom.swing.MigLayout;
-import view_miglayout.Seleccion_Modelo;
+import src.view_miglayout.Seleccion_Modelo;
 
 public class Data_Clients extends JFrame{
 
@@ -381,13 +381,12 @@ public class Data_Clients extends JFrame{
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
-<<<<<<< HEAD:src/view/miglayout/Data_Clients.java
-				int dialogButton = JOptionPane.showConfirmDialog(null, "¿Desea Guardar los Cambios?", "¿Desea Guardar los Cambios?", JOptionPane.OK_CANCEL_OPTION);
-=======
 				int dialogButton = JOptionPane.showConfirmDialog(null, language.btnSaveInfo(), language.btnSaveInfo(), JOptionPane.YES_NO_CANCEL_OPTION);
->>>>>>> 94086a0ea8173b3f93979079846545d7e12e29dd:src/view_miglayout/Data_Clients.java
 				if(dialogButton == JOptionPane.YES_OPTION) {
 					System.out.println("[INFO] - Guardando los datos del cliente...");
+					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				}else if(dialogButton == JOptionPane.NO_OPTION){
+					System.out.println("[INFO] - No se guardarán los cambios...");
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				}else if(dialogButton == JOptionPane.CANCEL_OPTION){
 					System.out.println("[INFO] - No se hará nada.");

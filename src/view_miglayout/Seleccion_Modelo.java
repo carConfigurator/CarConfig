@@ -1,8 +1,9 @@
-package view_miglayout;
+package src.view_miglayout;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -18,12 +19,17 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -42,13 +48,13 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
-import config.ConfigurationLoader;
-import daoImplFactory.LanguageFactory;
-import idao.ILanguage;
-import model.Accessory;
-import model.Client;
-import model.Engine;
-import model.Model;
+import src.config.ConfigurationLoader;
+import src.daoImplFactory.LanguageFactory;
+import src.idao.ILanguage;
+import src.model.Accessory;
+import src.model.Client;
+import src.model.Engine;
+import src.model.Model;
 import net.miginfocom.swing.MigLayout;
 
 public class Seleccion_Modelo extends JFrame{
@@ -61,10 +67,9 @@ public class Seleccion_Modelo extends JFrame{
 	private Engine engine;
 	private Accessory accessory;
 	
-//	private JFrame frame;
-	private JPanel panelGBC=new JPanel(),panelBox=new JPanel();
+	private JPanel panelGBC, panelBox;
 	private List<JButton> listBotones;
-	private JButton siguiente,anterior,btnCoches;
+	private JButton siguiente,anterior,btnCoches, configCoches;
 	private JLabel l1,luser;
 	private JTextPane areaInfo;
 	private JTextPane area;
@@ -82,6 +87,7 @@ public class Seleccion_Modelo extends JFrame{
 	String[] imatge_nom;
 	String root_images;
 	List<Image> listImg;
+	File temp;
 	
 	/*
 	 * Añado los componentes del concesionaro del coche (parte 12)
@@ -96,16 +102,19 @@ public class Seleccion_Modelo extends JFrame{
 		this.engine = new Engine(this.configLoad);
 		this.accessory = new Accessory(this.configLoad);
 		//migLayout
+		this.panelGBC = new JPanel();
+		this.panelBox = new JPanel();
 		this.panelGBC.setLayout(new MigLayout("insets 20 50 50 50, fillx, filly"));
 		this.panelBox.setLayout(new BoxLayout(panelBox, BoxLayout.Y_AXIS));
 		this.panelGBC.setBackground(new Color(255, 255, 255));
 		this.panelBox.setBackground(new Color(255, 255, 255));
 		
-		//menu
+		//Creación del Menu
 		pMenu=new JMenuBar();
-		pMenu.setBorder(BorderFactory.createEmptyBorder(10, 50, 0, 0));
-		pMenu.setBackground(new Color(255, 255, 255));
+		pMenu.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
+		pMenu.setBackground(new Color(215,18,43));
 		menu=new JMenu(language.menu());
+		menu.setForeground(new Color(255,255,255));
 		menuSeparator=new JSeparator();
 		menuSeparator.setBackground(Color.RED);
 		lMenuItem=new ArrayList<JMenuItem>();
@@ -113,7 +122,7 @@ public class Seleccion_Modelo extends JFrame{
 		lMenuItem.add(new JMenuItem(language.menuItemDelete()));
 		lMenuItem.add(new JMenuItem(language.menuItemModify()));
 		for (JMenuItem item : lMenuItem) {
-			menu.add(menuSeparator);//solo se pone la ultima vez que se llama
+//			menu.add(menuSeparator);//Solo se pone la ultima vez que se llama
 			menu.add(item);
 			item.setBackground(new Color(255, 255, 255));
 		}
@@ -148,7 +157,22 @@ public class Seleccion_Modelo extends JFrame{
 				BorderFactory.createEmptyBorder(5,10,5,10)
 				));
 		
-												//se añade la ruta de la imagen en una lista
+		File file = new File("src\\config\\settings.png");
+		if(file.exists()) {
+			System.out.println("si existe.");
+		}
+		
+//		try {
+//			
+////			ImageIcon config = new ImageIcon(ImageIO.read(getClass().getResource("src\\config\\settings.png")));
+//			this.configCoches = new JButton(config);
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		this.setBackground(new Color(255,255,255));
+		
+		//Se añade la ruta de la imagen en una lista
 		this.imatge_nom = this.model.getImage_name();
 		List<String> listImg=new ArrayList<>();
 		for (int i = 0; i < imatge_nom.length; i++) {
@@ -156,17 +180,15 @@ public class Seleccion_Modelo extends JFrame{
 			listImg.add(this.root_images + this.imatge_nom[i]);
 		}
 	
-		//creamos una lista de los botones con las rutas de las imagenes
+		//Creamos una lista de los botones con las rutas de las imagenes
 		this.listBotones=new ArrayList<JButton>();
 		crearBoton(listImg);//lista ruta imagen
 		
-		//añadimos los botones al panel
+		//Añadimos los botones al panel
 		for (JButton jButton : listBotones) {
 			this.panelBox.add(jButton);
 		}
 
-
-		
 		this.scroll = new JScrollPane(panelBox);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	    scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -174,13 +196,12 @@ public class Seleccion_Modelo extends JFrame{
 		scroll.setPreferredSize(new Dimension(coche.getImage().getWidth(null)/3-10, coche.getImage().getHeight(null)*3/2));
 		scroll.setBorder(null);
 		
-							//Añadimos las dimensiones aqui porque si hago como el scroll me dice que son 0,0, asi, me lo pilla bien
+		//Añadimos las dimensiones aqui porque si hago como el scroll me dice que son 0,0, asi, me lo pilla bien
 		area.setMinimumSize(new Dimension((scroll.getMinimumSize().width+10)*3,scroll.getMinimumSize().height*2/3));
-
-//		listBotones.get(0).doClick();
 		
 		this.panelGBC.add(l1, "span 2");
 		this.panelGBC.add(luser, "wrap, align right");
+//		this.panelGBC.add(this.configCoches, "wrap, align right");
 		this.panelGBC.add(scroll, "align right");
 		this.panelGBC.add(area, "wrap, pushx, growx, pushy, growy, span 2");
 		this.panelGBC.add(areaInfo, "span 2, skip, wrap, align right, pushx, growx");
@@ -309,7 +330,7 @@ public class Seleccion_Modelo extends JFrame{
 					}
 				}
 				File fImg = new File(coch.getDescription());
-				area.setText("<html><div style='text-align: center;'><span style='background: rgb(215,18,43); color: rgb(255,255,255); padding:10px; font-family: Tahoma;'>"+model.getName()[posicion]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
+				area.setText("<html><div style='text-align: center;'><span style='color: rgb(215,18,43); font-weight:600; padding:10px; font-family: Tahoma;'>"+model.getName()[posicion]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
 				areaInfo.setText("<html><div style='text-align: center; font-family: Tahoma;'><span style=padding:10px;'>"+model.getDescription()[posicion]+"</span></div><br></html>");
 				System.out.println("[INFO] - Cambiando modelo a: "+model.getName()[posicion]);
 			}
@@ -322,13 +343,27 @@ public class Seleccion_Modelo extends JFrame{
         return retValue;
     }
 
-	protected void anteriorActionPerformed() {
+	private void anteriorActionPerformed() {
 		setVisible(false);
 		new Data_Clients(configLoad, language, username, client);
 	}
 	
-	protected void siguienteActionPerformed() {
-		
+	private void siguienteActionPerformed() {
+		this.temp = new File(this.configLoad.getTemporalPathFile());
+		try {
+			FileWriter fw = new FileWriter(this.temp, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.newLine();
+			bw.write(this.model.toModel(1));
+			bw.newLine();
+			bw.write("------");
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		setVisible(false);
+		new Selection_Engine(this.configLoad, this.language, this.username);
 	}
 	
 	private void add() {

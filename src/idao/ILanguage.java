@@ -1,4 +1,4 @@
-package idao;
+package src.idao;
 
 public interface ILanguage {
 

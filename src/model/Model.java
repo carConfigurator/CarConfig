@@ -1,4 +1,4 @@
-package model;
+package src.model;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import config.ConfigurationLoader;
+import src.config.ConfigurationLoader;
 
 public class Model {
 
@@ -139,4 +139,14 @@ public class Model {
 		return "Id: "+Arrays.toString(id)+", precio: "+Arrays.toString(price)+", nomobre: "+Arrays.toString(name)+", descripcion: "+Arrays.toString(description)+", ruta imagen: "+Arrays.toString(image_name);
 	}
 	
+	public String toModel(int id) {
+		int[] allID = loadId();
+		for (int i = 0; i < allID.length; i++) {
+			if(allID[i] == id) {
+				System.out.println("ID Encontrado");
+			}
+		}
+		
+		return null;
+	}
 }

@@ -1,4 +1,4 @@
-package view_miglayout;
+package src.view_miglayout;
 
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
@@ -24,11 +24,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import config.ConfigurationLoader;
-import daoImplFactory.LanguageFactory;
-import idao.ILanguage;
+import src.config.ConfigurationLoader;
+import src.daoImplFactory.LanguageFactory;
+import src.idao.ILanguage;
 import net.miginfocom.swing.MigLayout;
-import view_miglayout.Data_Clients;
+import src.view_miglayout.Data_Clients;
 
 public class Login extends JFrame{
 	
@@ -60,7 +60,7 @@ public class Login extends JFrame{
 		ConfigurationLoader configLoad2 = ConfigurationLoader.getConfigurationLoaderInstance();
 		System.out.println("[INFO] - Obteniendo idioma del Archivo de Configuración...");
 		System.out.println("\t [DEMO] - El idioma para este sprint será únicamente en Castellano,\n\t pero está planteado para multilenguajes.");
-		this.language = LanguageFactory.getLanguage(configLoad.getLanguage_default(),this.configLoad);
+		this.language = LanguageFactory.getLanguage(this.configLoad);
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		// Comprobará siempre si el archivo existe, en caso de que exista lo eliminará para generarlo desde 0.

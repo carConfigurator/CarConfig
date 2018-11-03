@@ -1,6 +1,6 @@
-package daoImpl;
+package src.daoImpl;
 
-import idao.ILanguage;
+import src.idao.ILanguage;
 
 public class LanguageDAOEN implements ILanguage{
 

@@ -1,4 +1,4 @@
-package view_miglayout;
+package src.view_miglayout;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,10 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import config.ConfigurationLoader;
-import daoImplFactory.LanguageFactory;
-import idao.ILanguage;
-import model.Client;
+import src.config.ConfigurationLoader;
+import src.daoImplFactory.LanguageFactory;
+import src.idao.ILanguage;
+import src.model.Client;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
@@ -37,21 +37,21 @@ public class Purchase_Accessories extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
-					ILanguage language = LanguageFactory.getLanguage(configLoad.getLanguage_default(), configLoad);
-					String username = "user1";
-					Purchase_Accessories frame = new Purchase_Accessories(configLoad, language, username);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
+//					ILanguage language = LanguageFactory.getLanguage(configLoad.getLanguage_default(), configLoad);
+//					String username = "user1";
+//					Purchase_Accessories frame = new Purchase_Accessories(configLoad, language, username);
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
