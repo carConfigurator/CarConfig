@@ -1,4 +1,4 @@
-package src.model;
+package model;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import org.xml.sax.SAXException;
 
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
-import src.config.ConfigurationLoader;
+import config.ConfigurationLoader;
 
 public class Engine {
 

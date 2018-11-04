@@ -1,4 +1,4 @@
-package src.view_miglayout;
+package view_miglayout;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,10 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import src.config.ConfigurationLoader;
-import src.daoImplFactory.LanguageFactory;
-import src.idao.ILanguage;
-import src.model.Client;
+import config.ConfigurationLoader;
+import daoImplFactory.LanguageFactory;
+import idao.ILanguage;
+import model.Client;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -52,7 +52,7 @@ public class Selection_Engine extends JFrame {
 		this.panel.setBackground(new Color(255,255,255));
 		
 		// Elementos del JPanel
-		this.lblTitulo = new JLabel("Seleccion de caracteristicas del modelo");
+		this.lblTitulo = new JLabel(language.labelEngineTitle());
 		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		 
 		JList list = new JList();
@@ -100,7 +100,7 @@ public class Selection_Engine extends JFrame {
 	 */
 	private void JFrame() {
 		add(this.panel);
-		setTitle("SEAT Configurador - Selección de modelo");
+		setTitle(language.seleccionEngineTitle());
 		setIconImage(getIconImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600,600);

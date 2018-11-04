@@ -1,4 +1,4 @@
-package src.daoImpl;
+package daoImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +13,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import src.config.ConfigurationLoader;
-import src.idao.ILanguage;
+import config.ConfigurationLoader;
+import idao.ILanguage;
 
 public class LanguageDAOES implements ILanguage{
 
@@ -34,6 +34,17 @@ public class LanguageDAOES implements ILanguage{
 		} catch (IOException e) {
 			System.out.println("[ERROR] - Error de E/S. Más información del error: " + e);
 		}
+	}
+	
+	@Override
+	public String loginTitle() {
+		NodeList nList = document.getElementsByTagName("Login");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
+		}
+		return null;
 	}
 	
 	@Override
@@ -115,6 +126,17 @@ public class LanguageDAOES implements ILanguage{
 	
 	//		-------------------Métodos que se usarán para el Data_Clients.-------------------
 
+	@Override
+	public String dataClientsTitle() {
+		NodeList nList = document.getElementsByTagName("Data_clients");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
+		}
+		return null;
+	}
+	
 	@Override
 	public String labelClientTitle() {
 		NodeList nList = document.getElementsByTagName("Data_clients");
@@ -324,11 +346,22 @@ public class LanguageDAOES implements ILanguage{
 		return null;
 	}
 	
-	//		-------------------Métodos que se usarán para el Seleccion_Modelo.-------------------
+	//		-------------------Métodos que se usarán para el Selection_model.-------------------
+	
+	@Override
+	public String seleccionModeloTitle() {
+		NodeList nList = document.getElementsByTagName("Selection_model");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
+		}
+		return null;
+	}
 	
 	@Override
 	public String labelSelectTitle() {
-		NodeList nList = document.getElementsByTagName("Seleccion_modelo");
+		NodeList nList = document.getElementsByTagName("Selection_model");
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
@@ -339,7 +372,7 @@ public class LanguageDAOES implements ILanguage{
 
 	@Override
 	public String btnPrevious() {
-		NodeList nList = document.getElementsByTagName("Seleccion_modelo");
+		NodeList nList = document.getElementsByTagName("Selection_model");
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
@@ -350,7 +383,7 @@ public class LanguageDAOES implements ILanguage{
 
 	@Override
 	public String menu() {
-		NodeList nList = document.getElementsByTagName("Seleccion_modelo");
+		NodeList nList = document.getElementsByTagName("Selection_model");
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
@@ -361,7 +394,7 @@ public class LanguageDAOES implements ILanguage{
 
 	@Override
 	public String menuItemAdd() {
-		NodeList nList = document.getElementsByTagName("Seleccion_modelo");
+		NodeList nList = document.getElementsByTagName("Selection_model");
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
@@ -372,7 +405,7 @@ public class LanguageDAOES implements ILanguage{
 
 	@Override
 	public String menuItemDelete() {
-		NodeList nList = document.getElementsByTagName("Seleccion_modelo");
+		NodeList nList = document.getElementsByTagName("Selection_model");
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
@@ -383,11 +416,213 @@ public class LanguageDAOES implements ILanguage{
 
 	@Override
 	public String menuItemModify() {
-		NodeList nList = document.getElementsByTagName("Seleccion_modelo");
+		NodeList nList = document.getElementsByTagName("Selection_model");
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
 			return ""+eElement.getElementsByTagName("menu_item_modify").item(0).getTextContent();
+		}
+		return null;
+	}
+	
+	//		-------------------Métodos que se usarán para Selection_Engine.-------------------
+	
+	@Override
+	public String seleccionEngineTitle() {
+		NodeList nList = document.getElementsByTagName("Selection_engine");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelEngineTitle() {
+		NodeList nList = document.getElementsByTagName("Selection_engine");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_title").item(0).getTextContent();
+		}
+		return null;
+	}
+	
+	//		-------------------Métodos que se usarán para Purchase_accessories.-------------------
+	
+	@Override
+	public String purchaseAccessoriesTitle() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelAccessoriesTitle() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_title").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelModelCar() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_model_car").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String checkBoxElectricElevation() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("checkBox_electric_elevation").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String checkBoxBrowser() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("checkBox_browser").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String checkBoxTires() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("checkBox_tires").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String checkBoxHeatedSeats() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("checkBox_heated_seats").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String checkBoxCruisingSpeed() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("checkBox_cruising_speed").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String checkBoxAutomaticParking() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("checkBox_automatic_parking").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String checkBoxUsbConnectors() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("checkBox_usb_connectors").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String checkBoxMetallizedPaint() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("checkBox_metallized_paint").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelBasePrice() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_base_price").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelIncreasePrice() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_increase_price").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelTotalPrice() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_total_price").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String btnBack() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("btn_back").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String btnEnd() {
+		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("btn_end").item(0).getTextContent();
 		}
 		return null;
 	}

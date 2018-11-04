@@ -1,4 +1,4 @@
-package src.view_miglayout;
+package view_miglayout;
 
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
@@ -24,11 +24,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import src.config.ConfigurationLoader;
-import src.daoImplFactory.LanguageFactory;
-import src.idao.ILanguage;
+import config.ConfigurationLoader;
+import daoImplFactory.LanguageFactory;
+import idao.ILanguage;
 import net.miginfocom.swing.MigLayout;
-import src.view_miglayout.Data_Clients;
+import view_miglayout.Data_Clients;
 
 public class Login extends JFrame{
 	
@@ -148,7 +148,7 @@ public class Login extends JFrame{
 	 */
 	public void JFrame() {
 		add(panel);
-		setTitle("SEAT Configurador - Log In");
+		setTitle(language.loginTitle());
 		setIconImage(getIconImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600,600);

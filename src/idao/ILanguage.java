@@ -1,8 +1,9 @@
-package src.idao;
+package idao;
 
 public interface ILanguage {
 
 	// Métodos que se usarán para el Login.
+	String loginTitle();
 	String labelUsername();
 	String labelPassword();
 	String btnLogin();
@@ -12,6 +13,7 @@ public interface ILanguage {
 	String errorLoginPasswordTitle();
 	
 	// Métodos que se usarán para el Data_Clients.
+	String dataClientsTitle();
 	String labelClientTitle();
 	String labelAuthIn();
 	String labelClientName();
@@ -33,12 +35,35 @@ public interface ILanguage {
 	String btnSaveInfo();
 	
 	// Métodos que se usarán para el Seleccion_Modelo.
+	String seleccionModeloTitle();
 	String labelSelectTitle();
 	String btnPrevious();
 	//boton siguiente en Data_clients
 	String menu();
 	String menuItemAdd();
 	String menuItemDelete();
-	String menuItemModify();
+	String menuItemModify();	
+
+	// Métodos que se usarán para selection_engine.
+	String seleccionEngineTitle();
+	String labelEngineTitle();
+	
+	// Métodos que se usarán para purchase_accessories.
+	String purchaseAccessoriesTitle();
+	String labelAccessoriesTitle();
+	String labelModelCar();
+	String checkBoxElectricElevation();
+	String checkBoxBrowser();
+	String checkBoxTires();
+	String checkBoxHeatedSeats();
+	String checkBoxCruisingSpeed();
+	String checkBoxAutomaticParking();
+	String checkBoxUsbConnectors();
+	String checkBoxMetallizedPaint();
+	String labelBasePrice();
+	String labelIncreasePrice();
+	String labelTotalPrice();
+	String btnBack();
+	String btnEnd();
 	
 }

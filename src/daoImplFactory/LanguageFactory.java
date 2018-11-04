@@ -1,10 +1,10 @@
-package src.daoImplFactory;
+package daoImplFactory;
 
-import src.config.ConfigurationLoader;
-import src.daoImpl.LanguageDAOCA;
-import src.daoImpl.LanguageDAOEN;
-import src.daoImpl.LanguageDAOES;
-import src.idao.ILanguage;
+import config.ConfigurationLoader;
+import daoImpl.LanguageDAOCA;
+import daoImpl.LanguageDAOEN;
+import daoImpl.LanguageDAOES;
+import idao.ILanguage;
 
 public class LanguageFactory {
 	
