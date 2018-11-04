@@ -46,7 +46,6 @@
 		<label_title>Seleccion de caracteristicas del modelo</label_title>
 	</Selection_engine>
 	<Purchase_accessories>
-		<title>SEAT Configurador - Selección de caracteristicas</title>
 		<label_title>Compra de Accesorios</label_title>
 		<label_model_car>Caracteristicas seleccionadas anteriormetne</label_model_car>
 		<checkBox_electric_elevation>Elevaduras electricas</checkBox_electric_elevation>
@@ -58,10 +57,10 @@
 		<checkBox_usb_connectors>Conectores USB</checkBox_usb_connectors>
 		<checkBox_metallized_paint>Pintura metalizada</checkBox_metallized_paint>
 		<label_base_price>Precio Base:</label_base_price>
-		<label_increase_price>Aumento en el precio:</label_increase_price>
+		<label_increase_price>Accesorios:</label_increase_price>
 		<label_total_price>Total precio:</label_total_price>
-		<btn_back>ATRAS</btn_back>
-		<btn_end>FINALIZAR</btn_end>
+		<btn_back>Atrás</btn_back>
+		<btn_end>Finalizar Compra</btn_end>
 	</Purchase_accessories>
 	<Button>
 		<btn_login>Iniciar Sesión</btn_login>

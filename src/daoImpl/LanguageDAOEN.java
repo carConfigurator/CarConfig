@@ -206,12 +206,6 @@ public class LanguageDAOEN implements ILanguage{
 	}
 
 	@Override
-	public String purchaseAccessoriesTitle() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String labelAccessoriesTitle() {
 		// TODO Auto-generated method stub
 		return null;

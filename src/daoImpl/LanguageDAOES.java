@@ -450,17 +450,6 @@ public class LanguageDAOES implements ILanguage{
 	}
 	
 	//		-------------------Métodos que se usarán para Purchase_accessories.-------------------
-	
-	@Override
-	public String purchaseAccessoriesTitle() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
-		}
-		return null;
-	}
 
 	@Override
 	public String labelAccessoriesTitle() {

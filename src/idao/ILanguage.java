@@ -49,7 +49,6 @@ public interface ILanguage {
 	String labelEngineTitle();
 	
 	// Métodos que se usarán para purchase_accessories.
-	String purchaseAccessoriesTitle();
 	String labelAccessoriesTitle();
 	String labelModelCar();
 	String checkBoxElectricElevation();
