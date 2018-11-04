@@ -1,4 +1,4 @@
-package src.view_miglayout;
+package view_miglayout;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -32,12 +32,12 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-import src.config.ConfigurationLoader;
-import src.idao.ILanguage;
+import config.ConfigurationLoader;
+import idao.ILanguage;
 import javafx.scene.input.DataFormat;
-import src.model.Client;
+import model.Client;
 import net.miginfocom.swing.MigLayout;
-import src.view_miglayout.Seleccion_Modelo;
+import view_miglayout.Selection_model;
 
 public class Data_Clients extends JFrame{
 
@@ -301,7 +301,7 @@ public class Data_Clients extends JFrame{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-        	new Seleccion_Modelo(this.configLoad, this.language, this.username, client);
+        	new Selection_model(this.configLoad, this.language, this.username, client);
         	setVisible(false);
 		}
 	}
@@ -361,7 +361,7 @@ public class Data_Clients extends JFrame{
 	private void JFrame() {
 		add(this.panel);
 		setSize(600,600);
-		setTitle("SEAT Configurador - Datos Clientes");
+		setTitle(language.dataClientsTitle());
 		setIconImage(getIconImage());
 		pack();
 		setLocationRelativeTo(null);

@@ -28,16 +28,45 @@
 		<btn_next>Siguiente</btn_next>
 		<error_null_field>Faltan campos por rellenar. Rellene todos los campos obligatorios</error_null_field>
 		<error_null_field_title>Informacion Incompleta</error_null_field_title>
-		<error_email></error_email>
-		<error_email_title></error_email_title>
-		<btn_save_info></btn_save_info>
+		<error_email>El correo no es valido</error_email>
+		<error_email_title>Error de correo</error_email_title>
+		<btn_save_info>¿Desea Guardar los Cambios?</btn_save_info>
 	</Data_clients>
-	<Seleccion_modelo>
+	<Selection_model>
+		<title>SEAT Configurador - Selección de modelo</title>
 		<label_select_title>Seleccionar el Modelo del Coche</label_select_title>
 		<btn_previous>Anterior</btn_previous>
 		<menu>Opciones de coches</menu>
 		<menu_item_add>Añadir un coche</menu_item_add>
 		<menu_item_delete>Suprimir un coche</menu_item_delete>
 		<menu_item_modify>Modificar un coche</menu_item_modify>
-	</Seleccion_modelo>
+	</Selection_model>
+	<Selection_engine>
+		<title>SEAT Configurador - Selección de caracteristicas</title>
+		<label_title>Seleccion de caracteristicas del modelo</label_title>
+	</Selection_engine>
+	<Purchase_accessories>
+		<title>SEAT Configurador - Selección de caracteristicas</title>
+		<label_title>Compra de Accesorios</label_title>
+		<label_model_car>Caracteristicas seleccionadas anteriormetne</label_model_car>
+		<checkBox_electric_elevation>Elevaduras electricas</checkBox_electric_elevation>
+		<checkBox_browser>Navegador</checkBox_browser>
+		<checkBox_tires>Llantas de aleacion</checkBox_tires>
+		<checkBox_heated_seats>Asientos calefactados</checkBox_heated_seats>
+		<checkBox_cruising_speed>Velocidad de crucero</checkBox_cruising_speed>
+		<checkBox_automatic_parking>Aparcamiento automatico</checkBox_automatic_parking>
+		<checkBox_usb_connectors>Conectores USB</checkBox_usb_connectors>
+		<checkBox_metallized_paint>Pintura metalizada</checkBox_metallized_paint>
+		<label_base_price>Precio Base:</label_base_price>
+		<label_increase_price>Aumento en el precio:</label_increase_price>
+		<label_total_price>Total precio:</label_total_price>
+		<btn_back>ATRAS</btn_back>
+		<btn_end>FINALIZAR</btn_end>
+	</Purchase_accessories>
+	<Button>
+		<btn_login>Iniciar Sesión</btn_login>
+		<btn_save>Guardar</btn_save>
+		<btn_next>Siguiente</btn_next>
+		<btn_previous>Anterior</btn_previous>
+	</Button>
 </Lenguage>

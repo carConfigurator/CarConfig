@@ -1,4 +1,4 @@
-package src.view_miglayout;
+package view_miglayout;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -48,16 +48,16 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
-import src.config.ConfigurationLoader;
-import src.daoImplFactory.LanguageFactory;
-import src.idao.ILanguage;
-import src.model.Accessory;
-import src.model.Client;
-import src.model.Engine;
-import src.model.Model;
+import config.ConfigurationLoader;
+import daoImplFactory.LanguageFactory;
+import idao.ILanguage;
+import model.Accessory;
+import model.Client;
+import model.Engine;
+import model.Model;
 import net.miginfocom.swing.MigLayout;
 
-public class Seleccion_Modelo extends JFrame{
+public class Selection_model extends JFrame{
 	
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
@@ -92,7 +92,7 @@ public class Seleccion_Modelo extends JFrame{
 	/*
 	 * Añado los componentes del concesionaro del coche (parte 12)
 	 */
-	public Seleccion_Modelo(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
+	public Selection_model(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
 		this.configLoad = configLoad;
 		this.language = language;
 		this.root_images = this.configLoad.getCar_image_path();
@@ -275,7 +275,7 @@ public class Seleccion_Modelo extends JFrame{
 	private void JFrame() {
 		setJMenuBar(pMenu);
 		add(panelGBC);
-		setTitle("SEAT Configurador - Selección de modelo");
+		setTitle(language.seleccionModeloTitle());
 		setIconImage(getIconImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600,600);

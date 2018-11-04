@@ -1,6 +1,6 @@
-package src.daoImpl;
+package daoImpl;
 
-import src.idao.ILanguage;
+import idao.ILanguage;
 
 public class LanguageDAOCA implements ILanguage{
 
@@ -171,6 +171,132 @@ public class LanguageDAOCA implements ILanguage{
 
 	@Override
 	public String menuItemModify() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String loginTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String dataClientsTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String seleccionModeloTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String seleccionEngineTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelEngineTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String purchaseAccessoriesTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelAccessoriesTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelModelCar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String checkBoxElectricElevation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String checkBoxBrowser() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String checkBoxTires() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String checkBoxHeatedSeats() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String checkBoxCruisingSpeed() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String checkBoxAutomaticParking() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String checkBoxUsbConnectors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String checkBoxMetallizedPaint() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelBasePrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelIncreasePrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelTotalPrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String btnBack() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String btnEnd() {
 		// TODO Auto-generated method stub
 		return null;
 	}
