@@ -350,11 +350,16 @@ public class Selection_model extends JFrame{
 	
 	private void siguienteActionPerformed() {
 		this.temp = new File(this.configLoad.getTemporalPathFile());
+		this.model.toModel(posicion+1);
+		int id = model.getIdSelected();
+		String name = model.getNameSelected();
+		String description = model.getDescriptionSelected();
+		double price = model.getPriceSelected();
 		try {
 			FileWriter fw = new FileWriter(this.temp, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.newLine();
-			bw.write(this.model.toModel(1));
+			bw.write(id+", "+name+", "+description+", "+price);
 			bw.newLine();
 			bw.write("------");
 			bw.close();
@@ -363,7 +368,7 @@ public class Selection_model extends JFrame{
 			e.printStackTrace();
 		}
 		setVisible(false);
-		new Selection_Engine(this.configLoad, this.language, this.username);
+		new Selection_Engine(this.configLoad, this.language, this.username, this.client, this.model);
 	}
 	
 	private void add() {

@@ -27,6 +27,10 @@ public class Model {
 	private double[] price;
 	private String[] name, description, image_name;
 	
+	private String nameSelected, descriptionSelected;
+	private int idSelected;
+	private double priceSelected;
+	
 	public Model(ConfigurationLoader configLoad) {
 		this.configLoad = configLoad;
 		this.factory = DocumentBuilderFactory.newInstance();
@@ -42,6 +46,7 @@ public class Model {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		this.id = loadId();
 		this.price = loadPrice();
 		this.name = loadName();
@@ -140,7 +145,7 @@ public class Model {
 		return "Id: "+Arrays.toString(id)+", precio: "+Arrays.toString(price)+", nomobre: "+Arrays.toString(name)+", descripcion: "+Arrays.toString(description)+", ruta imagen: "+Arrays.toString(image_name);
 	}
 	
-	public String toModel(int id) {
+	public void toModel(int id) {
 		String name = null; String description = null; double price = 0;
 		System.out.print("[INFO] - Buscando el Modelo... ");
 		int[] allID = loadId();
@@ -149,12 +154,29 @@ public class Model {
 				NodeList nList = document.getElementsByTagName("Model");
 				Node nNode = nList.item(i);
 				Element eElement = (Element) nNode;
-				name = eElement.getElementsByTagName("nom").item(0).getTextContent();
-				description = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
-				price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+				this.nameSelected = eElement.getElementsByTagName("nom").item(0).getTextContent();
+				this.descriptionSelected = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
+				this.priceSelected = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
 				System.out.print("ID del Modelo seleccionado encontrado!\n");
 			}
 		}
-		return id+", "+name+", "+description+", "+price;
 	}
+
+	public String getNameSelected() {
+		return nameSelected;
+	}
+
+	public String getDescriptionSelected() {
+		return descriptionSelected;
+	}
+
+	public int getIdSelected() {
+		return idSelected;
+	}
+
+	public double getPriceSelected() {
+		return priceSelected;
+	}
+	
+	
 }

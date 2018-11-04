@@ -12,6 +12,7 @@ import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
 import model.Client;
+import model.Model;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -41,7 +42,7 @@ public class Selection_Engine extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username) {
+	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
