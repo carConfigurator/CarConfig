@@ -162,16 +162,6 @@ public class Selection_model extends JFrame{
 			System.out.println("si existe.");
 		}
 		
-//		try {
-//			
-////			ImageIcon config = new ImageIcon(ImageIO.read(getClass().getResource("src\\config\\settings.png")));
-//			this.configCoches = new JButton(config);
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		this.setBackground(new Color(255,255,255));
-		
 		//Se añade la ruta de la imagen en una lista
 		this.imatge_nom = this.model.getImage_name();
 		List<String> listImg=new ArrayList<>();
@@ -201,7 +191,6 @@ public class Selection_model extends JFrame{
 		
 		this.panelGBC.add(l1, "span 2");
 		this.panelGBC.add(luser, "wrap, align right");
-//		this.panelGBC.add(this.configCoches, "wrap, align right");
 		this.panelGBC.add(scroll, "align right");
 		this.panelGBC.add(area, "wrap, pushx, growx, pushy, growy, span 2");
 		this.panelGBC.add(areaInfo, "span 2, skip, wrap, align right, pushx, growx");

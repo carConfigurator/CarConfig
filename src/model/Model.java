@@ -171,7 +171,7 @@ public class Model {
 	}
 
 	public int getIdSelected() {
-		return idSelected;
+		return idSelected+1;
 	}
 
 	public double getPriceSelected() {
