@@ -167,7 +167,6 @@ public class Selection_model extends JFrame{
 		List<String> listImg=new ArrayList<>();
 		for (int i = 0; i < imatge_nom.length; i++) {
 			listImg.add(this.root_images + this.imatge_nom[i]);
-			listImg.add(this.root_images + this.imatge_nom[i]);
 		}
 	
 		//Creamos una lista de los botones con las rutas de las imagenes
@@ -362,6 +361,7 @@ public class Selection_model extends JFrame{
 	
 	private void add() {
 		System.out.println("add");
+		new Add_Car(configLoad, language);
 	}
 	private void delete() {
 		System.out.println("delete");
