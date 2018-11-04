@@ -201,14 +201,14 @@ public class Data_Clients extends JFrame{
 		this.dc_birthdate = new JDateChooser();
 		if(client.getBirthdate() != null) {
 			this.dc_birthdate = new JDateChooser();
-			DateFormat df = new SimpleDateFormat("dd-M-yyyy");		
+			DateFormat df = new SimpleDateFormat("dd-MM-yyyy");		
 			try {
 				this.dc_birthdate.setDate(df.parse(client.getBirthdate()));
 			} catch (ParseException e1) {
 				e1.printStackTrace();
 			}
 		}
-		this.dc_birthdate.setDateFormatString("dd-M-yyyy");
+		this.dc_birthdate.setDateFormatString("dd-MM-yyyy");
 		this.dc_birthdate.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		this.dc_birthdate.setBackground(new Color(255, 255, 255));
 		
@@ -286,7 +286,7 @@ public class Data_Clients extends JFrame{
 			if(this.dc_birthdate.getDate()==null) {
 				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText());
 			}else {
-				SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText(), sdf.format(dc_birthdate.getDate()));
 			}
         	try {

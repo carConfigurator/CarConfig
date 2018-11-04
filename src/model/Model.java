@@ -107,6 +107,7 @@ public class Model {
 		int[] id = new int[nList.getLength()];
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
+//			System.out.println("[INFO] - "+nNode);
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
 				id[temp] = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
@@ -140,13 +141,20 @@ public class Model {
 	}
 	
 	public String toModel(int id) {
+		String name = null; String description = null; double price = 0;
+		System.out.print("[INFO] - Buscando el Modelo... ");
 		int[] allID = loadId();
 		for (int i = 0; i < allID.length; i++) {
 			if(allID[i] == id) {
-				System.out.println("ID Encontrado");
+				NodeList nList = document.getElementsByTagName("Model");
+				Node nNode = nList.item(i);
+				Element eElement = (Element) nNode;
+				name = eElement.getElementsByTagName("nom").item(0).getTextContent();
+				description = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
+				price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+				System.out.print("ID del Modelo seleccionado encontrado!\n");
 			}
 		}
-		
-		return null;
+		return id+", "+name+", "+description+", "+price;
 	}
 }

@@ -26,7 +26,7 @@ public class Purchase_Accessories extends JFrame {
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
 	private Client client;
-	private String username;
+	private JLabel username;
 	
 	JPanel contentPane;
 	JLabel lblTitulo, lblModeloCoche, lblPrecioBasee, lblAumento, lblTotalPrecio;
@@ -37,21 +37,21 @@ public class Purchase_Accessories extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
-//					ILanguage language = LanguageFactory.getLanguage(configLoad.getLanguage_default(), configLoad);
-//					String username = "user1";
-//					Purchase_Accessories frame = new Purchase_Accessories(configLoad, language, username);
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
+					ILanguage language = LanguageFactory.getLanguage(configLoad);
+					String username = "user1";
+					Purchase_Accessories frame = new Purchase_Accessories(configLoad, language, username);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -59,7 +59,8 @@ public class Purchase_Accessories extends JFrame {
 	public Purchase_Accessories(ConfigurationLoader configLoad, ILanguage language, String username) {
 		this.language = language;
 		this.configLoad = configLoad;
-		this.username = username;
+		this.username = new JLabel(username);
+		this.username.setFont(new Font("Tahoma", 0, 11));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 604, 537);
@@ -67,89 +68,74 @@ public class Purchase_Accessories extends JFrame {
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setBackground(new Color(255,255,255));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[30px][200px][60px][200px][grow]", "[45px][50px][20px][40px][40px][40px][40px][20px][40px][40px][40px][60px]"));
+		contentPane.setLayout(new MigLayout("insets 35"));
 		
 		this.lblTitulo = new JLabel("Compra de Accesorios");
-		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		this.contentPane.add(lblTitulo, "cell 3 0");
+		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		this.lblModeloCoche = new JLabel("Caracteristicas seleccionadas anteriormetne.");
-		this.lblModeloCoche.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		this.contentPane.add(lblModeloCoche, "cell 0 1 5 1");
+		this.lblModeloCoche = new JLabel("Caracteristicas seleccionadas anteriormente.");
+		this.lblModeloCoche.setFont(new Font("Tahoma", 2, 12));
 		
 		this.cbElevadurasElectricas = new JCheckBox("Elevaduras electricas");
-		this.cbElevadurasElectricas.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbElevadurasElectricas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbElevadurasElectricas.setBackground(new Color(255,255,255));
 		this.cbElevadurasElectricas.setFocusable(false);
-		this.contentPane.add(cbElevadurasElectricas, "cell 1 3");
 		
 		this.cbNavegador = new JCheckBox("Navegador");
-		this.cbNavegador.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbNavegador.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbNavegador.setBackground(new Color(255,255,255));
 		this.cbNavegador.setFocusable(false);
-		this.contentPane.add(cbNavegador, "cell 3 3");
 		
 		this.cbLlantasAl = new JCheckBox("Llantas de aleacion");
-		this.cbLlantasAl.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbLlantasAl.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbLlantasAl.setBackground(new Color(255,255,255));
 		this.cbLlantasAl.setFocusable(false);
-		this.contentPane.add(cbLlantasAl, "cell 1 4");
 		
 		this.cbAsientosCal = new JCheckBox("Asientos calefactados");
-		this.cbAsientosCal.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbAsientosCal.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbAsientosCal.setBackground(new Color(255,255,255));
 		this.cbAsientosCal.setFocusable(false);
-		this.contentPane.add(cbAsientosCal, "cell 3 4");
 		
 		this.cbVelCrucero = new JCheckBox("Velocidad de crucero");
-		this.cbVelCrucero.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbVelCrucero.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbVelCrucero.setBackground(new Color(255,255,255));
 		this.cbVelCrucero.setFocusable(false);
-		this.contentPane.add(cbVelCrucero, "cell 1 5");
 		
 		this.cbAparcamietnoAuto = new JCheckBox("Aparcamiento automatico");
-		this.cbAparcamietnoAuto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbAparcamietnoAuto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbAparcamietnoAuto.setBackground(new Color(255,255,255));
 		this.cbAparcamietnoAuto.setFocusable(false);
-		this.contentPane.add(cbAparcamietnoAuto, "cell 3 5");
 		
 		this.cbConectorUSB = new JCheckBox("Conectores USB");
-		this.cbConectorUSB.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbConectorUSB.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbConectorUSB.setBackground(new Color(255,255,255));
 		this.cbConectorUSB.setFocusable(false);
-		this.contentPane.add(cbConectorUSB, "cell 1 6");
 		
 		this.cbPinturaMetal = new JCheckBox("Pintura metalizada");
-		this.cbPinturaMetal.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.cbPinturaMetal.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbPinturaMetal.setBackground(new Color(255,255,255));
 		this.cbPinturaMetal.setFocusable(false);
-		this.contentPane.add(cbPinturaMetal, "cell 3 6");
 		
 		this.lblPrecioBasee = new JLabel("Precio Base:");
-		this.lblPrecioBasee.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.contentPane.add(lblPrecioBasee, "cell 1 8,alignx left,aligny center");
+		this.lblPrecioBasee.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		this.tfPrecioBase = new JTextField();
-		this.tfPrecioBase.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.tfPrecioBase.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.tfPrecioBase.setText("0");
 		this.tfPrecioBase.setOpaque(false);
-		this.contentPane.add(tfPrecioBase, "cell 3 8,growx,aligny center");
-		this.tfPrecioBase.setColumns(10);
+		this.tfPrecioBase.setEditable(false);
 		
-		this.lblAumento = new JLabel("Aumento en el precio:");
-		this.lblAumento.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.contentPane.add(lblAumento, "cell 1 9,alignx left,aligny center");
+		this.lblAumento = new JLabel("Accesorios:");
+		this.lblAumento.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		this.tfAumento = new JTextField();
-		this.tfAumento.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		this.tfAumento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.tfAumento.setText("0");
 		this.tfAumento.setOpaque(false);
-		this.contentPane.add(tfAumento, "cell 3 9,growx");
-		this.tfAumento.setColumns(10);
+		this.tfAumento.setEditable(false);
 		
 		this.lblTotalPrecio = new JLabel("Total precio:");
-		this.lblTotalPrecio.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.contentPane.add(lblTotalPrecio, "cell 1 10,alignx left,aligny center");
+		this.lblTotalPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		// Esta parte del codigo sirve para sumar los dos campos de precios y mostrar el total.
 		// Solo se puede mostrar en forma de String por lo que se deben pasar los valores de formato.
@@ -164,24 +150,42 @@ public class Purchase_Accessories extends JFrame {
 		this.tfTotalPrecio.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		this.tfTotalPrecio.setText(resultSt); // Resultado do los dos campos.
 		this.tfTotalPrecio.setOpaque(false);
-		this.contentPane.add(tfTotalPrecio, "cell 3 10,growx");
-		this.tfTotalPrecio.setColumns(10);
+		this.tfTotalPrecio.setEditable(false);
 		
-		this.btnAtras = new JButton("ATRAS");
+		this.btnAtras = new JButton("Atrás");
 		this.btnAtras.setBackground(new Color(215,18,43));
 		this.btnAtras.setForeground(new Color(255,255,255));
 		this.btnAtras.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
-		this.contentPane.add(btnAtras, "cell 1 11,growx");
 		
-		this.btnFinalizar = new JButton("FINALIZAR");
+		this.btnFinalizar = new JButton("Finalizar Compra");
 		this.btnFinalizar.setBackground(new Color(215,18,43));
 		this.btnFinalizar.setForeground(new Color(255,255,255));
 		this.btnFinalizar.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
-		this.contentPane.add(btnFinalizar, "cell 3 11,growx");
+		
+		this.contentPane.add(lblTitulo);
+		this.contentPane.add(this.username, "wrap, align right");
+		this.contentPane.add(lblModeloCoche, "wrap, align right");
+		this.contentPane.add(cbElevadurasElectricas);
+		this.contentPane.add(cbNavegador, "align left, wrap");
+		this.contentPane.add(cbLlantasAl);
+		this.contentPane.add(cbAsientosCal, "align left, wrap");
+		this.contentPane.add(cbVelCrucero);
+		this.contentPane.add(cbAparcamietnoAuto, "align left, wrap");
+		this.contentPane.add(cbConectorUSB);
+		this.contentPane.add(cbPinturaMetal, "align left, wrap");
+		this.contentPane.add(lblPrecioBasee);
+		this.contentPane.add(tfPrecioBase, "align left, wrap, pushx, growx");
+		this.contentPane.add(lblAumento);
+		this.contentPane.add(tfAumento, "align left, wrap, pushx, growx");
+		this.contentPane.add(lblTotalPrecio);
+		this.contentPane.add(tfTotalPrecio, "align left, wrap, pushx, growx");
+		this.contentPane.add(btnAtras);
+		this.contentPane.add(btnFinalizar, "align right, wrap");
+		
 	}
 
 }
