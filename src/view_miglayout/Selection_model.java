@@ -361,7 +361,8 @@ public class Selection_model extends JFrame{
 	
 	private void add() {
 		System.out.println("add");
-		new Add_Car(configLoad, language);
+		new Add_Car(configLoad, language, username, client, model);
+		setVisible(false);
 	}
 	private void delete() {
 		System.out.println("delete");

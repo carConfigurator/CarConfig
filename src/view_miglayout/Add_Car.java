@@ -3,13 +3,20 @@ package view_miglayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -31,6 +38,8 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import config.ConfigurationLoader;
 import idao.ILanguage;
 import model.Accessory;
@@ -44,17 +53,26 @@ public class Add_Car extends JFrame{
 
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
-	
-	private JPanel panelMig;
+	private Client client;
+	private String username;
+	private Model model;
 	
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
 	private Document documentOld;
 	private Document documentNew;
 	
-	public Add_Car(ConfigurationLoader configLoad, ILanguage language){
+	private JPanel panelMig;
+	private JLabel lId, lName, lDescription, lImg_Name, lPrice;
+	private JTextField tfId, tfName, tfDescription, tfImg_Name, tfPrice;
+	private JButton btnSave, btnBack;
+	
+	public Add_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model){
 		this.configLoad = configLoad;
 		this.language = language;
+		this.username = username;
+		this.client = client;
+		this.model = model;
 		
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
@@ -68,193 +86,108 @@ public class Add_Car extends JFrame{
 			System.out.println("[ERROR] - Error de E/S. Más información del error: " + e);
 		}
 
+		// Configuracion de los Componentes:
+		// Añado el Layout al Panel y le indico que este haga un padding de 20 en el Panel.
 		this.panelMig = new JPanel();
 		this.panelMig.setLayout(new MigLayout("insets 20 50 50 50, fillx, filly"));
 		this.panelMig.setBackground(new Color(255, 255, 255));
 
+		this.lId = new JLabel(this.language.labelId());
+		this.lId.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.tfId = new JTextField(30);
+		this.tfId.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
+				BorderFactory.createEmptyBorder(5, 0, 5, 0)
+				));
+		this.tfId.setEditable(false);
+		this.lName = new JLabel(this.language.labelName());
+		this.lName.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.tfName = new JTextField(30);
+		this.tfName.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
+				BorderFactory.createEmptyBorder(5, 0, 5, 0)
+				));
+		this.lDescription = new JLabel(this.language.labelDescription());
+		this.lDescription.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.tfDescription = new JTextField(30);
+		this.tfDescription.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
+				BorderFactory.createEmptyBorder(5, 0, 5, 0)
+				));
+		this.lImg_Name = new JLabel(this.language.labelImg_Name());
+		this.lImg_Name.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.tfImg_Name = new JTextField(30);
+		this.tfImg_Name.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
+				BorderFactory.createEmptyBorder(5, 0, 5, 0)
+				));
+		this.lPrice = new JLabel(this.language.labelPrice());
+		this.lPrice.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.tfPrice = new JTextField(30);
+		this.tfPrice.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
+				BorderFactory.createEmptyBorder(5, 0, 5, 0)
+				));
 		
-
-        String nombre_archivo = "car_config-prova";
-        
-        System.out.println("-------------");
-
-        NodeList nListModel = documentOld.getElementsByTagName("Model");
-		for (int i = 0; i < nListModel.getLength(); i++) {
-			Node nNode = nListModel.item(i);
-			System.out.println("------NEW MODEL");
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				for (int y = 0; y < eElement.getElementsByTagName("*").getLength(); y++) {
-					Node nElements = eElement.getElementsByTagName("*").item(y);
-					System.out.println("KEY: "+nElements.getNodeName());
-					if (nElements.getNodeType() == Node.ELEMENT_NODE) {
-						Element eElement2 = (Element) nElements;
-						System.out.println("VALUE: "+eElement2.getTextContent());
-					}
-		    	}
+		this.btnSave = new JButton(language.btnSave());
+		this.btnSave.setBackground(new Color(215,18,43));
+		this.btnSave.setForeground(new Color(255,255,255));
+		this.btnSave.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createLineBorder(new Color(215, 18, 43)),
+				BorderFactory.createEmptyBorder(5,10,5,10)
+				));
+		this.btnBack = new JButton(language.btnBack());
+		this.btnBack.setBackground(new Color(215,18,43));
+		this.btnBack.setForeground(new Color(255,255,255));
+		this.btnBack.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createLineBorder(new Color(215, 18, 43)),
+				BorderFactory.createEmptyBorder(5,10,5,10)
+				));
+		
+		
+		// Colocacion de los Componentes en el JPanel:
+		this.panelMig.add(lId, ""); // Añado el atributo wrap en la constraint que hace que el componente ocupe toda la fila.
+		this.panelMig.add(tfId, "wrap, pushx, growx"); // PushX y GrowX hacen que el componente vaya hasta el final de la fila y si se redimensiona, este se mantenga hasta el final de la fila
+		this.panelMig.add(lName, "");
+		this.panelMig.add(tfName, "wrap, pushx, growx");
+		this.panelMig.add(lDescription, "");
+		this.panelMig.add(tfDescription, "wrap, pushx, growx");
+		this.panelMig.add(lImg_Name, "");
+		this.panelMig.add(tfImg_Name, "wrap, pushx, growx");
+		this.panelMig.add(lPrice, "");
+		this.panelMig.add(tfPrice, "wrap, pushx, growx");
+		this.panelMig.add(btnBack, "align left");
+		this.panelMig.add(btnSave, "align right"); // Alineo el componente a la derecha de la fila, sería como un float.
+				
+		// Ponemos el id que le toque al siguiente coche
+		for (int i = 0; i < model.getId().length; i++) {
+			if ((i+1)!=model.getId()[i]) {
+				tfId.setText(""+model.getId()[i]);
+				i=model.getId().length;
 			}
-    	}
-		
-		NodeList nListEngine = documentOld.getElementsByTagName("Engine");
-		for (int i = 0; i < nListEngine.getLength(); i++) {
-			Node nNode = nListEngine.item(i);
-			System.out.println("-------NEW ENGINE");
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				for (int y = 0; y < eElement.getElementsByTagName("*").getLength(); y++) {
-					Node nElements = eElement.getElementsByTagName("*").item(y);
-					System.out.println("KEY: "+nElements.getNodeName());
-					if (nElements.getNodeType() == Node.ELEMENT_NODE) {
-						Element eElement2 = (Element) nElements;
-						System.out.println("VALUE: "+eElement2.getTextContent());
-					}
-		    	}
-			}
-    	}
-		
-		NodeList nList = documentOld.getElementsByTagName("Accessory");
-		for (int i = 0; i < nList.getLength(); i++) {
-			Node nNode = nList.item(i);
-			System.out.println("--------NEW ACCESSORY");
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				for (int y = 0; y < eElement.getElementsByTagName("*").getLength(); y++) {
-					Node nElements = eElement.getElementsByTagName("*").item(y);
-					System.out.println("KEY: "+nElements.getNodeName());
-					if (nElements.getNodeType() == Node.ELEMENT_NODE) {
-						Element eElement2 = (Element) nElements;
-						System.out.println("VALUE: "+eElement2.getTextContent());
-					}
-		    	}
-			}
-    	}
-		
-		
-		ArrayList key = new ArrayList();
-        ArrayList value = new ArrayList();
-        key.add("opcion1");
-        value.add("22");
-        key.add("opcion2");
-        value.add("22");
-        key.add("opcion3");
-        value.add("22");
-        key.add("opcion4");
-        value.add("25");
-		
-//        DOMImplementation implementation = builder.getDOMImplementation();
-//        Document document = implementation.createDocument(null, nombre_archivo, null);
-//        document.setXmlVersion("1.0");
-
-        
-    	System.out.println("Root element :" + documentOld.getDocumentElement().getNodeName());
-    	NodeList nodeList = documentOld.getDocumentElement().getChildNodes();
-    	for (int i = 0; i < nodeList.getLength(); i++) {
-    		Element eElement = (Element) nodeList;
-    		System.out.println(eElement.getNodeName());
-    		System.out.println(eElement.getElementsByTagName(eElement.getNodeName()).item(0).getTextContent());
-    		System.out.println(eElement.getNodeValue());
-    	}
-        //Main Node
-        Element raiz = documentOld.getDocumentElement();
-        //Por cada key creamos un item que contendrá la key y el value
-//        NodeList nodeList = documentOld.getDocumentElement().getChildNodes();
-        System.out.println("docElement "+documentOld.getDocumentElement());
-        System.out.println("docChildNodes "+documentOld.getDocumentElement().getChildNodes());
-        System.out.println("docChildNodes2 "+documentOld.getDocumentElement());
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node nNode2 = nodeList.item(i);
-        	
-    		if (nNode2.getNodeType() == Node.ELEMENT_NODE) {
-    			Element eElement = (Element) nNode2;
-//    			""+eElement.getElementsByTagName("title").item(0).getTextContent();
-
-                //Item Node
-//                Element itemNode = document.createElement(eElement.getTagName()); 
-                System.out.println("TAG: "+eElement.getTagName());
-                
-                //Key Node
-//                Element keyNode = document.createElement(eElement.getNodeName()); 
-//                Text nodeKeyValue = document.createTextNode(eElement.getNodeValue());
-//                keyNode.appendChild(nodeKeyValue);
-                
-                System.out.println("NodeName: "+eElement.getNodeName());
-                
-                System.out.println("NodeValue: "+eElement.getNodeValue());
-                
-    		}
-        	
-        	
-        	
-        	
-            //Item Node
-//            Element itemNode = document.createElement("ITEM"); 
-//            //Key Node
-//            Element keyNode = document.createElement("KEY"); 
-//            Text nodeKeyValue = document.createTextNode(""+key.get(i));
-//            keyNode.appendChild(nodeKeyValue);      
-//            //Value Node
-//            Element valueNode = document.createElement("VALUE"); 
-//            Text nodeValueValue = document.createTextNode(""+value.get(i));                
-//            valueNode.appendChild(nodeValueValue);
-//            //append keyNode and valueNode to itemNode
-//            itemNode.appendChild(keyNode);
-//            itemNode.appendChild(valueNode);
-//            //append itemNode to raiz
-//            raiz.appendChild(itemNode); //pegamos el elemento a la raiz "Documento"
-        }                
-        //Generate XML
-//        Source source = new DOMSource(document);
-        //Indicamos donde lo queremos almacenar
-        Result result = new StreamResult(new File("src\\config\\car"+nombre_archivo+".xml")); //nombre del archivo
-        Transformer transformer;
-		try {
-			transformer = TransformerFactory.newInstance().newTransformer();
-//	        try {
-//				transformer.transform(source, result);
-//			} catch (TransformerException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-		} catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TransformerFactoryConfigurationError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}
+		if (tfId.getText().equals("")) {
+			tfId.setText(""+(model.getId().length+1));
 		}
 		
-		
-		
-//		NodeList nodes = documentOld.getElementsByTagName("CarConfiguration");
-//		
-//		Element eModel = document.getDocumentElement();
-//		Node node = document.createElement("newnode");
-
-//		eModel.appendChild(node); 
-//		Element eModel = document.createElement("Model");
-//		eModel.setAttribute("id", "123");
-//		eModel.setAttribute("nom", "123");
-//		eModel.setAttribute("descripcio", "123");
-//		eModel.setAttribute("imatge_nom", "123");
-//		eModel.setAttribute("preu", "123");
-//		System.out.println(nodes.item(0).toString());
-//		nodes.item(0).getParentNode().insertBefore(eModel, nodes.item(0));
+		btnSave.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				saveActionPerformed(e);
+			}
+		});
+				
+		btnBack.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				backActionPerformed(e);
+			}
+		});
 		
 		JFrame();
 	}
-	
-	//se quita
-	public String loginTitle() {
-		NodeList nList = documentOld.getElementsByTagName("Login");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
-		}
-		return null;
-	}
-	
-	
 	
 	private void JFrame() {
 		add(panelMig);
@@ -265,6 +198,140 @@ public class Add_Car extends JFrame{
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
+	}
+	
+	private void saveActionPerformed(ActionEvent ae) {
+		String nombre_archivo = "CarConfiguration";
+		
+		DOMImplementation implementation = builder.getDOMImplementation();
+        documentNew = implementation.createDocument(null, nombre_archivo, null);
+        documentNew.setXmlVersion("1.0");
+		
+      //Main Node
+        Element raiz = documentNew.getDocumentElement();
+        
+        System.out.println("-------------"+documentNew.getDocumentElement());
+
+        NodeList nListModel = documentOld.getElementsByTagName("Model");
+		for (int i = 0; i < nListModel.getLength(); i++) {
+			Node nNode = nListModel.item(i);
+			System.out.println("------NEW MODEL");
+            Element itemNode = documentNew.createElement("Model"); 
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element elementKey = (Element) nNode;
+				for (int y = 0; y < elementKey.getElementsByTagName("*").getLength(); y++) {
+					Node nElementsKey = elementKey.getElementsByTagName("*").item(y);
+					System.out.println("KEY: "+nElementsKey.getNodeName());
+		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
+					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
+						Element elementValue = (Element) nElementsKey;
+						System.out.println("VALUE: "+elementValue.getTextContent());
+			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
+			            keyNode.appendChild(nodeKeyValue);
+					}
+		            itemNode.appendChild(keyNode);
+		    	}
+	            raiz.appendChild(itemNode);
+			}
+    	}
+		
+		//añadimos el nuevo coche
+        Element newItemNode = documentNew.createElement("Model");
+        Element idNode = documentNew.createElement("id");
+        Text idValue = documentNew.createTextNode(tfId.getText());
+        idNode.appendChild(idValue);
+        Element nomNode = documentNew.createElement("nom");
+        Text nomValue = documentNew.createTextNode(tfName.getText());
+        nomNode.appendChild(nomValue);
+        Element descripcioNode = documentNew.createElement("descripcio");
+        Text descripcioValue = documentNew.createTextNode(tfDescription.getText());
+        descripcioNode.appendChild(descripcioValue);
+        Element imatge_nomNode = documentNew.createElement("imatge_nom");
+        Text imatge_nomValue = documentNew.createTextNode(tfImg_Name.getText());
+        imatge_nomNode.appendChild(imatge_nomValue);
+        Element preuNode = documentNew.createElement("preu");
+        Text preuValue = documentNew.createTextNode(tfPrice.getText());
+        preuNode.appendChild(preuValue);
+
+        newItemNode.appendChild(idNode);
+        newItemNode.appendChild(nomNode);
+        newItemNode.appendChild(descripcioNode);
+        newItemNode.appendChild(imatge_nomNode);
+        newItemNode.appendChild(preuNode);
+        raiz.appendChild(newItemNode);
+		
+		NodeList nListEngine = documentOld.getElementsByTagName("Engine");
+		for (int i = 0; i < nListEngine.getLength(); i++) {
+			Node nNode = nListEngine.item(i);
+			System.out.println("-------NEW ENGINE");
+            Element itemNode = documentNew.createElement("Engine"); 
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element elementEngine = (Element) nNode;
+				for (int y = 0; y < elementEngine.getElementsByTagName("*").getLength(); y++) {
+					Node nElementsKey = elementEngine.getElementsByTagName("*").item(y);
+					System.out.println("KEY: "+nElementsKey.getNodeName());
+		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
+					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
+						Element elementValue = (Element) nElementsKey;
+						System.out.println("VALUE: "+elementValue.getTextContent());
+			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
+			            keyNode.appendChild(nodeKeyValue);
+					}
+		            itemNode.appendChild(keyNode);
+		    	}
+	            raiz.appendChild(itemNode);
+			}
+    	}
+		
+		NodeList nList = documentOld.getElementsByTagName("Accessory");
+		for (int i = 0; i < nList.getLength(); i++) {
+			Node nNode = nList.item(i);
+			System.out.println("--------NEW ACCESSORY");
+            Element itemNode = documentNew.createElement("Accessory");
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element) nNode;
+				for (int y = 0; y < eElement.getElementsByTagName("*").getLength(); y++) {
+					Node nElementsKey = eElement.getElementsByTagName("*").item(y);
+					System.out.println("KEY: "+nElementsKey.getNodeName());
+		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
+					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
+						Element elementValue = (Element) nElementsKey;
+						System.out.println("VALUE: "+elementValue.getTextContent());
+			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
+			            keyNode.appendChild(nodeKeyValue);
+					}
+		            itemNode.appendChild(keyNode);
+		    	}
+	            raiz.appendChild(itemNode);
+			}
+    	}
+		
+        //Generate XML
+        Source source = new DOMSource(documentNew);
+        //Indicamos donde lo queremos almacenar
+        Result result = new StreamResult(new File("src\\config\\car\\car_config.xml")); //nombre del archivo
+        Transformer transformer;
+		try {
+			transformer = TransformerFactory.newInstance().newTransformer();
+	        try {
+				transformer.transform(source, result);
+			} catch (TransformerException e) {
+				e.printStackTrace();
+			}
+		} catch (TransformerConfigurationException e) {
+			e.printStackTrace();
+		} catch (TransformerFactoryConfigurationError e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("[INFO] - Nuevo XML creado");
+		setVisible(false);
+		new Selection_model(configLoad, language, username, client);
+	}
+	
+	private void backActionPerformed(ActionEvent ae) {
+		setVisible(false);
+		new Selection_model(configLoad, language, username, client);
 	}
 	
 	/*

@@ -70,7 +70,7 @@ public class Purchase_Accessories extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("insets 35"));
 		
-		this.lblTitulo = new JLabel(language.labelAccessoriesTitle());
+		this.lblTitulo = new JLabel(language.purchaseAccessoriesTitle());
 		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		this.lblModeloCoche = new JLabel(language.labelModelCar());
