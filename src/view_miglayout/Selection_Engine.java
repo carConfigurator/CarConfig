@@ -12,6 +12,7 @@ import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
 import model.Client;
+import model.Engine;
 import model.Model;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
@@ -34,19 +35,38 @@ public class Selection_Engine extends JFrame {
 	private ConfigurationLoader configLoad;
 	private ILanguage language;
 	private String username;
+	private Client client;
+	private Model model;
+	private Engine engine;
 	
 	JPanel panel;
 	JLabel lblTitulo;
 	JButton btn_Anterior, btn_Siguiente;	
 	
-	/**
-	 * Create the frame.
-	 */
+	
+	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, Engine engine) {
+		this.language = language;
+		this.configLoad = configLoad;
+		this.username = username;
+		this.client = client;
+		this.model = model;
+		this.engine = engine;
+		
+		onCreate();
+	}
+	
 	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
+		this.client = client;
+		this.model = model;
+		this.engine = new Engine(this.configLoad);
 		
+		onCreate();
+	}
+	
+	public void onCreate() {		
 		// Panel
 		this.panel = new JPanel();
 		this.panel.setLayout(new MigLayout("insets 20"));
@@ -58,6 +78,8 @@ public class Selection_Engine extends JFrame {
 		 
 		JList list = new JList();
 		DefaultListModel modelo = new DefaultListModel(); // Sirve para introducir elementos de forma indirecta (Ej: Haciendo un bucle para añadir elementos).
+		this.engine.loadEngines(this.model.getIdSelected());
+		System.out.println(this.engine.toString());
 		
 		// Ejemplo para añadir contenido dentro del JList.
 		for (int i = 1; i < 4; i++) {

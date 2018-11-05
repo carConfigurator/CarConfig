@@ -154,6 +154,7 @@ public class Model {
 				NodeList nList = document.getElementsByTagName("Model");
 				Node nNode = nList.item(i);
 				Element eElement = (Element) nNode;
+				this.idSelected = id;
 				this.nameSelected = eElement.getElementsByTagName("nom").item(0).getTextContent();
 				this.descriptionSelected = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 				this.priceSelected = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
@@ -171,7 +172,11 @@ public class Model {
 	}
 
 	public int getIdSelected() {
-		return idSelected+1;
+		return idSelected;
+	}
+	
+	public void setIdSelected(int idSelected) {
+		this.idSelected = idSelected;
 	}
 
 	public double getPriceSelected() {

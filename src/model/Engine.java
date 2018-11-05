@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -21,10 +22,10 @@ import config.ConfigurationLoader;
 public class Engine {
 
 	// Atributos de la clase
-	private int[] id;
-	private double[] price;
-	private String[] name, description, image_name;
-	private String[] models_available;
+	private int id;
+	private double price;
+	private String name, description, image_name;
+	private String models_available;
 	private ConfigurationLoader configLoad;
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
@@ -44,13 +45,34 @@ public class Engine {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.id = loadId();
-		this.price = loadPrice();
-		this.name = loadName();
-		this.description = loadDescription();
-		this.image_name = loadImage_Name();
-		this.models_available = loadModels_Available();
-		System.out.println(getInformation());
+	}
+	
+	public void loadEngines(int idModel) {
+		System.out.println("[ID Select] - " + idModel);
+		NodeList nList = document.getElementsByTagName("Engine");
+		String[] engines = new String[nList.getLength()];
+		int i = 0;
+		Node nNode = nList.item(i);
+		Element eElement = (Element) nNode;
+		String available_models = eElement.getElementsByTagName("models_avaliable").item(0).getTextContent();
+		String[] am = available_models.split(";");
+		System.out.println("[Model Available] - " + am[0]);
+		int[] models = new int[am.length];
+		for (int j = 0; j < am.length; j++) {
+			models[j] = Integer.parseInt(am[j]);
+		}
+		
+		for (int j = 0; j < models.length; j++) {
+			if(models[j] == idModel) {
+				System.out.println("I MIND!");
+				this.id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+				System.out.println("NAME ENGINE: " + eElement.getElementsByTagName("nom").item(0).getTextContent());
+				this.name = eElement.getElementsByTagName("nom").item(0).getTextContent();
+				this.description = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
+				this.image_name = eElement.getElementsByTagName("image_name").item(0).getTextContent();
+				this.price = Double.parseDouble(eElement.getElementsByTagName("price").item(0).getTextContent());
+			}
+		}
 	}
 
 	private String[] loadModels_Available() {
@@ -134,32 +156,38 @@ public class Engine {
 		}
 		return id;
 	}
+	
+	public String[] getEngines(int idModel) {
+		
+		return null;
+	}
 
-	public int[] getId() {
+	public int getId() {
 		return id;
 	}
 
-	public double[] getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public String[] getName() {
+	public String getName() {
 		return name;
 	}
 
-	public String[] getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
-	public String[] getImage_name() {
+	public String getImage_name() {
 		return image_name;
 	}
 
-	public String[] getModels_available() {
+	public String getModels_available() {
 		return models_available;
 	}	
 	
-	private String getInformation() {
-		return "Id: "+Arrays.toString(id)+", precio: "+Arrays.toString(price)+", nomobre: "+Arrays.toString(name)+", descripcion: "+Arrays.toString(description)+", ruta imagen: "+Arrays.toString(image_name)+", modelos disponibles: "+Arrays.toString(models_available);
+	@Override
+	public String toString() {
+		return this.id + ", " + this.name + ", " + this.description + ", " + this.price;
 	}
 }
