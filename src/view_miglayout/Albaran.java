@@ -1,6 +1,7 @@
 package view_miglayout;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.ScrollPane;
 
@@ -67,16 +68,17 @@ public class Albaran extends JFrame {
 		// pack();
 		// setLocationRelativeTo(null);
 		contentPane.setLayout(new MigLayout("", "[grow][grow][grow][grow]", "[][75px][50px][][][][][][50px][grow][grow]"));
+		contentPane.setBackground(new Color(255, 255, 255));
 		
-		lblAlbaran = new JLabel("ALBARAN");
-		lblAlbaran.setFont(new Font("Tahoma", Font.BOLD, 17));
-		contentPane.add(lblAlbaran, "cell 2 1");
+//		lblAlbaran = new JLabel("ALBARAN");
+//		lblAlbaran.setFont(new Font("Tahoma", Font.BOLD, 17));
+//		contentPane.add(lblAlbaran, "cell 2 1");
 		
-		lblCliente = new JLabel("Cliente:");
+		lblCliente = new JLabel("Cliente");
 		lblCliente.setFont(new Font("Tahoma", Font.BOLD, 15));
-		contentPane.add(lblCliente, "cell 0 2,aligny bottom");
+		contentPane.add(lblCliente, "cell 0 2, aligny bottom");
 		
-		lblEmpresa = new JLabel("Empresa:");
+		lblEmpresa = new JLabel("Empresa");
 		lblEmpresa.setFont(new Font("Tahoma", Font.BOLD, 15));
 		contentPane.add(lblEmpresa, "cell 2 2,aligny bottom");
 		
@@ -113,6 +115,7 @@ public class Albaran extends JFrame {
 		contentPane.add(lblCorreo, "flowx,cell 0 7");
 		
 		table = new JTable();
+		table.setBackground(new Color(255, 255, 255));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null},
@@ -136,6 +139,7 @@ public class Albaran extends JFrame {
 		sp.setBounds(105, 127, 1120, 540);
 		sp.setBorder(new EmptyBorder(0, 0, 0, 0));
 		sp.setViewportView(table);
+		sp.getViewport().setBackground(new Color(255, 255, 255));
 		contentPane.add(sp, "cell 0 9 4 1,growx");
 		
 		lblNombrecliente = new JLabel("");
@@ -167,6 +171,7 @@ public class Albaran extends JFrame {
 		sp2.setBounds(105, 127, 1120, 540);
 		sp2.setBorder(new EmptyBorder(0, 0, 0, 0));
 		sp2.setViewportView(table_1);
+		sp2.getViewport().setBackground(new Color(255,255,255));
 		table_1.getColumnModel().getColumn(1).setPreferredWidth(102);
 		contentPane.add(sp2, "cell 0 10,grow");
 	}
