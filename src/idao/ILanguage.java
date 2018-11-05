@@ -73,5 +73,11 @@ public interface ILanguage {
 	String labelDescription();
 	String labelImg_Name();
 	String labelPrice();
+	String errorImgName();
+	String errorImgNameTitle();
+	
+	// Métodos que se usarán para delete_car.
+	String deleteCarTitle();
+	String dataDeleteCarTitle();
 	
 }

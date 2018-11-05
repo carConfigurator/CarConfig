@@ -92,6 +92,20 @@ public class Selection_model extends JFrame{
 	/*
 	 * Añado los componentes del concesionaro del coche (parte 12)
 	 */
+
+	public Selection_model(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model) {
+		this.configLoad = configLoad;
+		this.language = language;
+		this.root_images = this.configLoad.getCar_image_path();
+		this.client = client;
+		this.username = username;
+		this.model = model;
+		this.engine = new Engine(this.configLoad);
+		this.accessory = new Accessory(this.configLoad);
+		
+		onCreate();
+	}
+	
 	public Selection_model(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
 		this.configLoad = configLoad;
 		this.language = language;
@@ -101,6 +115,10 @@ public class Selection_model extends JFrame{
 		this.model = new Model(this.configLoad);
 		this.engine = new Engine(this.configLoad);
 		this.accessory = new Accessory(this.configLoad);
+		onCreate();
+	}
+	
+	public void onCreate() {
 		//migLayout
 		this.panelGBC = new JPanel();
 		this.panelBox = new JPanel();
@@ -294,6 +312,7 @@ public class Selection_model extends JFrame{
 		
 		
 	}
+	
 	private void listener(ImageIcon coch, JButton b) {
 		b.addFocusListener(new FocusListener() {
 			
@@ -360,16 +379,16 @@ public class Selection_model extends JFrame{
 	}
 	
 	private void add() {
-		System.out.println("[INFO] - Añadiendo un coche");
+		System.out.println("[INFO] - Añadiendo un coche...");
 		new Add_Car(configLoad, language, username, client, model);
 		setVisible(false);
 	}
 	private void delete() {
-		System.out.println("[INFO] - Eliminando un coche");
-		new Delete_Car(configLoad, language, username, client, model, model.getIdSelected());
+		System.out.println("[INFO] - Eliminando un coche...");
 		setVisible(false);
+		new Delete_Car(configLoad, language, username, client, model, model.getIdSelected());
 	}
 	private void modify() {
-		System.out.println("modify");
+		System.out.println("[INFO] - Modificando un coche...");
 	}
 }

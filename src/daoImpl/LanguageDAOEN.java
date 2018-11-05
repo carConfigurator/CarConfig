@@ -331,5 +331,29 @@ public class LanguageDAOEN implements ILanguage{
 		return null;
 	}
 
+	@Override
+	public String errorImgName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String errorImgNameTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deleteCarTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String dataDeleteCarTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

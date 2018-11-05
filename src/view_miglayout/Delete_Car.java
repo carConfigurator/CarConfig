@@ -2,8 +2,11 @@ package view_miglayout;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,7 +33,7 @@ import idao.ILanguage;
 import model.Client;
 import model.Model;
 
-public class Delete_Car {
+public class Delete_Car extends JFrame{
 	
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
@@ -42,13 +45,15 @@ public class Delete_Car {
 	private DocumentBuilder builder;
 	private Document documentOld;
 	private Document documentNew;
+	
+	private JPanel panel = new JPanel();
 
 	public Delete_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, int idSelected) {
 		this.configLoad = configLoad;
 		this.language = language;
 		this.username = username;
 		this.client = client;
-		this.idSelected = idSelected;	
+		this.idSelected = 5;	//idSelected
 		
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
@@ -62,25 +67,51 @@ public class Delete_Car {
 			System.out.println("[ERROR] - Error de E/S. Más información del error: " + e);
 		}
 		
-		NodeList nListModel = documentOld.getElementsByTagName("Model");
-		for (int i = 0; i < nListModel.getLength(); i++) {
-			Node nNode = nListModel.item(i);
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element elementKey = (Element) nNode;
-				for (int y = 0; y < elementKey.getElementsByTagName("id").getLength(); y++) {
-					Node nElementsKey = elementKey.getElementsByTagName("id").item(y);
-					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
-						Element elementValue = (Element) nElementsKey;
-						if (elementValue.getTextContent().equals(idSelected)) {
-							System.out.println("SI");
-//							JOptionPane.showConfirmDialog(parentComponent, message)
-						}
-					}
-		    	}
-			}
-    	}
+		//string en que le guardamos la info del modelo
+		String[] info=new String[5];
 		
-		generateXML();
+		//buscamos el modelo que queremos
+		NodeList nList = documentOld.getElementsByTagName("Model");
+		String[] models = new String[nList.getLength()];
+		for (int i = 0; i < models.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			//cuando lo encontremos cogemos la info de ese modelo y lo guardamos al array
+			if (eElement.getElementsByTagName("id").item(0).getTextContent().equals(""+this.idSelected)) {
+				for (int j = 0; j < 5; j++) {
+					String allInfo = eElement.getElementsByTagName("*").item(j).getTextContent();
+					info[j]=allInfo;
+				}
+			}
+		}
+		
+		//dialogo para mostrar el coche que vamos a eliminar
+		int optionPane=JOptionPane.showConfirmDialog(panel, language.dataDeleteCarTitle()+"\n"
+						+language.labelId()+info[0]+"\n"
+						+language.labelName()+info[1]+"\n"
+						+language.labelDescription()+info[2]+"\n"
+						+language.labelImg_Name()+info[3]+"\n"
+						+language.labelPrice()+info[4]+"\n"
+					,language.deleteCarTitle(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		
+		if (optionPane==JOptionPane.YES_OPTION) {
+			generateXML();
+		}else {
+			new Selection_model(this.configLoad, this.language, this.username, this.client);
+		}
+		
+		JFrame();
+	}
+	
+	private void JFrame() {
+		add(panel);
+//		setTitle();
+		setIconImage(getIconImage());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setSize(400,400);
+//		pack();
+		setLocationRelativeTo(null);
+		setVisible(false);
 	}
 	
 	private void generateXML() {
@@ -93,23 +124,35 @@ public class Delete_Car {
       //Main Node
         Element raiz = documentNew.getDocumentElement();
 
+        //creamos un boolean para ver si nos saltamos un modelo (para saltar el modelo eliminado)
+        boolean saltar=false;
+        
         NodeList nListModel = documentOld.getElementsByTagName("Model");
 		for (int i = 0; i < nListModel.getLength(); i++) {
-			Node nNode = nListModel.item(i);
-            Element itemNode = documentNew.createElement("Model"); 
+			Node nNode = nListModel.item(i); 
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element elementKey = (Element) nNode;
+				Element itemNode = documentNew.createElement("Model");
 				for (int y = 0; y < elementKey.getElementsByTagName("*").getLength(); y++) {
 					Node nElementsKey = elementKey.getElementsByTagName("*").item(y);
 		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
 					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
 						Element elementValue = (Element) nElementsKey;
 			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
-			            keyNode.appendChild(nodeKeyValue);
+			            if(!nodeKeyValue.getTextContent().equals(""+this.idSelected)) {
+				            keyNode.appendChild(nodeKeyValue);
+			            }else {
+			            	y=elementKey.getElementsByTagName("*").getLength();
+			            	saltar=true;
+			            }
 					}
-		            itemNode.appendChild(keyNode);
+					if(!saltar) {
+			            itemNode.appendChild(keyNode);
+		            }
 		    	}
-	            raiz.appendChild(itemNode);
+				if(!saltar) {
+		            raiz.appendChild(itemNode);
+	            }
 			}
     	}
 		
@@ -170,6 +213,8 @@ public class Delete_Car {
 		} catch (TransformerFactoryConfigurationError e) {
 			e.printStackTrace();
 		}
+		
+		new Selection_model(this.configLoad, this.language, this.username, this.client);
 	}
 
 }

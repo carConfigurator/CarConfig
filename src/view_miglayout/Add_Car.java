@@ -13,8 +13,10 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.xml.parsers.DocumentBuilder;
@@ -64,7 +66,8 @@ public class Add_Car extends JFrame{
 	
 	private JPanel panelMig;
 	private JLabel lId, lName, lDescription, lImg_Name, lPrice;
-	private JTextField tfId, tfName, tfDescription, tfImg_Name, tfPrice;
+	private JTextField tfId, tfName, tfDescription, tfImg_Name;
+	private JFormattedTextField tffPrice;
 	private JButton btnSave, btnBack;
 	
 	public Add_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model){
@@ -123,8 +126,8 @@ public class Add_Car extends JFrame{
 				));
 		this.lPrice = new JLabel(this.language.labelPrice());
 		this.lPrice.setFont(new java.awt.Font("Tahoma", 0, 12));
-		this.tfPrice = new JTextField(30);
-		this.tfPrice.setBorder(BorderFactory.createCompoundBorder(
+		this.tffPrice = new JFormattedTextField(new Integer(30));
+		this.tffPrice.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
 				));
@@ -155,7 +158,7 @@ public class Add_Car extends JFrame{
 		this.panelMig.add(lImg_Name, "");
 		this.panelMig.add(tfImg_Name, "wrap, pushx, growx");
 		this.panelMig.add(lPrice, "");
-		this.panelMig.add(tfPrice, "wrap, pushx, growx");
+		this.panelMig.add(tffPrice, "wrap, pushx, growx");
 		this.panelMig.add(btnBack, "align left");
 		this.panelMig.add(btnSave, "align right"); // Alineo el componente a la derecha de la fila, sería como un float.
 				
@@ -174,7 +177,14 @@ public class Add_Car extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				saveActionPerformed(e);
+				if ((new File (configLoad.getCar_image_path()+tfImg_Name.getText()).exists())) {
+//					if (tfPrice) {
+//						
+//					}
+					saveActionPerformed(e);
+				}else {
+					JOptionPane.showMessageDialog(panelMig, language.errorImgName(), language.errorImgNameTitle(), JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 				
@@ -191,7 +201,7 @@ public class Add_Car extends JFrame{
 	
 	private void JFrame() {
 		add(panelMig);
-		setTitle("Añadir Un Coche");
+		setTitle(language.addCarTitle());
 		setIconImage(getIconImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(400,400);
@@ -245,7 +255,7 @@ public class Add_Car extends JFrame{
         Text imatge_nomValue = documentNew.createTextNode(tfImg_Name.getText());
         imatge_nomNode.appendChild(imatge_nomValue);
         Element preuNode = documentNew.createElement("preu");
-        Text preuValue = documentNew.createTextNode(tfPrice.getText());
+        Text preuValue = documentNew.createTextNode(tffPrice.getText());
         preuNode.appendChild(preuValue);
 
         newItemNode.appendChild(idNode);

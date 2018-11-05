@@ -48,7 +48,7 @@
 		<label_title>Seleccion de caracteristicas del modelo</label_title>
 	</Selection_engine>
 	<Purchase_accessories>
-		<label_title>Compra de Accesorios</label_title>
+		<title>Compra de Accesorios</title>
 		<label_model_car>Caracteristicas seleccionadas anteriormetne</label_model_car>
 		<checkBox_electric_elevation>Elevaduras electricas</checkBox_electric_elevation>
 		<checkBox_browser>Navegador</checkBox_browser>
@@ -63,11 +63,17 @@
 		<label_total_price>Total precio:</label_total_price>
 	</Purchase_accessories>
 	<Add_Car>
-		<label_title>Añadir un nuevo coche</label_title>
-		<label_Id>ID:</label_Id>
-		<label_Name>Nombre:</label_Name>
-		<label_Description>Descripción:</label_Description>
-		<label_Img_Name>Nombre de la Imagen:</label_Img_Name>
-		<label_Price>Precio:</label_Price>
+		<title>Añadir un nuevo coche</title>
+		<label_id>ID: </label_id>
+		<label_name>Nombre: </label_name>
+		<label_description>Descripción: </label_description>
+		<label_img_name>Nombre de la Imagen: </label_img_name>
+		<label_price>Precio: </label_price>
+		<error_img_name>La imagen que desea insertar no existe</error_img_name>
+		<error_img_name_title>Error Imagen</error_img_name_title>
 	</Add_Car>
+	<Delete_Car>
+		<title>Eliminar un coche</title>
+		<label_data_title>Estas seguro que queres eliminar el siguiente coche?</label_data_title>
+	</Delete_Car>
 </Lenguage>

@@ -455,7 +455,7 @@ public class LanguageDAOES implements ILanguage{
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_title").item(0).getTextContent();
+			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
 		}
 		return null;
 	}
@@ -600,7 +600,7 @@ public class LanguageDAOES implements ILanguage{
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_title").item(0).getTextContent();
+			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
 		}
 		return null;
 	}
@@ -611,7 +611,7 @@ public class LanguageDAOES implements ILanguage{
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_Id").item(0).getTextContent();
+			return ""+eElement.getElementsByTagName("label_id").item(0).getTextContent();
 		}
 		return null;
 	}
@@ -622,7 +622,7 @@ public class LanguageDAOES implements ILanguage{
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_Name").item(0).getTextContent();
+			return ""+eElement.getElementsByTagName("label_name").item(0).getTextContent();
 		}
 		return null;
 	}
@@ -633,7 +633,7 @@ public class LanguageDAOES implements ILanguage{
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_Description").item(0).getTextContent();
+			return ""+eElement.getElementsByTagName("label_description").item(0).getTextContent();
 		}
 		return null;
 	}
@@ -644,7 +644,7 @@ public class LanguageDAOES implements ILanguage{
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_Img_Name").item(0).getTextContent();
+			return ""+eElement.getElementsByTagName("label_img_name").item(0).getTextContent();
 		}
 		return null;
 	}
@@ -655,7 +655,53 @@ public class LanguageDAOES implements ILanguage{
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_Price").item(0).getTextContent();
+			return ""+eElement.getElementsByTagName("label_price").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String errorImgName() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_img_name").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String errorImgNameTitle() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_img_name_title").item(0).getTextContent();
+		}
+		return null;
+	}
+	
+	//		-------------------Métodos que se usarán para Delete_Car.-------------------
+
+	@Override
+	public String deleteCarTitle() {
+		NodeList nList = document.getElementsByTagName("Delete_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String dataDeleteCarTitle() {
+		NodeList nList = document.getElementsByTagName("Delete_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_data_title").item(0).getTextContent();
 		}
 		return null;
 	}
