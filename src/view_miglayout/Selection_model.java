@@ -360,12 +360,14 @@ public class Selection_model extends JFrame{
 	}
 	
 	private void add() {
-		System.out.println("add");
+		System.out.println("[INFO] - Añadiendo un coche");
 		new Add_Car(configLoad, language, username, client, model);
 		setVisible(false);
 	}
 	private void delete() {
-		System.out.println("delete");
+		System.out.println("[INFO] - Eliminando un coche");
+		new Delete_Car(configLoad, language, username, client, model, model.getIdSelected());
+		setVisible(false);
 	}
 	private void modify() {
 		System.out.println("modify");

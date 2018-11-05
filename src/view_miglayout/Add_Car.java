@@ -209,23 +209,18 @@ public class Add_Car extends JFrame{
 		
       //Main Node
         Element raiz = documentNew.getDocumentElement();
-        
-        System.out.println("-------------"+documentNew.getDocumentElement());
 
         NodeList nListModel = documentOld.getElementsByTagName("Model");
 		for (int i = 0; i < nListModel.getLength(); i++) {
 			Node nNode = nListModel.item(i);
-			System.out.println("------NEW MODEL");
             Element itemNode = documentNew.createElement("Model"); 
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element elementKey = (Element) nNode;
 				for (int y = 0; y < elementKey.getElementsByTagName("*").getLength(); y++) {
 					Node nElementsKey = elementKey.getElementsByTagName("*").item(y);
-					System.out.println("KEY: "+nElementsKey.getNodeName());
 		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
 					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
 						Element elementValue = (Element) nElementsKey;
-						System.out.println("VALUE: "+elementValue.getTextContent());
 			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
 			            keyNode.appendChild(nodeKeyValue);
 					}
@@ -263,17 +258,14 @@ public class Add_Car extends JFrame{
 		NodeList nListEngine = documentOld.getElementsByTagName("Engine");
 		for (int i = 0; i < nListEngine.getLength(); i++) {
 			Node nNode = nListEngine.item(i);
-			System.out.println("-------NEW ENGINE");
             Element itemNode = documentNew.createElement("Engine"); 
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element elementEngine = (Element) nNode;
 				for (int y = 0; y < elementEngine.getElementsByTagName("*").getLength(); y++) {
 					Node nElementsKey = elementEngine.getElementsByTagName("*").item(y);
-					System.out.println("KEY: "+nElementsKey.getNodeName());
 		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
 					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
 						Element elementValue = (Element) nElementsKey;
-						System.out.println("VALUE: "+elementValue.getTextContent());
 			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
 			            keyNode.appendChild(nodeKeyValue);
 					}
@@ -286,17 +278,14 @@ public class Add_Car extends JFrame{
 		NodeList nList = documentOld.getElementsByTagName("Accessory");
 		for (int i = 0; i < nList.getLength(); i++) {
 			Node nNode = nList.item(i);
-			System.out.println("--------NEW ACCESSORY");
             Element itemNode = documentNew.createElement("Accessory");
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
 				for (int y = 0; y < eElement.getElementsByTagName("*").getLength(); y++) {
 					Node nElementsKey = eElement.getElementsByTagName("*").item(y);
-					System.out.println("KEY: "+nElementsKey.getNodeName());
 		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
 					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
 						Element elementValue = (Element) nElementsKey;
-						System.out.println("VALUE: "+elementValue.getTextContent());
 			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
 			            keyNode.appendChild(nodeKeyValue);
 					}
