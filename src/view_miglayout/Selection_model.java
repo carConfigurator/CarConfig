@@ -92,7 +92,7 @@ public class Selection_model extends JFrame{
 	/*
 	 * Añado los componentes del concesionaro del coche (parte 12)
 	 */
-
+	
 	public Selection_model(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model) {
 		this.configLoad = configLoad;
 		this.language = language;
@@ -115,6 +115,7 @@ public class Selection_model extends JFrame{
 		this.model = new Model(this.configLoad);
 		this.engine = new Engine(this.configLoad);
 		this.accessory = new Accessory(this.configLoad);
+		
 		onCreate();
 	}
 	
@@ -140,7 +141,6 @@ public class Selection_model extends JFrame{
 		lMenuItem.add(new JMenuItem(language.menuItemDelete()));
 		lMenuItem.add(new JMenuItem(language.menuItemModify()));
 		for (JMenuItem item : lMenuItem) {
-//			menu.add(menuSeparator);//Solo se pone la ultima vez que se llama
 			menu.add(item);
 			item.setBackground(new Color(255, 255, 255));
 		}
@@ -174,11 +174,6 @@ public class Selection_model extends JFrame{
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)
 				));
-		
-		File file = new File("src\\config\\settings.png");
-		if(file.exists()) {
-			System.out.println("si existe.");
-		}
 		
 		//Se añade la ruta de la imagen en una lista
 		this.imatge_nom = this.model.getImage_name();

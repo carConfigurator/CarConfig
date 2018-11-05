@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.sun.xml.internal.ws.api.pipe.NextAction;
+
 import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
@@ -23,6 +25,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
@@ -40,10 +43,10 @@ public class Selection_Engine extends JFrame {
 	private Engine engine;
 	
 	JPanel panel;
-	JLabel lblTitulo;
+	JLabel lblTitulo, lblUsername;
 	JButton btn_Anterior, btn_Siguiente;	
 	
-	
+	// Constructores de la vista:
 	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, Engine engine) {
 		this.language = language;
 		this.configLoad = configLoad;
@@ -67,30 +70,34 @@ public class Selection_Engine extends JFrame {
 	}
 	
 	public void onCreate() {		
-		// Panel
+		// Configuración del Panel
 		this.panel = new JPanel();
 		this.panel.setLayout(new MigLayout("insets 20"));
 		this.panel.setBackground(new Color(255,255,255));
 		
 		// Elementos del JPanel
 		this.lblTitulo = new JLabel(language.labelEngineTitle());
-		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		this.lblUsername = new JLabel(this.language.labelAuthIn() + this.username);
+		this.lblUsername.setFont(new Font("Tahoma", 0, 11));
 		 
 		JList list = new JList();
 		DefaultListModel modelo = new DefaultListModel(); // Sirve para introducir elementos de forma indirecta (Ej: Haciendo un bucle para añadir elementos).
+		// Llamo al metodo loadEngines() y le paso el id que el usuario ha seleccionado.
 		this.engine.loadEngines(this.model.getIdSelected());
-		System.out.println(this.engine.toString());
-		
-		// Ejemplo para añadir contenido dentro del JList.
-		for (int i = 1; i < 4; i++) {
-			modelo.addElement("texto "+i);
+		// Obtengo todos los submodelos disponibles del modelo seleccionado.
+		ArrayList<String> engines = this.engine.getEngines();
+		// Y los printo en la vista.
+		for (String string : engines) {
+			modelo.addElement(string);
 		}
 		
 		// PARA AÑADIR CONTENIDO A LA LISTA DEBE SER CON STRINGS.
 		list.setModel(modelo);
-		list.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		list.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		list.setBackground(new Color(157, 157, 157));
-		list.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		list.setBorder(BorderFactory.createEmptyBorder(10, 25, 10, 25));
 		
 		this.btn_Anterior = new JButton("Anterior");
 		this.btn_Anterior.setFont(new Font("Tahoma", 0, 12));
@@ -108,8 +115,17 @@ public class Selection_Engine extends JFrame {
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
 		
+		this.btn_Siguiente.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				nextActionPerformed();
+			}
+		});
+		
 		// Add Components to Panel
-		this.panel.add(this.lblTitulo, "wrap, align right");
+		this.panel.add(this.lblTitulo, "align left");
+		this.panel.add(this.lblUsername, "skip, align right, wrap");
 		this.panel.add(list, "wrap, span 3, growx, growy, pushx");
 		this.panel.add(this.btn_Anterior, "span 2, align left");
 		this.panel.add(this.btn_Siguiente, "align right");
@@ -118,6 +134,11 @@ public class Selection_Engine extends JFrame {
 	}
 	
 	
+	protected void nextActionPerformed() {
+		setVisible(false);
+		new Purchase_Accessories(this.configLoad, this.language, this.username, this.client, this.model, this.engine);
+	}
+
 	/*
 	 * Método para configurar la ventana actual.
 	 */

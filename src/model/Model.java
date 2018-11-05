@@ -23,10 +23,13 @@ public class Model {
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
 	private Document document;
+	
+	// En estos atributos estará la información de todos los modelos disponibles.
 	private int[] id;
 	private double[] price;
 	private String[] name, description, image_name;
 	
+	// En estos atributos estará la información del modelo seleccionado.
 	private String nameSelected, descriptionSelected;
 	private int idSelected;
 	private double priceSelected;
@@ -112,7 +115,6 @@ public class Model {
 		int[] id = new int[nList.getLength()];
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
-//			System.out.println("[INFO] - "+nNode);
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
 				id[temp] = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
