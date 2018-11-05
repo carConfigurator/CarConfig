@@ -36,6 +36,59 @@ public class LanguageDAOES implements ILanguage{
 		}
 	}
 	
+	//	------------------------------Botones----------------------------------
+
+	@Override
+	public String btnLogin() {
+		NodeList nList = document.getElementsByTagName("btn_login");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+	
+	@Override
+	public String btnSave() {
+		NodeList nList = document.getElementsByTagName("btn_save");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+
+	@Override
+	public String btnNext() {
+		NodeList nList = document.getElementsByTagName("btn_next");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+
+	@Override
+	public String btnSaveInfo() {
+		NodeList nList = document.getElementsByTagName("btn_save_info");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+	
+	@Override
+	public String btnPrevious() {
+		NodeList nList = document.getElementsByTagName("btn_previous");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+
+	@Override
+	public String btnBack() {
+		NodeList nList = document.getElementsByTagName("btn_back");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+
+	@Override
+	public String btnEnd() {
+		NodeList nList = document.getElementsByTagName("btn_end");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+
+	//		-------------------Métodos que se usarán para el Login.-------------------
+
 	@Override
 	public String loginTitle() {
 		NodeList nList = document.getElementsByTagName("Login");
@@ -65,17 +118,6 @@ public class LanguageDAOES implements ILanguage{
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
 			return ""+eElement.getElementsByTagName("label_password").item(0).getTextContent();
-		}
-		return null;
-	}
-
-	@Override
-	public String btnLogin() {
-		NodeList nList = document.getElementsByTagName("Login");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("btn_login").item(0).getTextContent();
 		}
 		return null;
 	}
@@ -270,28 +312,6 @@ public class LanguageDAOES implements ILanguage{
 	}
 
 	@Override
-	public String btnSave() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("btn_save").item(0).getTextContent();
-		}
-		return null;
-	}
-
-	@Override
-	public String btnNext() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("btn_next").item(0).getTextContent();
-		}
-		return null;
-	}
-
-	@Override
 	public String errorNullField() {
 		NodeList nList = document.getElementsByTagName("Data_clients");
 		Node nNode = nList.item(0);
@@ -334,17 +354,6 @@ public class LanguageDAOES implements ILanguage{
 		}
 		return null;
 	}
-
-	@Override
-	public String btnSaveInfo() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("btn_save_info").item(0).getTextContent();
-		}
-		return null;
-	}
 	
 	//		-------------------Métodos que se usarán para el Selection_model.-------------------
 	
@@ -366,17 +375,6 @@ public class LanguageDAOES implements ILanguage{
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
 			return ""+eElement.getElementsByTagName("label_select_title").item(0).getTextContent();
-		}
-		return null;
-	}
-
-	@Override
-	public String btnPrevious() {
-		NodeList nList = document.getElementsByTagName("Selection_model");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("btn_previous").item(0).getTextContent();
 		}
 		return null;
 	}
@@ -452,7 +450,7 @@ public class LanguageDAOES implements ILanguage{
 	//		-------------------Métodos que se usarán para Purchase_accessories.-------------------
 
 	@Override
-	public String labelAccessoriesTitle() {
+	public String purchaseAccessoriesTitle() {
 		NodeList nList = document.getElementsByTagName("Purchase_accessories");
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -593,25 +591,71 @@ public class LanguageDAOES implements ILanguage{
 		}
 		return null;
 	}
+	
+	//		-------------------Métodos que se usarán para Add_Car.-------------------
 
 	@Override
-	public String btnBack() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+	public String addCarTitle() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("btn_back").item(0).getTextContent();
+			return ""+eElement.getElementsByTagName("label_title").item(0).getTextContent();
+		}
+		return null;
+	}
+	
+	@Override
+	public String labelId() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_Id").item(0).getTextContent();
 		}
 		return null;
 	}
 
 	@Override
-	public String btnEnd() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
+	public String labelName() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("btn_end").item(0).getTextContent();
+			return ""+eElement.getElementsByTagName("label_Name").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelDescription() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_Description").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelImg_Name() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_Img_Name").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelPrice() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_Price").item(0).getTextContent();
 		}
 		return null;
 	}

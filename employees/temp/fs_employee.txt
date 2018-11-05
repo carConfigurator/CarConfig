@@ -1,6 +1,10 @@
-alexis.mengual
+dario.delcore
 ------
+<<<<<<< HEAD
 a, a, a, a, a@a.com, null
 ------
 2, SEAT Ateca, Observaciones del SEAT Ateca, 11368.1
+=======
+adsf, asdf, asfd, asd, asdff@asdf.com, null
+>>>>>>> 999c785360290b9ffd5008ca7c4c1ec8b40810d5
 ------
