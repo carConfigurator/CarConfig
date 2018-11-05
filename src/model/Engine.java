@@ -30,10 +30,12 @@ public class Engine {
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
 	private Document document;
+	private ArrayList<String> getEngines;
 	
 	public Engine(ConfigurationLoader configLoad) {
 		System.out.println("[INFO] - Cargando Motores...");
 		this.configLoad = configLoad;
+		this.getEngines = new ArrayList<String>();
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
 			this.builder = factory.newDocumentBuilder();
@@ -48,146 +50,38 @@ public class Engine {
 	}
 	
 	public void loadEngines(int idModel) {
-		System.out.println("[ID Select] - " + idModel);
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Engine");
 		String[] engines = new String[nList.getLength()];
-		int i = 0;
-		Node nNode = nList.item(i);
-		Element eElement = (Element) nNode;
-		String available_models = eElement.getElementsByTagName("models_avaliable").item(0).getTextContent();
-		String[] am = available_models.split(";");
-		System.out.println("[Model Available] - " + am[0]);
-		int[] models = new int[am.length];
-		for (int j = 0; j < am.length; j++) {
-			models[j] = Integer.parseInt(am[j]);
-		}
-		
-		for (int j = 0; j < models.length; j++) {
-			if(models[j] == idModel) {
-				System.out.println("I MIND!");
-				this.id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
-				System.out.println("NAME ENGINE: " + eElement.getElementsByTagName("nom").item(0).getTextContent());
-				this.name = eElement.getElementsByTagName("nom").item(0).getTextContent();
-				this.description = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
-				this.image_name = eElement.getElementsByTagName("image_name").item(0).getTextContent();
-				this.price = Double.parseDouble(eElement.getElementsByTagName("price").item(0).getTextContent());
+		for (int i = 0; i < engines.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			// Selecciono los elementos del nodo models_avaliable
+			String available_models = eElement.getElementsByTagName("models_avaliable").item(0).getTextContent();
+			// Hago un split para poder añadirlos a continuación en un array de int.
+			String[] am = available_models.split(";");
+			int[] models = new int[am.length];
+			// Añado los id de los modelos disponibles en el array int.
+			for (int j = 0; j < am.length; j++) {
+				models[j] = Integer.parseInt(am[j]);
 			}
+			
+			// Recorro el array en busca de la coincidencia con el id del modelo seleccionado.
+			for (int j = 0; j < models.length; j++) {
+				if(models[j] == idModel) {
+					this.id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+					this.name = eElement.getElementsByTagName("nom").item(0).getTextContent();
+					this.description = eElement.getElementsByTagName("description").item(0).getTextContent();
+					this.image_name = eElement.getElementsByTagName("image_name").item(0).getTextContent();
+					this.price = Double.parseDouble(eElement.getElementsByTagName("price").item(0).getTextContent());
+					// Finalmente añado la información en un ArrayList<String> para cuando el programa necesite printar en la vista las varias opciones.
+					this.getEngines.add(this.name + ", " + this.description + ", " + this.price + "€");
+				}
+			}	
 		}
-	}
-
-	private String[] loadModels_Available() {
-		NodeList nList = document.getElementsByTagName("Engine");
-//		int[] mod_avaliable = new int[nList.getLength()];
-		String[] mod_avaliable = new String[nList.getLength()];
-		for (int temp = 0; temp < nList.getLength(); temp++) {
-			Node nNode = nList.item(temp);
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				mod_avaliable[temp] = eElement.getElementsByTagName("models_avaliable").item(0).getTextContent();
-			}
-		}
-//		for (int i = 0; i < modelosString.length; i++) {
-//			mod_avaliable[i]=Integer.parseInt(modelosString[i]);
-//		}
-		return mod_avaliable;
-	}
-
-	private String[] loadImage_Name() {
-		NodeList nList = document.getElementsByTagName("Engine");
-		String[] image = new String[nList.getLength()];
-		for (int temp = 0; temp < nList.getLength(); temp++) {
-			Node nNode = nList.item(temp);
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				image[temp] = eElement.getElementsByTagName("image_name").item(0).getTextContent();
-			}
-		}
-		return image;
-	}
-
-	private String[] loadDescription() {
-		NodeList nList = document.getElementsByTagName("Engine");
-		String[] description = new String[nList.getLength()];
-		for (int temp = 0; temp < nList.getLength(); temp++) {
-			Node nNode = nList.item(temp);
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				description[temp] = eElement.getElementsByTagName("description").item(0).getTextContent();
-			}
-		}
-		return description;
-	}
-
-	private String[] loadName() {
-		NodeList nList = document.getElementsByTagName("Engine");
-		String[] name = new String[nList.getLength()];
-		for (int temp = 0; temp < nList.getLength(); temp++) {
-			Node nNode = nList.item(temp);
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				name[temp] = eElement.getElementsByTagName("nom").item(0).getTextContent();
-			}
-		}
-		return name;
-	}
-
-	private double[] loadPrice() {
-		NodeList nList = document.getElementsByTagName("Engine");
-		double[] price = new double[nList.getLength()];
-		for (int temp = 0; temp < nList.getLength(); temp++) {
-			Node nNode = nList.item(temp);
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				price[temp] = Double.parseDouble(eElement.getElementsByTagName("price").item(0).getTextContent());
-			}
-		}
-		return price;
-	}
-
-	private int[] loadId() {
-		NodeList nList = document.getElementsByTagName("Engine");
-		int[] id = new int[nList.getLength()];
-		for (int temp = 0; temp < nList.getLength(); temp++) {
-			Node nNode = nList.item(temp);
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				id[temp] = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
-			}
-		}
-		return id;
 	}
 	
-	public String[] getEngines(int idModel) {
-		
-		return null;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public String getImage_name() {
-		return image_name;
-	}
-
-	public String getModels_available() {
-		return models_available;
-	}	
-	
-	@Override
-	public String toString() {
-		return this.id + ", " + this.name + ", " + this.description + ", " + this.price;
+	public ArrayList<String> getEngines(){
+		return this.getEngines;
 	}
 }
