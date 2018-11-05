@@ -81,6 +81,32 @@ public class Engine {
 		}
 	}
 	
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getImage_name() {
+		return image_name;
+	}
+
+	public String getModels_available() {
+		return models_available;
+	}
+
 	public ArrayList<String> getEngines(){
 		return this.getEngines;
 	}

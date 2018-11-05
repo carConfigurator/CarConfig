@@ -1,6 +1,6 @@
 alexis.mengual
 ------
-a, a, a, a, as@s.com, null
+a, a, a, a, a@a.com, null
 ------
 1, SEAT MiiP5, Observaciones del SEAT Mii5P, 7726.2
 ------

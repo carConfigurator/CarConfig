@@ -11,7 +11,10 @@ import javax.swing.border.EmptyBorder;
 import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
+import model.Accessory;
 import model.Client;
+import model.Engine;
+import model.Model;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
@@ -19,6 +22,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
 
 public class Purchase_Accessories extends JFrame {
 
@@ -26,53 +32,40 @@ public class Purchase_Accessories extends JFrame {
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
 	private Client client;
+	private Model model;
+	private Engine engine;
+	private Accessory accessory;
 	private JLabel username;
 	
-	JPanel contentPane;
+	JPanel panel;
 	JLabel lblTitulo, lblModeloCoche, lblPrecioBasee, lblAumento, lblTotalPrecio;
 	JTextField tfAumento, tfTotalPrecio, tfPrecioBase;
 	JCheckBox cbElevadurasElectricas, cbNavegador, cbLlantasAl, cbAsientosCal, cbVelCrucero, cbAparcamietnoAuto, cbConectorUSB, cbPinturaMetal;
 	JButton btnAtras, btnFinalizar;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConfigurationLoader configLoad = ConfigurationLoader.getConfigurationLoaderInstance();
-					ILanguage language = LanguageFactory.getLanguage(configLoad);
-					String username = "user1";
-					Purchase_Accessories frame = new Purchase_Accessories(configLoad, language, username);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
-	public Purchase_Accessories(ConfigurationLoader configLoad, ILanguage language, String username) {
+	public Purchase_Accessories(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, Engine engine) {
 		this.language = language;
 		this.configLoad = configLoad;
-		this.username = new JLabel(username);
+		this.client = client;
+		this.model = model;
+		this.engine = engine;
+		this.accessory = new Accessory(this.configLoad);
+		
+		this.username = new JLabel(this.language.labelAuthIn() + username);
 		this.username.setFont(new Font("Tahoma", 0, 11));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 604, 537);
-		contentPane = new JPanel();
-		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.contentPane.setBackground(new Color(255,255,255));
-		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("insets 35"));
+		this.panel = new JPanel();
+		this.panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.panel.setBackground(new Color(255,255,255));
+		this.panel.setLayout(new MigLayout("insets 35"));
 		
 		this.lblTitulo = new JLabel(language.purchaseAccessoriesTitle());
 		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
 		this.lblModeloCoche = new JLabel(language.labelModelCar());
 		this.lblModeloCoche.setFont(new Font("Tahoma", 2, 12));
 		
@@ -80,11 +73,20 @@ public class Purchase_Accessories extends JFrame {
 		this.cbElevadurasElectricas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbElevadurasElectricas.setBackground(new Color(255,255,255));
 		this.cbElevadurasElectricas.setFocusable(false);
+		// Compruebo que este modelo disponga de Elevaduras Electricas
+		if(!this.accessory.checkElectricElevation(this.model.getIdSelected())) {
+			this.cbElevadurasElectricas.setEnabled(false);
+		}
+		this.cbElevadurasElectricas.setToolTipText("Cargando Modelos disponibles...");
 		
 		this.cbNavegador = new JCheckBox(language.checkBoxBrowser());
 		this.cbNavegador.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbNavegador.setBackground(new Color(255,255,255));
 		this.cbNavegador.setFocusable(false);
+		// Compruebo que este modelo disponga de Navegador
+		if(!this.accessory.checkNavegation(this.model.getIdSelected())) {
+			this.cbNavegador.setEnabled(false);
+		}
 		
 		this.cbLlantasAl = new JCheckBox(language.checkBoxTires());
 		this.cbLlantasAl.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -166,26 +168,53 @@ public class Purchase_Accessories extends JFrame {
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
 		
-		this.contentPane.add(lblTitulo);
-		this.contentPane.add(this.username, "wrap, align right");
-		this.contentPane.add(lblModeloCoche, "wrap, align right");
-		this.contentPane.add(cbElevadurasElectricas);
-		this.contentPane.add(cbNavegador, "align left, wrap");
-		this.contentPane.add(cbLlantasAl);
-		this.contentPane.add(cbAsientosCal, "align left, wrap");
-		this.contentPane.add(cbVelCrucero);
-		this.contentPane.add(cbAparcamietnoAuto, "align left, wrap");
-		this.contentPane.add(cbConectorUSB);
-		this.contentPane.add(cbPinturaMetal, "align left, wrap");
-		this.contentPane.add(lblPrecioBasee);
-		this.contentPane.add(tfPrecioBase, "align left, wrap, pushx, growx");
-		this.contentPane.add(lblAumento);
-		this.contentPane.add(tfAumento, "align left, wrap, pushx, growx");
-		this.contentPane.add(lblTotalPrecio);
-		this.contentPane.add(tfTotalPrecio, "align left, wrap, pushx, growx");
-		this.contentPane.add(btnAtras);
-		this.contentPane.add(btnFinalizar, "align right, wrap");
+		this.panel.add(lblTitulo);
+		this.panel.add(this.username, "wrap, align right");
+		this.panel.add(lblModeloCoche, "wrap, align right");
+		this.panel.add(cbElevadurasElectricas);
+		this.panel.add(cbNavegador, "align left, wrap");
+		this.panel.add(cbLlantasAl);
+		this.panel.add(cbAsientosCal, "align left, wrap");
+		this.panel.add(cbVelCrucero);
+		this.panel.add(cbAparcamietnoAuto, "align left, wrap");
+		this.panel.add(cbConectorUSB);
+		this.panel.add(cbPinturaMetal, "align left, wrap");
+		this.panel.add(lblPrecioBasee);
+		this.panel.add(tfPrecioBase, "align left, wrap, pushx, growx");
+		this.panel.add(lblAumento);
+		this.panel.add(tfAumento, "align left, wrap, pushx, growx");
+		this.panel.add(lblTotalPrecio);
+		this.panel.add(tfTotalPrecio, "align left, wrap, pushx, growx");
+		this.panel.add(btnAtras);
+		this.panel.add(btnFinalizar, "align right, wrap");
+		
+		JFrame();
 		
 	}
+	
+	/*
+	 * Método para configurar la ventana actual.
+	 */
+	private void JFrame() {
+		add(panel);
+		setTitle(language.seleccionEngineTitle());
+		setIconImage(getIconImage());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(600,600);
+		pack();
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+	
+	/*
+	 * Método que obtiene la imagen para el JFrame.
+	 * @return La imagen que hay en carpeta.
+	 * @see java.awt.Frame#getIconImage()
+	 */
+	public Image getIconImage() {
+		File image = new File("src/config/favicon.png");
+        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
+        return retValue;
+    }
 
 }

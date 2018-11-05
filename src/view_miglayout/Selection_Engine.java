@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.sun.xml.internal.ws.api.pipe.NextAction;
+
 import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
@@ -113,6 +115,14 @@ public class Selection_Engine extends JFrame {
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
 		
+		this.btn_Siguiente.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				nextActionPerformed();
+			}
+		});
+		
 		// Add Components to Panel
 		this.panel.add(this.lblTitulo, "align left");
 		this.panel.add(this.lblUsername, "skip, align right, wrap");
@@ -124,6 +134,11 @@ public class Selection_Engine extends JFrame {
 	}
 	
 	
+	protected void nextActionPerformed() {
+		setVisible(false);
+		new Purchase_Accessories(this.configLoad, this.language, this.username, this.client, this.model, this.engine);
+	}
+
 	/*
 	 * Método para configurar la ventana actual.
 	 */

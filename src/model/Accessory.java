@@ -160,4 +160,13 @@ public class Accessory {
 	private String getInformation() {
 		return "Id: "+Arrays.toString(id)+", precio: "+Arrays.toString(price)+", nomobre: "+Arrays.toString(name)+", descripcion: "+Arrays.toString(description)+", ruta imagen: "+Arrays.toString(image_name)+", modelos disponibles: "+Arrays.toString(models_available);
 	}
+
+	public boolean checkElectricElevation(int idSelected) {
+		System.out.println("electric elevation");
+		return false;
+	}
+
+	public boolean checkNavegation(int idSelected) {
+		return false;
+	}
 }
