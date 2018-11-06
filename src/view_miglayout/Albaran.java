@@ -41,6 +41,7 @@ public class Albaran extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	// Constructor con variables globales
 	public Albaran(ConfigurationLoader configLoad, ILanguage language, String username, Client client) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 748, 596);
