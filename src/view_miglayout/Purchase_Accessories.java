@@ -24,6 +24,8 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 public class Purchase_Accessories extends JFrame {
@@ -167,7 +169,15 @@ public class Purchase_Accessories extends JFrame {
 		this.btnFinalizar.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
-		
+		this.btnFinalizar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				new Albaran(configLoad, language, username, client);
+				
+			}
+		});
 		this.panel.add(lblTitulo);
 		this.panel.add(this.username, "wrap, align right");
 		this.panel.add(lblModeloCoche, "wrap, align right");

@@ -42,12 +42,15 @@ public class Albaran extends JFrame {
 	 * Create the frame.
 	 */
 	public Albaran(ConfigurationLoader configLoad, ILanguage language, String username, Client client) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 748, 596);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		this.contentPane.setLayout(new MigLayout("", "[grow][grow][grow][grow]", "[][75px][50px][][][][][][50px][grow][grow]"));
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 748, 596);
+		setContentPane(contentPane);
+		setLocationRelativeTo(null);
+		setVisible(true);
 		
 		this.lblAlbaran = new JLabel("ALBARAN");
 		this.lblAlbaran.setFont(new Font("Tahoma", Font.BOLD, 17));
