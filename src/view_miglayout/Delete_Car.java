@@ -53,7 +53,7 @@ public class Delete_Car extends JFrame{
 		this.language = language;
 		this.username = username;
 		this.client = client;
-		this.idSelected = 5;	//idSelected
+		this.idSelected = idSelected;
 		
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
@@ -105,11 +105,8 @@ public class Delete_Car extends JFrame{
 	
 	private void JFrame() {
 		add(panel);
-//		setTitle();
 		setIconImage(getIconImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setSize(400,400);
-//		pack();
 		setLocationRelativeTo(null);
 		setVisible(false);
 	}
@@ -136,9 +133,16 @@ public class Delete_Car extends JFrame{
 				for (int y = 0; y < elementKey.getElementsByTagName("*").getLength(); y++) {
 					Node nElementsKey = elementKey.getElementsByTagName("*").item(y);
 		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
+		            
 					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
 						Element elementValue = (Element) nElementsKey;
 			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
+			            
+			            if (keyNode.getTextContent().equals("id") && !nodeKeyValue.getTextContent().equals(i)) {
+			            	System.out.println("DIFF");
+			            }
+			            
+			            
 			            if(!nodeKeyValue.getTextContent().equals(""+this.idSelected)) {
 				            keyNode.appendChild(nodeKeyValue);
 			            }else {
@@ -152,6 +156,8 @@ public class Delete_Car extends JFrame{
 		    	}
 				if(!saltar) {
 		            raiz.appendChild(itemNode);
+	            }else {
+	            	saltar=false;
 	            }
 			}
     	}

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +20,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.InternationalFormatter;
+import javax.swing.text.MaskFormatter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -66,8 +70,7 @@ public class Add_Car extends JFrame{
 	
 	private JPanel panelMig;
 	private JLabel lId, lName, lDescription, lImg_Name, lPrice;
-	private JTextField tfId, tfName, tfDescription, tfImg_Name;
-	private JFormattedTextField tffPrice;
+	private JTextField tfId, tfName, tfDescription, tfImg_Name, tfPrice;
 	private JButton btnSave, btnBack;
 	
 	public Add_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model){
@@ -126,8 +129,8 @@ public class Add_Car extends JFrame{
 				));
 		this.lPrice = new JLabel(this.language.labelPrice());
 		this.lPrice.setFont(new java.awt.Font("Tahoma", 0, 12));
-		this.tffPrice = new JFormattedTextField(new Integer(30));
-		this.tffPrice.setBorder(BorderFactory.createCompoundBorder(
+		this.tfPrice = new JTextField(30);
+		this.tfPrice.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
 				));
@@ -158,7 +161,7 @@ public class Add_Car extends JFrame{
 		this.panelMig.add(lImg_Name, "");
 		this.panelMig.add(tfImg_Name, "wrap, pushx, growx");
 		this.panelMig.add(lPrice, "");
-		this.panelMig.add(tffPrice, "wrap, pushx, growx");
+		this.panelMig.add(tfPrice, "wrap, pushx, growx");
 		this.panelMig.add(btnBack, "align left");
 		this.panelMig.add(btnSave, "align right"); // Alineo el componente a la derecha de la fila, sería como un float.
 				
@@ -177,14 +180,25 @@ public class Add_Car extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if ((new File (configLoad.getCar_image_path()+tfImg_Name.getText()).exists())) {
-//					if (tfPrice) {
-//						
-//					}
-					saveActionPerformed(e);
+				if (!tfImg_Name.getText().equals("")) {
+					if ((new File (configLoad.getCar_image_path()+tfImg_Name.getText()).exists())) {
+						if (!tfPrice.getText().equals("")) {
+							try {
+								Double.parseDouble(tfPrice.getText());
+								saveActionPerformed(e);
+							}catch(NumberFormatException ex) {
+								System.out.println("[ERROR] - El valor del String no se puede formatear a Double");
+							}
+						}else {
+							System.out.println("[ERROR] - El precio no se puede dejar null");
+						}
+					}else {
+						JOptionPane.showMessageDialog(panelMig, language.errorImgName(), language.errorImgNameTitle(), JOptionPane.ERROR_MESSAGE);
+					}
 				}else {
-					JOptionPane.showMessageDialog(panelMig, language.errorImgName(), language.errorImgNameTitle(), JOptionPane.ERROR_MESSAGE);
+					System.out.println("[ERROR] - Se tiene que poner una imagen");
 				}
+				
 			}
 		});
 				
@@ -255,7 +269,7 @@ public class Add_Car extends JFrame{
         Text imatge_nomValue = documentNew.createTextNode(tfImg_Name.getText());
         imatge_nomNode.appendChild(imatge_nomValue);
         Element preuNode = documentNew.createElement("preu");
-        Text preuValue = documentNew.createTextNode(tffPrice.getText());
+        Text preuValue = documentNew.createTextNode(tfPrice.getText());
         preuNode.appendChild(preuValue);
 
         newItemNode.appendChild(idNode);
@@ -325,12 +339,12 @@ public class Add_Car extends JFrame{
 		
 		System.out.println("[INFO] - Nuevo XML creado");
 		setVisible(false);
-		new Selection_model(configLoad, language, username, client);
+		new Selection_model(this.configLoad, this.language, this.username, this.client);
 	}
 	
 	private void backActionPerformed(ActionEvent ae) {
 		setVisible(false);
-		new Selection_model(configLoad, language, username, client);
+		new Selection_model(this.configLoad, this.language, this.username, this.client);
 	}
 	
 	/*

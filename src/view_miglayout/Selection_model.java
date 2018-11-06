@@ -48,6 +48,10 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
@@ -381,6 +385,7 @@ public class Selection_model extends JFrame{
 	private void delete() {
 		System.out.println("[INFO] - Eliminando un coche...");
 		setVisible(false);
+		this.model.toModel(posicion+1);
 		new Delete_Car(configLoad, language, username, client, model, model.getIdSelected());
 	}
 	private void modify() {
