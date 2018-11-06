@@ -48,7 +48,7 @@ public class Delete_Car extends JFrame{
 	
 	private JPanel panel = new JPanel();
 
-	public Delete_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, int idSelected) {
+	public Delete_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, int idSelected) {
 		this.configLoad = configLoad;
 		this.language = language;
 		this.username = username;
