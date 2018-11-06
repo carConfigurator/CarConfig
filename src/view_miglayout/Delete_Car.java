@@ -105,7 +105,6 @@ public class Delete_Car extends JFrame{
 	
 	private void JFrame() {
 		add(panel);
-		setIconImage(getIconImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(false);
@@ -123,7 +122,8 @@ public class Delete_Car extends JFrame{
 
         //creamos un boolean para ver si nos saltamos un modelo (para saltar el modelo eliminado)
         boolean saltar=false;
-        
+        //boolean para saber en que punto hemos eliminado el coche
+        boolean eliminat=false;
         NodeList nListModel = documentOld.getElementsByTagName("Model");
 		for (int i = 0; i < nListModel.getLength(); i++) {
 			Node nNode = nListModel.item(i); 
@@ -133,21 +133,20 @@ public class Delete_Car extends JFrame{
 				for (int y = 0; y < elementKey.getElementsByTagName("*").getLength(); y++) {
 					Node nElementsKey = elementKey.getElementsByTagName("*").item(y);
 		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
-		            
 					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
 						Element elementValue = (Element) nElementsKey;
 			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
-			            
-			            if (keyNode.getTextContent().equals("id") && !nodeKeyValue.getTextContent().equals(i)) {
-			            	System.out.println("DIFF");
-			            }
-			            
-			            
+			            //primero comprobamos si lo tenemos que eliminar
 			            if(!nodeKeyValue.getTextContent().equals(""+this.idSelected)) {
 				            keyNode.appendChild(nodeKeyValue);
+				            //y si no es el seleccionado y ya hay uno eliminado, baja el id de los demas en 1 
+				            if (keyNode.getNodeName().equals("id") && eliminat) {
+				            	nodeKeyValue.setTextContent(""+i);
+				            }
 			            }else {
 			            	y=elementKey.getElementsByTagName("*").getLength();
 			            	saltar=true;
+			            	eliminat=true;
 			            }
 					}
 					if(!saltar) {

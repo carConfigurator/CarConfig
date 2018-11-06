@@ -89,6 +89,7 @@ public class Selection_model extends JFrame{
 	private JSeparator menuSeparator;
 	
 	String[] imatge_nom;
+	int [] cochesId;
 	String root_images;
 	List<Image> listImg;
 	File temp;
@@ -181,14 +182,15 @@ public class Selection_model extends JFrame{
 		
 		//Se añade la ruta de la imagen en una lista
 		this.imatge_nom = this.model.getImage_name();
-		List<String> listImg=new ArrayList<>();
+		this.cochesId = this.model.getId();
+		List<String> listCoche=new ArrayList<>();
 		for (int i = 0; i < imatge_nom.length; i++) {
-			listImg.add(this.root_images + this.imatge_nom[i]);
+			listCoche.add(this.root_images + this.imatge_nom[i]+";"+this.cochesId[i]);
 		}
 	
 		//Creamos una lista de los botones con las rutas de las imagenes
 		this.listBotones=new ArrayList<JButton>();
-		crearBoton(listImg);//lista ruta imagen
+		crearBoton(listCoche);//lista ruta imagen
 		
 		//Añadimos los botones al panel
 		for (JButton jButton : listBotones) {
@@ -297,7 +299,7 @@ public class Selection_model extends JFrame{
 					BorderFactory.createLineBorder(new Color(255, 255, 255)),
 					BorderFactory.createEmptyBorder(1, 1, 1, 1)
 					));
-			coche=new ImageIcon(string);
+			coche=new ImageIcon(string.split(";")[0]);//en la posicion 0 tenemos el nombre de la imagen
 			cocheBoton= new ImageIcon(coche.getImage().getScaledInstance(coche.getIconWidth()/4, coche.getIconHeight()/4, Image.SCALE_DEFAULT));
 			btnCoches.setIcon(cocheBoton);
 			btnCoches.setMargin(new Insets(0, 0, 0, 0));
@@ -306,13 +308,13 @@ public class Selection_model extends JFrame{
 			listImg=new ArrayList<Image>();
 			listImg.add(coche.getImage());
 			
-			listener(coche, btnCoches);  
+			listener(coche, btnCoches, Integer.parseInt(string.split(";")[1]));  //en la posicion 1 tenemos el id del coche
 		}
 		
 		
 	}
 	
-	private void listener(ImageIcon coch, JButton b) {
+	private void listener(ImageIcon coch, JButton b, int cocheId) {
 		b.addFocusListener(new FocusListener() {
 			
 			@Override
@@ -331,7 +333,7 @@ public class Selection_model extends JFrame{
 						BorderFactory.createEmptyBorder(1, 1, 1, 1)
 						));
 				for (int i = 0; i < imatge_nom.length; i++) {
-					if ((root_images+imatge_nom[i]).equals(coch.getDescription())) {//la descripcion es del objeto, que devuelve la ruta de la imagen
+					if (model.getId()[i]==cocheId) {
 						posicion=i;
 					}
 				}
@@ -383,8 +385,8 @@ public class Selection_model extends JFrame{
 		setVisible(false);
 	}
 	private void delete() {
-		System.out.println("[INFO] - Eliminando un coche...");
 		setVisible(false);
+		System.out.println("[INFO] - Eliminando un coche...");
 		this.model.toModel(posicion+1);
 		new Delete_Car(configLoad, language, username, client, model, model.getIdSelected());
 	}
