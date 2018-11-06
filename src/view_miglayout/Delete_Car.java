@@ -97,7 +97,7 @@ public class Delete_Car extends JFrame{
 		if (optionPane==JOptionPane.YES_OPTION) {
 			generateXML();
 		}else {
-			new Selection_model(this.configLoad, this.language, this.username, this.client);
+			new Selection_Model(this.configLoad, this.language, this.username, this.client);
 		}
 		
 		JFrame();
@@ -219,7 +219,7 @@ public class Delete_Car extends JFrame{
 			e.printStackTrace();
 		}
 		
-		new Selection_model(this.configLoad, this.language, this.username, this.client);
+		new Selection_Model(this.configLoad, this.language, this.username, this.client);
 	}
 
 }

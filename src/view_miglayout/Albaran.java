@@ -52,35 +52,35 @@ public class Albaran extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 		
-		this.lblAlbaran = new JLabel("ALBARAN");
+		this.lblAlbaran = new JLabel(language.labelDeliveryNote());
 		this.lblAlbaran.setFont(new Font("Tahoma", Font.BOLD, 17));
 		this.contentPane.add(lblAlbaran, "cell 2 1");
 		
-		this.lblCliente = new JLabel("Cliente:");
+		this.lblCliente = new JLabel(language.labelClient());
 		this.lblCliente.setFont(new Font("Tahoma", Font.BOLD, 15));
 		this.contentPane.add(lblCliente, "cell 0 2,aligny bottom");
 		
-		this.lblEmpresa = new JLabel("Empresa:");
+		this.lblEmpresa = new JLabel(language.labelCompany());
 		this.lblEmpresa.setFont(new Font("Tahoma", Font.BOLD, 15));
 		this.contentPane.add(lblEmpresa, "cell 2 2,aligny bottom");
 		
-		this.lblNombre = new JLabel("Nombre:");
+		this.lblNombre = new JLabel(language.labelClientName());
 		this.lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
 		this.contentPane.add(lblNombre, "flowx,cell 0 3");
 		
-		this.lblNombreempresa = new JLabel("SEAT");
+		this.lblNombreempresa = new JLabel(language.labelCompanyName());
 		this.lblNombreempresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.contentPane.add(lblNombreempresa, "cell 2 3");
 		
-		this.lblPrimerApellido = new JLabel("Primer Apellido:");
+		this.lblPrimerApellido = new JLabel(language.labelClientFirstLastName());
 		this.lblPrimerApellido.setFont(new Font("Tahoma", Font.BOLD, 11));
 		this.contentPane.add(lblPrimerApellido, "flowx,cell 0 4");
 		
-		this.lblEmpleado = new JLabel("Empleado:");
+		this.lblEmpleado = new JLabel(language.labelEmployee());
 		this.lblEmpleado.setFont(new Font("Tahoma", Font.BOLD, 15));
 		this.contentPane.add(lblEmpleado, "cell 2 4,aligny bottom");
 		
-		this.lblSegundoApellido = new JLabel("Segundo Apellido:");
+		this.lblSegundoApellido = new JLabel(language.labelClientSecondLastName());
 		this.lblSegundoApellido.setFont(new Font("Tahoma", Font.BOLD, 11));
 		this.contentPane.add(lblSegundoApellido, "flowx,cell 0 5");
 		
@@ -88,11 +88,11 @@ public class Albaran extends JFrame {
 		this.lblNombreempleado.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.contentPane.add(lblNombreempleado, "cell 2 5");
 		
-		this.lblDireccion = new JLabel("Direccion:");
+		this.lblDireccion = new JLabel(language.labelClientAddress());
 		this.lblDireccion.setFont(new Font("Tahoma", Font.BOLD, 11));
 		this.contentPane.add(lblDireccion, "flowx,cell 0 6");
 		
-		this.lblCorreo = new JLabel("Correo:");
+		this.lblCorreo = new JLabel(language.labelMail());
 		this.lblCorreo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		this.contentPane.add(lblCorreo, "flowx,cell 0 7");
 		
@@ -128,9 +128,7 @@ public class Albaran extends JFrame {
 				{null, null, null, null},
 			},
 			// Encabezado de las columnas.
-			new String[] {
-				"Cantidad", "Especificacion", "Precio", "Informe"
-			}
+			language.table().split(",")
 		));
 		this.table.setBorder(new EmptyBorder(0, 0, 0, 0));
 		// Para añadir los Encabezados se necesita crear un JScrollPane y añadirlo al JTable.
@@ -147,9 +145,7 @@ public class Albaran extends JFrame {
 			new Object[][] {
 				{null, null, null, null},
 			},
-			new String[] {
-				"Precio Base", "Descuento", "Precio Total", "IVA(21%)"
-			}
+			language.tableOne().split(",")
 		));
 		
 		// Para los Encabezados se crea otro JScrollPane.

@@ -185,16 +185,16 @@ public class Modify_Car extends JFrame{
 								Double.parseDouble(tfPrice.getText());
 								saveActionPerformed(e);
 							}catch(NumberFormatException ex) {
-								System.out.println("[ERROR] - El valor del String no se puede formatear a Double");
+								JOptionPane.showMessageDialog(panelMig, language.errorParseDouble(), language.errorParseDoubleTitle(), JOptionPane.ERROR_MESSAGE);
 							}
 						}else {
-							System.out.println("[ERROR] - El precio no se puede dejar null");
+							JOptionPane.showMessageDialog(panelMig, language.errorPriceNull(), language.errorPriceNullTitle(), JOptionPane.ERROR_MESSAGE);
 						}
 					}else {
 						JOptionPane.showMessageDialog(panelMig, language.errorImgName(), language.errorImgNameTitle(), JOptionPane.ERROR_MESSAGE);
 					}
 				}else {
-					System.out.println("[ERROR] - Se tiene que poner una imagen");
+					JOptionPane.showMessageDialog(panelMig, language.errorImgNameNull(), language.errorImgNameNullTitle(), JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}
@@ -353,12 +353,12 @@ public class Modify_Car extends JFrame{
 		
 		System.out.println("[INFO] - Nuevo XML creado");
 		setVisible(false);
-		new Selection_model(this.configLoad, this.language, this.username, this.client);
+		new Selection_Model(this.configLoad, this.language, this.username, this.client);
 	}
 	
 	private void backActionPerformed(ActionEvent ae) {
 		setVisible(false);
-		new Selection_model(this.configLoad, this.language, this.username, this.client);
+		new Selection_Model(this.configLoad, this.language, this.username, this.client);
 	}
 	
 	/*

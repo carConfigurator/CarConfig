@@ -73,11 +73,29 @@ public interface ILanguage {
 	String labelDescription();
 	String labelImg_Name();
 	String labelPrice();
+	String errorParseDouble();
+	String errorParseDoubleTitle();
+	String errorPriceNull();
+	String errorPriceNullTitle();
 	String errorImgName();
 	String errorImgNameTitle();
+	String errorImgNameNull();
+	String errorImgNameNullTitle();
 	
 	// Métodos que se usarán para delete_car.
 	String deleteCarTitle();
 	String dataDeleteCarTitle();
-	
+
+	// Métodos que se usarán para albaran.
+	String labelDeliveryNote();
+	String labelClient();
+	String labelCompany();
+	//name in data_clients
+	String labelCompanyName();
+	//first and second name in data_clients
+	String labelEmployee();
+	//label adress in data_clients
+	String labelMail();
+	String table();
+	String tableOne();
 }
