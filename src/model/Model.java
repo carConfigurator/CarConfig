@@ -23,10 +23,13 @@ public class Model {
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
 	private Document document;
+	
+	// En estos atributos estará la información de todos los modelos disponibles.
 	private int[] id;
 	private double[] price;
 	private String[] name, description, image_name;
 	
+	// En estos atributos estará la información del modelo seleccionado.
 	private String nameSelected, descriptionSelected;
 	private int idSelected;
 	private double priceSelected;
@@ -112,7 +115,6 @@ public class Model {
 		int[] id = new int[nList.getLength()];
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
-//			System.out.println("[INFO] - "+nNode);
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
 				id[temp] = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
@@ -154,6 +156,7 @@ public class Model {
 				NodeList nList = document.getElementsByTagName("Model");
 				Node nNode = nList.item(i);
 				Element eElement = (Element) nNode;
+				this.idSelected = id;
 				this.nameSelected = eElement.getElementsByTagName("nom").item(0).getTextContent();
 				this.descriptionSelected = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 				this.priceSelected = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
@@ -171,7 +174,11 @@ public class Model {
 	}
 
 	public int getIdSelected() {
-		return idSelected+1;
+		return idSelected;
+	}
+	
+	public void setIdSelected(int idSelected) {
+		this.idSelected = idSelected;
 	}
 
 	public double getPriceSelected() {

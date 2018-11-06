@@ -2,11 +2,19 @@ package idao;
 
 public interface ILanguage {
 
+	//BOTONES
+	String btnLogin();
+	String btnSave();
+	String btnNext();
+	String btnSaveInfo();
+	String btnPrevious();
+	String btnBack();
+	String btnEnd();
+	
 	// Métodos que se usarán para el Login.
 	String loginTitle();
 	String labelUsername();
 	String labelPassword();
-	String btnLogin();
 	String errorLoginUser();
 	String errorLoginUserTitle();
 	String errorLoginPassword();
@@ -26,19 +34,14 @@ public interface ILanguage {
 	String radioGenderFemale();
 	String radioGenderUnknown();
 	String labelClientBirhdate();
-	String btnSave();
-	String btnNext();
 	String errorNullField();
 	String errorNullFieldTitle();
 	String errorEmail();
 	String errorEmailTitle();
-	String btnSaveInfo();
 	
 	// Métodos que se usarán para el Seleccion_Modelo.
 	String seleccionModeloTitle();
 	String labelSelectTitle();
-	String btnPrevious();
-	//boton siguiente en Data_clients
 	String menu();
 	String menuItemAdd();
 	String menuItemDelete();
@@ -49,7 +52,7 @@ public interface ILanguage {
 	String labelEngineTitle();
 	
 	// Métodos que se usarán para purchase_accessories.
-	String labelAccessoriesTitle();
+	String purchaseAccessoriesTitle();
 	String labelModelCar();
 	String checkBoxElectricElevation();
 	String checkBoxBrowser();
@@ -62,7 +65,19 @@ public interface ILanguage {
 	String labelBasePrice();
 	String labelIncreasePrice();
 	String labelTotalPrice();
-	String btnBack();
-	String btnEnd();
+
+	// Métodos que se usarán para add_car.
+	String addCarTitle();
+	String labelId();
+	String labelName();
+	String labelDescription();
+	String labelImg_Name();
+	String labelPrice();
+	String errorImgName();
+	String errorImgNameTitle();
+	
+	// Métodos que se usarán para delete_car.
+	String deleteCarTitle();
+	String dataDeleteCarTitle();
 	
 }

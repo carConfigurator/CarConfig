@@ -200,13 +200,25 @@ public class LanguageDAOCA implements ILanguage{
 	}
 
 	@Override
+	public String btnBack() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String btnEnd() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public String labelEngineTitle() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String labelAccessoriesTitle() {
+	public String purchaseAccessoriesTitle() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -284,15 +296,65 @@ public class LanguageDAOCA implements ILanguage{
 	}
 
 	@Override
-	public String btnBack() {
+	public String addCarTitle() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String btnEnd() {
+	public String labelId() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String labelName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelImg_Name() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelPrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String errorImgName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String errorImgNameTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deleteCarTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String dataDeleteCarTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }
