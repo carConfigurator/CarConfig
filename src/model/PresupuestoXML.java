@@ -111,35 +111,37 @@ public class PresupuestoXML {
 	
 	
 	private void createNodes() {
+		Element raiz = document.getDocumentElement();
+		
 		this.element = document.createElement("employee");
 		Text text = document.createTextNode(getEmployee());
 //		element.appendChild(this.element);
 		this.element.appendChild(text);
-//		this.document.appendChild(element);
+		raiz.appendChild(element);
 		
 		this.element = document.createElement("client");
 		text = document.createTextNode(getClient());
 //		element.appendChild(this.element);
 		this.element.appendChild(text);
-//		this.document.appendChild(element);
+		raiz.appendChild(element);
 		
 		this.element = document.createElement("model");
 		text = document.createTextNode(getModel());
 //		element.appendChild(this.element);
 		this.element.appendChild(text);
-//		this.document.appendChild(element);
+		raiz.appendChild(element);
 		
 		this.element = document.createElement("engine");
 		text = document.createTextNode(getEngine());
 //		element.appendChild(this.element);
 		this.element.appendChild(text);
-//		this.document.appendChild(element);
+		raiz.appendChild(element);
 		
 		this.element = document.createElement("accesories");
 		text = document.createTextNode(getClient());
 //		element.appendChild(this.element);
 		this.element.appendChild(text);
-//		this.document.appendChild(element);
+		raiz.appendChild(element);
 		
 		createXML();
 	}
@@ -147,18 +149,17 @@ public class PresupuestoXML {
 	private void createXML() {
 		Source source = new DOMSource(document);
 		Result result = new StreamResult(new File("employees\\budgets\\presupuesto.xml")); //nombre del archivo
-		Transformer transformer = null;
+		Transformer transformer;
 		
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
+			try {
+				transformer.transform(source, result);
+			} catch (TransformerException e) {
+				e.printStackTrace();
+			}
 		} catch (TransformerException e) {
 			System.out.println("Error: " + e);
-		}
-		
-		try {
-			transformer.transform(source, result);
-		} catch (TransformerException e) {
-			e.printStackTrace();
 		}
 	}
 	

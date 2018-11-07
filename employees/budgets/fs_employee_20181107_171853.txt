@@ -1,4 +1,3 @@
-Datos Temporales
 [Empleado] dario.delcore
 ------
 [Cliente] ad, f, f, f, f@asdf.com, Desconocido, null
