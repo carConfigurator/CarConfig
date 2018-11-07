@@ -39,21 +39,20 @@ public class Delete_Car extends JFrame{
 	private ConfigurationLoader configLoad;
 	private Client client;
 	private String username;
-	private int idSelected;
+	private Model model;
 	
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
 	private Document documentOld;
-	private Document documentNew;
 	
 	private JPanel panel = new JPanel();
 
-	public Delete_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, int idSelected) {
+	public Delete_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model) {
 		this.configLoad = configLoad;
 		this.language = language;
 		this.username = username;
 		this.client = client;
-		this.idSelected = idSelected;
+		this.model = model;
 		
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
@@ -77,7 +76,7 @@ public class Delete_Car extends JFrame{
 			Node nNode = nList.item(i);
 			Element eElement = (Element) nNode;
 			//cuando lo encontremos cogemos la info de ese modelo y lo guardamos al array
-			if (eElement.getElementsByTagName("id").item(0).getTextContent().equals(""+this.idSelected)) {
+			if (eElement.getElementsByTagName("id").item(0).getTextContent().equals(""+this.model.getIdSelected())) {
 				for (int j = 0; j < 5; j++) {
 					String allInfo = eElement.getElementsByTagName("*").item(j).getTextContent();
 					info[j]=allInfo;
@@ -95,7 +94,7 @@ public class Delete_Car extends JFrame{
 					,language.deleteCarTitle(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		
 		if (optionPane==JOptionPane.YES_OPTION) {
-			generateXML();
+			model.deleteCar(configLoad, language, username, client, documentOld);
 		}else {
 			new Selection_Model(this.configLoad, this.language, this.username, this.client);
 		}
@@ -108,118 +107,6 @@ public class Delete_Car extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(false);
-	}
-	
-	private void generateXML() {
-		String nombre_archivo = "CarConfiguration";
-		
-		DOMImplementation implementation = builder.getDOMImplementation();
-        documentNew = implementation.createDocument(null, nombre_archivo, null);
-        documentNew.setXmlVersion("1.0");
-		
-      //Main Node
-        Element raiz = documentNew.getDocumentElement();
-
-        //creamos un boolean para ver si nos saltamos un modelo (para saltar el modelo eliminado)
-        boolean saltar=false;
-        //boolean para saber en que punto hemos eliminado el coche
-        boolean eliminat=false;
-        NodeList nListModel = documentOld.getElementsByTagName("Model");
-		for (int i = 0; i < nListModel.getLength(); i++) {
-			Node nNode = nListModel.item(i); 
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element elementKey = (Element) nNode;
-				Element itemNode = documentNew.createElement("Model");
-				for (int y = 0; y < elementKey.getElementsByTagName("*").getLength(); y++) {
-					Node nElementsKey = elementKey.getElementsByTagName("*").item(y);
-		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
-					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
-						Element elementValue = (Element) nElementsKey;
-			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
-			            //primero comprobamos si lo tenemos que eliminar
-			            if(!nodeKeyValue.getTextContent().equals(""+this.idSelected)) {
-				            keyNode.appendChild(nodeKeyValue);
-				            //y si no es el seleccionado y ya hay uno eliminado, baja el id de los demas en 1 
-				            if (keyNode.getNodeName().equals("id") && eliminat) {
-				            	nodeKeyValue.setTextContent(""+i);
-				            }
-			            }else {
-			            	y=elementKey.getElementsByTagName("*").getLength();
-			            	saltar=true;
-			            	eliminat=true;
-			            }
-					}
-					if(!saltar) {
-			            itemNode.appendChild(keyNode);
-		            }
-		    	}
-				if(!saltar) {
-		            raiz.appendChild(itemNode);
-	            }else {
-	            	saltar=false;
-	            }
-			}
-    	}
-		
-		NodeList nListEngine = documentOld.getElementsByTagName("Engine");
-		for (int i = 0; i < nListEngine.getLength(); i++) {
-			Node nNode = nListEngine.item(i);
-            Element itemNode = documentNew.createElement("Engine"); 
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element elementEngine = (Element) nNode;
-				for (int y = 0; y < elementEngine.getElementsByTagName("*").getLength(); y++) {
-					Node nElementsKey = elementEngine.getElementsByTagName("*").item(y);
-		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
-					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
-						Element elementValue = (Element) nElementsKey;
-			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
-			            keyNode.appendChild(nodeKeyValue);
-					}
-		            itemNode.appendChild(keyNode);
-		    	}
-	            raiz.appendChild(itemNode);
-			}
-    	}
-		
-		NodeList nList = documentOld.getElementsByTagName("Accessory");
-		for (int i = 0; i < nList.getLength(); i++) {
-			Node nNode = nList.item(i);
-            Element itemNode = documentNew.createElement("Accessory");
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				for (int y = 0; y < eElement.getElementsByTagName("*").getLength(); y++) {
-					Node nElementsKey = eElement.getElementsByTagName("*").item(y);
-		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
-					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
-						Element elementValue = (Element) nElementsKey;
-			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
-			            keyNode.appendChild(nodeKeyValue);
-					}
-		            itemNode.appendChild(keyNode);
-		    	}
-	            raiz.appendChild(itemNode);
-			}
-    	}
-		
-        //Generate XML
-        Source source = new DOMSource(documentNew);
-        //Indicamos donde lo queremos almacenar
-        Result result = new StreamResult(new File("src\\config\\car\\car_config.xml")); //nombre del archivo
-        Transformer transformer;
-		try {
-			transformer = TransformerFactory.newInstance().newTransformer();
-	        try {
-				transformer.transform(source, result);
-			} catch (TransformerException e) {
-				e.printStackTrace();
-			}
-		} catch (TransformerConfigurationException e) {
-			e.printStackTrace();
-		} catch (TransformerFactoryConfigurationError e) {
-			e.printStackTrace();
-		}
-		
-		new Selection_Model(this.configLoad, this.language, this.username, this.client);
 	}
 
 }
