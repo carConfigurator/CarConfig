@@ -98,6 +98,7 @@ public class Albaran extends JFrame {
 			int i = 0;
 			String line;
 			
+			//creamos el xml del presupuesti
 			PresupuestoXML xml = new PresupuestoXML();
 			
 			try {
@@ -112,16 +113,16 @@ public class Albaran extends JFrame {
 					}
 					
 					if(line.contains("[Modelo]")) {
-						xml.setModel(line);
+						xml.setModel(line);//le falta el nombre de la imagen
 					}
 					
 					if(line.contains("[Motor]")) {
-						xml.setEngine(line);
+						xml.setEngine(line);//le falta nombre de la imagen y modelos disponibles
 					}
 					
 					if(line.contains("[Accesorios]")) {
 						while(!(line = br.readLine()).contains("------")) {
-							xml.setAccessories(line + "||");
+							xml.setAccessories(line + "||");//le falta nombre de la imagen y modelos disponibles
 						}
 					}
 				}
@@ -130,6 +131,7 @@ public class Albaran extends JFrame {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			xml.headerXML();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
