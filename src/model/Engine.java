@@ -110,4 +110,21 @@ public class Engine {
 	public ArrayList<String> getEngines(){
 		return this.getEngines;
 	}
+	
+	public String getEngineSelected(int idEngine) {
+		NodeList nList = document.getElementsByTagName("Engine");
+		String[] engines = new String[nList.getLength()];
+		for (int i = 0; i < engines.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(idEngine == Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent())) {
+				int id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
+				String descripcion = eElement.getElementsByTagName("description").item(0).getTextContent();
+				double price = Double.parseDouble(eElement.getElementsByTagName("price").item(0).getTextContent());
+				return id + ", " + nom + ", " + descripcion + ", " + price;
+			}
+		}
+		return null;
+	}
 }

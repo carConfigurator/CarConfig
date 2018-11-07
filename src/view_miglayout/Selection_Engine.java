@@ -24,7 +24,12 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
@@ -41,6 +46,8 @@ public class Selection_Engine extends JFrame {
 	private Client client;
 	private Model model;
 	private Engine engine;
+	private File temp;
+	private JList list;
 	
 	JPanel panel;
 	JLabel lblTitulo, lblUsername;
@@ -54,6 +61,28 @@ public class Selection_Engine extends JFrame {
 		this.client = client;
 		this.model = model;
 		this.engine = engine;
+		
+		FileWriter fw;
+		try {
+			fw = new FileWriter(this.temp, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(username);
+			bw.newLine();
+			bw.write("------");
+			bw.newLine();
+			bw.write(this.client.toString());
+			bw.newLine();
+			bw.write("------");
+			bw.newLine();
+			bw.write(this.model.toString());
+			bw.write("------");
+			bw.newLine();
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		onCreate();
 	}
@@ -69,7 +98,10 @@ public class Selection_Engine extends JFrame {
 		onCreate();
 	}
 	
-	public void onCreate() {		
+	public void onCreate() {
+		
+		this.temp = new File(this.configLoad.getTemporalPathFile());
+		
 		// Configuración del Panel
 		this.panel = new JPanel();
 		this.panel.setLayout(new MigLayout("insets 20"));
@@ -82,7 +114,7 @@ public class Selection_Engine extends JFrame {
 		this.lblUsername = new JLabel(this.language.labelAuthIn() + this.username);
 		this.lblUsername.setFont(new Font("Tahoma", 0, 11));
 		 
-		JList list = new JList();
+		this.list = new JList();
 		DefaultListModel modelo = new DefaultListModel(); // Sirve para introducir elementos de forma indirecta (Ej: Haciendo un bucle para añadir elementos).
 		// Llamo al metodo loadEngines() y le paso el id que el usuario ha seleccionado.
 		this.engine.loadEngines(this.model.getIdSelected());
@@ -95,6 +127,7 @@ public class Selection_Engine extends JFrame {
 		
 		// PARA AÑADIR CONTENIDO A LA LISTA DEBE SER CON STRINGS.
 		list.setModel(modelo);
+		list.setSelectedIndex(0);
 		list.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		list.setBackground(new Color(157, 157, 157));
 		list.setBorder(BorderFactory.createEmptyBorder(10, 25, 10, 25));
@@ -136,6 +169,20 @@ public class Selection_Engine extends JFrame {
 	
 	protected void nextActionPerformed() {
 		setVisible(false);
+		
+		try {
+			FileWriter fw = new FileWriter(this.temp, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.newLine();
+			bw.write(this.engine.getEngineSelected(this.list.getSelectedIndex() + 1));
+			bw.newLine();
+			bw.write("------");
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		new Purchase_Accessories(this.configLoad, this.language, this.username, this.client, this.model, this.engine);
 	}
 

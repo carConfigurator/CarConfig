@@ -62,9 +62,7 @@ public class Accessory {
 				mod_avaliable[temp] = eElement.getElementsByTagName("models_disponibles").item(0).getTextContent();
 			}
 		}
-//		for (int i = 0; i < modelosString.length; i++) {
-//			mod_avaliable[i]=Integer.parseInt(modelosString[i]);
-//		}
+		
 		return mod_avaliable;
 	}
 
@@ -78,6 +76,7 @@ public class Accessory {
 				image[temp] = eElement.getElementsByTagName("imatge_nom").item(0).getTextContent();
 			}
 		}
+		
 		return image;
 	}
 
@@ -91,6 +90,7 @@ public class Accessory {
 				description[temp] = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 			}
 		}
+		
 		return description;
 	}
 
@@ -162,11 +162,177 @@ public class Accessory {
 	}
 
 	public boolean checkElectricElevation(int idSelected) {
-		System.out.println("electric elevation");
+		return checkAccesory(idSelected, "Elevaduras electricas");
+	}
+	
+	public boolean checkNavegation(int idSelected) {
+		return checkAccesory(idSelected, "Navegador"); 
+	}
+	
+	public boolean checkTire(int idSelected) {
+		return checkAccesory(idSelected, "Yantas de aleacion");
+	}
+	
+	public boolean checkSeating(int idSelected) {
+		return checkAccesory(idSelected, "Asientos calefactados");
+	}
+	
+	public boolean checkSpeedCruise(int idSelected) {
+		return checkAccesory(idSelected, "Velocidad de crucero");
+	}
+	
+	public boolean checkMetallicPaint(int idSelected) {
+		return checkAccesory(idSelected, "Pintura metalizada");
+	}
+	
+	public boolean checkAutoParking(int idSelected) {
+		return checkAccesory(idSelected, "Aparcamiento automatico");
+	}
+	
+	public boolean checkUSB(int idSelected) {
+		return checkAccesory(idSelected, "Conectores USB");
+	}	
+
+	private boolean checkAccesory(int idSelected, String accessory) {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			// Selecciono los elementos del nodo models_avaliable
+			String available_models = eElement.getElementsByTagName("models_disponibles").item(0).getTextContent();
+			String nom_accesories = eElement.getElementsByTagName("nom").item(0).getTextContent();
+			
+			if(nom_accesories.equals(accessory)) {
+				// Hago un split para poder añadirlos a continuación en un array de int.
+				String[] am = available_models.split(";");
+				int[] models = new int[am.length];
+				// Añado los id de los modelos disponibles en el array int.
+				for (int j = 0; j < am.length; j++) {
+					models[j] = Integer.parseInt(am[j]);
+				}
+				
+				// Recorro el array en busca de la coincidencia con el id del modelo seleccionado.
+				for (int j = 0; j < models.length; j++) {
+					if(models[j] == idSelected) {
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 
-	public boolean checkNavegation(int idSelected) {
-		return false;
+	public double getPriceElevators() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 1) {
+				return Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+			}
+		}
+		return 0;
+	}
+
+	public double getPriceNavegador() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 2) {
+				return Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+			}
+		}
+		return 0;
+	}
+
+	public double getPriceTires() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 3) {
+				return Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+			}
+		}
+		return 0;
+	}
+
+	public double getPriceSeating() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 4) {
+				return Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+			}
+		}
+		return 0;
+	}
+	
+	public double getPriceSpeedCruise() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 5) {
+				return Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+			}
+		}
+		return 0;
+	}
+
+	public double getPriceAutoParking() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 6) {
+				return Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+			}
+		}
+		return 0;
+	}
+
+	public double getPriceUSB() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 7) {
+				return Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+			}
+		}
+		return 0;
+	}
+
+	public double getPriceMetallicPaint() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 8) {
+				return Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+			}
+		}
+		return 0;
 	}
 }

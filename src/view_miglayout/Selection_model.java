@@ -103,6 +103,23 @@ public class Selection_model extends JFrame{
 		this.engine = new Engine(this.configLoad);
 		this.accessory = new Accessory(this.configLoad);
 		
+		FileWriter fw;
+		try {
+			fw = new FileWriter(this.temp, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(username);
+			bw.newLine();
+			bw.write("------");
+			bw.newLine();
+			bw.write(this.client.toString());
+			bw.newLine();
+			bw.write("------");
+			bw.newLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		onCreate();
 	}
 	
@@ -357,6 +374,7 @@ public class Selection_model extends JFrame{
 		String name = model.getNameSelected();
 		String description = model.getDescriptionSelected();
 		double price = model.getPriceSelected();
+		
 		try {
 			FileWriter fw = new FileWriter(this.temp, true);
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -369,6 +387,7 @@ public class Selection_model extends JFrame{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		setVisible(false);
 		new Selection_Engine(this.configLoad, this.language, this.username, this.client, this.model);
 	}
@@ -378,11 +397,13 @@ public class Selection_model extends JFrame{
 		new Add_Car(configLoad, language, username, client, model);
 		setVisible(false);
 	}
+	
 	private void delete() {
 		System.out.println("[INFO] - Eliminando un coche...");
 		setVisible(false);
 		new Delete_Car(configLoad, language, username, client, model, model.getIdSelected());
 	}
+	
 	private void modify() {
 		System.out.println("[INFO] - Modificando un coche...");
 	}
