@@ -44,8 +44,9 @@ public class PresupuestoXML {
 
 		this.implementation = builder.getDOMImplementation();
 		
-		this.transformer = null;
+//		this.transformer = null;
 		accessories = new ArrayList<String>();
+		headerXML();
 	}
 
 	public String getEmployee() {
@@ -112,28 +113,33 @@ public class PresupuestoXML {
 	private void createNodes() {
 		this.element = document.createElement("employee");
 		Text text = document.createTextNode(getEmployee());
-		element.appendChild(this.element);
+//		element.appendChild(this.element);
 		this.element.appendChild(text);
+//		this.document.appendChild(element);
 		
 		this.element = document.createElement("client");
 		text = document.createTextNode(getClient());
-		element.appendChild(this.element);
+//		element.appendChild(this.element);
 		this.element.appendChild(text);
+//		this.document.appendChild(element);
 		
 		this.element = document.createElement("model");
 		text = document.createTextNode(getModel());
-		element.appendChild(this.element);
+//		element.appendChild(this.element);
 		this.element.appendChild(text);
+//		this.document.appendChild(element);
 		
 		this.element = document.createElement("engine");
 		text = document.createTextNode(getEngine());
-		element.appendChild(this.element);
+//		element.appendChild(this.element);
 		this.element.appendChild(text);
+//		this.document.appendChild(element);
 		
 		this.element = document.createElement("accesories");
 		text = document.createTextNode(getClient());
-		element.appendChild(this.element);
+//		element.appendChild(this.element);
 		this.element.appendChild(text);
+//		this.document.appendChild(element);
 		
 		createXML();
 	}

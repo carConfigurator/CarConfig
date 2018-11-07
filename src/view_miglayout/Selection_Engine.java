@@ -60,11 +60,12 @@ public class Selection_Engine extends JFrame {
 		this.username = username;
 		this.client = client;
 		this.model = model;
-		this.engine = engine;
+		this.engine = new Engine(this.configLoad);
+		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		FileWriter fw;
 		try {
-			fw = new FileWriter(this.temp, true);
+			fw = new FileWriter(this.temp);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write("[Empleado] ");
 			bw.write(username);

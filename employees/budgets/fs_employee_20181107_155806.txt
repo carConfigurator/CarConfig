@@ -1,13 +1,11 @@
-Datos Temporales
 [Empleado] dario.delcore
 ------
-[Cliente] ajfk, fdskjal, kljfds, fds, fkl@asdf.co, Desconocido, null
+[Cliente] Dario, Del Core, Sogas, Direccion, dariodelc@hotmail.com, Hombre, null
 ------
 [Modelo] 1, SEAT Mii P5, Observaciones del SEAT Mii 5P, 7726.2
 ------
 [Motor] 1, Ibiza 1.6 TDI CR 70 KW (95 CV), Diesel / 5 Velocidades Manual, 18.59
 ------
 [Accesorios]
-2, Navegador, Navegador, 70.0
 ------
-6244,63
+6188,63

@@ -240,7 +240,8 @@ public class Purchase_Accessories extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				setVisible(false);
+				new Selection_Engine(configLoad, language, username, client, model, engine);
 			}
 			
 		});
