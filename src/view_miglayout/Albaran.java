@@ -12,6 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -23,9 +26,12 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
+import com.toedter.calendar.JDateChooser;
+
 import config.ConfigurationLoader;
 import idao.ILanguage;
 import model.Client;
+import model.PresupuestoXML;
 
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
@@ -59,7 +65,8 @@ public class Albaran extends JFrame {
 		this.contentPane.setLayout(new MigLayout("insets 30"));
 		this.contentPane.setBackground(new Color(255, 255, 255));
 		this.temp = new File(this.configLoad.getTemporalPathFile());
-		this.budget = new File(this.configLoad.getBudgetPathFile() + "fs_employee.txt");
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+		this.budget = new File(this.configLoad.getBudgetPathFile() + "fs_employee_" + timeStamp + ".txt");
 		
 		JTextArea ta = new JTextArea();
 		ta.setEditable(false);
@@ -79,12 +86,41 @@ public class Albaran extends JFrame {
 		}
 		
 		this.contentPane.add(ta, "wrap, pushx, growx, pushy, growy");
-		
+		generateXMLBudget();
 		generateBudget();
-		
 		JFrame();
 	}
 	
+	private void generateXMLBudget() {
+		try {
+			FileReader fr = new FileReader(this.temp);
+			BufferedReader br = new BufferedReader(fr);
+			int i = 0;
+			String line;
+			
+			PresupuestoXML xml = new PresupuestoXML();
+			
+			try {
+				while((line = br.readLine())!=null) {
+					if(i == 0){
+						xml.setEmployee(line);
+					}else if(i == 2) {
+						xml.setClient(line);
+					}else if(i==4) {
+						xml.setModel(line);
+					}else if(i==6) {
+						xml.setEmployee(line);
+					}
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void generateBudget() {
 		try {
 			FileReader fr = new FileReader(this.temp);

@@ -1,13 +1,14 @@
 alexis.mengual
 ------
-a, a, a, a, a@a.com, null
+Alexis, Mengual, Vázquez, Mi Dirección, lexmengual@gmail.com, null
 ------
 3, SEAT Nuevo Arona, Observaciones del SEAT Nuevo Arona, 15239.1
 ------
 1, Ibiza 1.6 TDI CR 70 KW (95 CV), Diesel / 5 Velocidades Manual, 18.59
 ------
 3, Yantas de aleacion, Yantas de aleacion, 120.0
-7, Conectores USB, Conectores USB, 200.0
+6, Aparcamiento automatico, Aparcamiento automatico, 530.0
+8, Pintura metalizada, Pintura metalizada, 500.0
 ------
 Descuento: 20%
-Precio Final: 15577.69
+Precio Final: 16407.690000000002
