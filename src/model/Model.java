@@ -30,7 +30,7 @@ public class Model {
 	private String[] name, description, image_name;
 	
 	// En estos atributos estará la información del modelo seleccionado.
-	private String nameSelected, descriptionSelected;
+	private String nameSelected, descriptionSelected, image_nameSelected;
 	private int idSelected;
 	private double priceSelected;
 	
@@ -160,6 +160,7 @@ public class Model {
 				this.nameSelected = eElement.getElementsByTagName("nom").item(0).getTextContent();
 				this.descriptionSelected = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 				this.priceSelected = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+				this.image_nameSelected = eElement.getElementsByTagName("imatge_nom").item(0).getTextContent();
 				System.out.print("ID del Modelo seleccionado encontrado!\n");
 			}
 		}
@@ -185,5 +186,8 @@ public class Model {
 		return priceSelected;
 	}
 	
+	public String getImage_nameSelected() {
+		return image_nameSelected;
+	}
 	
 }

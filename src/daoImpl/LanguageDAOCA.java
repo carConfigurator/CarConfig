@@ -355,6 +355,90 @@ public class LanguageDAOCA implements ILanguage{
 		return null;
 	}
 
+	@Override
+	public String errorParseDouble() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String errorParseDoubleTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String errorPriceNull() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String errorPriceNullTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String errorImgNameNull() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String errorImgNameNullTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelDeliveryNote() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelClient() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelCompany() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelCompanyName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelEmployee() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String labelMail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String table() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String tableOne() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }

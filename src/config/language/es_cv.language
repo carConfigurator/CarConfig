@@ -69,11 +69,26 @@
 		<label_description>Descripción: </label_description>
 		<label_img_name>Nombre de la Imagen: </label_img_name>
 		<label_price>Precio: </label_price>
+		<error_parse_double>El valor del String no se puede formatear a Double</error_parse_double>
+		<error_parse_double_title>Error Precio</error_parse_double_title>
+		<error_price_null>El precio no se puede dejar vacio</error_price_null>
+		<error_price_null_title>Error Precio Vacio</error_price_null_title>
 		<error_img_name>La imagen que desea insertar no existe</error_img_name>
 		<error_img_name_title>Error Imagen</error_img_name_title>
+		<error_img_name_null>Se tiene que poner una imagen</error_img_name_null>
+		<error_img_name_null_title>Error Imagen Vacia</error_img_name_null_title>
 	</Add_Car>
 	<Delete_Car>
 		<title>Eliminar un coche</title>
 		<label_data_title>Estas seguro que queres eliminar el siguiente coche?</label_data_title>
 	</Delete_Car>
+	<Delivery_Note>
+		<label_delivery_note>ALBARAN</label_delivery_note>
+		<label_data_title>Cliente: </label_client>
+		<label_company>Empresa: </label_company>
+		<label_company_name>SEAT</label_company_name>
+		<lable_employee>Empleado: </lable_employee>
+		<label_mail>Correo: </label_mail>
+		<table>Cantidad,Especificacion,Precio,Informe</table>
+		<tableOne>Precio Base,Descuento,Precio Total,IVA(21%)</tableOne>
 </Lenguage>

@@ -176,6 +176,7 @@ public class Purchase_Accessories extends JFrame {
 		this.btnFinalizar.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
+<<<<<<< HEAD
 		
 		this.btnAtras.addActionListener(new ActionListener() {
 			
@@ -186,12 +187,15 @@ public class Purchase_Accessories extends JFrame {
 			
 		});
 		
+=======
+>>>>>>> 4f426254565acff75b2aec88f39a862847e692f5
 		this.btnFinalizar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				new Albaran(configLoad, language, username, client);
+<<<<<<< HEAD
 			}
 		});
 		
@@ -348,6 +352,11 @@ public class Purchase_Accessories extends JFrame {
 		});
 		
 		// Add components to JPanel
+=======
+				
+			}
+		});
+>>>>>>> 4f426254565acff75b2aec88f39a862847e692f5
 		this.panel.add(lblTitulo);
 		this.panel.add(this.username, "wrap, align right");
 		this.panel.add(lblModeloCoche, "wrap, align right");

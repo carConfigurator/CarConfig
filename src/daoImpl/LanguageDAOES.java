@@ -659,6 +659,50 @@ public class LanguageDAOES implements ILanguage{
 		}
 		return null;
 	}
+	
+	@Override
+	public String errorParseDouble() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_parse_double").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String errorParseDoubleTitle() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_parse_double_title").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String errorPriceNull() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_price_null").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String errorPriceNullTitle() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_price_null_title").item(0).getTextContent();
+		}
+		return null;
+	}
 
 	@Override
 	public String errorImgName() {
@@ -678,6 +722,28 @@ public class LanguageDAOES implements ILanguage{
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
 			return ""+eElement.getElementsByTagName("error_img_name_title").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String errorImgNameNull() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_img_name_null").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String errorImgNameNullTitle() {
+		NodeList nList = document.getElementsByTagName("Add_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("error_img_name_null_title").item(0).getTextContent();
 		}
 		return null;
 	}
@@ -705,4 +771,96 @@ public class LanguageDAOES implements ILanguage{
 		}
 		return null;
 	}
+
+	//		-------------------Métodos que se usarán para Delete_Car.-------------------
+
+	@Override
+	public String labelDeliveryNote() {
+		NodeList nList = document.getElementsByTagName("Delivery_Note");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_data_title").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelClient() {
+		NodeList nList = document.getElementsByTagName("Delivery_Note");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_data_title").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelCompany() {
+		NodeList nList = document.getElementsByTagName("Delivery_Note");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_company").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelCompanyName() {
+		NodeList nList = document.getElementsByTagName("Delivery_Note");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_company_name").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelEmployee() {
+		NodeList nList = document.getElementsByTagName("Delivery_Note");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("lable_employee").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String labelMail() {
+		NodeList nList = document.getElementsByTagName("Delivery_Note");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("label_mail").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String table() {
+		NodeList nList = document.getElementsByTagName("Delivery_Note");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("table").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	@Override
+	public String tableOne() {
+		NodeList nList = document.getElementsByTagName("Delivery_Note");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("tableOne").item(0).getTextContent();
+		}
+		return null;
+	}
+
+	
 }

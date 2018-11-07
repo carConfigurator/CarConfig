@@ -37,7 +37,7 @@ import idao.ILanguage;
 import javafx.scene.input.DataFormat;
 import model.Client;
 import net.miginfocom.swing.MigLayout;
-import view_miglayout.Selection_model;
+import view_miglayout.Selection_Model;
 
 public class Data_Clients extends JFrame{
 
@@ -301,7 +301,7 @@ public class Data_Clients extends JFrame{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-        	new Selection_model(this.configLoad, this.language, this.username, client);
+        	new Selection_Model(this.configLoad, this.language, this.username, client);
         	setVisible(false);
 		}
 	}

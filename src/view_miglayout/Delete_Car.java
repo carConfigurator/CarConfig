@@ -48,12 +48,12 @@ public class Delete_Car extends JFrame{
 	
 	private JPanel panel = new JPanel();
 
-	public Delete_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, int idSelected) {
+	public Delete_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, int idSelected) {
 		this.configLoad = configLoad;
 		this.language = language;
 		this.username = username;
 		this.client = client;
-		this.idSelected = 5;	//idSelected
+		this.idSelected = idSelected;
 		
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
@@ -97,7 +97,7 @@ public class Delete_Car extends JFrame{
 		if (optionPane==JOptionPane.YES_OPTION) {
 			generateXML();
 		}else {
-			new Selection_model(this.configLoad, this.language, this.username, this.client);
+			new Selection_Model(this.configLoad, this.language, this.username, this.client);
 		}
 		
 		JFrame();
@@ -105,11 +105,7 @@ public class Delete_Car extends JFrame{
 	
 	private void JFrame() {
 		add(panel);
-//		setTitle();
-		setIconImage(getIconImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setSize(400,400);
-//		pack();
 		setLocationRelativeTo(null);
 		setVisible(false);
 	}
@@ -126,7 +122,8 @@ public class Delete_Car extends JFrame{
 
         //creamos un boolean para ver si nos saltamos un modelo (para saltar el modelo eliminado)
         boolean saltar=false;
-        
+        //boolean para saber en que punto hemos eliminado el coche
+        boolean eliminat=false;
         NodeList nListModel = documentOld.getElementsByTagName("Model");
 		for (int i = 0; i < nListModel.getLength(); i++) {
 			Node nNode = nListModel.item(i); 
@@ -139,11 +136,17 @@ public class Delete_Car extends JFrame{
 					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
 						Element elementValue = (Element) nElementsKey;
 			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
+			            //primero comprobamos si lo tenemos que eliminar
 			            if(!nodeKeyValue.getTextContent().equals(""+this.idSelected)) {
 				            keyNode.appendChild(nodeKeyValue);
+				            //y si no es el seleccionado y ya hay uno eliminado, baja el id de los demas en 1 
+				            if (keyNode.getNodeName().equals("id") && eliminat) {
+				            	nodeKeyValue.setTextContent(""+i);
+				            }
 			            }else {
 			            	y=elementKey.getElementsByTagName("*").getLength();
 			            	saltar=true;
+			            	eliminat=true;
 			            }
 					}
 					if(!saltar) {
@@ -152,6 +155,8 @@ public class Delete_Car extends JFrame{
 		    	}
 				if(!saltar) {
 		            raiz.appendChild(itemNode);
+	            }else {
+	            	saltar=false;
 	            }
 			}
     	}
@@ -214,7 +219,7 @@ public class Delete_Car extends JFrame{
 			e.printStackTrace();
 		}
 		
-		new Selection_model(this.configLoad, this.language, this.username, this.client);
+		new Selection_Model(this.configLoad, this.language, this.username, this.client);
 	}
 
 }
