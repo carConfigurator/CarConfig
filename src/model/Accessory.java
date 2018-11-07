@@ -335,4 +335,150 @@ public class Accessory {
 		}
 		return 0;
 	}
+
+	public String getElevators() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 1) {
+				int id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
+				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
+				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+				return id + ", " + nom + ", " + descripcio + ", " + price;
+			}
+		}
+		return null;
+	}
+
+	public String getNavegator() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 2) {
+				int id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
+				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
+				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+				return id + ", " + nom + ", " + descripcio + ", " + price;
+			}
+		}
+		return null;
+	}
+
+	public String getTires() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 3) {
+				int id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
+				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
+				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+				return id + ", " + nom + ", " + descripcio + ", " + price;
+			}
+		}
+		return null;
+	}
+
+	public String getSeating() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 4) {
+				int id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
+				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
+				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+				return id + ", " + nom + ", " + descripcio + ", " + price;
+			}
+		}
+		return null;
+	}
+
+	public String getSpeedCruise() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 5) {
+				int id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
+				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
+				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+				return id + ", " + nom + ", " + descripcio + ", " + price;
+			}
+		}
+		return null;
+	}
+
+	public String getAutoParking() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 6) {
+				int id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
+				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
+				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+				return id + ", " + nom + ", " + descripcio + ", " + price;
+			}
+		}
+		return null;
+	}
+
+	public String getUSB() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 7) {
+				int id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
+				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
+				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+				return id + ", " + nom + ", " + descripcio + ", " + price;
+			}
+		}
+		return null;
+	}
+
+	public String getMetallicPaint() {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == 8) {
+				int id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
+				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
+				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
+				return id + ", " + nom + ", " + descripcio + ", " + price;
+			}
+		}
+		return null;
+	}
+	
+	
 }

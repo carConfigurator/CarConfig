@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -40,14 +41,11 @@ public class Albaran extends JFrame {
 	private Client client;
 	private String username;
 	private File temp;
+	private File budget;
 	
 	// Atributos de la clase.
 	private JPanel contentPane;
-	private JTable table, table_1;
-	private JLabel lblAlbaran, lblCliente, lblEmpresa, lblNombreempresa, lblEmpleado, lblNombreempleado,
-	 lblNombre, lblPrimerApellido, lblSegundoApellido, lblDireccion, lblCorreo, lblNombrecliente, lblPriapellido, 
-	 lblSegapellido, lblDireccioncliente, lblCorreocliente;
-	private JScrollPane sp, sp2;
+	
 
 	/**
 	 * Create the frame.
@@ -61,6 +59,7 @@ public class Albaran extends JFrame {
 		this.contentPane.setLayout(new MigLayout("insets 30"));
 		this.contentPane.setBackground(new Color(255, 255, 255));
 		this.temp = new File(this.configLoad.getTemporalPathFile());
+		this.budget = new File(this.configLoad.getBudgetPathFile() + "fs_employee.txt");
 		
 		JTextArea ta = new JTextArea();
 		ta.setEditable(false);
@@ -80,9 +79,37 @@ public class Albaran extends JFrame {
 		}
 		
 		this.contentPane.add(ta, "wrap, pushx, growx, pushy, growy");
+		
+		generateBudget();
+		
 		JFrame();
 	}
 	
+	private void generateBudget() {
+		try {
+			FileReader fr = new FileReader(this.temp);
+			BufferedReader br = new BufferedReader(fr);
+			FileWriter fw = new FileWriter(this.budget);
+			BufferedWriter bw = new BufferedWriter(fw);
+			String line;
+			
+			while((line = br.readLine()) != null) {
+				bw.write(line);
+				bw.newLine();
+			}
+			
+			br.close();
+			fr.close();
+			bw.close();
+			fw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 	/*
 	 * Método para configurar la ventana actual.
 	 */

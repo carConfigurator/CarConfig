@@ -21,7 +21,7 @@ public class ConfigurationLoader {
 	private DocumentBuilder builder;
 	private Document document;
 	
-	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path, car_image_path, temporal_path_file;
+	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path, car_image_path, temporal_path_file, budget_path_file;
 	private String[] employee_list,employee_password;
 	private boolean employee_version;
 	
@@ -46,6 +46,7 @@ public class ConfigurationLoader {
 			this.employee_password=loadEmployee_password();
 			this.specifications_file_path=loadSpecifications_file_path();
 			this.temporal_path_file = loadTemporalPathFile();
+			this.budget_path_file = loadBudgetPathFile();
 		} catch (ParserConfigurationException e) {
 			System.out.println("[ERROR] - No se ha podido parsear la configuración. Más información del error: " + e);
 		} catch (SAXException e) {
@@ -55,6 +56,12 @@ public class ConfigurationLoader {
 		}
 	}
 	
+	private String loadBudgetPathFile() {
+		NodeList nList = document.getElementsByTagName("budget_path_file");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+
 	/*
 	 * Método para comprobar si ya hay una instancia generada.
 	 * @return Devuelve la instancia a la clase o un null en caso de si ya hay una.
@@ -197,6 +204,10 @@ public class ConfigurationLoader {
 
 	public String getTemporalPathFile() {
 		return temporal_path_file;
+	}
+	
+	public String getBudgetPathFile() {
+		return budget_path_file;
 	}
 	
 	/*

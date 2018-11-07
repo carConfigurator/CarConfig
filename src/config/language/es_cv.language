@@ -84,11 +84,12 @@
 	</Delete_Car>
 	<Delivery_Note>
 		<label_delivery_note>ALBARAN</label_delivery_note>
-		<label_data_title>Cliente: </label_client>
+		<label_data_title>Cliente: </label_data_title>
 		<label_company>Empresa: </label_company>
 		<label_company_name>SEAT</label_company_name>
 		<lable_employee>Empleado: </lable_employee>
 		<label_mail>Correo: </label_mail>
 		<table>Cantidad,Especificacion,Precio,Informe</table>
 		<tableOne>Precio Base,Descuento,Precio Total,IVA(21%)</tableOne>
+	</Delivery_Note>
 </Lenguage>

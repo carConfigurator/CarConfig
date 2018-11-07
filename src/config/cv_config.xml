@@ -14,5 +14,5 @@
 		<employee_password>1234,5678,1234</employee_password>
 		<specifications_file_path>src\\config\\specifications</specifications_file_path>
 		<temporal_path_file>employees\\temp\\fs_employee.txt</temporal_path_file>
-	</configuration>
+		<budget_path_file>employees\\budgets\\</budget_path_file></configuration>
 </ConfigurationLoader>

@@ -26,7 +26,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Purchase_Accessories extends JFrame {
 
@@ -38,9 +41,10 @@ public class Purchase_Accessories extends JFrame {
 	private Engine engine;
 	private Accessory accessory;
 	private JLabel username;
+	private File temp;
 	
 	JPanel panel;
-	JLabel lblTitulo, lblModeloCoche, lblPrecioBasee, lblAumento, lblTotalPrecio;
+	JLabel lblTitulo, lblModeloCoche, lblMostrarModelo, lblPrecioBasee, lblAumento, lblTotalPrecio;
 	JTextField tfAumento, tfTotalPrecio, tfPrecioBase;
 	JCheckBox cbElevadurasElectricas, cbNavegador, cbLlantasAl, cbAsientosCal, cbVelCrucero, cbAparcamietnoAuto, cbConectorUSB, cbPinturaMetal;
 	JButton btnAtras, btnFinalizar;
@@ -56,6 +60,7 @@ public class Purchase_Accessories extends JFrame {
 		this.model = model;
 		this.engine = engine;
 		this.accessory = new Accessory(this.configLoad);
+		this.temp = new File(this.configLoad.getTemporalPathFile());
 		this.Aumento = 0;
 		this.TotalPrecio = 0;
 		
@@ -71,9 +76,14 @@ public class Purchase_Accessories extends JFrame {
 		
 		this.lblTitulo = new JLabel(language.purchaseAccessoriesTitle());
 		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+//		String modelocoche = "<html><body>" + language.labelModelCar() + "<br />" + this.engine.getEngineSelected(this.engine.getIdSelected()) + "</body></html>";
 		this.lblModeloCoche = new JLabel(language.labelModelCar());
 		this.lblModeloCoche.setFont(new Font("Tahoma", 2, 12));
-		this.lblModeloCoche.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		
+		this.lblMostrarModelo = new JLabel(this.engine.getEngineSelected(this.engine.getIdSelected()));
+		this.lblMostrarModelo.setFont(new Font("Tahoma", 0, 12));
+		this.lblMostrarModelo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 		
 		this.cbElevadurasElectricas = new JCheckBox(language.checkBoxElectricElevation());
 		this.cbElevadurasElectricas.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -176,8 +186,7 @@ public class Purchase_Accessories extends JFrame {
 		this.btnFinalizar.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
-<<<<<<< HEAD
-		
+
 		this.btnAtras.addActionListener(new ActionListener() {
 			
 			@Override
@@ -187,15 +196,67 @@ public class Purchase_Accessories extends JFrame {
 			
 		});
 		
-=======
->>>>>>> 4f426254565acff75b2aec88f39a862847e692f5
 		this.btnFinalizar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+				try {
+					FileWriter fw = new FileWriter(temp, true);
+					BufferedWriter bw = new BufferedWriter(fw);
+					String accesoriesSelected = "";
+					
+					if(cbElevadurasElectricas.isSelected()) {
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getElevators();
+					}
+					
+					if(cbNavegador.isSelected()) {
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getNavegator();
+					}
+					
+					if (cbLlantasAl.isSelected()) {
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getTires();
+					}
+					
+					if(cbAsientosCal.isSelected()) {
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getSeating();
+					}
+					
+					if(cbVelCrucero.isSelected()) {
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getSpeedCruise();
+					}
+					
+					if(cbAparcamietnoAuto.isSelected()) {
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getAutoParking();
+					}
+					
+					if(cbConectorUSB.isSelected()) {
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getUSB();
+					}
+					
+					if(cbPinturaMetal.isSelected()) {
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getMetallicPaint();
+					}
+				
+					bw.write(accesoriesSelected);
+					bw.newLine();
+					bw.write("------");
+					if(configLoad.getEmployee_version()) {
+						bw.newLine();
+						bw.write("Descuento: 20%");
+						bw.newLine();
+						// Falta aplicar descuento
+						bw.write("Precio Final: " + TotalPrecio);
+					}else {
+						bw.write("Precio Final: " + TotalPrecio);
+					}
+					bw.close();
+					fw.close();
+					
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				new Albaran(configLoad, language, username, client);
-<<<<<<< HEAD
 			}
 		});
 		
@@ -351,15 +412,10 @@ public class Purchase_Accessories extends JFrame {
 			}
 		});
 		
-		// Add components to JPanel
-=======
-				
-			}
-		});
->>>>>>> 4f426254565acff75b2aec88f39a862847e692f5
 		this.panel.add(lblTitulo);
 		this.panel.add(this.username, "wrap, align right");
-		this.panel.add(lblModeloCoche, "wrap, align right");
+		this.panel.add(lblModeloCoche, "wrap, align left");
+		this.panel.add(lblMostrarModelo, "wrap, align left");
 		this.panel.add(cbElevadurasElectricas);
 		this.panel.add(cbNavegador, "align left, wrap");
 		this.panel.add(cbLlantasAl);

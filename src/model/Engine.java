@@ -22,7 +22,7 @@ import config.ConfigurationLoader;
 public class Engine {
 
 	// Atributos de la clase
-	private int id;
+	private int id, idEngineSelect;
 	private double price;
 	private String name, description, image_name;
 	private String models_available;
@@ -111,7 +111,12 @@ public class Engine {
 		return this.getEngines;
 	}
 	
+	public int getIdSelected() {
+		return this.idEngineSelect;
+	}
+	
 	public String getEngineSelected(int idEngine) {
+		this.idEngineSelect = idEngine;
 		NodeList nList = document.getElementsByTagName("Engine");
 		String[] engines = new String[nList.getLength()];
 		for (int i = 0; i < engines.length; i++) {
