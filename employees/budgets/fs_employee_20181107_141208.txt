@@ -1,7 +1,6 @@
-Datos Temporales
 [Empleado] alexis.mengual
 ------
-[Cliente] a, a, a, a, a@a.com, null
+[Cliente] a, a, a, a, a@a.com, Desconocido, null
 ------
 [Modelo] 1, SEAT Mii P5, Observaciones del SEAT Mii 5P, 7726.2
 ------

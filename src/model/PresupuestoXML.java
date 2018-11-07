@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -8,10 +9,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 
 public class PresupuestoXML {
 
@@ -92,6 +98,62 @@ public class PresupuestoXML {
 				+ ", accessories=" + accessories + "]";
 	}
 	
+	private void headerXML() {
+		// Obtenemos la implementación del DOM
+		this.implementation = builder.getDOMImplementation();
+		// Creamos el documento vacío
+		this.document = implementation.createDocument(null, "Presupuesto", null);
+		this.document.setXmlVersion("1.0");
+		
+		createNodes();
+	}
 	
+	
+	private void createNodes() {
+		this.element = document.createElement("employee");
+		Text text = document.createTextNode(getEmployee());
+		element.appendChild(this.element);
+		this.element.appendChild(text);
+		
+		this.element = document.createElement("client");
+		text = document.createTextNode(getClient());
+		element.appendChild(this.element);
+		this.element.appendChild(text);
+		
+		this.element = document.createElement("model");
+		text = document.createTextNode(getModel());
+		element.appendChild(this.element);
+		this.element.appendChild(text);
+		
+		this.element = document.createElement("engine");
+		text = document.createTextNode(getEngine());
+		element.appendChild(this.element);
+		this.element.appendChild(text);
+		
+		this.element = document.createElement("accesories");
+		text = document.createTextNode(getClient());
+		element.appendChild(this.element);
+		this.element.appendChild(text);
+		
+		createXML();
+	}
+
+	private void createXML() {
+		Source source = new DOMSource(document);
+		Result result = new StreamResult(new File("employees\\budgets\\presupuesto.xml")); //nombre del archivo
+		Transformer transformer = null;
+		
+		try {
+			transformer = TransformerFactory.newInstance().newTransformer();
+		} catch (TransformerException e) {
+			System.out.println("Error: " + e);
+		}
+		
+		try {
+			transformer.transform(source, result);
+		} catch (TransformerException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

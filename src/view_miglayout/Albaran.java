@@ -141,7 +141,7 @@ public class Albaran extends JFrame {
 			BufferedReader br = new BufferedReader(fr);
 			FileWriter fw = new FileWriter(this.budget);
 			BufferedWriter bw = new BufferedWriter(fw);
-			String line;
+			String line = br.readLine();
 			
 			while((line = br.readLine()) != null) {
 				bw.write(line);

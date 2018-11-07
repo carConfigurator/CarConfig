@@ -195,7 +195,15 @@ public class Data_Clients extends JFrame{
 		this.bg_gender.add(rb_female);
 		this.bg_gender.add(rb_unknown);
 		
-		this.rb_unknown.setSelected(true);
+		String getGender = this.client.getGender();
+		
+		if(getGender.equals("Hombre")) {
+			this.rb_male.setSelected(true);
+		}else if(getGender.equals("Mujer")) {
+			this.rb_female.setSelected(true);
+		}else if(getGender.equals(null) || getGender.equals("Desconocido")) {
+			this.rb_unknown.setSelected(true);	
+		}
 		
 		this.label_client_birthdate = new JLabel(this.language.labelClientBirhdate());
 		this.label_client_birthdate.setFont(new java.awt.Font("Tahoma", 0, 12));
@@ -286,11 +294,24 @@ public class Data_Clients extends JFrame{
 	protected void nextActionPerformed() {
 		if(checkData()) {
 			System.out.println("[INFO] - Todos los campos son correctos. Cambiando de Frame...");
+			
+			String getGender = null;
+			
+			if(rb_female.isSelected()) {
+				getGender = rb_female.getText();
+			}else if(rb_male.isSelected()) {
+				getGender = rb_male.getText();
+			}else if(rb_unknown.isSelected()) {
+				getGender = rb_unknown.getText();
+			}
+
+			System.out.println(getGender);
+			
 			if(this.dc_birthdate.getDate()==null) {
-				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText());
+				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText(), getGender);
 			}else {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText(), sdf.format(dc_birthdate.getDate()));
+				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText(), getGender, sdf.format(dc_birthdate.getDate()));
 			}
         	try {
 				FileWriter fw = new FileWriter(this.temp, true);
