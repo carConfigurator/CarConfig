@@ -66,14 +66,17 @@ public class Selection_Engine extends JFrame {
 		try {
 			fw = new FileWriter(this.temp, true);
 			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("[Empleado] ");
 			bw.write(username);
 			bw.newLine();
 			bw.write("------");
 			bw.newLine();
+			bw.write("[Cliente] ");
 			bw.write(this.client.toString());
 			bw.newLine();
 			bw.write("------");
 			bw.newLine();
+			bw.write("[Modelo] ");
 			bw.write(this.model.toString());
 			bw.write("------");
 			bw.newLine();
@@ -149,6 +152,16 @@ public class Selection_Engine extends JFrame {
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
 		
+		
+		this.btn_Anterior.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				new Selection_Model(configLoad, language, username, client, model);
+			}
+		});
+		
 		this.btn_Siguiente.addActionListener(new ActionListener() {
 			
 			@Override
@@ -175,6 +188,7 @@ public class Selection_Engine extends JFrame {
 			FileWriter fw = new FileWriter(this.temp, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.newLine();
+			bw.write("[Motor] ");
 			bw.write(this.engine.getEngineSelected(this.list.getSelectedIndex() + 1));
 			bw.newLine();
 			bw.write("------");

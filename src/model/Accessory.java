@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -475,6 +476,52 @@ public class Accessory {
 				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
 				return id + ", " + nom + ", " + descripcio + ", " + price;
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<String> getModelsAvailables(int idAccessory) {
+		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
+		ArrayList<String> name_models = new ArrayList<String>();
+		
+		for (String string : name_models) {
+			System.out.println(string);
+		}
+		
+		NodeList nList = document.getElementsByTagName("Accessory");		
+		String[] accessories = new String[nList.getLength()];
+		for (int i = 0; i < accessories.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == idAccessory) {
+				// Selecciono los elementos del nodo models_avaliable
+				String available_models = eElement.getElementsByTagName("models_disponibles").item(0).getTextContent();
+				// Hago un split para poder añadirlos a continuación en un array de int.
+				String[] am = available_models.split(";");
+				int[] models = new int[am.length];
+				
+				// Añado los id de los modelos disponibles en el array int.
+				for (int j = 0; j < am.length; j++) {
+					models[j] = Integer.parseInt(am[j]);
+				}
+				
+				for (int j = 0; j < models.length; j++) {
+					name_models.add(getNameModel(models[j]));
+				}
+			}
+		}
+		return name_models;
+	}
+
+	private String getNameModel(int idModel) {
+		NodeList nList = document.getElementsByTagName("Model");
+		String[] model = new String[nList.getLength()];
+		for (int i = 0; i < model.length; i++) {
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			if(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()) == idModel) {
+				return eElement.getElementsByTagName("nom").item(0).getTextContent();
 			}
 		}
 		return null;

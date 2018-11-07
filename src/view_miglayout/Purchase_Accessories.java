@@ -30,6 +30,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class Purchase_Accessories extends JFrame {
 
@@ -93,7 +95,12 @@ public class Purchase_Accessories extends JFrame {
 		// Compruebo que este modelo disponga de Elevaduras Electricas
 		if(!this.accessory.checkElectricElevation(this.model.getIdSelected())) {
 			this.cbElevadurasElectricas.setEnabled(false);
-			this.cbElevadurasElectricas.setToolTipText("Cargando Modelos disponibles...");
+			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(1);
+			String models = "Disponible en: ";
+			for (String string : modelsAvailables) {
+				models = models + string + ", ";
+			}
+			this.cbElevadurasElectricas.setToolTipText(models);
 		}
 		
 		this.cbNavegador = new JCheckBox(language.checkBoxBrowser());
@@ -103,6 +110,12 @@ public class Purchase_Accessories extends JFrame {
 		// Compruebo que este modelo disponga de Navegador
 		if(!this.accessory.checkNavegation(this.model.getIdSelected())) {
 			this.cbNavegador.setEnabled(false);
+			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(2);
+			String models = "Disponible en: ";
+			for (String string : modelsAvailables) {
+				models = models + string + ", ";
+			}
+			this.cbNavegador.setToolTipText(models);
 		}
 		
 		this.cbLlantasAl = new JCheckBox(language.checkBoxTires());
@@ -111,6 +124,12 @@ public class Purchase_Accessories extends JFrame {
 		this.cbLlantasAl.setFocusable(false);
 		if(!this.accessory.checkTire(this.model.getIdSelected())) {
 			this.cbLlantasAl.setEnabled(false);
+			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(3);
+			String models = "Disponible en: ";
+			for (String string : modelsAvailables) {
+				models = models + string + ", ";
+			}
+			this.cbLlantasAl.setToolTipText(models);
 		}
 		
 		this.cbAsientosCal = new JCheckBox(language.checkBoxHeatedSeats());
@@ -119,6 +138,12 @@ public class Purchase_Accessories extends JFrame {
 		this.cbAsientosCal.setFocusable(false);
 		if(!this.accessory.checkSeating(this.model.getIdSelected())) {
 			this.cbAsientosCal.setEnabled(false);
+			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(4);
+			String models = "Disponible en: ";
+			for (String string : modelsAvailables) {
+				models = models + string + ", ";
+			}
+			this.cbAsientosCal.setToolTipText(models);
 		}
 		
 		this.cbVelCrucero = new JCheckBox(language.checkBoxCruisingSpeed());
@@ -127,6 +152,12 @@ public class Purchase_Accessories extends JFrame {
 		this.cbVelCrucero.setFocusable(false);
 		if(!this.accessory.checkSpeedCruise(this.model.getIdSelected())) {
 			this.cbVelCrucero.setEnabled(false);
+			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(5);
+			String models = "Disponible en: ";
+			for (String string : modelsAvailables) {
+				models = models + string + ", ";
+			}
+			this.cbVelCrucero.setToolTipText(models);
 		}
 		
 		this.cbAparcamietnoAuto = new JCheckBox(language.checkBoxAutomaticParking());
@@ -135,6 +166,12 @@ public class Purchase_Accessories extends JFrame {
 		this.cbAparcamietnoAuto.setFocusable(false);
 		if(!this.accessory.checkAutoParking(this.model.getIdSelected())) {
 			this.cbAparcamietnoAuto.setEnabled(false);
+			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(6);
+			String models = "Disponible en: ";
+			for (String string : modelsAvailables) {
+				models = models + string + ", ";
+			}
+			this.cbAparcamietnoAuto.setToolTipText(models);
 		}
 		
 		this.cbConectorUSB = new JCheckBox(language.checkBoxUsbConnectors());
@@ -143,6 +180,12 @@ public class Purchase_Accessories extends JFrame {
 		this.cbConectorUSB.setFocusable(false);
 		if(!this.accessory.checkUSB(this.model.getIdSelected())) {
 			this.cbConectorUSB.setEnabled(false);
+			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(7);
+			String models = "Disponible en: ";
+			for (String string : modelsAvailables) {
+				models = models + string + ", ";
+			}
+			this.cbConectorUSB.setToolTipText(models);
 		}
 		
 		this.cbPinturaMetal = new JCheckBox(language.checkBoxMetallizedPaint());
@@ -151,6 +194,12 @@ public class Purchase_Accessories extends JFrame {
 		this.cbPinturaMetal.setFocusable(false);
 		if(!this.accessory.checkMetallicPaint(this.model.getIdSelected())) {
 			this.cbPinturaMetal.setEnabled(false);
+			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(8);
+			String models = "Disponible en: ";
+			for (String string : modelsAvailables) {
+				models = models + string + ", ";
+			}
+			this.cbPinturaMetal.setToolTipText(models);
 		}
 		
 		JLabel lblPrecioBase = new JLabel(language.labelBasePrice());
@@ -237,18 +286,18 @@ public class Purchase_Accessories extends JFrame {
 					if(cbPinturaMetal.isSelected()) {
 						accesoriesSelected = accesoriesSelected + "\n" + accessory.getMetallicPaint();
 					}
-				
+					bw.newLine();
+					bw.write("[Accesorios]");
 					bw.write(accesoriesSelected);
 					bw.newLine();
 					bw.write("------");
 					if(configLoad.getEmployee_version()) {
+						System.out.println("[INFO] - Aplicando descuento de empleado...");
 						bw.newLine();
-						bw.write("Descuento: 20%");
-						bw.newLine();
-						// Falta aplicar descuento
-						bw.write("Precio Final: " + TotalPrecio);
+						double precioFinal = TotalPrecio * 0.8;
+						bw.write(String.format("%.2f", precioFinal));
 					}else {
-						bw.write("Precio Final: " + TotalPrecio);
+						bw.write(String.format("%.2f", TotalPrecio));
 					}
 					bw.close();
 					fw.close();

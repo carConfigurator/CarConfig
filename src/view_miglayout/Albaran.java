@@ -76,7 +76,7 @@ public class Albaran extends JFrame {
 		try {
 			fr = new FileReader(this.temp);
 			BufferedReader br = new BufferedReader(fr);
-			String linea;
+			String linea = br.readLine();
 			
 			while((linea = br.readLine()) != null) {
 				ta.setText(ta.getText() + linea + "\n");
@@ -102,16 +102,30 @@ public class Albaran extends JFrame {
 			
 			try {
 				while((line = br.readLine())!=null) {
-					if(i == 0){
-						xml.setEmployee(line);
-					}else if(i == 2) {
-						xml.setClient(line);
-					}else if(i==4) {
-						xml.setModel(line);
-					}else if(i==6) {
+					if(line.contains("[Empleado]")) {
+						System.out.println("[INFO] - Empleado encontrado!");
 						xml.setEmployee(line);
 					}
+					
+					if(line.contains("[Cliente]")) {
+						xml.setClient(line);
+					}
+					
+					if(line.contains("[Modelo]")) {
+						xml.setModel(line);
+					}
+					
+					if(line.contains("[Motor]")) {
+						xml.setEngine(line);
+					}
+					
+					if(line.contains("[Accesorios]")) {
+						while(!(line = br.readLine()).contains("------")) {
+							xml.setAccessories(line + "||");
+						}
+					}
 				}
+				System.out.println(xml.toString());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -183,6 +183,9 @@ public class Login extends JFrame{
 						try {
 							FileWriter fw = new FileWriter(this.temp);
 							BufferedWriter bw = new BufferedWriter(fw);
+							bw.write("Datos Temporales");
+							bw.newLine();
+							bw.write("[Empleado] ");
 							bw.write(username);
 							bw.newLine();
 							bw.write("------");

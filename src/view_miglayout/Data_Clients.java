@@ -69,6 +69,9 @@ public class Data_Clients extends JFrame{
 		try {
 			FileWriter fw = new FileWriter(this.temp);
 			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("Datos Temporales");
+			bw.newLine();
+			bw.write("[Empleado] ");
 			bw.write(username);
 			bw.newLine();
 			bw.write("------");
@@ -293,6 +296,7 @@ public class Data_Clients extends JFrame{
 				FileWriter fw = new FileWriter(this.temp, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.newLine();
+				bw.write("[Cliente] ");
 				bw.write(client.toString());
 				bw.newLine();
 				bw.write("------");

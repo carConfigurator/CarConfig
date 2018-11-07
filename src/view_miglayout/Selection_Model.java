@@ -107,25 +107,31 @@ public class Selection_Model extends JFrame{
 		this.model = model;
 		this.engine = new Engine(this.configLoad);
 		this.accessory = new Accessory(this.configLoad);
+		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		FileWriter fw;
 		try {
-			fw = new FileWriter(this.temp, true);
+			fw = new FileWriter(this.temp);
 			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("Datos Temporales");
+			bw.newLine();
+			bw.write("[Empleado] ");
 			bw.write(username);
 			bw.newLine();
 			bw.write("------");
 			bw.newLine();
+			bw.write("[Cliente] ");
 			bw.write(this.client.toString());
 			bw.newLine();
 			bw.write("------");
-			bw.newLine();
+			bw.close();
+			fw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		onCreate();
+//		listener(coch, b, cocheId);
 	}
 	
 	public Selection_Model(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
@@ -351,9 +357,11 @@ public class Selection_Model extends JFrame{
 						));
 				for (int i = 0; i < imatge_nom.length; i++) {
 					if (model.getId()[i]==cocheId) {
+						// Guardamos la posición del Vehículo seleccionado.
 						posicion=i;
 					}
 				}
+				
 				File fImg = new File(coch.getDescription());
 				area.setText("<html><div style='text-align: center;'><span style='color: rgb(215,18,43); font-weight:600; padding:10px; font-family: Tahoma;'>"+model.getName()[posicion]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
 				areaInfo.setText("<html><div style='text-align: center; font-family: Tahoma;'><span style=padding:10px;'>"+model.getDescription()[posicion]+"</span></div><br></html>");
@@ -385,6 +393,7 @@ public class Selection_Model extends JFrame{
 			FileWriter fw = new FileWriter(this.temp, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.newLine();
+			bw.write("[Modelo] ");
 			bw.write(id+", "+name+", "+description+", "+price);
 			bw.newLine();
 			bw.write("------");
