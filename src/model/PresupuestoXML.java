@@ -170,12 +170,8 @@ public class PresupuestoXML {
 					text = document.createTextNode(getModel().split(",")[2]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Image_Name");
-					text = document.createTextNode(getModel().split(",")[3]);
-				this.node.appendChild(text);//añadimos el texto al node
-			this.element.appendChild(this.node);//añadimos el node al element
 				this.node = document.createElement("Price");
-					text = document.createTextNode(getModel().split(",")[4]);
+					text = document.createTextNode(getModel().split(",")[3]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
 		raiz.appendChild(element);//añadimos el element en la raiz
@@ -195,16 +191,8 @@ public class PresupuestoXML {
 					text = document.createTextNode(getEngine().split(",")[2]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Image_Name");
-					text = document.createTextNode(getEngine().split(",")[3]);
-				this.node.appendChild(text);//añadimos el texto al node
-			this.element.appendChild(this.node);//añadimos el node al element
 				this.node = document.createElement("Price");
-					text = document.createTextNode(getEngine().split(",")[4]);
-				this.node.appendChild(text);//añadimos el texto al node
-			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Models_Avaliable");
-					text = document.createTextNode(getEngine().split(",")[5]);
+					text = document.createTextNode(getEngine().split(",")[3]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
 		raiz.appendChild(element);//añadimos el element en la raiz
@@ -225,16 +213,8 @@ public class PresupuestoXML {
 						text = document.createTextNode(accessory.split(",")[2]);
 					this.node.appendChild(text);//añadimos el texto al node
 				this.element.appendChild(this.node);//añadimos el node al element
-					this.node = document.createElement("Image_Name");
-						text = document.createTextNode(accessory.split(",")[3]);
-					this.node.appendChild(text);//añadimos el texto al node
-				this.element.appendChild(this.node);//añadimos el node al element
 					this.node = document.createElement("Price");
-						text = document.createTextNode(accessory.split(",")[4]);
-					this.node.appendChild(text);//añadimos el texto al node
-				this.element.appendChild(this.node);//añadimos el node al element
-					this.node = document.createElement("Models_Avaliable");
-						text = document.createTextNode(accessory.split(",")[5]);
+						text = document.createTextNode(accessory.split(",")[3]);
 					this.node.appendChild(text);//añadimos el texto al node
 				this.element.appendChild(this.node);//añadimos el node al element
 			raiz.appendChild(element);//añadimos el element en la raiz

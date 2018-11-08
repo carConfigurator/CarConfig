@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<Lenguage>
+	<btn_login>CA Iniciar Sesión</btn_login>
+	<btn_save>CA Guardar</btn_save>
+	<btn_next>CA Siguiente</btn_next>
+	<btn_save_info>CA ¿Desea Guardar los Cambios?</btn_save_info>
+	<btn_previous>CA Anterior</btn_previous>
+	<btn_back>CA Atrás</btn_back>
+	<btn_end>CA Finalizar Compra</btn_end>
+	<Login>
+		<title>CA SEAT Configurador - Log In</title>
+		<label_username>CA Nombre de Usuario</label_username>
+		<label_password>CA Contraseña</label_password>
+		<error_login_user>CA El usuario introducido no es correcto o no existe</error_login_user>
+		<error_login_user_title>CA [ERROR] - Nombre de Usuario no encontrado</error_login_user_title>
+		<error_login_password>CA [ERROR] - Fallo de Autenticación</error_login_password>
+		<error_login_password_title>CA El usuario o contraseñas no son correctos</error_login_password_title>
+	</Login>
+	<Data_clients>
+		<title>CA SEAT Configurador - Datos Clientes</title>
+		<label_client_title>CA Datos del Cliente</label_client_title>
+		<label_username>CA Usuario: </label_username>
+		<label_client_name>CA Nombre: *</label_client_name>
+		<label_client_first_lastname>CA Primer Apellido: *</label_client_first_lastname>
+		<label_client_second_lastname>CA Segundo Apellido: *</label_client_second_lastname>
+		<label_client_address>CA Dirección: *</label_client_address>
+		<label_client_email>CA Correo Electrónico: *</label_client_email>
+		<label_client_gender>CA Género:</label_client_gender>
+		<rb_male>CA Hombre</rb_male>
+		<rb_female>CA Mujer</rb_female>
+		<rb_unknown>CA Desconocido</rb_unknown>
+		<label_client_birthdate>CA Fecha nacimiento:</label_client_birthdate>
+		<error_null_field>CA Faltan campos por rellenar. Rellene todos los campos obligatorios</error_null_field>
+		<error_null_field_title>CA Informacion Incompleta</error_null_field_title>
+		<error_email>CA El correo no es valido</error_email>
+		<error_email_title>CA Error de correo</error_email_title>
+	</Data_clients>
+	<Selection_model>
+		<title>CA SEAT Configurador - Selección de modelo</title>
+		<label_select_title>CA Seleccionar el Modelo del Coche</label_select_title>
+		<menu>CA Opciones de coches</menu>
+		<menu_item_add>CA Añadir un coche</menu_item_add>
+		<menu_item_delete>CA Suprimir un coche</menu_item_delete>
+		<menu_item_modify>CA Modificar un coche</menu_item_modify>
+	</Selection_model>
+	<Selection_engine>
+		<title>CA SEAT Configurador - Selección de caracteristicas</title>
+		<label_title>CA Seleccion de caracteristicas del modelo</label_title>
+	</Selection_engine>
+	<Purchase_accessories>
+		<title>CA Compra de Accesorios</title>
+		<label_model_car>CA Caracteristicas seleccionadas anteriormetne</label_model_car>
+		<checkBox_electric_elevation>CA Elevaduras electricas</checkBox_electric_elevation>
+		<checkBox_browser>CA Navegador</checkBox_browser>
+		<checkBox_tires>CA Llantas de aleacion</checkBox_tires>
+		<checkBox_heated_seats>CA Asientos calefactados</checkBox_heated_seats>
+		<checkBox_cruising_speed>CA Velocidad de crucero</checkBox_cruising_speed>
+		<checkBox_automatic_parking>CA Aparcamiento automatico</checkBox_automatic_parking>
+		<checkBox_usb_connectors>CA Conectores USB</checkBox_usb_connectors>
+		<checkBox_metallized_paint>CA Pintura metalizada</checkBox_metallized_paint>
+		<label_base_price>CA Precio Base:</label_base_price>
+		<label_increase_price>CA Accesorios:</label_increase_price>
+		<label_total_price>CA Total precio:</label_total_price>
+	</Purchase_accessories>
+	<Add_Car>
+		<title>CA Añadir un nuevo coche</title>
+		<label_id>CA ID: </label_id>
+		<label_name>CA Nombre: </label_name>
+		<label_description>CA Descripción: </label_description>
+		<label_img_name>CA Nombre de la Imagen: </label_img_name>
+		<label_price>CA Precio: </label_price>
+		<error_parse_double>CA El valor del String no se puede formatear a Double</error_parse_double>
+		<error_parse_double_title>CA Error Precio</error_parse_double_title>
+		<error_price_null>CA El precio no se puede dejar vacio</error_price_null>
+		<error_price_null_title>CA Error Precio Vacio</error_price_null_title>
+		<error_img_name>CA La imagen que desea insertar no existe</error_img_name>
+		<error_img_name_title>CA Error Imagen</error_img_name_title>
+		<error_img_name_null>CA Se tiene que poner una imagen</error_img_name_null>
+		<error_img_name_null_title>CA Error Imagen Vacia</error_img_name_null_title>
+	</Add_Car>
+	<Delete_Car>
+		<title>CA Eliminar un coche</title>
+		<label_data_title>CA Estas seguro que queres eliminar el siguiente coche?</label_data_title>
+	</Delete_Car>
+	<Delivery_Note>
+		<label_delivery_note>CA ALBARAN</label_delivery_note>
+		<label_data_title>CA Cliente: </label_data_title>
+		<label_company>CA Empresa: </label_company>
+		<label_company_name>CA SEAT</label_company_name>
+		<lable_employee>CA Empleado: </lable_employee>
+		<label_mail>CA Correo: </label_mail>
+		<table>CA Cantidad,Especificacion,Precio,Informe</table>
+		<tableOne>CA Precio Base,Descuento,Precio Total,IVA(21%)</tableOne>
+	</Delivery_Note>
+</Lenguage>
