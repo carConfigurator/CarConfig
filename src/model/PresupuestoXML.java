@@ -136,7 +136,7 @@ public class PresupuestoXML {
 		//cogemos el nombre de empleado
 			this.element = document.createElement("Employee");
 			
-				this.node = document.createElement("Employee_Name");
+				this.node = document.createElement("name");
 					Text text = document.createTextNode(getEmployee().split(" ")[1]);//esto separa por el espacio el [Employee] con "nombre_empleado.apellidos" y devuelve el nombre completo
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
@@ -145,31 +145,31 @@ public class PresupuestoXML {
 		//cogemos la informacion del cliente (la separamos por , por lo tanto lo recogemos por posicion)
 			this.element = document.createElement("Client");
 			
-				this.node = document.createElement("Client_Name");
+				this.node = document.createElement("name");
 					text = document.createTextNode(getClient().split(",")[0]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Surname");
+				this.node = document.createElement("first_lastname");
 					text = document.createTextNode(getClient().split(",")[1]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Second_Surname");
+				this.node = document.createElement("second_lastname");
 					text = document.createTextNode(getClient().split(",")[2]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Address");
+				this.node = document.createElement("address");
 					text = document.createTextNode(getClient().split(",")[3]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Email"); 
+				this.node = document.createElement("email"); 
 					text = document.createTextNode(getClient().split(",")[4]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Gender"); 
+				this.node = document.createElement("gender"); 
 					text = document.createTextNode(getClient().split(",")[5]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Birthdate"); 
+				this.node = document.createElement("birthdate"); 
 					text = document.createTextNode(getClient().split(",")[6]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
@@ -178,19 +178,19 @@ public class PresupuestoXML {
 		//cogemos la informacion del modelo (la separamos por , por lo tanto lo recogemos por posicion)
 			this.element = document.createElement("Model");
 			
-				this.node = document.createElement("Model_Id");
+				this.node = document.createElement("id");
 					text = document.createTextNode(getModel().split(",")[0]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Model_Name");
+				this.node = document.createElement("name");
 					text = document.createTextNode(getModel().split(",")[1]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Model_Description");
+				this.node = document.createElement("description");
 					text = document.createTextNode(getModel().split(",")[2]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Price");
+				this.node = document.createElement("price");
 					text = document.createTextNode(getModel().split(",")[3]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
@@ -199,19 +199,19 @@ public class PresupuestoXML {
 		//cogemos la informacion de los motores (la separamos por , por lo tanto lo recogemos por posicion)
 		this.element = document.createElement("Engine");
 		
-				this.node = document.createElement("Engine_Id");
+				this.node = document.createElement("id");
 					text = document.createTextNode(getEngine().split(",")[0]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Engine_Name");
+				this.node = document.createElement("name");
 					text = document.createTextNode(getEngine().split(",")[1]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Engine_Description");
+				this.node = document.createElement("description");
 					text = document.createTextNode(getEngine().split(",")[2]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
-				this.node = document.createElement("Price");
+				this.node = document.createElement("price");
 					text = document.createTextNode(getEngine().split(",")[3]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
@@ -223,19 +223,19 @@ public class PresupuestoXML {
 			Element eAccesory = null;
 			for (String accessory : getAccessories()) {
 				eAccesory = document.createElement("Accesory");
-					this.node = document.createElement("Id");
+					this.node = document.createElement("id");
 						text = document.createTextNode(accessory.split(",")[0]);
 					this.node.appendChild(text);//añadimos el texto al node
 				eAccesory.appendChild(this.node);//añadimos el node al element
-					this.node = document.createElement("Name");
+					this.node = document.createElement("name");
 						text = document.createTextNode(accessory.split(",")[1]);
 					this.node.appendChild(text);//añadimos el texto al node
 				eAccesory.appendChild(this.node);//añadimos el node al element
-					this.node = document.createElement("Description");
+					this.node = document.createElement("description");
 						text = document.createTextNode(accessory.split(",")[2]);
 					this.node.appendChild(text);//añadimos el texto al node
 				eAccesory.appendChild(this.node);//añadimos el node al element
-					this.node = document.createElement("Price");
+					this.node = document.createElement("price");
 						text = document.createTextNode(accessory.split(",")[3]);
 					this.node.appendChild(text);//añadimos el texto al node
 				eAccesory.appendChild(this.node);//añadimos el node al element
@@ -246,7 +246,7 @@ public class PresupuestoXML {
 		//cogemos el precio final
 			this.element = document.createElement("FinalPrice");
 			
-				this.node = document.createElement("Price");
+				this.node = document.createElement("price");
 					text = document.createTextNode(""+getPrice());//esto separa por el espacio el [Employee] con "nombre_empleado.apellidos" y devuelve el nombre completo
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element

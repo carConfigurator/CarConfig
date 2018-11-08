@@ -72,7 +72,7 @@ public class Selection_Model extends JFrame{
 	private Accessory accessory;
 	
 	private JPanel panelGBC, panelBox;
-	private List<JButton> listBotones;
+	private List<JButton> listBotones=null;
 	private JButton siguiente,anterior,btnCoches, configCoches;
 	private JLabel l1,luser;
 	private JTextPane areaInfo;
@@ -131,7 +131,6 @@ public class Selection_Model extends JFrame{
 		}
 		
 		onCreate();
-//		listener(coch, b, cocheId);
 	}
 	
 	public Selection_Model(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
@@ -144,6 +143,7 @@ public class Selection_Model extends JFrame{
 		this.engine = new Engine(this.configLoad);
 		this.accessory = new Accessory(this.configLoad);
 		
+		model.setIdSelected(2);
 		onCreate();
 	}
 	
@@ -355,17 +355,11 @@ public class Selection_Model extends JFrame{
 						BorderFactory.createLineBorder(new Color(215, 18, 43)),
 						BorderFactory.createEmptyBorder(1, 1, 1, 1)
 						));
-				for (int i = 0; i < imatge_nom.length; i++) {
-					if (model.getId()[i]==cocheId) {
-						// Guardamos la posición del Vehículo seleccionado.
-						posicion=i;
-					}
-				}
 				
 				File fImg = new File(coch.getDescription());
-				area.setText("<html><div style='text-align: center;'><span style='color: rgb(215,18,43); font-weight:600; padding:10px; font-family: Tahoma;'>"+model.getName()[posicion]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
-				areaInfo.setText("<html><div style='text-align: center; font-family: Tahoma;'><span style=padding:10px;'>"+model.getDescription()[posicion]+"</span></div><br></html>");
-				System.out.println("[INFO] - Cambiando modelo a: "+model.getName()[posicion]);
+				area.setText("<html><div style='text-align: center;'><span style='color: rgb(215,18,43); font-weight:600; padding:10px; font-family: Tahoma;'>"+model.getName()[model.getIdSelected()]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
+				areaInfo.setText("<html><div style='text-align: center; font-family: Tahoma;'><span style=padding:10px;'>"+model.getDescription()[model.getIdSelected()]+"</span></div><br></html>");
+				System.out.println("[INFO] - Cambiando modelo a: "+model.getName()[model.getIdSelected()]);
 			}
 		});
 	}
