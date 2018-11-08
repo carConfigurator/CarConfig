@@ -1,15 +1,13 @@
 package daoImplFactory;
 
 import config.ConfigurationLoader;
-import daoImpl.LanguageDAOCA;
-import daoImpl.LanguageDAOEN;
-import daoImpl.LanguageDAOES;
+import daoImpl.LanguageDAO;
 import idao.ILanguage;
 
 public class LanguageFactory {
 	
 	public static ILanguage getLanguage(ConfigurationLoader configLoad) {
-		return new LanguageDAOES(configLoad);
+		return new LanguageDAO(configLoad);
 	}
 
 }

@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -51,6 +52,7 @@ public class Albaran extends JFrame {
 	
 	// Atributos de la clase.
 	private JPanel contentPane;
+	private JButton btnGoClient;
 	
 
 	/**
@@ -64,6 +66,7 @@ public class Albaran extends JFrame {
 		this.contentPane = new JPanel();
 		this.contentPane.setLayout(new MigLayout("insets 30"));
 		this.contentPane.setBackground(new Color(255, 255, 255));
+		this.btnGoClient
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 		this.budget = new File(this.configLoad.getBudgetPathFile() + "fs_employee_" + timeStamp + ".txt");
@@ -98,6 +101,7 @@ public class Albaran extends JFrame {
 			int i = 0;
 			String line;
 			
+			//creamos el xml del presupuesti
 			PresupuestoXML xml = new PresupuestoXML();
 			
 			try {
@@ -130,6 +134,7 @@ public class Albaran extends JFrame {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			xml.headerXML();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

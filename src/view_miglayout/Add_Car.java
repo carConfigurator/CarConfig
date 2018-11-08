@@ -66,7 +66,6 @@ public class Add_Car extends JFrame{
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
 	private Document documentOld;
-	private Document documentNew;
 	
 	private JPanel panelMig;
 	private JLabel lId, lName, lDescription, lImg_Name, lPrice;
@@ -177,7 +176,8 @@ public class Add_Car extends JFrame{
 						if (!tfPrice.getText().equals("")) {
 							try {
 								Double.parseDouble(tfPrice.getText());
-								saveActionPerformed(e);
+								model.addCar(configLoad, language, username, client, documentOld, tfId, tfName, tfDescription, tfImg_Name, tfPrice);
+								setVisible(false);
 							}catch(NumberFormatException ex) {
 								JOptionPane.showMessageDialog(panelMig, language.errorParseDouble(), language.errorParseDoubleTitle(), JOptionPane.ERROR_MESSAGE);
 							}
@@ -214,124 +214,6 @@ public class Add_Car extends JFrame{
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
-	}
-	
-	private void saveActionPerformed(ActionEvent ae) {
-		String nombre_archivo = "CarConfiguration";
-		
-		DOMImplementation implementation = builder.getDOMImplementation();
-        documentNew = implementation.createDocument(null, nombre_archivo, null);
-        documentNew.setXmlVersion("1.0");
-		
-      //Main Node
-        Element raiz = documentNew.getDocumentElement();
-
-        NodeList nListModel = documentOld.getElementsByTagName("Model");
-		for (int i = 0; i < nListModel.getLength(); i++) {
-			Node nNode = nListModel.item(i);
-            Element itemNode = documentNew.createElement("Model"); 
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element elementKey = (Element) nNode;
-				for (int y = 0; y < elementKey.getElementsByTagName("*").getLength(); y++) {
-					Node nElementsKey = elementKey.getElementsByTagName("*").item(y);
-		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
-					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
-						Element elementValue = (Element) nElementsKey;
-			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
-			            keyNode.appendChild(nodeKeyValue);
-					}
-		            itemNode.appendChild(keyNode);
-		    	}
-	            raiz.appendChild(itemNode);
-			}
-    	}
-		
-		//añadimos el nuevo coche
-        Element newItemNode = documentNew.createElement("Model");
-        Element idNode = documentNew.createElement("id");
-        Text idValue = documentNew.createTextNode(tfId.getText());
-        idNode.appendChild(idValue);
-        Element nomNode = documentNew.createElement("nom");
-        Text nomValue = documentNew.createTextNode(tfName.getText());
-        nomNode.appendChild(nomValue);
-        Element descripcioNode = documentNew.createElement("descripcio");
-        Text descripcioValue = documentNew.createTextNode(tfDescription.getText());
-        descripcioNode.appendChild(descripcioValue);
-        Element imatge_nomNode = documentNew.createElement("imatge_nom");
-        Text imatge_nomValue = documentNew.createTextNode(tfImg_Name.getText());
-        imatge_nomNode.appendChild(imatge_nomValue);
-        Element preuNode = documentNew.createElement("preu");
-        Text preuValue = documentNew.createTextNode(tfPrice.getText());
-        preuNode.appendChild(preuValue);
-
-        newItemNode.appendChild(idNode);
-        newItemNode.appendChild(nomNode);
-        newItemNode.appendChild(descripcioNode);
-        newItemNode.appendChild(imatge_nomNode);
-        newItemNode.appendChild(preuNode);
-        raiz.appendChild(newItemNode);
-		
-		NodeList nListEngine = documentOld.getElementsByTagName("Engine");
-		for (int i = 0; i < nListEngine.getLength(); i++) {
-			Node nNode = nListEngine.item(i);
-            Element itemNode = documentNew.createElement("Engine"); 
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element elementEngine = (Element) nNode;
-				for (int y = 0; y < elementEngine.getElementsByTagName("*").getLength(); y++) {
-					Node nElementsKey = elementEngine.getElementsByTagName("*").item(y);
-		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
-					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
-						Element elementValue = (Element) nElementsKey;
-			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
-			            keyNode.appendChild(nodeKeyValue);
-					}
-		            itemNode.appendChild(keyNode);
-		    	}
-	            raiz.appendChild(itemNode);
-			}
-    	}
-		
-		NodeList nList = documentOld.getElementsByTagName("Accessory");
-		for (int i = 0; i < nList.getLength(); i++) {
-			Node nNode = nList.item(i);
-            Element itemNode = documentNew.createElement("Accessory");
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				for (int y = 0; y < eElement.getElementsByTagName("*").getLength(); y++) {
-					Node nElementsKey = eElement.getElementsByTagName("*").item(y);
-		            Element keyNode = documentNew.createElement(nElementsKey.getNodeName()); 
-					if (nElementsKey.getNodeType() == Node.ELEMENT_NODE) {
-						Element elementValue = (Element) nElementsKey;
-			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
-			            keyNode.appendChild(nodeKeyValue);
-					}
-		            itemNode.appendChild(keyNode);
-		    	}
-	            raiz.appendChild(itemNode);
-			}
-    	}
-		
-        //Generate XML
-        Source source = new DOMSource(documentNew);
-        //Indicamos donde lo queremos almacenar
-        Result result = new StreamResult(new File("src\\config\\car\\car_config.xml")); //nombre del archivo
-        Transformer transformer;
-		try {
-			transformer = TransformerFactory.newInstance().newTransformer();
-	        try {
-				transformer.transform(source, result);
-			} catch (TransformerException e) {
-				e.printStackTrace();
-			}
-		} catch (TransformerConfigurationException e) {
-			e.printStackTrace();
-		} catch (TransformerFactoryConfigurationError e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println("[INFO] - Nuevo XML creado");
-		setVisible(false);
-		new Selection_Model(this.configLoad, this.language, this.username, this.client);
 	}
 	
 	private void backActionPerformed(ActionEvent ae) {

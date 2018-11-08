@@ -16,13 +16,13 @@ import org.xml.sax.SAXException;
 import config.ConfigurationLoader;
 import idao.ILanguage;
 
-public class LanguageDAOES implements ILanguage{
+public class LanguageDAO implements ILanguage{
 
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
 	private Document document;
 	
-	public LanguageDAOES(ConfigurationLoader configLoad) {
+	public LanguageDAO(ConfigurationLoader configLoad) {
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
 			this.builder = factory.newDocumentBuilder();

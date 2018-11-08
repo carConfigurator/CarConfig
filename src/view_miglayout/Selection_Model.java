@@ -417,13 +417,13 @@ public class Selection_Model extends JFrame{
 		setVisible(false);
 		System.out.println("[INFO] - Eliminando un coche...");
 		this.model.toModel(posicion+1);
-		new Delete_Car(configLoad, language, username, client, model.getIdSelected());
+		new Delete_Car(configLoad, language, username, client, model);
 	}
 	
 	private void modify() {
 		System.out.println("[INFO] - Modificando un coche...");
 		this.model.toModel(posicion+1);
-		new Modify_Car(configLoad, language, username, client, model, model.getIdSelected());
+		new Modify_Car(configLoad, language, username, client, model);
 		setVisible(false);
 	}
 }

@@ -17,6 +17,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 public class PresupuestoXML {
@@ -27,9 +29,7 @@ public class PresupuestoXML {
 	private DOMImplementation implementation;
 	private Document document;
 	private Element element;
-	private Source source;
-	private Result result;
-	private Transformer transformer;
+	private Node node;
 	
 	String employee, client, model, engine;
 	ArrayList<String> accessories;
@@ -44,8 +44,9 @@ public class PresupuestoXML {
 
 		this.implementation = builder.getDOMImplementation();
 		
-		this.transformer = null;
+//		this.transformer = null;
 		accessories = new ArrayList<String>();
+//		headerXML();
 	}
 
 	public String getEmployee() {
@@ -98,7 +99,7 @@ public class PresupuestoXML {
 				+ ", accessories=" + accessories + "]";
 	}
 	
-	private void headerXML() {
+	public void headerXML() {
 		// Obtenemos la implementación del DOM
 		this.implementation = builder.getDOMImplementation();
 		// Creamos el documento vacío
@@ -110,30 +111,114 @@ public class PresupuestoXML {
 	
 	
 	private void createNodes() {
-		this.element = document.createElement("employee");
-		Text text = document.createTextNode(getEmployee());
-		element.appendChild(this.element);
-		this.element.appendChild(text);
+		Element raiz = document.getDocumentElement();
 		
-		this.element = document.createElement("client");
-		text = document.createTextNode(getClient());
-		element.appendChild(this.element);
-		this.element.appendChild(text);
+		//cogemos el nombre de empleado
+			this.element = document.createElement("Employee");
+			
+				this.node = document.createElement("Employee_Name");
+					Text text = document.createTextNode(getEmployee().split(" ")[1]);//esto separa por el espacio el [Employee] con "nombre_empleado.apellidos" y devuelve el nombre completo
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+		raiz.appendChild(element);//añadimos el element en la raiz
 		
-		this.element = document.createElement("model");
-		text = document.createTextNode(getModel());
-		element.appendChild(this.element);
-		this.element.appendChild(text);
+		//cogemos la informacion del cliente (la separamos por , por lo tanto lo recogemos por posicion)
+			this.element = document.createElement("Client");
+			
+				this.node = document.createElement("Client_Name");
+					text = document.createTextNode(getClient().split(",")[0]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("Surname");
+					text = document.createTextNode(getClient().split(",")[1]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("Second_Surname");
+					text = document.createTextNode(getClient().split(",")[2]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("Address");
+					text = document.createTextNode(getClient().split(",")[3]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("Email"); 
+					text = document.createTextNode(getClient().split(",")[4]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("Gender"); 
+					text = document.createTextNode(getClient().split(",")[5]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("Birthdate"); 
+					text = document.createTextNode(getClient().split(",")[6]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+		raiz.appendChild(element);//añadimos el element en la raiz
+
+		//cogemos la informacion del modelo (la separamos por , por lo tanto lo recogemos por posicion)
+			this.element = document.createElement("Model");
+			
+				this.node = document.createElement("Model_Id");
+					text = document.createTextNode(getModel().split(",")[0]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("Model_Name");
+					text = document.createTextNode(getModel().split(",")[1]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("Model_Description");
+					text = document.createTextNode(getModel().split(",")[2]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("Price");
+					text = document.createTextNode(getModel().split(",")[3]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+		raiz.appendChild(element);//añadimos el element en la raiz
+
+		//cogemos la informacion de los motores (la separamos por , por lo tanto lo recogemos por posicion)
+		this.element = document.createElement("Engine");
 		
-		this.element = document.createElement("engine");
-		text = document.createTextNode(getEngine());
-		element.appendChild(this.element);
-		this.element.appendChild(text);
-		
-		this.element = document.createElement("accesories");
-		text = document.createTextNode(getClient());
-		element.appendChild(this.element);
-		this.element.appendChild(text);
+				this.node = document.createElement("Engine_Id");
+					text = document.createTextNode(getEngine().split(",")[0]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("Engine_Name");
+					text = document.createTextNode(getEngine().split(",")[1]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("Engine_Description");
+					text = document.createTextNode(getEngine().split(",")[2]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("Price");
+					text = document.createTextNode(getEngine().split(",")[3]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+		raiz.appendChild(element);//añadimos el element en la raiz
+
+		//por cada linea de accessiorios (por cada accessorio) cogemos la informacion separada por ","
+		for (String accessory : getAccessories()) {
+				this.element = document.createElement("Accesories");
+				
+					this.node = document.createElement("Accesory_Id");
+						text = document.createTextNode(accessory.split(",")[0]);
+					this.node.appendChild(text);//añadimos el texto al node
+				this.element.appendChild(this.node);//añadimos el node al element
+					this.node = document.createElement("Accesory_Name");
+						text = document.createTextNode(accessory.split(",")[1]);
+					this.node.appendChild(text);//añadimos el texto al node
+				this.element.appendChild(this.node);//añadimos el node al element
+					this.node = document.createElement("Accesory_Description");
+						text = document.createTextNode(accessory.split(",")[2]);
+					this.node.appendChild(text);//añadimos el texto al node
+				this.element.appendChild(this.node);//añadimos el node al element
+					this.node = document.createElement("Price");
+						text = document.createTextNode(accessory.split(",")[3]);
+					this.node.appendChild(text);//añadimos el texto al node
+				this.element.appendChild(this.node);//añadimos el node al element
+			raiz.appendChild(element);//añadimos el element en la raiz
+		}
 		
 		createXML();
 	}
@@ -141,18 +226,17 @@ public class PresupuestoXML {
 	private void createXML() {
 		Source source = new DOMSource(document);
 		Result result = new StreamResult(new File("employees\\budgets\\presupuesto.xml")); //nombre del archivo
-		Transformer transformer = null;
+		Transformer transformer;
 		
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
+			try {
+				transformer.transform(source, result);
+			} catch (TransformerException e) {
+				e.printStackTrace();
+			}
 		} catch (TransformerException e) {
 			System.out.println("Error: " + e);
-		}
-		
-		try {
-			transformer.transform(source, result);
-		} catch (TransformerException e) {
-			e.printStackTrace();
 		}
 	}
 	

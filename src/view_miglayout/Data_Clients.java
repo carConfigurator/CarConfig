@@ -34,7 +34,7 @@ import com.toedter.calendar.JDateChooser;
 
 import config.ConfigurationLoader;
 import idao.ILanguage;
-import javafx.scene.input.DataFormat;
+//import javafx.scene.input.DataFormat;
 import model.Client;
 import net.miginfocom.swing.MigLayout;
 import view_miglayout.Selection_Model;

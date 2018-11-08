@@ -1,0 +1,12 @@
+[Empleado] dario.delcore
+------
+[Cliente] sadjkf, dsfa, sda, fads, sdf@asdf.cpo, Desconocido, null
+------
+[Modelo] 1, SEAT Mii P5, Observaciones del SEAT Mii 5P, 7726.2
+------
+[Motor] 1, Ibiza 1.6 TDI CR 70 KW (95 CV), Diesel / 5 Velocidades Manual, 18.59
+------
+[Accesorios]
+8, Pintura metalizada, Pintura metalizada, 500.0
+------
+6588,63
