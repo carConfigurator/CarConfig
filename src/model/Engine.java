@@ -127,7 +127,7 @@ public class Engine {
 				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
 				String descripcion = eElement.getElementsByTagName("description").item(0).getTextContent();
 				double price = Double.parseDouble(eElement.getElementsByTagName("price").item(0).getTextContent());
-				return id + ", " + nom + ", " + descripcion + ", " + price;
+				return id + "," + nom + "," + descripcion + "," + price;
 			}
 		}
 		return null;

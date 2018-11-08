@@ -349,7 +349,7 @@ public class Accessory {
 				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
 				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
-				return id + ", " + nom + ", " + descripcio + ", " + price;
+				return id + "," + nom + "," + descripcio + "," + price;
 			}
 		}
 		return null;
@@ -367,7 +367,7 @@ public class Accessory {
 				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
 				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
-				return id + ", " + nom + ", " + descripcio + ", " + price;
+				return id + "," + nom + "," + descripcio + "," + price;
 			}
 		}
 		return null;
@@ -385,7 +385,7 @@ public class Accessory {
 				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
 				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
-				return id + ", " + nom + ", " + descripcio + ", " + price;
+				return id + "," + nom + "," + descripcio + "," + price;
 			}
 		}
 		return null;
@@ -403,7 +403,7 @@ public class Accessory {
 				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
 				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
-				return id + ", " + nom + ", " + descripcio + ", " + price;
+				return id + "," + nom + "," + descripcio + "," + price;
 			}
 		}
 		return null;
@@ -421,7 +421,7 @@ public class Accessory {
 				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
 				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
-				return id + ", " + nom + ", " + descripcio + ", " + price;
+				return id + "," + nom + "," + descripcio + "," + price;
 			}
 		}
 		return null;
@@ -439,7 +439,7 @@ public class Accessory {
 				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
 				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
-				return id + ", " + nom + ", " + descripcio + ", " + price;
+				return id + "," + nom + "," + descripcio + "," + price;
 			}
 		}
 		return null;
@@ -457,7 +457,7 @@ public class Accessory {
 				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
 				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
-				return id + ", " + nom + ", " + descripcio + ", " + price;
+				return id + "," + nom + "," + descripcio + "," + price;
 			}
 		}
 		return null;
@@ -475,7 +475,7 @@ public class Accessory {
 				String nom = eElement.getElementsByTagName("nom").item(0).getTextContent();
 				String descripcio = eElement.getElementsByTagName("descripcio").item(0).getTextContent();
 				double price = Double.parseDouble(eElement.getElementsByTagName("preu").item(0).getTextContent());
-				return id + ", " + nom + ", " + descripcio + ", " + price;
+				return id + "," + nom + "," + descripcio + "," + price;
 			}
 		}
 		return null;

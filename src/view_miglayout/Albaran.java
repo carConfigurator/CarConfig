@@ -66,7 +66,7 @@ public class Albaran extends JFrame {
 		this.contentPane = new JPanel();
 		this.contentPane.setLayout(new MigLayout("insets 30"));
 		this.contentPane.setBackground(new Color(255, 255, 255));
-		this.btnGoClient
+//		this.btnGoClient
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 		this.budget = new File(this.configLoad.getBudgetPathFile() + "fs_employee_" + timeStamp + ".txt");
@@ -112,21 +112,24 @@ public class Albaran extends JFrame {
 					}
 					
 					if(line.contains("[Cliente]")) {
-						xml.setClient(line);
+						xml.setClient(line.substring(10));
 					}
 					
 					if(line.contains("[Modelo]")) {
-						xml.setModel(line);
+						xml.setModel(line.substring(9));
 					}
 					
 					if(line.contains("[Motor]")) {
-						xml.setEngine(line);
+						xml.setEngine(line.substring(8));
 					}
 					
 					if(line.contains("[Accesorios]")) {
 						while(!(line = br.readLine()).contains("------")) {
-							xml.setAccessories(line + "||");
+							xml.setAccessories(line);
 						}
+						//PRICE
+						line = br.readLine();
+						xml.setPrice(Double.parseDouble(line.replace(',', '.')));
 					}
 				}
 				System.out.println(xml.toString());

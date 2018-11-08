@@ -1,7 +1,9 @@
 package model;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -32,6 +34,8 @@ public class PresupuestoXML {
 	private Node node;
 	
 	String employee, client, model, engine;
+	Double price;
+	int discount;
 	ArrayList<String> accessories;
 	
 	public PresupuestoXML() {
@@ -91,6 +95,22 @@ public class PresupuestoXML {
 
 	public void setAccessories(String line) {
 		accessories.add(line);
+	}
+	
+	public Double getPrice() {
+		return price;
+	}
+	
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
+	public int getDiscount() {
+		return discount;
+	}
+	
+	public void setDiscount(int discount) {
+		this.discount = discount;
 	}
 
 	@Override
@@ -198,34 +218,48 @@ public class PresupuestoXML {
 		raiz.appendChild(element);//añadimos el element en la raiz
 
 		//por cada linea de accessiorios (por cada accessorio) cogemos la informacion separada por ","
-		for (String accessory : getAccessories()) {
-				this.element = document.createElement("Accesories");
-				
-					this.node = document.createElement("Accesory_Id");
+
+			this.element = document.createElement("Accesories");
+			Element eAccesory = null;
+			for (String accessory : getAccessories()) {
+				eAccesory = document.createElement("Accesory");
+					this.node = document.createElement("Id");
 						text = document.createTextNode(accessory.split(",")[0]);
 					this.node.appendChild(text);//añadimos el texto al node
-				this.element.appendChild(this.node);//añadimos el node al element
-					this.node = document.createElement("Accesory_Name");
+				eAccesory.appendChild(this.node);//añadimos el node al element
+					this.node = document.createElement("Name");
 						text = document.createTextNode(accessory.split(",")[1]);
 					this.node.appendChild(text);//añadimos el texto al node
-				this.element.appendChild(this.node);//añadimos el node al element
-					this.node = document.createElement("Accesory_Description");
+				eAccesory.appendChild(this.node);//añadimos el node al element
+					this.node = document.createElement("Description");
 						text = document.createTextNode(accessory.split(",")[2]);
 					this.node.appendChild(text);//añadimos el texto al node
-				this.element.appendChild(this.node);//añadimos el node al element
+				eAccesory.appendChild(this.node);//añadimos el node al element
 					this.node = document.createElement("Price");
 						text = document.createTextNode(accessory.split(",")[3]);
 					this.node.appendChild(text);//añadimos el texto al node
-				this.element.appendChild(this.node);//añadimos el node al element
-			raiz.appendChild(element);//añadimos el element en la raiz
-		}
+				eAccesory.appendChild(this.node);//añadimos el node al element
+				this.element.appendChild(eAccesory);//añadimos el element al elementraiz
+			}
+		raiz.appendChild(this.element);//añadimos el element en la raiz
+		
+		//cogemos el precio final
+			this.element = document.createElement("FinalPrice");
+			
+				this.node = document.createElement("Price");
+					text = document.createTextNode(""+getPrice());//esto separa por el espacio el [Employee] con "nombre_empleado.apellidos" y devuelve el nombre completo
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
+		raiz.appendChild(element);//añadimos el element en la raiz
+		
 		
 		createXML();
 	}
 
 	private void createXML() {
 		Source source = new DOMSource(document);
-		Result result = new StreamResult(new File("employees\\budgets\\presupuesto.xml")); //nombre del archivo
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+		Result result = new StreamResult(new File("employees\\budgets\\presupuesto_"+timeStamp+".xml")); //nombre del archivo
 		Transformer transformer;
 		
 		try {

@@ -88,11 +88,11 @@ public class Selection_Model extends JFrame{
 	private List<JMenuItem> lMenuItem;
 	private JSeparator menuSeparator;
 	
-	String[] imatge_nom;
-	int [] cochesId;
-	String root_images;
-	List<Image> listImg;
-	File temp;
+	private String[] imatge_nom;
+	private int [] cochesId;
+	private String root_images;
+	private List<Image> listImg;
+	private File temp;
 	
 	/*
 	 * Añado los componentes del concesionaro del coche (parte 12)
@@ -314,15 +314,15 @@ public class Selection_Model extends JFrame{
 		setVisible(true);
 	}
 	
-	private void crearBoton(List<String> nom) {
-		for (String string : nom) {
+	private void crearBoton(List<String> nomimg) {
+		for (String sNomImg : nomimg) {
 			btnCoches=new JButton();
 			btnCoches.setBackground(new Color(255,255,255));
 			btnCoches.setBorder(BorderFactory.createCompoundBorder(
 					BorderFactory.createLineBorder(new Color(255, 255, 255)),
 					BorderFactory.createEmptyBorder(1, 1, 1, 1)
 					));
-			coche=new ImageIcon(string.split(";")[0]);//en la posicion 0 tenemos el nombre de la imagen
+			coche=new ImageIcon(sNomImg.split(";")[0]);//en la posicion 0 tenemos el nombre de la imagen
 			cocheBoton= new ImageIcon(coche.getImage().getScaledInstance(coche.getIconWidth()/4, coche.getIconHeight()/4, Image.SCALE_DEFAULT));
 			btnCoches.setIcon(cocheBoton);
 			btnCoches.setMargin(new Insets(0, 0, 0, 0));
@@ -331,7 +331,7 @@ public class Selection_Model extends JFrame{
 			listImg=new ArrayList<Image>();
 			listImg.add(coche.getImage());
 			
-			listener(coche, btnCoches, Integer.parseInt(string.split(";")[1]));  //en la posicion 1 tenemos el id del coche
+			listener(coche, btnCoches, Integer.parseInt(sNomImg.split(";")[1]));  //en la posicion 1 tenemos el id del coche
 		}
 		
 		
@@ -394,7 +394,7 @@ public class Selection_Model extends JFrame{
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.newLine();
 			bw.write("[Modelo] ");
-			bw.write(id+", "+name+", "+description+", "+price);
+			bw.write(id+","+name+","+description+","+price);
 			bw.newLine();
 			bw.write("------");
 			bw.close();
