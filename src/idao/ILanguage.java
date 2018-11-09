@@ -2,6 +2,9 @@ package idao;
 
 public interface ILanguage {
 
+	// Default Title
+	String titleDefault();
+	
 	//BOTONES
 	String btnLogin();
 	String btnSave();
@@ -10,6 +13,7 @@ public interface ILanguage {
 	String btnPrevious();
 	String btnBack();
 	String btnEnd();
+	String btnStart();
 	
 	// Métodos que se usarán para el Login.
 	String loginTitle();

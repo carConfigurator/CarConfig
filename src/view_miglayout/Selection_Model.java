@@ -32,7 +32,6 @@ import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -88,8 +87,8 @@ public class Selection_Model extends JFrame{
 	private List<JMenuItem> lMenuItem;
 	private JSeparator menuSeparator;
 	
-	private String[] imatge_nom;
-	private int [] cochesId;
+//	private String[] imatge_nom;
+//	private int [] cochesId;
 	private String root_images;
 	private List<Image> listImg;
 	private File temp;
@@ -204,16 +203,17 @@ public class Selection_Model extends JFrame{
 				));
 		
 		//Se añade la ruta de la imagen en una lista
-		this.imatge_nom = this.model.getImage_name();
-		this.cochesId = this.model.getId();
-		List<String> listCoche=new ArrayList<>();
-		for (int i = 0; i < imatge_nom.length; i++) {
-			listCoche.add(this.root_images + this.imatge_nom[i]+";"+this.cochesId[i]);
-		}
+//		this.imatge_nom = this.model.getImage_name();
+//		this.cochesId = this.model.getId();
+//		List<String> listCoche=new ArrayList<>();
+//		for (int i = 0; i < imatge_nom.length; i++) {
+//			listCoche.add(this.root_images + this.imatge_nom[i]+";"+this.cochesId[i]);
+//		}
 	
 		//Creamos una lista de los botones con las rutas de las imagenes
 		this.listBotones=new ArrayList<JButton>();
-		crearBoton(listCoche);//lista ruta imagen
+//		listBotones.get(model.getIdSelected()).doClick();
+		crearBoton(/*listCoche*/);//lista ruta imagen
 		
 		//Añadimos los botones al panel
 		for (JButton jButton : listBotones) {
@@ -295,35 +295,20 @@ public class Selection_Model extends JFrame{
 				modify();
 			}
 		});
-		
-		JFrame();
+
+		addFrame(configLoad, panelGBC, language.labelDeliveryNote());
 	}
 	
-	/*
-	 * Método para configurar la ventana actual.
-	 */
-	private void JFrame() {
-		setJMenuBar(pMenu);
-		add(panelGBC);
-		setTitle(language.seleccionModeloTitle());
-		setIconImage(getIconImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(600,600);
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
-	}
-	
-	private void crearBoton(List<String> nomimg) {
-		for (String sNomImg : nomimg) {
+	private void crearBoton(/*List<String> nomimg*/) {
+		for (int i = 0; i < model.getId().length; i++) {
 			btnCoches=new JButton();
 			btnCoches.setBackground(new Color(255,255,255));
 			btnCoches.setBorder(BorderFactory.createCompoundBorder(
 					BorderFactory.createLineBorder(new Color(255, 255, 255)),
 					BorderFactory.createEmptyBorder(1, 1, 1, 1)
 					));
-			coche=new ImageIcon(sNomImg.split(";")[0]);//en la posicion 0 tenemos el nombre de la imagen
-			cocheBoton= new ImageIcon(coche.getImage().getScaledInstance(coche.getIconWidth()/4, coche.getIconHeight()/4, Image.SCALE_DEFAULT));
+			coche=new ImageIcon(model.getImage_name()[i]);//en la posicion 0 tenemos el nombre de la imagen
+//			cocheBoton= new ImageIcon(coche.getImage().getScaledInstance(coche.getIconWidth()/4, coche.getIconHeight()/4, Image.SCALE_DEFAULT));
 			btnCoches.setIcon(cocheBoton);
 			btnCoches.setMargin(new Insets(0, 0, 0, 0));
 			listBotones.add(btnCoches);
@@ -331,9 +316,29 @@ public class Selection_Model extends JFrame{
 			listImg=new ArrayList<Image>();
 			listImg.add(coche.getImage());
 			
-			listener(coche, btnCoches, Integer.parseInt(sNomImg.split(";")[1]));  //en la posicion 1 tenemos el id del coche
+			listener(coche, btnCoches, model.getId()[i]);  //en la posicion 1 tenemos el id del coche
 		}
 		
+		
+//		for (String sNomImg : nomimg) {
+//			btnCoches=new JButton();
+//			btnCoches.setBackground(new Color(255,255,255));
+//			btnCoches.setBorder(BorderFactory.createCompoundBorder(
+//					BorderFactory.createLineBorder(new Color(255, 255, 255)),
+//					BorderFactory.createEmptyBorder(1, 1, 1, 1)
+//					));
+//			coche=new ImageIcon(sNomImg.split(";")[0]);//en la posicion 0 tenemos el nombre de la imagen
+//			cocheBoton= new ImageIcon(coche.getImage().getScaledInstance(coche.getIconWidth()/4, coche.getIconHeight()/4, Image.SCALE_DEFAULT));
+//			btnCoches.setIcon(cocheBoton);
+//			btnCoches.setMargin(new Insets(0, 0, 0, 0));
+//			listBotones.add(btnCoches);
+//			
+//			listImg=new ArrayList<Image>();
+//			listImg.add(coche.getImage());
+//			
+//			listener(coche, btnCoches, Integer.parseInt(sNomImg.split(";")[1]));  //en la posicion 1 tenemos el id del coche
+//		}
+//		
 		
 	}
 	

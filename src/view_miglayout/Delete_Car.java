@@ -33,7 +33,7 @@ import idao.ILanguage;
 import model.Client;
 import model.Model;
 
-public class Delete_Car extends JFrame{
+public class Delete_Car{
 	
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
@@ -99,14 +99,14 @@ public class Delete_Car extends JFrame{
 			new Selection_Model(this.configLoad, this.language, this.username, this.client);
 		}
 		
-		JFrame();
+//		JFrame();
 	}
 	
-	private void JFrame() {
-		add(panel);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
-		setVisible(false);
-	}
+//	private void JFrame() {
+//		add(panel);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setLocationRelativeTo(null);
+//		setVisible(false);
+//	}
 
 }

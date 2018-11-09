@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <Lenguage>
+	<title_default>SEAT Configurador</title_default>s
 	<btn_login>Iniciar Sesión</btn_login>
 	<btn_save>Guardar</btn_save>
 	<btn_next>Siguiente</btn_next>
@@ -7,8 +8,9 @@
 	<btn_previous>Anterior</btn_previous>
 	<btn_back>Atrás</btn_back>
 	<btn_end>Finalizar Compra</btn_end>
+	<btn_start>Ir al inicio</btn_start>
 	<Login>
-		<title>SEAT Configurador - Log In</title>
+		<title>Log In</title>
 		<label_username>Nombre de Usuario</label_username>
 		<label_password>Contraseña</label_password>
 		<error_login_user>El usuario introducido no es correcto o no existe</error_login_user>
@@ -17,7 +19,7 @@
 		<error_login_password_title>El usuario o contraseñas no son correctos</error_login_password_title>
 	</Login>
 	<Data_clients>
-		<title>SEAT Configurador - Datos Clientes</title>
+		<title>Datos Clientes</title>
 		<label_client_title>Datos del Cliente</label_client_title>
 		<label_username>Usuario: </label_username>
 		<label_client_name>Nombre: *</label_client_name>
@@ -36,7 +38,7 @@
 		<error_email_title>Error de correo</error_email_title>
 	</Data_clients>
 	<Selection_model>
-		<title>SEAT Configurador - Selección de modelo</title>
+		<title>Selección de modelo</title>
 		<label_select_title>Seleccionar el Modelo del Coche</label_select_title>
 		<menu>Opciones de coches</menu>
 		<menu_item_add>Añadir un coche</menu_item_add>
@@ -44,11 +46,11 @@
 		<menu_item_modify>Modificar un coche</menu_item_modify>
 	</Selection_model>
 	<Selection_engine>
-		<title>SEAT Configurador - Selección de caracteristicas</title>
+		<title>Selección de motor</title>
 		<label_title>Seleccion de caracteristicas del modelo</label_title>
 	</Selection_engine>
 	<Purchase_accessories>
-		<title>Compra de Accesorios</title>
+		<title>Selección de accesorios</title>
 		<label_model_car>Caracteristicas seleccionadas anteriormetne</label_model_car>
 		<checkBox_electric_elevation>Elevaduras electricas</checkBox_electric_elevation>
 		<checkBox_browser>Navegador</checkBox_browser>

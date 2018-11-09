@@ -7,6 +7,7 @@
 	<btn_previous>EN Anterior</btn_previous>
 	<btn_back>EN Atrás</btn_back>
 	<btn_end>EN Finalizar Compra</btn_end>
+	<btn_start>EN Ir al inicio</btn_start>
 	<Login>
 		<title>EN SEAT Configurador - Log In</title>
 		<label_username>EN Nombre de Usuario</label_username>

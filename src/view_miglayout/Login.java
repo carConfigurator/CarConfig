@@ -1,9 +1,7 @@
 package view_miglayout;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -13,7 +11,6 @@ import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,11 +31,11 @@ public class Login extends JFrame{
 	private File temp;
 	
 	// Atributos de la Clase.
-	JPanel panel = new JPanel();
-	JLabel label_username, label_password;
-	JTextField tfield_username;
-	JPasswordField pfield_password;
-	JButton btn_login;
+	private JPanel panel = new JPanel();
+	private JLabel label_username, label_password;
+	private JTextField tfield_username;
+	private JPasswordField pfield_password;
+	private JButton btn_login;
 	
 	// Al ser la primera Vista, hago un main que ejecute el constructor el cuál tendrá todos los parámetros.
 	public static void main(String[] args) {
@@ -137,21 +134,7 @@ public class Login extends JFrame{
 			}
 		});
 		
-		JFrame();
-	}
-	
-	/*
-	 * Método para configurar la ventana actual.
-	 */
-	public void JFrame() {
-		add(panel);
-		setTitle(language.loginTitle());
-		setIconImage(getIconImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(600,600);
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
+		addFrame(configLoad, panel, language.titleDefault());
 	}
 	
 	/*
@@ -165,52 +148,86 @@ public class Login extends JFrame{
 		String[] listPassword = configLoad.getEmployee_password();
 		
 		int countTries = 1;
+		boolean pass = false;
+		boolean user = false;
 		
+		//primero hacemos un bucle para comprovar si el usuario y la contraseña son correctos
 		for (int i = 0; i < listEmployee.length; i++) {
-			if(countTries == listEmployee.length+1) {
-				JOptionPane.showMessageDialog(null,language.errorLoginUser(),language.errorLoginUserTitle(), JOptionPane.ERROR_MESSAGE);
-				System.out.println("[ERROR] - El usuario no existe.");
-			}else {
-				if(listEmployee[i].equals(username)) {
-					if(listPassword[i].equals(password)) {
-						System.out.println("[INFO] - Conexión Establecida. Cambiando de Frame...\n\t Enviando configuración, idioma y nombre de usuario...");
-						// Oculto este Frame y llamo al siguiente:
-						setVisible(false);
-						System.out.println("[INFO] - Escribiendo en el fichero temporal.");
-						try {
-							FileWriter fw = new FileWriter(this.temp);
-							BufferedWriter bw = new BufferedWriter(fw);
-							bw.write("Datos Temporales");
-							bw.newLine();
-							bw.write("[Empleado] ");
-							bw.write(username);
-							bw.newLine();
-							bw.write("------");
-							bw.close();
-							fw.close();
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-						new Data_Clients(this.configLoad, this.language, username);
-					}else {
-						System.out.println("[ERROR] - El usuario/contraseña es incorrecto");
-						JOptionPane.showMessageDialog(null,language.errorLoginPassword(),language.errorLoginPasswordTitle(), JOptionPane.ERROR_MESSAGE);
-					}
-				}else {
-					countTries++;
+			if (tfield_username.getText().equals(listEmployee[i])) {
+				user=true;
+				if (pfield_password.getText().equals(listPassword[i])) {
+					pass=true;
 				}
 			}
 		}
+		//una vez lo hemos recorrido todo, miramos que ha pasado
+		if(user) {//si lusuario ha ido bien entra en la contraseña
+			if (pass) {//si la contraseña ha ido bien cambia de ventana
+				System.out.println("[INFO] - Conexión Establecida. Cambiando de Frame...\n\t Enviando configuración, idioma y nombre de usuario...");
+				System.out.println("[INFO] - Escribiendo en el fichero temporal.");
+				try {
+					FileWriter fw = new FileWriter(this.temp);
+					BufferedWriter bw = new BufferedWriter(fw);
+					bw.write("Datos Temporales");
+					bw.newLine();
+					bw.write("[Empleado] ");
+					bw.write(username);
+					bw.newLine();
+					bw.write("------");
+					bw.close();
+					fw.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				// Oculto este Frame y llamo al siguiente:
+				setVisible(false);
+				new Data_Clients(this.configLoad, this.language, username);
+			}else {//si la contraseña era invalida saltara un error de la contraseña
+				System.out.println("[ERROR] - El usuario/contraseña es incorrecto");
+				JOptionPane.showMessageDialog(null,language.errorLoginPassword(),language.errorLoginPasswordTitle(), JOptionPane.ERROR_MESSAGE);
+			}
+		}else {//si el usuario era invalido saltara un error de usuario invalido
+			JOptionPane.showMessageDialog(null,language.errorLoginUser(),language.errorLoginUserTitle(), JOptionPane.ERROR_MESSAGE);
+			System.out.println("[ERROR] - El usuario no existe.");
+		}
+		
+		
+		
+		
+//		for (int i = 0; i < listEmployee.length; i++) {
+//			if(countTries == listEmployee.length+1) {
+//				JOptionPane.showMessageDialog(null,language.errorLoginUser(),language.errorLoginUserTitle(), JOptionPane.ERROR_MESSAGE);
+//				System.out.println("[ERROR] - El usuario no existe.");
+//			}else {
+//				if(listEmployee[i].equals(username)) {
+//					if(listPassword[i].equals(password)) {
+//						System.out.println("[INFO] - Conexión Establecida. Cambiando de Frame...\n\t Enviando configuración, idioma y nombre de usuario...");
+//						System.out.println("[INFO] - Escribiendo en el fichero temporal.");
+//						try {
+//							FileWriter fw = new FileWriter(this.temp);
+//							BufferedWriter bw = new BufferedWriter(fw);
+//							bw.write("Datos Temporales");
+//							bw.newLine();
+//							bw.write("[Empleado] ");
+//							bw.write(username);
+//							bw.newLine();
+//							bw.write("------");
+//							bw.close();
+//							fw.close();
+//						} catch (IOException e1) {
+//							e1.printStackTrace();
+//						}
+//						// Oculto este Frame y llamo al siguiente:
+//						setFrameVisible(false);
+//						new Data_Clients(this.configLoad, this.language, username);
+//					}else {
+//						System.out.println("[ERROR] - El usuario/contraseña es incorrecto");
+//						JOptionPane.showMessageDialog(null,language.errorLoginPassword(),language.errorLoginPasswordTitle(), JOptionPane.ERROR_MESSAGE);
+//					}
+//				}else {
+//					countTries++;
+//				}
+//			}
+//		}
 	}
-
-	/*
-	 * Método que obtiene la imagen para el JFrame.
-	 * @return La imagen que hay en carpeta.
-	 * @see java.awt.Frame#getIconImage()
-	 */
-	public Image getIconImage() {
-		File image = new File("src/config/favicon.png");
-        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
-        return retValue;
-    }
 }

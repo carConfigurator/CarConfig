@@ -1,16 +1,16 @@
 package view_miglayout;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
+
+import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
+import config.ConfigurationLoader;
 import idao.ILanguage;
 
 public class JFrame extends javax.swing.JFrame {
@@ -18,24 +18,41 @@ public class JFrame extends javax.swing.JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public JFrame(JPanel panel) {
+	public JFrame() {}
+	public void addFrame(ConfigurationLoader configLoad, JPanel panel, String title) {
 		add(panel);
-		setTitle("SEAT Configurador");
-		setIconImage(getIconImage());
+		setTitle(title);
+		setIconImage(getIconImage(configLoad));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600,600);
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
+//	public JFrame(ConfigurationLoader configLoad, JPanel panel, String title) {
+//		add(panel);
+//		setTitle(title);
+//		setIconImage(getIconImage(configLoad));
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setSize(600,600);
+//		pack();
+//		setLocationRelativeTo(null);
+//		setVisible(true);
+//	}
+//	//frame para añadir un menu
+//	public JFrame(ConfigurationLoader configLoad, JMenuBar pMenu, JPanel panel, String title) {
+//		setJMenuBar(pMenu);
+//		add(panel);
+//		setTitle(title);
+//		setIconImage(getIconImage(configLoad));
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setSize(600,600);
+//		pack();
+//		setLocationRelativeTo(null);
+//		setVisible(true);
+//	}
 	
-	public JFrame(JPanel panel, ILanguage language) {
-		add(panel);
-		setTitle("SEAT Configurador");
-		setIconImage(getIconImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(600,600);
-		pack();
+	public void windowsListener(ILanguage language) {
 		addWindowListener(new WindowListener() {
 			
 			@Override
@@ -71,8 +88,6 @@ public class JFrame extends javax.swing.JFrame {
 			@Override
 			public void windowActivated(WindowEvent e) {}
 		});
-		setLocationRelativeTo(null);
-		setVisible(true);
 	}
 	
 	/*
@@ -80,8 +95,8 @@ public class JFrame extends javax.swing.JFrame {
 	 * @return La imagen que hay en carpeta.
 	 * @see java.awt.Frame#getIconImage()
 	 */
-	public Image getIconImage() {
-		File image = new File("src/config/favicon.png");
+	private Image getIconImage(ConfigurationLoader configLoader) {
+		File image = new File(configLoader.getIconImage());
         Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
         return retValue;
     }

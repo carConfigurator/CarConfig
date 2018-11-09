@@ -36,6 +36,14 @@ public class LanguageDAO implements ILanguage{
 		}
 	}
 	
+	//  ------------------------------Default title-------------------------------------
+	@Override
+	public String titleDefault() {
+		NodeList nList = document.getElementsByTagName("title_default");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+	
 	//	------------------------------Botones----------------------------------
 
 	@Override
@@ -83,6 +91,13 @@ public class LanguageDAO implements ILanguage{
 	@Override
 	public String btnEnd() {
 		NodeList nList = document.getElementsByTagName("btn_end");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+
+	@Override
+	public String btnStart() {
+		NodeList nList = document.getElementsByTagName("btn_start");
 		Node nNode = nList.item(0);
 		return nNode.getTextContent();
 	}

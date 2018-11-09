@@ -1,7 +1,6 @@
-Datos Temporales
 [Empleado] dario.delcore
 ------
-[Cliente] asdf,cy,fcfy,cf,ycf@asdf.ocs,Desconocido,null
+[Cliente] hv,vugy,vhi,vgu,vi@asd.cos,Desconocido,null
 ------
 [Modelo] 1,SEAT Mii P5,Observaciones del SEAT Mii 5P,7726.2
 ------

@@ -1,12 +1,8 @@
 package view_miglayout;
 
 import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
@@ -16,14 +12,12 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,7 +28,6 @@ import com.toedter.calendar.JDateChooser;
 
 import config.ConfigurationLoader;
 import idao.ILanguage;
-//import javafx.scene.input.DataFormat;
 import model.Client;
 import net.miginfocom.swing.MigLayout;
 import view_miglayout.Selection_Model;
@@ -48,14 +41,14 @@ public class Data_Clients extends JFrame{
 	private Client client;
 	private String username;
 	
-	JPanel panel;
-	JLabel label_client_title, label_username, label_client_name, label_client_first_lastname, label_client_second_lastname,
-	label_client_email, label_client_address, label_client_gender, label_client_birthdate;
-	JTextField tfield_client_name, tfield_client_first_lastname, tfield_client_second_lastname, tfield_client_address, tfield_client_email;
-	JRadioButton rb_male, rb_female, rb_unknown;
-	ButtonGroup bg_gender;
-	JDateChooser dc_birthdate;
-	JButton btn_save, btn_next;
+	private JPanel panel;
+	private JLabel label_client_title, label_username, label_client_name, label_client_first_lastname, label_client_second_lastname,
+		label_client_email, label_client_address, label_client_gender, label_client_birthdate;
+	private JTextField tfield_client_name, tfield_client_first_lastname, tfield_client_second_lastname, tfield_client_address, tfield_client_email;
+	private JRadioButton rb_male, rb_female, rb_unknown;
+	private ButtonGroup bg_gender;
+	private JDateChooser dc_birthdate;
+	private JButton btn_save, btn_next;
 	
 	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username, Client client) {
 		System.out.println("[INFO] - Mostrando nuevamente el Frame de Datos Clientes...");
@@ -197,11 +190,11 @@ public class Data_Clients extends JFrame{
 		
 		String getGender = this.client.getGender();
 		
-		if(getGender.equals("Hombre")) {
+		if(getGender.equals(language.radioGenderMale())) {
 			this.rb_male.setSelected(true);
-		}else if(getGender.equals("Mujer")) {
+		}else if(getGender.equals(language.radioGenderFemale())) {
 			this.rb_female.setSelected(true);
-		}else if(getGender.equals(null) || getGender.equals("Desconocido")) {
+		}else if(getGender.equals(null) || getGender.equals(language.radioGenderUnknown())) {
 			this.rb_unknown.setSelected(true);	
 		}
 		
@@ -277,7 +270,53 @@ public class Data_Clients extends JFrame{
 		this.panel.add(dc_birthdate, "wrap, pushx, growx");
 		this.panel.add(btn_save, "skip, align right, split 2");
 		this.panel.add(btn_next);
-		JFrame();
+		
+		addFrame(configLoad, panel, language.labelDeliveryNote());
+//		addWindowListener(new WindowListener() {
+//			
+//			@Override
+//			public void windowOpened(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowIconified(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowDeiconified(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowDeactivated(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowClosing(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowClosed(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void windowActivated(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+		windowsListener(language);
 	}
 	
 	/*
@@ -326,8 +365,8 @@ public class Data_Clients extends JFrame{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-        	new Selection_Model(this.configLoad, this.language, this.username, client);
         	setVisible(false);
+        	new Selection_Model(this.configLoad, this.language, this.username, client);
 		}
 	}
 	
@@ -359,7 +398,6 @@ public class Data_Clients extends JFrame{
 	}
 
 	protected void saveActionPerformed() {
-		
 		if(checkData()) {
 			DateFormat format = new SimpleDateFormat(dc_birthdate.getDateFormatString());
 			String getInformation = label_client_name.getText() + tfield_client_name.getText()
@@ -382,61 +420,4 @@ public class Data_Clients extends JFrame{
 			JOptionPane.showMessageDialog(null, getInformation + "\n" + getGender, this.label_client_title.getText(), JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-
-	private void JFrame() {
-		add(this.panel);
-		setSize(600,600);
-		setTitle(language.dataClientsTitle());
-		setIconImage(getIconImage());
-		pack();
-		setLocationRelativeTo(null);
-		addWindowListener(new WindowListener() {
-			
-			@Override
-			public void windowOpened(WindowEvent e) {}
-			
-			@Override
-			public void windowIconified(WindowEvent e) {}
-			
-			@Override
-			public void windowDeiconified(WindowEvent e) {}
-			
-			@Override
-			public void windowDeactivated(WindowEvent e) {}
-			
-			@Override
-			public void windowClosing(WindowEvent e) {
-				int dialogButton = JOptionPane.showConfirmDialog(null, language.btnSaveInfo(), language.btnSaveInfo(), JOptionPane.YES_NO_CANCEL_OPTION);
-				if(dialogButton == JOptionPane.YES_OPTION) {
-					System.out.println("[INFO] - Guardando los datos del cliente...");
-					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				}else if(dialogButton == JOptionPane.NO_OPTION){
-					System.out.println("[INFO] - No se guardarán los cambios...");
-					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				}else if(dialogButton == JOptionPane.CANCEL_OPTION){
-					System.out.println("[INFO] - No se hará nada.");
-					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-				}
-			}
-			
-			@Override
-			public void windowClosed(WindowEvent e) {}
-			
-			@Override
-			public void windowActivated(WindowEvent e) {}
-		});
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
-	}
-	
-	/*
-	 * Método que obtiene la imagen para el JFrame.
-	 * @return La imagen que hay en carpeta.
-	 * @see java.awt.Frame#getIconImage()
-	 */
-	public Image getIconImage() {
-		File image = new File("src/config/favicon.png");
-        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
-        return retValue;
-    }
 }
