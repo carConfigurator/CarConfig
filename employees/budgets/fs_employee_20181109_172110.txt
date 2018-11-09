@@ -1,6 +1,6 @@
 [Empleado] dario.delcore
 ------
-[Cliente] asd,vgu,fycg,ycf,sadf@saf.co,Desconocido,null
+[Cliente] uvg,gvu,vug,uvg,ugv@asd.co,Desconocido,null
 ------
 [Modelo] 1,SEAT Mii P5,Observaciones del SEAT Mii 5P,7726.2
 ------

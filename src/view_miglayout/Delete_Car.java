@@ -85,7 +85,7 @@ public class Delete_Car{
 		}
 		
 		//dialogo para mostrar el coche que vamos a eliminar
-		int optionPane=JOptionPane.showConfirmDialog(panel, language.dataDeleteCarTitle()+"\n"
+		int optionPane=JOptionPane.showConfirmDialog(panel, language.titleDefault()+" - "+language.dataDeleteCarTitle()+"\n"
 						+language.labelId()+info[0]+"\n"
 						+language.labelName()+info[1]+"\n"
 						+language.labelDescription()+info[2]+"\n"

@@ -347,7 +347,7 @@ public class Purchase_Accessories extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				double pricesTires = accessory.getPriceTires();
 				if(cbLlantasAl.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
+					System.out.println("[INFO] - Llantas Seleccionado");
 					Aumento = Aumento + pricesTires;
 					lblMostrarAumento.setText(String.valueOf(Aumento));
 					TotalPrecio = TotalPrecio + pricesTires;
@@ -366,7 +366,7 @@ public class Purchase_Accessories extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				double priceSeating = accessory.getPriceSeating();
 				if(cbAsientosCal.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
+					System.out.println("[INFO] - Asientos Seleccionado");
 					Aumento = Aumento + priceSeating;
 					lblMostrarAumento.setText(String.valueOf(Aumento));
 					TotalPrecio = TotalPrecio + priceSeating;
@@ -385,7 +385,7 @@ public class Purchase_Accessories extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				double priceSpeedCruise = accessory.getPriceSpeedCruise();
 				if(cbVelCrucero.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
+					System.out.println("[INFO] - Velocidad Seleccionado");
 					Aumento = Aumento + priceSpeedCruise;
 					lblMostrarAumento.setText(String.valueOf(Aumento));
 					TotalPrecio = TotalPrecio + priceSpeedCruise;
@@ -404,7 +404,7 @@ public class Purchase_Accessories extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				double priceAutoParking = accessory.getPriceAutoParking();
 				if(cbAparcamietnoAuto.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
+					System.out.println("[INFO] - Aparcamiento Seleccionado");
 					Aumento = Aumento + priceAutoParking;
 					lblMostrarAumento.setText(String.valueOf(Aumento));
 					TotalPrecio = TotalPrecio + priceAutoParking;
@@ -423,7 +423,7 @@ public class Purchase_Accessories extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				double priceUSB = accessory.getPriceUSB();
 				if(cbConectorUSB.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
+					System.out.println("[INFO] - Conector Seleccionado");
 					Aumento = Aumento + priceUSB;
 					lblMostrarAumento.setText(String.valueOf(Aumento));
 					TotalPrecio = TotalPrecio + priceUSB;
@@ -442,7 +442,7 @@ public class Purchase_Accessories extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				double metallicPaint = accessory.getPriceMetallicPaint();
 				if(cbPinturaMetal.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
+					System.out.println("[INFO] - Pintura Seleccionado");
 					Aumento = Aumento + metallicPaint;
 					lblMostrarAumento.setText(String.valueOf(Aumento));
 					TotalPrecio = TotalPrecio + metallicPaint;
@@ -477,7 +477,7 @@ public class Purchase_Accessories extends JFrame{
 		this.panel.add(this.btnAtras, "align left");
 		this.panel.add(btnFinalizar, "align right");
 		
-		addFrame(configLoad, panel, language.titleDefault());
+		addFrame(this.configLoad, this.panel, this.language, this.language.purchaseAccessoriesTitle());
 		
 	}
 }

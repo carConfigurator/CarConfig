@@ -6,7 +6,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 
-import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -19,9 +18,9 @@ public class JFrame extends javax.swing.JFrame {
 	 * Create the frame.
 	 */
 	public JFrame() {}
-	public void addFrame(ConfigurationLoader configLoad, JPanel panel, String title) {
+	public void addFrame(ConfigurationLoader configLoad, JPanel panel, ILanguage language, String title) {
 		add(panel);
-		setTitle(title);
+		setTitle(language.titleDefault()+" - "+title);
 		setIconImage(getIconImage(configLoad));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600,600);
@@ -29,28 +28,6 @@ public class JFrame extends javax.swing.JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
-//	public JFrame(ConfigurationLoader configLoad, JPanel panel, String title) {
-//		add(panel);
-//		setTitle(title);
-//		setIconImage(getIconImage(configLoad));
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setSize(600,600);
-//		pack();
-//		setLocationRelativeTo(null);
-//		setVisible(true);
-//	}
-//	//frame para añadir un menu
-//	public JFrame(ConfigurationLoader configLoad, JMenuBar pMenu, JPanel panel, String title) {
-//		setJMenuBar(pMenu);
-//		add(panel);
-//		setTitle(title);
-//		setIconImage(getIconImage(configLoad));
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setSize(600,600);
-//		pack();
-//		setLocationRelativeTo(null);
-//		setVisible(true);
-//	}
 	
 	public void windowsListener(ILanguage language) {
 		addWindowListener(new WindowListener() {

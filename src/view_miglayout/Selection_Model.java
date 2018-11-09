@@ -296,7 +296,7 @@ public class Selection_Model extends JFrame{
 			}
 		});
 
-		addFrame(configLoad, panelGBC, language.labelDeliveryNote());
+		addFrame(configLoad, panelGBC, language, language.seleccionModeloTitle());
 	}
 	
 	private void crearBoton(/*List<String> nomimg*/) {

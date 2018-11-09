@@ -1,11 +1,13 @@
 [Empleado] dario.delcore
 ------
-[Cliente] uiv,ugv,uvyg,vugy,asdf@adsfc.ocs,Desconocido,null
+[Cliente] j,biu,boi,hio,oijb@asdf.co,Desconocido,null
 ------
 [Modelo] 1,SEAT Mii P5,Observaciones del SEAT Mii 5P,7726.2
 ------
 [Motor] 1,Ibiza 1.6 TDI CR 70 KW (95 CV),Diesel / 5 Velocidades Manual,18.59
 ------
 [Accesorios]
+2,Navegador,Navegador,70.0
+8,Pintura metalizada,Pintura metalizada,500.0
 ------
-6188,63
+6644,63

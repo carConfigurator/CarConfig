@@ -167,7 +167,7 @@ public class Selection_Engine extends JFrame {
 		this.panel.add(this.btn_Anterior, "span 2, align left");
 		this.panel.add(this.btn_Siguiente, "align right");
 		
-		addFrame(this.configLoad, panel, language.seleccionEngineTitle());
+		addFrame(this.configLoad, panel, language, language.seleccionEngineTitle());
 	}
 	
 	

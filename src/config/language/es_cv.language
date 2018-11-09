@@ -84,8 +84,11 @@
 		<title>Eliminar un coche</title>
 		<label_data_title>Estas seguro que queres eliminar el siguiente coche?</label_data_title>
 	</Delete_Car>
+	<Modify_Car>
+		<title>Modificar un coche</title>
+	</Modify_Car>
 	<Delivery_Note>
-		<label_delivery_note>ALBARAN</label_delivery_note>
+		<title>ALBARAN</title>
 		<label_data_title>Cliente: </label_data_title>
 		<label_company>Empresa: </label_company>
 		<label_company_name>SEAT</label_company_name>

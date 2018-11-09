@@ -201,7 +201,7 @@ public class Add_Car extends JFrame{
 			}
 		});
 		
-		addFrame(configLoad, panelMig, language.addCarTitle());
+		addFrame(configLoad, panelMig, language, language.addCarTitle());
 	}
 	
 	private void backActionPerformed(ActionEvent ae) {

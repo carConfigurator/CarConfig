@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.ScrollPane;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -100,8 +102,15 @@ public class Albaran extends JFrame {
 		generateXMLBudget();
 		generateBudget();
 		
+		this.btn_GoClient.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loginActionPerformed(e);
+			}
+		});
 		
-		addFrame(configLoad, contentPane, language.labelDeliveryNote());
+		addFrame(configLoad, contentPane, language, language.deliveryNoteTitle());
 	}
 	
 	private void generateXMLBudget() {
@@ -175,6 +184,10 @@ public class Albaran extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	private void loginActionPerformed(ActionEvent e) {
+		setVisible(false);
+		new Data_Clients(this.configLoad, this.language, this.username, new Client());
 	}
 }

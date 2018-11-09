@@ -195,7 +195,6 @@ public class Accessory {
 	}	
 
 	private boolean checkAccesory(int idSelected, String accessory) {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -226,7 +225,6 @@ public class Accessory {
 	}
 
 	public double getPriceElevators() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -240,7 +238,6 @@ public class Accessory {
 	}
 
 	public double getPriceNavegador() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -254,7 +251,6 @@ public class Accessory {
 	}
 
 	public double getPriceTires() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -268,7 +264,6 @@ public class Accessory {
 	}
 
 	public double getPriceSeating() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -282,7 +277,6 @@ public class Accessory {
 	}
 	
 	public double getPriceSpeedCruise() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -296,7 +290,6 @@ public class Accessory {
 	}
 
 	public double getPriceAutoParking() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -310,7 +303,6 @@ public class Accessory {
 	}
 
 	public double getPriceUSB() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -324,7 +316,6 @@ public class Accessory {
 	}
 
 	public double getPriceMetallicPaint() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -338,7 +329,6 @@ public class Accessory {
 	}
 
 	public String getElevators() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -356,7 +346,6 @@ public class Accessory {
 	}
 
 	public String getNavegator() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -374,7 +363,6 @@ public class Accessory {
 	}
 
 	public String getTires() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -392,7 +380,6 @@ public class Accessory {
 	}
 
 	public String getSeating() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -410,7 +397,6 @@ public class Accessory {
 	}
 
 	public String getSpeedCruise() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -428,7 +414,6 @@ public class Accessory {
 	}
 
 	public String getAutoParking() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -446,7 +431,6 @@ public class Accessory {
 	}
 
 	public String getUSB() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -464,7 +448,6 @@ public class Accessory {
 	}
 
 	public String getMetallicPaint() {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		NodeList nList = document.getElementsByTagName("Accessory");		
 		String[] accessories = new String[nList.getLength()];
 		for (int i = 0; i < accessories.length; i++) {
@@ -482,7 +465,6 @@ public class Accessory {
 	}
 
 	public ArrayList<String> getModelsAvailables(int idAccessory) {
-		System.out.println("[INFO] - Seleccionando motores según el Modelo escogido");
 		ArrayList<String> name_models = new ArrayList<String>();
 		
 		for (String string : name_models) {

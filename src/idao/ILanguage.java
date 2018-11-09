@@ -90,8 +90,12 @@ public interface ILanguage {
 	String deleteCarTitle();
 	String dataDeleteCarTitle();
 
+	// Métodos que se usarán para delete_car.
+	String modifyCarTitle();
+	//los otros metodos son los mismos que los de add
+	
 	// Métodos que se usarán para albaran.
-	String labelDeliveryNote();
+	String deliveryNoteTitle();
 	String labelClient();
 	String labelCompany();
 	//name in data_clients

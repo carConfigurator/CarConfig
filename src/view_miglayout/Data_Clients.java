@@ -3,8 +3,6 @@ package view_miglayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -52,7 +50,7 @@ public class Data_Clients extends JFrame{
 	
 	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username, Client client) {
 		System.out.println("[INFO] - Mostrando nuevamente el Frame de Datos Clientes...");
-		System.out.println("[INFO] - Recuperando información del cliente añadido anteriormente...");
+		System.out.println("[INFO] - Recuperando información...");
 		this.client = client;
 		this.language = language;
 		this.configLoad = configLoad;
@@ -271,7 +269,7 @@ public class Data_Clients extends JFrame{
 		this.panel.add(btn_save, "skip, align right, split 2");
 		this.panel.add(btn_next);
 		
-		addFrame(configLoad, panel, language.labelDeliveryNote());
+		addFrame(configLoad, panel, language, language.dataClientsTitle());
 //		addWindowListener(new WindowListener() {
 //			
 //			@Override

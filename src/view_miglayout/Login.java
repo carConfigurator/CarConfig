@@ -134,7 +134,7 @@ public class Login extends JFrame{
 			}
 		});
 		
-		addFrame(configLoad, panel, language.titleDefault());
+		addFrame(configLoad, panel, language, language.loginTitle());
 	}
 	
 	/*
@@ -190,44 +190,5 @@ public class Login extends JFrame{
 			JOptionPane.showMessageDialog(null,language.errorLoginUser(),language.errorLoginUserTitle(), JOptionPane.ERROR_MESSAGE);
 			System.out.println("[ERROR] - El usuario no existe.");
 		}
-		
-		
-		
-		
-//		for (int i = 0; i < listEmployee.length; i++) {
-//			if(countTries == listEmployee.length+1) {
-//				JOptionPane.showMessageDialog(null,language.errorLoginUser(),language.errorLoginUserTitle(), JOptionPane.ERROR_MESSAGE);
-//				System.out.println("[ERROR] - El usuario no existe.");
-//			}else {
-//				if(listEmployee[i].equals(username)) {
-//					if(listPassword[i].equals(password)) {
-//						System.out.println("[INFO] - Conexión Establecida. Cambiando de Frame...\n\t Enviando configuración, idioma y nombre de usuario...");
-//						System.out.println("[INFO] - Escribiendo en el fichero temporal.");
-//						try {
-//							FileWriter fw = new FileWriter(this.temp);
-//							BufferedWriter bw = new BufferedWriter(fw);
-//							bw.write("Datos Temporales");
-//							bw.newLine();
-//							bw.write("[Empleado] ");
-//							bw.write(username);
-//							bw.newLine();
-//							bw.write("------");
-//							bw.close();
-//							fw.close();
-//						} catch (IOException e1) {
-//							e1.printStackTrace();
-//						}
-//						// Oculto este Frame y llamo al siguiente:
-//						setFrameVisible(false);
-//						new Data_Clients(this.configLoad, this.language, username);
-//					}else {
-//						System.out.println("[ERROR] - El usuario/contraseña es incorrecto");
-//						JOptionPane.showMessageDialog(null,language.errorLoginPassword(),language.errorLoginPasswordTitle(), JOptionPane.ERROR_MESSAGE);
-//					}
-//				}else {
-//					countTries++;
-//				}
-//			}
-//		}
 	}
 }
