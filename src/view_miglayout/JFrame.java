@@ -6,6 +6,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 
+import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -17,7 +18,6 @@ public class JFrame extends javax.swing.JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public JFrame() {}
 	public void addFrame(ConfigurationLoader configLoad, JPanel panel, ILanguage language, String title) {
 		add(panel);
 		setTitle(language.titleDefault()+" - "+title);
@@ -27,6 +27,10 @@ public class JFrame extends javax.swing.JFrame {
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
+	}
+	
+	public void addMenuBar(JMenuBar jmBar) {
+		setJMenuBar(jmBar);
 	}
 	
 	public void windowsListener(ILanguage language) {

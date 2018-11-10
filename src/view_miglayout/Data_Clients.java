@@ -270,50 +270,6 @@ public class Data_Clients extends JFrame{
 		this.panel.add(btn_next);
 		
 		addFrame(configLoad, panel, language, language.dataClientsTitle());
-//		addWindowListener(new WindowListener() {
-//			
-//			@Override
-//			public void windowOpened(WindowEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void windowIconified(WindowEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void windowDeiconified(WindowEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void windowDeactivated(WindowEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void windowClosing(WindowEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void windowClosed(WindowEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void windowActivated(WindowEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
 		windowsListener(language);
 	}
 	
@@ -341,8 +297,6 @@ public class Data_Clients extends JFrame{
 			}else if(rb_unknown.isSelected()) {
 				getGender = rb_unknown.getText();
 			}
-
-			System.out.println(getGender);
 			
 			if(this.dc_birthdate.getDate()==null) {
 				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText(), getGender);

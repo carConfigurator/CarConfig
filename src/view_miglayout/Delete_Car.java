@@ -85,7 +85,7 @@ public class Delete_Car{
 		}
 		
 		//dialogo para mostrar el coche que vamos a eliminar
-		int optionPane=JOptionPane.showConfirmDialog(panel, language.titleDefault()+" - "+language.dataDeleteCarTitle()+"\n"
+		int optionPane=JOptionPane.showConfirmDialog(panel, language.dataDeleteCarTitle()+"\n"
 						+language.labelId()+info[0]+"\n"
 						+language.labelName()+info[1]+"\n"
 						+language.labelDescription()+info[2]+"\n"
@@ -96,17 +96,7 @@ public class Delete_Car{
 		if (optionPane==JOptionPane.YES_OPTION) {
 			model.deleteCar(configLoad, language, username, client, documentOld);
 		}else {
-			new Selection_Model(this.configLoad, this.language, this.username, this.client);
+			new Selection_Model(this.configLoad, this.language, this.username, this.client, this.model);
 		}
-		
-//		JFrame();
 	}
-	
-//	private void JFrame() {
-//		add(panel);
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setLocationRelativeTo(null);
-//		setVisible(false);
-//	}
-
 }

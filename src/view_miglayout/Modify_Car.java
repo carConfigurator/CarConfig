@@ -205,11 +205,11 @@ public class Modify_Car extends JFrame{
 			}
 		});
 		
-		addFrame(configLoad, panelMig, language, language.modifyCarTitle());
+		addFrame(configLoad, panelMig, language, language.titleDefault());
 	}
 	
 	private void backActionPerformed(ActionEvent ae) {
 		setVisible(false);
-		new Selection_Model(this.configLoad, this.language, this.username, new Client());
+		new Selection_Model(this.configLoad, this.language, this.username, this.client, this.model);
 	}
 }

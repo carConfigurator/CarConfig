@@ -206,6 +206,6 @@ public class Add_Car extends JFrame{
 	
 	private void backActionPerformed(ActionEvent ae) {
 		setVisible(false);
-		new Selection_Model(this.configLoad, this.language, this.username, this.client);
+		new Selection_Model(this.configLoad, this.language, this.username, this.client, this.model);
 	}
 }
