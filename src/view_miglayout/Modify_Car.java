@@ -15,7 +15,6 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -206,33 +205,11 @@ public class Modify_Car extends JFrame{
 			}
 		});
 		
-		JFrame();
-	}
-	
-	private void JFrame() {
-		add(panelMig);
-		setTitle(language.addCarTitle());
-		setIconImage(getIconImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(400,400);
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
+		addFrame(configLoad, panelMig, language, language.titleDefault());
 	}
 	
 	private void backActionPerformed(ActionEvent ae) {
 		setVisible(false);
-		new Selection_Model(this.configLoad, this.language, this.username, this.client);
+		new Selection_Model(this.configLoad, this.language, this.username, this.client, this.model);
 	}
-	
-	/*
-	 * Método que obtiene la imagen para el JFrame.
-	 * @return La imagen que hay en carpeta.
-	 * @see java.awt.Frame#getIconImage()
-	 */
-	public Image getIconImage() {
-		File image = new File("src/config/favicon.png");
-        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
-        return retValue;
-    }
 }

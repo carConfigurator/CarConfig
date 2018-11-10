@@ -1,15 +1,11 @@
 package view_miglayout;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import config.ConfigurationLoader;
-import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
 import model.Accessory_woDAO;
 import model.Client;
@@ -22,18 +18,16 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class Purchase_Accessories extends JFrame {
+
+public class Purchase_Accessories extends JFrame{
 
 	// Atributos de la Clase:
 	private ILanguage language;
@@ -353,7 +347,7 @@ public class Purchase_Accessories extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				double pricesTires = accessory.getPriceTires();
 				if(cbLlantasAl.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
+					System.out.println("[INFO] - Llantas Seleccionado");
 					Aumento = Aumento + pricesTires;
 					lblMostrarAumento.setText(String.valueOf(Aumento));
 					TotalPrecio = TotalPrecio + pricesTires;
@@ -372,7 +366,7 @@ public class Purchase_Accessories extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				double priceSeating = accessory.getPriceSeating();
 				if(cbAsientosCal.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
+					System.out.println("[INFO] - Asientos Seleccionado");
 					Aumento = Aumento + priceSeating;
 					lblMostrarAumento.setText(String.valueOf(Aumento));
 					TotalPrecio = TotalPrecio + priceSeating;
@@ -391,7 +385,7 @@ public class Purchase_Accessories extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				double priceSpeedCruise = accessory.getPriceSpeedCruise();
 				if(cbVelCrucero.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
+					System.out.println("[INFO] - Velocidad Seleccionado");
 					Aumento = Aumento + priceSpeedCruise;
 					lblMostrarAumento.setText(String.valueOf(Aumento));
 					TotalPrecio = TotalPrecio + priceSpeedCruise;
@@ -410,7 +404,7 @@ public class Purchase_Accessories extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				double priceAutoParking = accessory.getPriceAutoParking();
 				if(cbAparcamietnoAuto.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
+					System.out.println("[INFO] - Aparcamiento Seleccionado");
 					Aumento = Aumento + priceAutoParking;
 					lblMostrarAumento.setText(String.valueOf(Aumento));
 					TotalPrecio = TotalPrecio + priceAutoParking;
@@ -429,7 +423,7 @@ public class Purchase_Accessories extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				double priceUSB = accessory.getPriceUSB();
 				if(cbConectorUSB.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
+					System.out.println("[INFO] - Conector Seleccionado");
 					Aumento = Aumento + priceUSB;
 					lblMostrarAumento.setText(String.valueOf(Aumento));
 					TotalPrecio = TotalPrecio + priceUSB;
@@ -448,7 +442,7 @@ public class Purchase_Accessories extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				double metallicPaint = accessory.getPriceMetallicPaint();
 				if(cbPinturaMetal.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
+					System.out.println("[INFO] - Pintura Seleccionado");
 					Aumento = Aumento + metallicPaint;
 					lblMostrarAumento.setText(String.valueOf(Aumento));
 					TotalPrecio = TotalPrecio + metallicPaint;
@@ -482,33 +476,8 @@ public class Purchase_Accessories extends JFrame {
 		this.panel.add(lblMostrarTotalPrecio, "align left, wrap, pushx, growx");
 		this.panel.add(this.btnAtras, "align left");
 		this.panel.add(btnFinalizar, "align right");
-		JFrame();
+		
+		addFrame(this.configLoad, this.panel, this.language, this.language.purchaseAccessoriesTitle());
 		
 	}
-	
-	/*
-	 * Método para configurar la ventana actual.
-	 */
-	private void JFrame() {
-		add(panel);
-		setTitle(language.seleccionEngineTitle());
-		setIconImage(getIconImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(600,600);
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
-	}
-	
-	/*
-	 * Método que obtiene la imagen para el JFrame.
-	 * @return La imagen que hay en carpeta.
-	 * @see java.awt.Frame#getIconImage()
-	 */
-	public Image getIconImage() {
-		File image = new File("src/config/favicon.png");
-        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
-        return retValue;
-    }
-
 }

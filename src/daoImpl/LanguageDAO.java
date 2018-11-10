@@ -36,6 +36,14 @@ public class LanguageDAO implements ILanguage{
 		}
 	}
 	
+	//  ------------------------------Default title-------------------------------------
+	@Override
+	public String titleDefault() {
+		NodeList nList = document.getElementsByTagName("title_default");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+	
 	//	------------------------------Botones----------------------------------
 
 	@Override
@@ -83,6 +91,13 @@ public class LanguageDAO implements ILanguage{
 	@Override
 	public String btnEnd() {
 		NodeList nList = document.getElementsByTagName("btn_end");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+
+	@Override
+	public String btnStart() {
+		NodeList nList = document.getElementsByTagName("btn_start");
 		Node nNode = nList.item(0);
 		return nNode.getTextContent();
 	}
@@ -772,15 +787,28 @@ public class LanguageDAO implements ILanguage{
 		return null;
 	}
 
-	//		-------------------Métodos que se usarán para Delete_Car.-------------------
+	//		-------------------Métodos que se usarán para Modify_Car.-------------------
 
 	@Override
-	public String labelDeliveryNote() {
+	public String modifyCarTitle() {
+		NodeList nList = document.getElementsByTagName("Modify_Car");
+		Node nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
+		}
+		return null;
+	}
+	
+	//		-------------------Métodos que se usarán para Albaran.-------------------
+
+	@Override
+	public String deliveryNoteTitle() {
 		NodeList nList = document.getElementsByTagName("Delivery_Note");
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_data_title").item(0).getTextContent();
+			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
 		}
 		return null;
 	}

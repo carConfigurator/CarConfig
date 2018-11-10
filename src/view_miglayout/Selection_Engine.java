@@ -1,17 +1,10 @@
 package view_miglayout;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import com.sun.xml.internal.ws.api.pipe.NextAction;
 
 import config.ConfigurationLoader;
-import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
 import model.Client;
 import model.Engine_woDAO;
@@ -24,8 +17,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -35,8 +26,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 
 public class Selection_Engine extends JFrame {
 
@@ -49,9 +38,9 @@ public class Selection_Engine extends JFrame {
 	private File temp;
 	private JList list;
 	
-	JPanel panel;
-	JLabel lblTitulo, lblUsername;
-	JButton btn_Anterior, btn_Siguiente;	
+	private JPanel panel;
+	private JLabel lblTitulo, lblUsername;
+	private JButton btn_Anterior, btn_Siguiente;	
 	
 	// Constructores de la vista:
 	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model_woDAO model, Engine_woDAO engine) {
@@ -178,7 +167,7 @@ public class Selection_Engine extends JFrame {
 		this.panel.add(this.btn_Anterior, "span 2, align left");
 		this.panel.add(this.btn_Siguiente, "align right");
 		
-		JFrame();
+		addFrame(this.configLoad, panel, language, language.seleccionEngineTitle());
 	}
 	
 	
@@ -201,30 +190,4 @@ public class Selection_Engine extends JFrame {
 		
 		new Purchase_Accessories(this.configLoad, this.language, this.username, this.client, this.model, this.engine);
 	}
-
-	/*
-	 * Método para configurar la ventana actual.
-	 */
-	private void JFrame() {
-		add(this.panel);
-		setTitle(language.seleccionEngineTitle());
-		setIconImage(getIconImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(600,600);
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
-	}
-	
-	/*
-	 * Método que obtiene la imagen para el JFrame.
-	 * @return La imagen que hay en carpeta.
-	 * @see java.awt.Frame#getIconImage()
-	 */
-	public Image getIconImage() {
-		File image = new File("src/config/favicon.png");
-        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
-        return retValue;
-    }
-
 }

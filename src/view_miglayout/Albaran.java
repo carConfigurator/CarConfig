@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.ScrollPane;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,7 +20,6 @@ import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -35,6 +36,7 @@ import model.Client;
 import model.PresupuestoXML;
 
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
@@ -52,7 +54,7 @@ public class Albaran extends JFrame {
 	
 	// Atributos de la clase.
 	private JPanel contentPane;
-	private JButton btnGoClient;
+	private JButton btn_GoClient;
 	
 
 	/**
@@ -66,7 +68,14 @@ public class Albaran extends JFrame {
 		this.contentPane = new JPanel();
 		this.contentPane.setLayout(new MigLayout("insets 30"));
 		this.contentPane.setBackground(new Color(255, 255, 255));
-//		this.btnGoClient
+		this.btn_GoClient = new JButton(language.btnStart());
+		this.btn_GoClient.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.btn_GoClient.setBackground(new Color(215,18,43));
+		this.btn_GoClient.setForeground(new Color(255,255,255));
+		this.btn_GoClient.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createLineBorder(new Color(215, 18, 43)),
+				BorderFactory.createEmptyBorder(5,10,5,10)
+				));
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 		this.budget = new File(this.configLoad.getBudgetPathFile() + "fs_employee_" + timeStamp + ".txt");
@@ -87,11 +96,21 @@ public class Albaran extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		this.contentPane.add(ta, "wrap, pushx, growx, pushy, growy");
+		this.contentPane.add(this.btn_GoClient, "pushx, pushy, align right");
 		generateXMLBudget();
 		generateBudget();
-		JFrame();
+		
+		this.btn_GoClient.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loginActionPerformed(e);
+			}
+		});
+		
+		addFrame(configLoad, contentPane, language, language.deliveryNoteTitle());
 	}
 	
 	private void generateXMLBudget() {
@@ -165,32 +184,10 @@ public class Albaran extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-	}
-
-	/*
-	 * Método para configurar la ventana actual.
-	 */
-	private void JFrame() {
-		add(this.contentPane);
-		setTitle(language.seleccionEngineTitle());
-		setIconImage(getIconImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(600,600);
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
 	}
 	
-	/*
-	 * Método que obtiene la imagen para el JFrame.
-	 * @return La imagen que hay en carpeta.
-	 * @see java.awt.Frame#getIconImage()
-	 */
-	public Image getIconImage() {
-		File image = new File("src/config/favicon.png");
-        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
-        return retValue;
-    }
-
+	private void loginActionPerformed(ActionEvent e) {
+		setVisible(false);
+		new Data_Clients(this.configLoad, this.language, this.username, new Client());
+	}
 }

@@ -1,9 +1,7 @@
 package view_miglayout;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -11,14 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.ContainerEvent;
-import java.awt.event.ContainerListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -26,13 +18,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -41,19 +30,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextPane;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
-
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import config.ConfigurationLoader;
-import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
 import model.Accessory_woDAO;
 import model.Client;
@@ -61,8 +39,7 @@ import model.Engine_woDAO;
 import model.Model_woDAO;
 import net.miginfocom.swing.MigLayout;
 
-public class Selection_Model extends JFrame{
-	
+public class Selection_Model extends JFrame{	
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
 	private Client client;
@@ -71,6 +48,7 @@ public class Selection_Model extends JFrame{
 	private Engine_woDAO engine;
 	private Accessory_woDAO accessory;
 	
+<<<<<<< HEAD
 	// Atributos de componentes
 	private JPanel panelGBC, panelBox;
 	private List<JButton> listBotones;
@@ -80,8 +58,17 @@ public class Selection_Model extends JFrame{
 	private JTextPane area;
 	private ImageIcon coche;
 	private ImageIcon cocheBoton;
+=======
+	private JPanel panelMig, panelBox;
+	private List<JButton> listBotones;
+	private JButton btnNext,btnBack,btnCar;
+	private JLabel lTitle,lUser;
+	private JTextPane infoPane;
+	private JTextPane carPane;
+	private ImageIcon imgIconButtonCar;
+	private ImageIcon imgIconPaneCar;
+>>>>>>> 9049cbba322bbe1548721eb64d760cee2d5a9ac1
 	private JScrollPane scroll;
-	private int posicion=0;
 	
 	// Atributos del Menu
 	private JMenuBar pMenu;
@@ -89,9 +76,6 @@ public class Selection_Model extends JFrame{
 	private List<JMenuItem> lMenuItem;
 	private JSeparator menuSeparator;
 	
-	private String[] imatge_nom;
-	private int [] cochesId;
-	private String root_images;
 	private List<Image> listImg;
 	private File temp;
 	
@@ -102,7 +86,6 @@ public class Selection_Model extends JFrame{
 	public Selection_Model(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model_woDAO model) {
 		this.configLoad = configLoad;
 		this.language = language;
-		this.root_images = this.configLoad.getCar_image_path();
 		this.client = client;
 		this.username = username;
 		this.model = model;
@@ -130,31 +113,42 @@ public class Selection_Model extends JFrame{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		onCreate();
+		listBotones.get(this.model.getIdSelected()-1).requestFocus();
 	}
 	
 	public Selection_Model(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
 		this.configLoad = configLoad;
 		this.language = language;
-		this.root_images = this.configLoad.getCar_image_path();
 		this.client = client;
 		this.username = username;
+<<<<<<< HEAD
 		this.model = new Model_woDAO(this.configLoad);
 		this.engine = new Engine_woDAO(this.configLoad);
 		this.accessory = new Accessory_woDAO(this.configLoad);
+=======
+		this.model = new Model(this.configLoad);
+		this.engine = new Engine(this.configLoad);
+		this.accessory = new Accessory(this.configLoad);
+		this.temp = new File(this.configLoad.getTemporalPathFile());
+>>>>>>> 9049cbba322bbe1548721eb64d760cee2d5a9ac1
 		
-		model.setIdSelected(2);
 		onCreate();
 	}
 	
 	public void onCreate() {
+<<<<<<< HEAD
 		//MiGLayout
 		this.panelGBC = new JPanel();
+=======
+		//migLayout
+		this.panelMig = new JPanel();
+>>>>>>> 9049cbba322bbe1548721eb64d760cee2d5a9ac1
 		this.panelBox = new JPanel();
-		this.panelGBC.setLayout(new MigLayout("insets 20 50 50 50, fillx, filly"));
+		this.panelMig.setLayout(new MigLayout("insets 20 50 50 50, fillx, filly"));
 		this.panelBox.setLayout(new BoxLayout(panelBox, BoxLayout.Y_AXIS));
-		this.panelGBC.setBackground(new Color(255, 255, 255));
+		this.panelMig.setBackground(new Color(255, 255, 255));
 		this.panelBox.setBackground(new Color(255, 255, 255));
 		
 		//Creación del Menu
@@ -175,7 +169,13 @@ public class Selection_Model extends JFrame{
 		}
 		pMenu.add(menu);
 		
+		//iniciamos los componentes
+		this.lTitle=new JLabel(language.labelSelectTitle());
+		this.lTitle.setFont(new java.awt.Font("Tahoma", 0, 16));
+		this.lUser=new JLabel(this.language.labelAuthIn() + username);
+		this.lUser.setFont(new java.awt.Font("Tahoma", 0, 10));
 		
+<<<<<<< HEAD
 		this.l1=new JLabel(language.labelSelectTitle());
 		this.l1.setFont(new java.awt.Font("Tahoma", 0, 16));
 		this.luser=new JLabel(this.language.labelAuthIn() + username);
@@ -203,46 +203,68 @@ public class Selection_Model extends JFrame{
 		this.siguiente.setBackground(new Color(215,18,43));
 		this.siguiente.setForeground(new Color(255,255,255));
 		this.siguiente.setBorder(BorderFactory.createCompoundBorder(
+=======
+		this.carPane=new JTextPane();
+			carPane.setContentType("text/html");
+			carPane.setEditable(false);
+		this.infoPane=new JTextPane();
+			infoPane.setContentType("text/html");
+			infoPane.setEditable(false);
+		this.btnBack=new JButton(language.btnPrevious());
+		this.btnBack.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.btnBack.setBackground(new Color(215,18,43));
+		this.btnBack.setForeground(new Color(255,255,255));
+		this.btnBack.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createLineBorder(new Color(215, 18, 43)),
+				BorderFactory.createEmptyBorder(5,10,5,10)
+				));
+		this.btnNext=new JButton(language.btnNext());
+		this.btnNext.setFont(new java.awt.Font("Tahoma", 0, 12));
+		this.btnNext.setBackground(new Color(215,18,43));
+		this.btnNext.setForeground(new Color(255,255,255));
+		this.btnNext.setBorder(BorderFactory.createCompoundBorder(
+>>>>>>> 9049cbba322bbe1548721eb64d760cee2d5a9ac1
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)
 				));
 		
-		//Se añade la ruta de la imagen en una lista
-		this.imatge_nom = this.model.getImage_name();
-		this.cochesId = this.model.getId();
-		List<String> listCoche=new ArrayList<>();
-		for (int i = 0; i < imatge_nom.length; i++) {
-			listCoche.add(this.root_images + this.imatge_nom[i]+";"+this.cochesId[i]);
-		}
-	
-		//Creamos una lista de los botones con las rutas de las imagenes
-		this.listBotones=new ArrayList<JButton>();
-		crearBoton(listCoche);//lista ruta imagen
+		
+		
+		
+		//HASTA AQUI TDODO BIEN
+		
+		this.listBotones=new ArrayList<JButton>();//esta lista la usamos en createButton, vamos añadiendo los coches a esta lista
+		createButton();
 		
 		//Añadimos los botones al panel
 		for (JButton jButton : listBotones) {
 			this.panelBox.add(jButton);
 		}
-
+		
 		this.scroll = new JScrollPane(panelBox);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	    scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-	    scroll.setMinimumSize(new Dimension(coche.getImage().getWidth(null)/3-10, coche.getImage().getHeight(null)*3/2));
-		scroll.setPreferredSize(new Dimension(coche.getImage().getWidth(null)/3-10, coche.getImage().getHeight(null)*3/2));
+	    scroll.setMinimumSize(new Dimension(imgIconButtonCar.getImage().getWidth(null)/3-10, imgIconButtonCar.getImage().getHeight(null)*3/2));
+		scroll.setPreferredSize(new Dimension(imgIconButtonCar.getImage().getWidth(null)/3-10, imgIconButtonCar.getImage().getHeight(null)*3/2));
 		scroll.setBorder(null);
 		
 		//Añadimos las dimensiones aqui porque si hago como el scroll me dice que son 0,0, asi, me lo pilla bien
-		area.setMinimumSize(new Dimension((scroll.getMinimumSize().width+10)*3,scroll.getMinimumSize().height*2/3));
+		carPane.setMinimumSize(new Dimension((scroll.getMinimumSize().width+10)*3,scroll.getMinimumSize().height*2/3));
 		
-		this.panelGBC.add(l1, "span 2");
-		this.panelGBC.add(luser, "wrap, align right");
-		this.panelGBC.add(scroll, "align right");
-		this.panelGBC.add(area, "wrap, pushx, growx, pushy, growy, span 2");
-		this.panelGBC.add(areaInfo, "span 2, skip, wrap, align right, pushx, growx");
-		this.panelGBC.add(anterior, "skip");
-		this.panelGBC.add(siguiente, "align right");
+		this.panelMig.add(lTitle, "span 2");
+		this.panelMig.add(lUser, "wrap, align right");
+		this.panelMig.add(scroll, "align right");
+		this.panelMig.add(carPane, "wrap, pushx, growx, pushy, growy, span 2");
+		this.panelMig.add(infoPane, "span 2, skip, wrap, align right, pushx, growx");
+		this.panelMig.add(btnBack, "skip");
+		this.panelMig.add(btnNext, "align right");
 		
+<<<<<<< HEAD
 		area.addComponentListener(new ComponentListener() {
+=======
+		
+		carPane.addComponentListener(new ComponentListener() {
+>>>>>>> 9049cbba322bbe1548721eb64d760cee2d5a9ac1
 			
 			@Override
 			public void componentShown(ComponentEvent e) {
@@ -250,7 +272,7 @@ public class Selection_Model extends JFrame{
 			
 			@Override
 			public void componentResized(ComponentEvent e) {
-				area.setMargin(new Insets(area.getBounds().height/2-area.getBounds().y, 0, 0, 0));
+				carPane.setMargin(new Insets(carPane.getBounds().height/2-carPane.getBounds().y, 0, 0, 0));
 			}
 			
 			@Override
@@ -262,7 +284,7 @@ public class Selection_Model extends JFrame{
 			}
 		});
 		
-		anterior.addActionListener(new ActionListener() {
+		btnBack.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -270,7 +292,12 @@ public class Selection_Model extends JFrame{
 			}
 		});
 		
+<<<<<<< HEAD
 		siguiente.addActionListener(new ActionListener() {
+=======
+		btnNext.addActionListener(new ActionListener() {
+			
+>>>>>>> 9049cbba322bbe1548721eb64d760cee2d5a9ac1
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				siguienteActionPerformed();
@@ -297,33 +324,22 @@ public class Selection_Model extends JFrame{
 				modify();
 			}
 		});
+
+		addMenuBar(pMenu);
+		addFrame(configLoad, panelMig, language, language.titleDefault());
+	}
+	
+	private void createButton() {
+		listImg=new ArrayList<Image>();
 		
-		JFrame();
-	}
-	
-	/*
-	 * Método para configurar la ventana actual.
-	 */
-	private void JFrame() {
-		setJMenuBar(pMenu);
-		add(panelGBC);
-		setTitle(language.seleccionModeloTitle());
-		setIconImage(getIconImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(600,600);
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
-	}
-	
-	private void crearBoton(List<String> nomimg) {
-		for (String sNomImg : nomimg) {
-			btnCoches=new JButton();
-			btnCoches.setBackground(new Color(255,255,255));
-			btnCoches.setBorder(BorderFactory.createCompoundBorder(
+		for (int i = 0; i < this.model.getId().length; i++) {
+			btnCar=new JButton();
+			btnCar.setBackground(new Color(255,255,255));
+			btnCar.setBorder(BorderFactory.createCompoundBorder(
 					BorderFactory.createLineBorder(new Color(255, 255, 255)),
 					BorderFactory.createEmptyBorder(1, 1, 1, 1)
 					));
+<<<<<<< HEAD
 			coche = new ImageIcon(sNomImg.split(";")[0]);//en la posicion 0 tenemos el nombre de la imagen
 			cocheBoton = new ImageIcon(coche.getImage().getScaledInstance(coche.getIconWidth()/4, coche.getIconHeight()/4, Image.SCALE_DEFAULT));
 			btnCoches.setIcon(cocheBoton);
@@ -331,43 +347,52 @@ public class Selection_Model extends JFrame{
 			listBotones.add(btnCoches);
 			
 			listener(coche, btnCoches, Integer.parseInt(sNomImg.split(";")[1]));  //en la posicion 1 tenemos el id del coche
+=======
+			imgIconButtonCar=new ImageIcon(this.configLoad.getCar_image_path()+this.model.getImage_name()[i]);//cogemos la ruta de la imagen
+			imgIconPaneCar= new ImageIcon(imgIconButtonCar.getImage().getScaledInstance(imgIconButtonCar.getIconWidth()/4, imgIconButtonCar.getIconHeight()/4, Image.SCALE_DEFAULT));//hacemos la imagen pequeña
+			btnCar.setIcon(imgIconPaneCar);//añadimos la imagen del coche al boton
+			btnCar.setMargin(new Insets(0, 0, 0, 0));
+			btnCar.setFocusPainted(false);//hacemos que no se marque al pulsar (no nos hace falta porque ya tenemos bordes)
+			listBotones.add(btnCar);
+			
+			listImg.add(imgIconButtonCar.getImage());//añadimos la imagen a una lista
+			
+			listener(imgIconButtonCar, btnCar, this.model.getId()[i]);  //en la posicion 1 tenemos el id del coche
+>>>>>>> 9049cbba322bbe1548721eb64d760cee2d5a9ac1
 		}
-		
-		
 	}
 	
-	private void listener(ImageIcon coch, JButton b, int cocheId) {
-		b.addFocusListener(new FocusListener() {
+	private void listener(ImageIcon imgIconCar, JButton bCar, int idCar) {
+		bCar.addFocusListener(new FocusListener() {//por cada boton de los coches, añadimos su listener
 			
 			@Override
 			public void focusLost(FocusEvent e) {
-				b.setBackground(new Color(255,255,255));
-				b.setBorder(BorderFactory.createCompoundBorder(
-						BorderFactory.createLineBorder(new Color(255, 255, 255)),
-						BorderFactory.createEmptyBorder(1, 1, 1, 1)
-						));
 			}
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				b.setBorder(BorderFactory.createCompoundBorder(
+				if (model.getIdSelected()>0) {//Si pulsamos cualquier otra cosa se nos desselecciona el coche, asi lo mantenemos seleccioando hasta que cambiemos de coche
+					listBotones.get(model.getIdSelected()-1).setBackground(new Color(255,255,255));
+					listBotones.get(model.getIdSelected()-1).setBorder(BorderFactory.createCompoundBorder(
+						BorderFactory.createLineBorder(new Color(255, 255, 255)),
+						BorderFactory.createEmptyBorder(1, 1, 1, 1)
+						));
+				}
+				
+				bCar.setBorder(BorderFactory.createCompoundBorder(
 						BorderFactory.createLineBorder(new Color(215, 18, 43)),
 						BorderFactory.createEmptyBorder(1, 1, 1, 1)
 						));
 				
-				File fImg = new File(coch.getDescription());
-				area.setText("<html><div style='text-align: center;'><span style='color: rgb(215,18,43); font-weight:600; padding:10px; font-family: Tahoma;'>"+model.getName()[model.getIdSelected()]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
-				areaInfo.setText("<html><div style='text-align: center; font-family: Tahoma;'><span style=padding:10px;'>"+model.getDescription()[model.getIdSelected()]+"</span></div><br></html>");
-				System.out.println("[INFO] - Cambiando modelo a: "+model.getName()[model.getIdSelected()]);
+				File fImg = new File(imgIconCar.getDescription());
+				carPane.setText("<html><div style='text-align: center;'><span style='color: rgb(215,18,43); font-weight:600; padding:10px; font-family: Tahoma;'>"+model.getName()[idCar-1]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
+				infoPane.setText("<html><div style='text-align: center; font-family: Tahoma;'><span style=padding:10px;'>"+model.getDescription()[idCar-1]+"</span></div><br></html>");
+				System.out.println("[INFO] - Cambiando modelo a: "+model.getName()[idCar-1]);
+
+				model.toModel(idCar);//le decimos que modelo tenemos seleccionado
 			}
 		});
 	}
-	
-	public Image getIconImage() {
-		File image = new File("src/config/favicon.png");
-        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
-        return retValue;
-    }
 
 	private void anteriorActionPerformed() {
 		setVisible(false);
@@ -376,7 +401,6 @@ public class Selection_Model extends JFrame{
 	
 	private void siguienteActionPerformed() {
 		this.temp = new File(this.configLoad.getTemporalPathFile());
-		this.model.toModel(posicion+1);
 		int id = model.getIdSelected();
 		String name = model.getNameSelected();
 		String description = model.getDescriptionSelected();
@@ -409,13 +433,11 @@ public class Selection_Model extends JFrame{
 	private void delete() {
 		setVisible(false);
 		System.out.println("[INFO] - Eliminando un coche...");
-		this.model.toModel(posicion+1);
 		new Delete_Car(configLoad, language, username, client, model);
 	}
 	
 	private void modify() {
 		System.out.println("[INFO] - Modificando un coche...");
-		this.model.toModel(posicion+1);
 		new Modify_Car(configLoad, language, username, client, model);
 		setVisible(false);
 	}

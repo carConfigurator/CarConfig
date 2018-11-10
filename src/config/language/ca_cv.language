@@ -7,6 +7,7 @@
 	<btn_previous>CA Anterior</btn_previous>
 	<btn_back>CA Atrás</btn_back>
 	<btn_end>CA Finalizar Compra</btn_end>
+	<btn_start>CA Ir al inicio</btn_start>
 	<Login>
 		<title>CA SEAT Configurador - Log In</title>
 		<label_username>CA Nombre de Usuario</label_username>
