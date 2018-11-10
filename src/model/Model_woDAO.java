@@ -31,7 +31,7 @@ import config.ConfigurationLoader;
 import idao.ILanguage;
 import view_miglayout.Selection_Model;
 
-public class Model_woDAO {
+//public class Model_woDAO {
 
 	// Atributos de la Clase
 	private ConfigurationLoader configLoad;

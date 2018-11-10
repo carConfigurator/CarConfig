@@ -5,10 +5,13 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import config.ConfigurationLoader;
+import daoImpl.EngineDAO_XML;
+import idao.IEngine;
 import idao.ILanguage;
+import idao.IModel;
 import model.Client;
-import model.Engine_woDAO;
-import model.Model_woDAO;
+//import model.Engine_woDAO;
+//import model.Model_woDAO;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -33,8 +36,8 @@ public class Selection_Engine extends JFrame {
 	private ILanguage language;
 	private String username;
 	private Client client;
-	private Model_woDAO model;
-	private Engine_woDAO engine;
+	private IModel model;
+	private IEngine engine;
 	private File temp;
 	private JList list;
 	
@@ -43,13 +46,13 @@ public class Selection_Engine extends JFrame {
 	private JButton btn_Anterior, btn_Siguiente;	
 	
 	// Constructores de la vista:
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model_woDAO model, Engine_woDAO engine) {
+	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model, IEngine engine) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
 		this.client = client;
 		this.model = model;
-		this.engine = new Engine_woDAO(this.configLoad);
+		this.engine = engine;
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		FileWriter fw;
@@ -80,13 +83,13 @@ public class Selection_Engine extends JFrame {
 		onCreate();
 	}
 	
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model_woDAO model) {
+	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
 		this.client = client;
 		this.model = model;
-		this.engine = new Engine_woDAO(this.configLoad);
+		this.engine = new EngineDAO_XML(/*this.configLoad*/);
 		
 		onCreate();
 	}
