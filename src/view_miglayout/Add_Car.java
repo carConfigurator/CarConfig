@@ -48,10 +48,8 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 import config.ConfigurationLoader;
 import idao.ILanguage;
 import idao.IModel;
-//import model.Accessory_woDAO;
 import model.Client;
-//import model.Engine_woDAO;
-//import model.Model_woDAO;
+import model.Model;
 import net.miginfocom.swing.MigLayout;
 import sun.awt.AWTAccessor.SystemColorAccessor;
 
@@ -149,7 +147,7 @@ public class Add_Car extends JFrame{
 		this.panelMig.add(btnSave, "align right"); // Alineo el componente a la derecha de la fila, sería como un float.
 				
 		// Ponemos el id que le toque al siguiente coche
-		tfId.setText(""+(model.getSelectedId()+1));
+		tfId.setText(""+(model.getModel(model.getModels().size()).getId()+1));
 		
 		btnSave.addActionListener(new ActionListener() {
 			
@@ -160,8 +158,9 @@ public class Add_Car extends JFrame{
 						if (!tfPrice.getText().equals("")) {
 							try {
 								Double.parseDouble(tfPrice.getText());
-								model.addCar(configLoad, language, username, client, tfId, tfName, tfDescription, tfImg_Name, tfPrice);
+								model.addCar(tfId, tfName, tfDescription, tfImg_Name, tfPrice);
 								setVisible(false);
+								backActionPerformed(e);
 							}catch(NumberFormatException ex) {
 								JOptionPane.showMessageDialog(panelMig, language.errorParseDouble(), language.errorParseDoubleTitle(), JOptionPane.ERROR_MESSAGE);
 							}
@@ -191,6 +190,6 @@ public class Add_Car extends JFrame{
 	
 	private void backActionPerformed(ActionEvent ae) {
 		setVisible(false);
-		new Selection_Model(this.configLoad, this.language, this.username, this.client, this.model);
+		new Selection_Model(this.configLoad, this.language, this.username, this.client);
 	}
 }

@@ -37,6 +37,7 @@ import idao.ILanguage;
 import idao.IModel;
 //import model.Accessory_woDAO;
 import model.Client;
+import model.Model;
 //import model.Engine_woDAO;
 //import model.Model_woDAO;
 import net.miginfocom.swing.MigLayout;
@@ -47,6 +48,7 @@ public class Selection_Model extends JFrame{
 	private Client client;
 	private String username;
 	private IModel model;
+	private Model modelSelected;
 	
 	private JPanel panelMig, panelBox;
 	private List<JButton> listBotones;
@@ -101,7 +103,7 @@ public class Selection_Model extends JFrame{
 		}
 
 		onCreate();
-		listBotones.get(this.model.getSelectedId()-1).requestFocus();
+		listBotones.get(modelSelected.getId()).requestFocus();
 	}
 	
 	public Selection_Model(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
@@ -110,6 +112,7 @@ public class Selection_Model extends JFrame{
 		this.client = client;
 		this.username = username;
 		this.model = new ModelDAO_XML();
+		this.modelSelected = model.getModel(1);
 		
 		onCreate();
 	}
@@ -287,9 +290,9 @@ public class Selection_Model extends JFrame{
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (model.getSelectedId()>0) {//Si pulsamos cualquier otra cosa se nos desselecciona el coche, asi lo mantenemos seleccioando hasta que cambiemos de coche
-					listBotones.get(model.getSelectedId()-1).setBackground(new Color(255,255,255));
-					listBotones.get(model.getSelectedId()-1).setBorder(BorderFactory.createCompoundBorder(
+				if (modelSelected.getId()>0) {//Si pulsamos cualquier otra cosa se nos desselecciona el coche, asi lo mantenemos seleccioando hasta que cambiemos de coche
+					listBotones.get(modelSelected.getId()-1).setBackground(new Color(255,255,255));
+					listBotones.get(modelSelected.getId()-1).setBorder(BorderFactory.createCompoundBorder(
 						BorderFactory.createLineBorder(new Color(255, 255, 255)),
 						BorderFactory.createEmptyBorder(1, 1, 1, 1)
 						));
@@ -305,7 +308,7 @@ public class Selection_Model extends JFrame{
 				infoPane.setText("<html><div style='text-align: center; font-family: Tahoma;'><span style=padding:10px;'>"+model.getModel(idCar).getDescription()+"</span></div><br></html>");
 				System.out.println("[INFO] - Cambiando modelo a: "+model.getModel(idCar).getName());
 
-				model.setModelSelected(idCar);//le decimos que modelo tenemos seleccionado
+				modelSelected = model.getModel(idCar);//le decimos que modelo tenemos seleccionado
 			}
 		});
 	}
@@ -317,10 +320,10 @@ public class Selection_Model extends JFrame{
 	
 	private void siguienteActionPerformed() {
 		this.temp = new File(this.configLoad.getTemporalPathFile());
-		int id = model.getModel(model.getSelectedId()).getId();
-		String name = model.getModel(model.getSelectedId()).getName();
-		String description = model.getModel(model.getSelectedId()).getDescription();
-		double price = model.getModel(model.getSelectedId()).getPrice();
+		int id = modelSelected.getId();
+		String name = modelSelected.getName();
+		String description = modelSelected.getDescription();
+		double price = modelSelected.getPrice();
 		
 		try {
 			FileWriter fw = new FileWriter(this.temp, true);
@@ -337,7 +340,7 @@ public class Selection_Model extends JFrame{
 		}
 		
 		setVisible(false);
-		new Selection_Engine(this.configLoad, this.language, this.username, this.client, this.model);
+		new Selection_Engine(this.configLoad, this.language, this.username, this.client, this.modelSelected);
 	}
 	
 	private void add() {
@@ -349,12 +352,12 @@ public class Selection_Model extends JFrame{
 	private void delete() {
 		setVisible(false);
 		System.out.println("[INFO] - Eliminando un coche...");
-		new Delete_Car(configLoad, language, username, client, model);
+		new Delete_Car(configLoad, language, username, client, model, modelSelected.getId());
 	}
 	
 	private void modify() {
 		System.out.println("[INFO] - Modificando un coche...");
-		new Modify_Car(configLoad, language, username, client, model);
+		new Modify_Car(configLoad, language, username, client, model, modelSelected.getId());
 		setVisible(false);
 	}
 }

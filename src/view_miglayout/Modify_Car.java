@@ -20,12 +20,10 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import config.ConfigurationLoader;
+import daoImpl.ModelDAO_XML;
 import idao.ILanguage;
 import idao.IModel;
-//import model.Accessory_woDAO;
 import model.Client;
-//import model.Engine_woDAO;
-//import model.Model_woDAO;
 import net.miginfocom.swing.MigLayout;
 
 public class Modify_Car extends JFrame{
@@ -41,7 +39,7 @@ public class Modify_Car extends JFrame{
 	private JTextField tfId, tfName, tfDescription, tfImg_Name, tfPrice;
 	private JButton btnSave, btnBack;
 	
-	public Modify_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model){
+	public Modify_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model, int idSelected){
 		this.configLoad = configLoad;
 		this.language = language;
 		this.username = username;
@@ -122,12 +120,11 @@ public class Modify_Car extends JFrame{
 		this.panelMig.add(btnSave, "align right"); // Alineo el componente a la derecha de la fila, sería como un float.
 				
 		// Ponemos el id que le toque al siguiente coche
-		System.out.println("aa"+model.getSelectedId());
-		tfId.setText(""+model.getModel(model.getSelectedId()).getId());
-		tfName.setText(model.getModel(model.getSelectedId()).getName());
-		tfDescription.setText(model.getModel(model.getSelectedId()).getDescription());
-		tfImg_Name.setText(model.getModel(model.getSelectedId()).getImage_name());
-		tfPrice.setText(""+model.getModel(model.getSelectedId()).getPrice());
+		tfId.setText(""+model.getModel(idSelected).getId());
+		tfName.setText(model.getModel(idSelected).getName());
+		tfDescription.setText(model.getModel(idSelected).getDescription());
+		tfImg_Name.setText(model.getModel(idSelected).getImage_name());
+		tfPrice.setText(""+model.getModel(idSelected).getPrice());
 		
 		btnSave.addActionListener(new ActionListener() {
 			
@@ -138,8 +135,9 @@ public class Modify_Car extends JFrame{
 						if (!tfPrice.getText().equals("")) {
 							try {
 								Double.parseDouble(tfPrice.getText());
-								model.modifyCar(configLoad, language, username, client,/* documentOld, */tfId, tfName, tfDescription, tfImg_Name, tfPrice);
+								model.modifyCar(tfId, tfName, tfDescription, tfImg_Name, tfPrice, idSelected);
 								setVisible(false);
+								backActionPerformed(e);
 							}catch(NumberFormatException ex) {
 								JOptionPane.showMessageDialog(panelMig, language.errorParseDouble(), language.errorParseDoubleTitle(), JOptionPane.ERROR_MESSAGE);
 							}
@@ -169,6 +167,6 @@ public class Modify_Car extends JFrame{
 	
 	private void backActionPerformed(ActionEvent ae) {
 		setVisible(false);
-		new Selection_Model(this.configLoad, this.language, this.username, this.client, this.model);
+		new Selection_Model(this.configLoad, this.language, this.username, this.client);
 	}
 }

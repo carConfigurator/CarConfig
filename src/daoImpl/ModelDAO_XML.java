@@ -40,8 +40,6 @@ public class ModelDAO_XML implements IModel{
 	private DocumentBuilder builder;
 	private Document document;
 	
-	private int idSelected;
-	
 	public ModelDAO_XML() {
 		this.factory = DocumentBuilderFactory.newInstance();
 		try {
@@ -72,6 +70,7 @@ public class ModelDAO_XML implements IModel{
 
 	@Override
 	public void loadModels() {
+		models.clear();
 		NodeList nList = document.getElementsByTagName("Model");
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
@@ -86,26 +85,9 @@ public class ModelDAO_XML implements IModel{
 			}
 		}
 	}
-
-
+	
 	@Override
-	public int getSelectedId() {
-		return idSelected;
-	}
-
-	@Override
-	public void setModelSelected(int id) {
-		System.out.print("[INFO] - Buscando el Modelo... ");
-		for (int i = 0; i < models.size(); i++) {
-			if(models.get(i).getId() == id) {
-				this.idSelected = id;
-				System.out.print("ID del Modelo seleccionado encontrado!\n");
-			}
-		}
-	}
-
-	@Override
-	public void addCar(ConfigurationLoader configLoad, ILanguage language, String username, Client client, JTextField tfId, JTextField tfName, JTextField tfDescription, JTextField tfImg_Name,JTextField tfPrice) {
+	public void addCar(JTextField tfId, JTextField tfName, JTextField tfDescription, JTextField tfImg_Name, JTextField tfPrice) {
 		Document documentNew;
 		
 		String nombre_archivo = "CarConfiguration";
@@ -142,16 +124,16 @@ public class ModelDAO_XML implements IModel{
         Element idNode = documentNew.createElement("id");
         Text idValue = documentNew.createTextNode(tfId.getText());
         idNode.appendChild(idValue);
-        Element nomNode = documentNew.createElement("nom");
+        Element nomNode = documentNew.createElement("name");
         Text nomValue = documentNew.createTextNode(tfName.getText());
         nomNode.appendChild(nomValue);
-        Element descripcioNode = documentNew.createElement("descripcio");
+        Element descripcioNode = documentNew.createElement("description");
         Text descripcioValue = documentNew.createTextNode(tfDescription.getText());
         descripcioNode.appendChild(descripcioValue);
-        Element imatge_nomNode = documentNew.createElement("imatge_nom");
+        Element imatge_nomNode = documentNew.createElement("image_name");
         Text imatge_nomValue = documentNew.createTextNode(tfImg_Name.getText());
         imatge_nomNode.appendChild(imatge_nomValue);
-        Element preuNode = documentNew.createElement("preu");
+        Element preuNode = documentNew.createElement("price");
         Text preuValue = documentNew.createTextNode(tfPrice.getText());
         preuNode.appendChild(preuValue);
 
@@ -169,13 +151,11 @@ public class ModelDAO_XML implements IModel{
 		
 		System.out.println("[INFO] - Nuevo XML creado");
 		System.out.println("[INFO] - Nuevo coche añadido");
-		
-		new Selection_Model(configLoad, language, username, client);
 	}
 	
 	@Override
 	//metodo para eliminar un coche
-	public void deleteCar(ConfigurationLoader configLoad, ILanguage language, String username, Client client) {
+	public void deleteCar(int idSelected) {
 		Document documentNew;
 		
 		String nombre_archivo = "CarConfiguration";
@@ -204,7 +184,7 @@ public class ModelDAO_XML implements IModel{
 						Element elementValue = (Element) nElementsKey;
 			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
 			            //primero comprobamos si lo tenemos que eliminar
-			            if(!nodeKeyValue.getTextContent().equals(""+this.idSelected)) {
+			            if(!nodeKeyValue.getTextContent().equals(""+getModel(idSelected).getId())) {
 				            keyNode.appendChild(nodeKeyValue);
 				            //y si no es el seleccionado y ya hay uno eliminado, baja el id de los demas en 1 
 				            if (keyNode.getNodeName().equals("id") && eliminat) {
@@ -234,13 +214,11 @@ public class ModelDAO_XML implements IModel{
         generateXml(documentNew);
         
 		System.out.println("[INFO] - Coche eliminado");
-		
-		new Selection_Model(configLoad, language, username, client);
 	}
 	
 	@Override
 	//metodo para modificar un coche
-	public void modifyCar(ConfigurationLoader configLoad, ILanguage language, String username, Client client, JTextField tfId, JTextField tfName, JTextField tfDescription, JTextField tfImg_Name, JTextField tfPrice) {
+	public void modifyCar(JTextField tfId, JTextField tfName, JTextField tfDescription, JTextField tfImg_Name, JTextField tfPrice, int idSelected) {
 		Document documentNew;
 		
 		String nombre_archivo = "CarConfiguration";
@@ -267,7 +245,7 @@ public class ModelDAO_XML implements IModel{
 						Element elementValue = (Element) nElementsKey;
 			            Text nodeKeyValue = documentNew.createTextNode(elementValue.getTextContent());
 			            //si el id que vamos a meter es el que queremos modificar hacemos lo siguiente: (sino se añade y ya)
-			            if(!nodeKeyValue.getTextContent().equals(""+this.idSelected)) {
+			            if(!nodeKeyValue.getTextContent().equals(""+getModel(idSelected).getId())) {
 				            keyNode.appendChild(nodeKeyValue);
 			            }else {
 			            	//si es el id que queremos modificar, ponemos la info que hemos tocado
@@ -275,16 +253,16 @@ public class ModelDAO_XML implements IModel{
 			                Element idNode = documentNew.createElement("id");
 			                Text idValue = documentNew.createTextNode(tfId.getText());
 			                idNode.appendChild(idValue);
-			                Element nomNode = documentNew.createElement("nom");
+			                Element nomNode = documentNew.createElement("name");
 			                Text nomValue = documentNew.createTextNode(tfName.getText());
 			                nomNode.appendChild(nomValue);
-			                Element descripcioNode = documentNew.createElement("descripcio");
+			                Element descripcioNode = documentNew.createElement("description");
 			                Text descripcioValue = documentNew.createTextNode(tfDescription.getText());
 			                descripcioNode.appendChild(descripcioValue);
-			                Element imatge_nomNode = documentNew.createElement("imatge_nom");
+			                Element imatge_nomNode = documentNew.createElement("image_name");
 			                Text imatge_nomValue = documentNew.createTextNode(tfImg_Name.getText());
 			                imatge_nomNode.appendChild(imatge_nomValue);
-			                Element preuNode = documentNew.createElement("preu");
+			                Element preuNode = documentNew.createElement("price");
 			                Text preuValue = documentNew.createTextNode(tfPrice.getText());
 			                preuNode.appendChild(preuValue);
 
@@ -320,8 +298,6 @@ public class ModelDAO_XML implements IModel{
 		
 		System.out.println("[INFO] - Nuevo XML creado");
 		System.out.println("[INFO] - Coche modificado");
-		
-		new Selection_Model(configLoad, language, username, client);
 	}
 	
 	//añadimos los motores al documento

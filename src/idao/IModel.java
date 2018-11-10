@@ -21,11 +21,8 @@ public interface IModel {
 	public void loadModels();
 	public ArrayList<Model> getModels();
 	public Model getModel(int id);
-	public void setModelSelected(int idSelected);
-	public int getSelectedId();
-	
-	
-	public void addCar(ConfigurationLoader configLoad, ILanguage language, String username, Client client, JTextField tfId, JTextField tfName, JTextField tfDescription, JTextField tfImg_Name, JTextField tfPrice);
-	public void deleteCar(ConfigurationLoader configLoad, ILanguage language, String username, Client client);
-	public void modifyCar(ConfigurationLoader configLoad, ILanguage language, String username, Client client, JTextField tfId, JTextField tfName, JTextField tfDescription, JTextField tfImg_Name, JTextField tfPrice);
+
+	public void addCar(JTextField tfId, JTextField tfName, JTextField tfDescription, JTextField tfImg_Name, JTextField tfPrice);
+	public void deleteCar(int idSelected);
+	public void modifyCar(JTextField tfId, JTextField tfName, JTextField tfDescription, JTextField tfImg_Name, JTextField tfPrice, int idSelected);
 }

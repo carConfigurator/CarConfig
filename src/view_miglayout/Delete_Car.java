@@ -29,10 +29,10 @@ import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
 import config.ConfigurationLoader;
+import daoImpl.ModelDAO_XML;
 import idao.ILanguage;
 import idao.IModel;
 import model.Client;
-//import model.Model_woDAO;
 
 public class Delete_Car{
 	
@@ -44,7 +44,7 @@ public class Delete_Car{
 	
 	private JPanel panel = new JPanel();
 
-	public Delete_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model) {
+	public Delete_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model, int idSelected) {
 		this.configLoad = configLoad;
 		this.language = language;
 		this.username = username;
@@ -53,17 +53,16 @@ public class Delete_Car{
 		
 		//dialogo para mostrar el coche que vamos a eliminar
 		int optionPane=JOptionPane.showConfirmDialog(panel, language.dataDeleteCarTitle()+"\n"
-						+language.labelId()+model.getModel(model.getSelectedId()).getId()+"\n"
-						+language.labelName()+model.getModel(model.getSelectedId()).getName()+"\n"
-						+language.labelDescription()+model.getModel(model.getSelectedId()).getDescription()+"\n"
-						+language.labelImg_Name()+model.getModel(model.getSelectedId()).getImage_name()+"\n"
-						+language.labelPrice()+model.getModel(model.getSelectedId()).getPrice()+"\n"
+						+language.labelId()+model.getModel(idSelected).getId()+"\n"
+						+language.labelName()+model.getModel(idSelected).getName()+"\n"
+						+language.labelDescription()+model.getModel(idSelected).getDescription()+"\n"
+						+language.labelImg_Name()+model.getModel(idSelected).getImage_name()+"\n"
+						+language.labelPrice()+model.getModel(idSelected).getPrice()+"\n"
 					,language.deleteCarTitle(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		
 		if (optionPane==JOptionPane.YES_OPTION) {
-			model.deleteCar(configLoad, language, username, client);
-		}else {
-			new Selection_Model(this.configLoad, this.language, this.username, this.client, this.model);
+			model.deleteCar(idSelected);
 		}
+		new Selection_Model(this.configLoad, this.language, this.username, this.client);
 	}
 }

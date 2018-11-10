@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -33,7 +32,7 @@ import view_miglayout.Selection_Model;
 
 //public class Model_woDAO {
 
-	// Atributos de la Clase
+//	 Atributos de la Clase
 	private ConfigurationLoader configLoad;
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
