@@ -72,7 +72,7 @@ public class ConfigurationLoader {
 			return configLoad = new ConfigurationLoader();
 		}else {
 			System.out.println("[ERROR] - No puedes volver a generar una instancia, comprueba tú código.");
-			return null;
+			return configLoad;
 		}
 	}
 

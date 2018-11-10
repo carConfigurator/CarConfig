@@ -11,10 +11,10 @@ import javax.swing.border.EmptyBorder;
 import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
-import model.Accessory;
+import model.Accessory_woDAO;
 import model.Client;
-import model.Engine;
-import model.Model;
+import model.Engine_woDAO;
+import model.Model_woDAO;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
@@ -39,9 +39,9 @@ public class Purchase_Accessories extends JFrame {
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
 	private Client client;
-	private Model model;
-	private Engine engine;
-	private Accessory accessory;
+	private Model_woDAO model;
+	private Engine_woDAO engine;
+	private Accessory_woDAO accessory;
 	private JLabel username;
 	private File temp;
 	
@@ -55,13 +55,13 @@ public class Purchase_Accessories extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Purchase_Accessories(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, Engine engine) {
+	public Purchase_Accessories(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model_woDAO model, Engine_woDAO engine) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.client = client;
 		this.model = model;
 		this.engine = engine;
-		this.accessory = new Accessory(this.configLoad);
+		this.accessory = new Accessory_woDAO(this.configLoad);
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		this.Aumento = 0;
 		this.TotalPrecio = 0;

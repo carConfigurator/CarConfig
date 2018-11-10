@@ -48,10 +48,10 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 
 import config.ConfigurationLoader;
 import idao.ILanguage;
-import model.Accessory;
+import model.Accessory_woDAO;
 import model.Client;
-import model.Engine;
-import model.Model;
+import model.Engine_woDAO;
+import model.Model_woDAO;
 import net.miginfocom.swing.MigLayout;
 import sun.awt.AWTAccessor.SystemColorAccessor;
 
@@ -61,7 +61,7 @@ public class Add_Car extends JFrame{
 	private ConfigurationLoader configLoad;
 	private Client client;
 	private String username;
-	private Model model;
+	private Model_woDAO model;
 	
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
@@ -72,7 +72,7 @@ public class Add_Car extends JFrame{
 	private JTextField tfId, tfName, tfDescription, tfImg_Name, tfPrice;
 	private JButton btnSave, btnBack;
 	
-	public Add_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model){
+	public Add_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model_woDAO model){
 		this.configLoad = configLoad;
 		this.language = language;
 		this.username = username;

@@ -14,8 +14,8 @@ import config.ConfigurationLoader;
 import daoImplFactory.LanguageFactory;
 import idao.ILanguage;
 import model.Client;
-import model.Engine;
-import model.Model;
+import model.Engine_woDAO;
+import model.Model_woDAO;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -44,8 +44,8 @@ public class Selection_Engine extends JFrame {
 	private ILanguage language;
 	private String username;
 	private Client client;
-	private Model model;
-	private Engine engine;
+	private Model_woDAO model;
+	private Engine_woDAO engine;
 	private File temp;
 	private JList list;
 	
@@ -54,13 +54,13 @@ public class Selection_Engine extends JFrame {
 	JButton btn_Anterior, btn_Siguiente;	
 	
 	// Constructores de la vista:
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, Engine engine) {
+	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model_woDAO model, Engine_woDAO engine) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
 		this.client = client;
 		this.model = model;
-		this.engine = new Engine(this.configLoad);
+		this.engine = new Engine_woDAO(this.configLoad);
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		FileWriter fw;
@@ -91,13 +91,13 @@ public class Selection_Engine extends JFrame {
 		onCreate();
 	}
 	
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model) {
+	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model_woDAO model) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
 		this.client = client;
 		this.model = model;
-		this.engine = new Engine(this.configLoad);
+		this.engine = new Engine_woDAO(this.configLoad);
 		
 		onCreate();
 	}

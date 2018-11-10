@@ -31,7 +31,7 @@ import org.xml.sax.SAXException;
 import config.ConfigurationLoader;
 import idao.ILanguage;
 import model.Client;
-import model.Model;
+import model.Model_woDAO;
 
 public class Delete_Car extends JFrame{
 	
@@ -39,7 +39,7 @@ public class Delete_Car extends JFrame{
 	private ConfigurationLoader configLoad;
 	private Client client;
 	private String username;
-	private Model model;
+	private Model_woDAO model;
 	
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
@@ -47,7 +47,7 @@ public class Delete_Car extends JFrame{
 	
 	private JPanel panel = new JPanel();
 
-	public Delete_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model) {
+	public Delete_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model_woDAO model) {
 		this.configLoad = configLoad;
 		this.language = language;
 		this.username = username;
