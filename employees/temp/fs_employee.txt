@@ -1,9 +1,5 @@
 Datos Temporales
-<<<<<<< HEAD
 [Empleado] alexis.mengual
 ------
 [Cliente] a,a,a,a,a@a.com,Desconocido,null
-=======
-[Empleado] dario.delcore
->>>>>>> 9049cbba322bbe1548721eb64d760cee2d5a9ac1
 ------
