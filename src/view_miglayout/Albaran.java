@@ -1,10 +1,6 @@
 package view_miglayout;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.ScrollPane;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -14,33 +10,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.table.DefaultTableModel;
-
-import com.toedter.calendar.JDateChooser;
 
 import config.ConfigurationLoader;
 import idao.ILanguage;
 import model.Client;
 import model.PresupuestoXML;
-
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Point;
 
 public class Albaran extends JFrame {
 
@@ -93,6 +75,8 @@ public class Albaran extends JFrame {
 			while((linea = br.readLine()) != null) {
 				ta.setText(ta.getText() + linea + "\n");
 			}
+			fr.close();
+			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -101,6 +85,7 @@ public class Albaran extends JFrame {
 		this.contentPane.add(this.btn_GoClient, "pushx, pushy, align right");
 		generateXMLBudget();
 		generateBudget();
+		deleteTemp();
 		
 		this.btn_GoClient.addActionListener(new ActionListener() {
 			
@@ -152,6 +137,8 @@ public class Albaran extends JFrame {
 					}
 				}
 				System.out.println(xml.toString());
+				fr.close();
+				br.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -183,6 +170,16 @@ public class Albaran extends JFrame {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private void deleteTemp() {
+		if (this.temp.exists()) {
+			if (this.temp.delete()) {
+				System.out.println("Fichero temporal eliminado correctametne");
+			}else {
+				System.out.println("No ha diso posible eliminar el fichero temporal");
+			}
 		}
 	}
 	
