@@ -290,15 +290,24 @@ public class Data_Clients extends JFrame{
 				getGender = rb_unknown.getText();
 			}
 			
-			if(this.dc_birthdate.getDate()==null) {
+			if(this.dc_birthdate.getDate() == null) {
 				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText(), getGender);
 			}else {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText(), getGender, sdf.format(dc_birthdate.getDate()));
 			}
         	try {
-				FileWriter fw = new FileWriter(this.temp, true);
+        		FileReader fr = new FileReader(this.temp);
+        		BufferedReader br = new BufferedReader(fr);
+        		String line;
+        		FileWriter fw = new FileWriter(this.temp, false);
 				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write("Datos Temporales");
+				bw.newLine();
+				bw.write("[Empleado] ");
+				bw.write(username);
+				bw.newLine();
+				bw.write("------");
 				bw.newLine();
 				bw.write("[Cliente] ");
 				bw.write(client.toString());

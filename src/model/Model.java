@@ -26,55 +26,44 @@ public class Model {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 	public String getImage_name() {
 		return image_name;
 	}
 
-
 	public void setImage_name(String image_name) {
 		this.image_name = image_name;
 	}
-
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public double getPrice() {
 		return price;
 	}
 
-
 	public void setPrice(double price) {
 		this.price = price;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Model [name=" + name + ", description=" + description + ", image_name=" + image_name + ", id=" + id
-				+ ", price=" + price + "]";
+		return id + ", " + name + ", " + description + ", " + image_name + ", " + id + ", " + price;
 	}
 }
