@@ -175,10 +175,25 @@ public class Albaran extends JFrame {
 	
 	private void deleteTemp() {
 		if (this.temp.exists()) {
-			if (this.temp.delete()) {
-				System.out.println("Fichero temporal eliminado correctametne");
-			}else {
-				System.out.println("No ha diso posible eliminar el fichero temporal");
+			try {
+				FileReader fr = new FileReader(this.temp);
+				BufferedReader br = new BufferedReader(fr);
+				FileWriter fw = new FileWriter(this.temp);
+				BufferedWriter bw = new BufferedWriter(fw);
+				String line = br.readLine();
+				
+				while((line = br.readLine()) != null) {
+					bw.write("");
+				}
+				
+				br.close();
+				fr.close();
+				bw.close();
+				fw.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}
