@@ -5,10 +5,15 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import config.ConfigurationLoader;
+import daoImpl.EngineDAO_XML;
+import idao.IEngine;
 import idao.ILanguage;
+import idao.IModel;
 import model.Client;
+import model.Engine;
 import model.Engine_woDAO;
-import model.Model_woDAO;
+//import model.Model_woDAO;
+import idao.IModel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -33,8 +38,8 @@ public class Selection_Engine extends JFrame {
 	private ILanguage language;
 	private String username;
 	private Client client;
-	private Model_woDAO model;
-	private Engine_woDAO engine;
+	private IModel model;
+	private IEngine engine;
 	private File temp;
 	private JList list;
 	
@@ -43,13 +48,13 @@ public class Selection_Engine extends JFrame {
 	private JButton btn_Anterior, btn_Siguiente;	
 	
 	// Constructores de la vista:
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model_woDAO model, Engine_woDAO engine) {
+	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model, Engine_woDAO engine) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
 		this.client = client;
 		this.model = model;
-		this.engine = new Engine_woDAO(this.configLoad);
+		this.engine = new EngineDAO_XML();
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		FileWriter fw;
@@ -80,13 +85,13 @@ public class Selection_Engine extends JFrame {
 		onCreate();
 	}
 	
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model_woDAO model) {
+	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
 		this.client = client;
 		this.model = model;
-		this.engine = new Engine_woDAO(this.configLoad);
+		this.engine = new EngineDAO_XML();
 		
 		onCreate();
 	}
@@ -110,13 +115,11 @@ public class Selection_Engine extends JFrame {
 		this.list = new JList();
 		DefaultListModel modelo = new DefaultListModel(); // Sirve para introducir elementos de forma indirecta (Ej: Haciendo un bucle para añadir elementos).
 		// Llamo al metodo loadEngines() y le paso el id que el usuario ha seleccionado.
-		this.engine.loadEngines(this.model.getIdSelected());
-		// Obtengo todos los submodelos disponibles del modelo seleccionado.
-		ArrayList<String> engines = this.engine.getEngines();
-		// Y los printo en la vista.
+		this.engine.loadEngines(1);
+		ArrayList<Engine> engines = this.engine.getEngines();
 		
-		for (String string : engines) {
-			modelo.addElement(string);
+		for (Engine engine : engines) {
+			modelo.addElement(engine.toString());
 		}
 		
 		// PARA AÑADIR CONTENIDO A LA LISTA DEBE SER CON STRINGS.
@@ -175,11 +178,12 @@ public class Selection_Engine extends JFrame {
 		setVisible(false);
 		
 		try {
+			Engine engine = this.engine.getEngine(this.list.getSelectedIndex() + 1);
 			FileWriter fw = new FileWriter(this.temp, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.newLine();
 			bw.write("[Motor] ");
-			bw.write(this.engine.getEngineSelected(this.list.getSelectedIndex() + 1));
+			bw.write(engine.toString());
 			bw.newLine();
 			bw.write("------");
 			bw.close();
@@ -188,6 +192,6 @@ public class Selection_Engine extends JFrame {
 			e.printStackTrace();
 		}
 		
-		new Purchase_Accessories(this.configLoad, this.language, this.username, this.client, this.model, this.engine);
+		new Purchase_Accessories(this.configLoad, this.language, this.username, this.client, this.model, engine);
 	}
 }

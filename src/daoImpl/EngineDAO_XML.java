@@ -37,30 +37,31 @@ public class EngineDAO_XML implements IEngine{
 			}
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
-		}
-	
-		loadEngines();
-		
+		}		
 	}
 
 	@Override
-	public void loadEngines() {
+	public void loadEngines(int model) {
 		NodeList nList = document.getElementsByTagName("Engine");
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element eElement = (Element) nNode;
-				int id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
-				String name = eElement.getElementsByTagName("name").item(0).getTextContent();
-				String description = eElement.getElementsByTagName("description").item(0).getTextContent();
-				String image_name = eElement.getElementsByTagName("image_name").item(0).getTextContent();
-				double price = Double.parseDouble(eElement.getElementsByTagName("price").item(0).getTextContent());
 				String[] models_availables = eElement.getElementsByTagName("models_available").item(0).getTextContent().split(";");
-				engines.add(new Engine(id, name, description, image_name, price, models_availables));
+				for (int i = 0; i < models_availables.length; i++) {
+					if(Integer.parseInt(models_availables[i]) == model) {
+						int id = Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent());
+						String name = eElement.getElementsByTagName("name").item(0).getTextContent();
+						String description = eElement.getElementsByTagName("description").item(0).getTextContent();
+						String image_name = eElement.getElementsByTagName("image_name").item(0).getTextContent();
+						double price = Double.parseDouble(eElement.getElementsByTagName("price").item(0).getTextContent());
+						engines.add(new Engine(id, name, description, image_name, price, models_availables));
+					}
+				}
 			}
 		}
 	}
-
+	
 	@Override
 	public ArrayList<Engine> getEngines() {
 		return engines;

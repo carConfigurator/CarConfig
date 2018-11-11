@@ -12,7 +12,7 @@ public interface IEngine {
 	public ArrayList<Engine> engines = new ArrayList<Engine>();
 	
 	// Métodos de la Interfaz:
-	public void loadEngines();
+	public void loadEngines(int id);
 	public ArrayList<Engine> getEngines();
 	public Engine getEngine(int id);
 	
