@@ -17,7 +17,7 @@ import org.xml.sax.SAXException;
 
 import config.ConfigurationLoader;
 
-public class Accessory_woDAO {
+//public class Accessory_woDAO {
 	
 	// Atributos de la Clase
 	private ConfigurationLoader configLoad;

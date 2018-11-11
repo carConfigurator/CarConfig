@@ -35,10 +35,11 @@ import config.ConfigurationLoader;
 import daoImpl.ModelDAO_XML;
 import idao.ILanguage;
 import idao.IModel;
-import model.Accessory_woDAO;
+//import model.Accessory_woDAO;
 import model.Client;
-import model.Engine_woDAO;
-import model.Model_woDAO;
+import model.Model;
+//import model.Engine_woDAO;
+//import model.Model_woDAO;
 import net.miginfocom.swing.MigLayout;
 
 public class Selection_Model extends JFrame{	
@@ -47,10 +48,7 @@ public class Selection_Model extends JFrame{
 	private Client client;
 	private String username;
 	private IModel model;
-	
-//	private Model_woDAO model;
-//	private Engine_woDAO engine;
-//	private Accessory_woDAO accessory;
+	private Model modelSelected;
 	
 	private JPanel panelMig, panelBox;
 	private List<JButton> listBotones;
@@ -105,7 +103,7 @@ public class Selection_Model extends JFrame{
 		}
 
 		onCreate();
-//		listBotones.get(this.model.getIdSelected()-1).requestFocus();
+		listBotones.get(modelSelected.getId()).requestFocus();
 	}
 	
 	public Selection_Model(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
@@ -114,6 +112,7 @@ public class Selection_Model extends JFrame{
 		this.client = client;
 		this.username = username;
 		this.model = new ModelDAO_XML();
+		this.modelSelected = model.getModel(1);
 		
 		onCreate();
 	}
@@ -172,8 +171,6 @@ public class Selection_Model extends JFrame{
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)
 				));
-		
-		//HASTA AQUI TDODO BIEN
 		
 		this.listBotones=new ArrayList<JButton>();//esta lista la usamos en createButton, vamos añadiendo los coches a esta lista
 		createButton();
@@ -264,14 +261,14 @@ public class Selection_Model extends JFrame{
 	private void createButton() {
 		listImg=new ArrayList<Image>();
 		
-		for (int i = 0; i < this.model.getId().length; i++) {
+		for (int i = 1; i < this.model.models.size()+1; i++) {
 			btnCar=new JButton();
 			btnCar.setBackground(new Color(255,255,255));
 			btnCar.setBorder(BorderFactory.createCompoundBorder(
 					BorderFactory.createLineBorder(new Color(255, 255, 255)),
 					BorderFactory.createEmptyBorder(1, 1, 1, 1)
 					));
-			imgIconButtonCar=new ImageIcon(this.configLoad.getCar_image_path()+this.model.getImage_name()[i]);//cogemos la ruta de la imagen
+			imgIconButtonCar=new ImageIcon(this.configLoad.getCar_image_path()+this.model.getModel(i).getImage_name());//cogemos la ruta de la imagen
 			imgIconPaneCar= new ImageIcon(imgIconButtonCar.getImage().getScaledInstance(imgIconButtonCar.getIconWidth()/4, imgIconButtonCar.getIconHeight()/4, Image.SCALE_DEFAULT));//hacemos la imagen pequeña
 			btnCar.setIcon(imgIconPaneCar);//añadimos la imagen del coche al boton
 			btnCar.setMargin(new Insets(0, 0, 0, 0));
@@ -280,7 +277,7 @@ public class Selection_Model extends JFrame{
 			
 			listImg.add(imgIconButtonCar.getImage());//añadimos la imagen a una lista
 			
-			listener(imgIconButtonCar, btnCar, this.model.getId()[i]);  //en la posicion 1 tenemos el id del coche
+			listener(imgIconButtonCar, btnCar, this.model.getModel(i).getId());
 		}
 	}
 	
@@ -293,9 +290,9 @@ public class Selection_Model extends JFrame{
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (model.getIdSelected()>0) {//Si pulsamos cualquier otra cosa se nos desselecciona el coche, asi lo mantenemos seleccioando hasta que cambiemos de coche
-					listBotones.get(model.getIdSelected()-1).setBackground(new Color(255,255,255));
-					listBotones.get(model.getIdSelected()-1).setBorder(BorderFactory.createCompoundBorder(
+				if (modelSelected.getId()>0) {//Si pulsamos cualquier otra cosa se nos desselecciona el coche, asi lo mantenemos seleccioando hasta que cambiemos de coche
+					listBotones.get(modelSelected.getId()-1).setBackground(new Color(255,255,255));
+					listBotones.get(modelSelected.getId()-1).setBorder(BorderFactory.createCompoundBorder(
 						BorderFactory.createLineBorder(new Color(255, 255, 255)),
 						BorderFactory.createEmptyBorder(1, 1, 1, 1)
 						));
@@ -307,12 +304,11 @@ public class Selection_Model extends JFrame{
 						));
 				
 				File fImg = new File(imgIconCar.getDescription());
-				carPane.setText("<html><div style='text-align: center;'><span style='color: rgb(215,18,43); font-weight:600; padding:10px; font-family: Tahoma;'>"+model.getName()[idCar-1]+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
-				infoPane.setText("<html><div style='text-align: center; font-family: Tahoma;'><span style=padding:10px;'>"+model.getDescription()[idCar-1]+"</span></div><br></html>");
-				System.out.println("[INFO] - Cambiando modelo a: "+model.getName()[idCar-1]);
+				carPane.setText("<html><div style='text-align: center;'><span style='color: rgb(215,18,43); font-weight:600; padding:10px; font-family: Tahoma;'>"+model.getModel(idCar).getName()+"<br><img src =\""+fImg.toURI()+"\" /></span></div></html>");
+				infoPane.setText("<html><div style='text-align: center; font-family: Tahoma;'><span style=padding:10px;'>"+model.getModel(idCar).getDescription()+"</span></div><br></html>");
+				System.out.println("[INFO] - Cambiando modelo a: "+model.getModel(idCar).getName());
 
-//				model.toModel(idCar);//le decimos que modelo tenemos seleccionado
-				model.getModel(idCar);
+				modelSelected = model.getModel(idCar);//le decimos que modelo tenemos seleccionado
 			}
 		});
 	}
@@ -324,10 +320,10 @@ public class Selection_Model extends JFrame{
 	
 	private void siguienteActionPerformed() {
 		this.temp = new File(this.configLoad.getTemporalPathFile());
-		int id = model.getIdSelected();
-		String name = model.getNameSelected();
-		String description = model.getDescriptionSelected();
-		double price = model.getPriceSelected();
+		int id = modelSelected.getId();
+		String name = modelSelected.getName();
+		String description = modelSelected.getDescription();
+		double price = modelSelected.getPrice();
 		
 		try {
 			FileWriter fw = new FileWriter(this.temp, true);
@@ -344,7 +340,7 @@ public class Selection_Model extends JFrame{
 		}
 		
 		setVisible(false);
-		new Selection_Engine(this.configLoad, this.language, this.username, this.client, this.model);
+		new Selection_Engine(this.configLoad, this.language, this.username, this.client, this.modelSelected);
 	}
 	
 	private void add() {
@@ -356,12 +352,12 @@ public class Selection_Model extends JFrame{
 	private void delete() {
 		setVisible(false);
 		System.out.println("[INFO] - Eliminando un coche...");
-		new Delete_Car(configLoad, language, username, client, model);
+		new Delete_Car(configLoad, language, username, client, model, modelSelected.getId());
 	}
 	
 	private void modify() {
 		System.out.println("[INFO] - Modificando un coche...");
-		new Modify_Car(configLoad, language, username, client, model);
+		new Modify_Car(configLoad, language, username, client, model, modelSelected.getId());
 		setVisible(false);
 	}
 }

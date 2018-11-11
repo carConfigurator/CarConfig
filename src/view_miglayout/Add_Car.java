@@ -47,10 +47,9 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 
 import config.ConfigurationLoader;
 import idao.ILanguage;
-import model.Accessory_woDAO;
+import idao.IModel;
 import model.Client;
-import model.Engine_woDAO;
-import model.Model_woDAO;
+import model.Model;
 import net.miginfocom.swing.MigLayout;
 import sun.awt.AWTAccessor.SystemColorAccessor;
 
@@ -60,35 +59,19 @@ public class Add_Car extends JFrame{
 	private ConfigurationLoader configLoad;
 	private Client client;
 	private String username;
-	private Model_woDAO model;
-	
-	private DocumentBuilderFactory factory;
-	private DocumentBuilder builder;
-	private Document documentOld;
+	private IModel model;
 	
 	private JPanel panelMig;
 	private JLabel lId, lName, lDescription, lImg_Name, lPrice;
 	private JTextField tfId, tfName, tfDescription, tfImg_Name, tfPrice;
 	private JButton btnSave, btnBack;
 	
-	public Add_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model_woDAO model){
+	public Add_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model){
 		this.configLoad = configLoad;
 		this.language = language;
 		this.username = username;
 		this.client = client;
 		this.model = model;
-		
-		this.factory = DocumentBuilderFactory.newInstance();
-		try {
-			this.builder = factory.newDocumentBuilder();
-			this.documentOld = builder.parse(new File(configLoad.getCar_configuration_path()+configLoad.getCar_configuration_file_name()));
-		} catch (ParserConfigurationException e) {
-			System.out.println("[ERROR] - No se ha podido parsear la configuración. Más información del error: " + e);
-		} catch (SAXException e) {
-			System.out.println("[ERROR] - No se ha podido parsear el archivo XML. Más información del error: " + e);
-		} catch (IOException e) {
-			System.out.println("[ERROR] - Error de E/S. Más información del error: " + e);
-		}
 
 		// Configuracion de los Componentes:
 		// Añado el Layout al Panel y le indico que este haga un padding de 20 en el Panel.
@@ -164,7 +147,7 @@ public class Add_Car extends JFrame{
 		this.panelMig.add(btnSave, "align right"); // Alineo el componente a la derecha de la fila, sería como un float.
 				
 		// Ponemos el id que le toque al siguiente coche
-		tfId.setText(""+(model.getId().length+1));
+		tfId.setText(""+(model.getModel(model.getModels().size()).getId()+1));
 		
 		btnSave.addActionListener(new ActionListener() {
 			
@@ -175,8 +158,9 @@ public class Add_Car extends JFrame{
 						if (!tfPrice.getText().equals("")) {
 							try {
 								Double.parseDouble(tfPrice.getText());
-								model.addCar(configLoad, language, username, client, documentOld, tfId, tfName, tfDescription, tfImg_Name, tfPrice);
+								model.addCar(tfId, tfName, tfDescription, tfImg_Name, tfPrice);
 								setVisible(false);
+								backActionPerformed(e);
 							}catch(NumberFormatException ex) {
 								JOptionPane.showMessageDialog(panelMig, language.errorParseDouble(), language.errorParseDoubleTitle(), JOptionPane.ERROR_MESSAGE);
 							}
@@ -206,6 +190,6 @@ public class Add_Car extends JFrame{
 	
 	private void backActionPerformed(ActionEvent ae) {
 		setVisible(false);
-		new Selection_Model(this.configLoad, this.language, this.username, this.client, this.model);
+		new Selection_Model(this.configLoad, this.language, this.username, this.client);
 	}
 }
