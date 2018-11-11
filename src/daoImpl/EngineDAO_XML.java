@@ -43,6 +43,7 @@ public class EngineDAO_XML implements IEngine{
 
 	@Override
 	public void loadEngines(int model) {
+		engines.clear();//limpiamos el array por si ya estan cargadas que no se dupliquen
 		NodeList nList = document.getElementsByTagName("Engine");
 		for (int temp = 0; temp < nList.getLength(); temp++) {
 			Node nNode = nList.item(temp);

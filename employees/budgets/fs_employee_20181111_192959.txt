@@ -1,0 +1,14 @@
+[Empleado] dario.delcore
+------
+[Cliente] gyui,gyi,giu,viu,vui@sa.dso,Desconocido,null
+------
+[Modelo] 2,SEAT Ateca,Observaciones del SEAT Ateca,11368.1
+------
+[Motor] Ibiza 1.6 TDI CR 70 KW (95 CV), Diesel / 5 Velocidades Manual, 18.59€
+------
+[Accesorios]
+Accessory [id=2, name=Navegador, description=Navegador, image_name=ruta_imagen, price=70.0, models_available=[1, 2, 3, 4]]
+Accessory [id=4, name=Asientos calefactados, description=Asientos calefactados, image_name=ruta_imagen, price=350.0, models_available=[2, 3, 4]]
+Accessory [id=6, name=Aparcamiento automatico, description=Aparcamiento automatico, image_name=ruta_imagen, price=530.0, models_available=[2, 3, 4]]
+------
+9109,35

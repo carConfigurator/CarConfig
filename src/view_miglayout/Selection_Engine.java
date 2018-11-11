@@ -11,7 +11,6 @@ import idao.ILanguage;
 import idao.IModel;
 import model.Client;
 import model.Engine;
-//import idao.IModel;
 import model.Model;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
@@ -80,8 +79,7 @@ public class Selection_Engine extends JFrame {
 			bw.close();
 			fw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("[ERROR] - Error al intentar añadir el modelo en el fichero temporal");
 		}
 		
 		onCreate();
