@@ -1,13 +1,3 @@
+Datos Temporales
 [Empleado] alexis.mengual
 ------
-[Cliente] a,a,a,a,a@a.com,Desconocido,null
-------
-[Modelo] Model [name=SEAT Mii P5, description=Observaciones del SEAT Mii 5P, image_name=Mii_5P.jpeg, id=1, price=7726.21]------
-
-[Motor] Mii 1.0 55 KW (75 CV), Gasolina / 5 Velocidades Manual, 9.59€
-------
-[Accesorios]
-Accessory [id=2, name=Navegador, description=Navegador, image_name=ruta_imagen, price=70.0, models_available=[1, 2, 3, 4]]
-Accessory [id=8, name=Pintura metalizada, description=Pintura metalizada, image_name=ruta_imagen, price=500.0, models_available=[1, 2, 3, 4]]
-------
-6188,64

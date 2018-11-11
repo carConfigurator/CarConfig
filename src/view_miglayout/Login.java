@@ -57,11 +57,6 @@ public class Login extends JFrame{
 		this.language = LanguageFactory.getLanguage(this.configLoad);
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
-		// Comprobará siempre si el archivo existe, en caso de que exista lo eliminará para generarlo desde 0.
-		if(this.temp.exists()) {
-			this.temp.delete();
-		}
-		
 		// Volvemos a generar el fichero txt:
 		try {
 			this.temp.createNewFile();

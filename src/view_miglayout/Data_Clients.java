@@ -84,7 +84,12 @@ public class Data_Clients extends JFrame{
 		this.configLoad = configLoad;
 		this.username = username;
 		this.temp = new File(this.configLoad.getTemporalPathFile());
-		
+		// Comprobará siempre si el archivo existe, en caso de que exista lo eliminará para generarlo desde 0.
+		if(this.temp.exists()) {
+			if(this.temp.length() > 0) {
+				JOptionPane.showMessageDialog(null, "Hay datos en el archivo temporal", "INFO", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
 		createFrame();
 		
 	}
