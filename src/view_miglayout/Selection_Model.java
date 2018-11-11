@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -35,11 +34,8 @@ import config.ConfigurationLoader;
 import daoImpl.ModelDAO_XML;
 import idao.ILanguage;
 import idao.IModel;
-//import model.Accessory_woDAO;
 import model.Client;
 import model.Model;
-//import model.Engine_woDAO;
-//import model.Model_woDAO;
 import net.miginfocom.swing.MigLayout;
 
 public class Selection_Model extends JFrame{	
