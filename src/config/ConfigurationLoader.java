@@ -69,10 +69,9 @@ public class ConfigurationLoader {
 	 */
 	public static ConfigurationLoader getConfigurationLoaderInstance() {
 		if(configLoad == null) {
-			System.out.println("[INFO] - Generando instancia...");
+			System.out.println("[INFO] - Generando nueva instancia...");
 			return configLoad = new ConfigurationLoader();
 		}else {
-			System.out.println("[ERROR] - No puedes volver a generar una instancia, comprueba tú código.");
 			return configLoad;
 		}
 	}

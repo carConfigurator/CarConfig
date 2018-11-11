@@ -6,12 +6,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import config.ConfigurationLoader;
+import daoImpl.AccessoryDAO_XML;
 import idao.IAccessory;
 import idao.IEngine;
 import idao.ILanguage;
 import idao.IModel;
 import model.Accessory;
 import model.Client;
+import model.Engine;
+import model.Model;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
@@ -33,9 +36,9 @@ public class Purchase_Accessories extends JFrame{
 	private ILanguage language;
 	private ConfigurationLoader configLoad;
 	private Client client;
-	private IModel model;
-	private IEngine engine;
-	private Accessory accessory;
+	private Model model;
+	private Engine engine;
+	private IAccessory accessory;
 	private JLabel username;
 	private File temp;
 	
@@ -49,13 +52,13 @@ public class Purchase_Accessories extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public Purchase_Accessories(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model, IEngine engine) {
+	public Purchase_Accessories(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, Engine engine) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.client = client;
 		this.model = model;
 		this.engine = engine;
-		this.accessory = new Accessory(/*this.configLoad*/);
+		this.accessory = new AccessoryDAO_XML();
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		this.Aumento = 0;
 		this.TotalPrecio = 0;
@@ -73,149 +76,109 @@ public class Purchase_Accessories extends JFrame{
 		this.lblTitulo = new JLabel(language.purchaseAccessoriesTitle());
 		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-//		String modelocoche = "<html><body>" + language.labelModelCar() + "<br />" + this.engine.getEngineSelected(this.engine.getIdSelected()) + "</body></html>";
 		this.lblModeloCoche = new JLabel(language.labelModelCar());
 		this.lblModeloCoche.setFont(new Font("Tahoma", 2, 12));
 		
-		this.lblMostrarModelo = new JLabel(this.engine.getEngineSelected(this.engine.getIdSelected()));
+		this.lblMostrarModelo = new JLabel(this.engine.toString());
 		this.lblMostrarModelo.setFont(new Font("Tahoma", 0, 12));
 		this.lblMostrarModelo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		
+		this.accessory.loadAccesories(model.getId());
+		ArrayList<Accessory> accessoryList = this.accessory.getAccesories();
+		Accessory accessoryObj = this.accessory.getAccessory(1);
 		
 		this.cbElevadurasElectricas = new JCheckBox(language.checkBoxElectricElevation());
 		this.cbElevadurasElectricas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbElevadurasElectricas.setBackground(new Color(255,255,255));
 		this.cbElevadurasElectricas.setFocusable(false);
-		
-		// Compruebo que este modelo disponga de Elevaduras Electricas
-		if(!this.accessory.checkElectricElevation(this.model.getIdSelected())) {
+		// Compruebo si esta disponible el Accesorio "Elevaduras Electricas":
+		if(!this.accessory.checkAccessory(1)) {
 			this.cbElevadurasElectricas.setEnabled(false);
-			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(1);
-			String models = "Disponible en: ";
-			for (String string : modelsAvailables) {
-				models = models + string + ", ";
-			}
-			this.cbElevadurasElectricas.setToolTipText(models);
 		}
-		
+
 		this.cbNavegador = new JCheckBox(language.checkBoxBrowser());
 		this.cbNavegador.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbNavegador.setBackground(new Color(255,255,255));
 		this.cbNavegador.setFocusable(false);
-		// Compruebo que este modelo disponga de Navegador
-		if(!this.accessory.checkNavegation(this.model.getIdSelected())) {
+		// Compruebo si esta disponible el Accesorio "Navegador":
+		if(!this.accessory.checkAccessory(2)) {
 			this.cbNavegador.setEnabled(false);
-			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(2);
-			String models = "Disponible en: ";
-			for (String string : modelsAvailables) {
-				models = models + string + ", ";
-			}
-			this.cbNavegador.setToolTipText(models);
 		}
 		
 		this.cbLlantasAl = new JCheckBox(language.checkBoxTires());
 		this.cbLlantasAl.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbLlantasAl.setBackground(new Color(255,255,255));
 		this.cbLlantasAl.setFocusable(false);
-		if(!this.accessory.checkTire(this.model.getIdSelected())) {
+		// Compruebo si esta disponible el Accesorio "Llantas de Aleación":
+		if(!this.accessory.checkAccessory(3)) {
 			this.cbLlantasAl.setEnabled(false);
-			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(3);
-			String models = "Disponible en: ";
-			for (String string : modelsAvailables) {
-				models = models + string + ", ";
-			}
-			this.cbLlantasAl.setToolTipText(models);
 		}
-		
+
 		this.cbAsientosCal = new JCheckBox(language.checkBoxHeatedSeats());
 		this.cbAsientosCal.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbAsientosCal.setBackground(new Color(255,255,255));
 		this.cbAsientosCal.setFocusable(false);
-		if(!this.accessory.checkSeating(this.model.getIdSelected())) {
+		// Compruebo si esta disponible el Accesorio "Asientos Calefactados":
+		if(!this.accessory.checkAccessory(4)) {
 			this.cbAsientosCal.setEnabled(false);
-			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(4);
-			String models = "Disponible en: ";
-			for (String string : modelsAvailables) {
-				models = models + string + ", ";
-			}
-			this.cbAsientosCal.setToolTipText(models);
 		}
-		
+				
 		this.cbVelCrucero = new JCheckBox(language.checkBoxCruisingSpeed());
 		this.cbVelCrucero.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbVelCrucero.setBackground(new Color(255,255,255));
 		this.cbVelCrucero.setFocusable(false);
-		if(!this.accessory.checkSpeedCruise(this.model.getIdSelected())) {
+		// Compruebo si esta disponible el Accesorio "Velocidad Crucero":
+		if(!this.accessory.checkAccessory(5)) {
 			this.cbVelCrucero.setEnabled(false);
-			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(5);
-			String models = "Disponible en: ";
-			for (String string : modelsAvailables) {
-				models = models + string + ", ";
-			}
-			this.cbVelCrucero.setToolTipText(models);
 		}
-		
+				
 		this.cbAparcamietnoAuto = new JCheckBox(language.checkBoxAutomaticParking());
 		this.cbAparcamietnoAuto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbAparcamietnoAuto.setBackground(new Color(255,255,255));
 		this.cbAparcamietnoAuto.setFocusable(false);
-		if(!this.accessory.checkAutoParking(this.model.getIdSelected())) {
+		// Compruebo si esta disponible el Accesorio "Aparcamiento Automatico":
+		if(!this.accessory.checkAccessory(6)) {
 			this.cbAparcamietnoAuto.setEnabled(false);
-			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(6);
-			String models = "Disponible en: ";
-			for (String string : modelsAvailables) {
-				models = models + string + ", ";
-			}
-			this.cbAparcamietnoAuto.setToolTipText(models);
 		}
-		
+
 		this.cbConectorUSB = new JCheckBox(language.checkBoxUsbConnectors());
 		this.cbConectorUSB.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbConectorUSB.setBackground(new Color(255,255,255));
 		this.cbConectorUSB.setFocusable(false);
-		if(!this.accessory.checkUSB(this.model.getIdSelected())) {
+		// Compruebo si esta disponible el Accesorio "Conector USB":
+		if(!this.accessory.checkAccessory(7)) {
 			this.cbConectorUSB.setEnabled(false);
-			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(7);
-			String models = "Disponible en: ";
-			for (String string : modelsAvailables) {
-				models = models + string + ", ";
-			}
-			this.cbConectorUSB.setToolTipText(models);
 		}
-		
+				
 		this.cbPinturaMetal = new JCheckBox(language.checkBoxMetallizedPaint());
 		this.cbPinturaMetal.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbPinturaMetal.setBackground(new Color(255,255,255));
 		this.cbPinturaMetal.setFocusable(false);
-		if(!this.accessory.checkMetallicPaint(this.model.getIdSelected())) {
+		// Compruebo si esta disponible el Accesorio "Pintura Metalizada":
+		if(!this.accessory.checkAccessory(8)) {
 			this.cbPinturaMetal.setEnabled(false);
-			ArrayList<String> modelsAvailables = this.accessory.getModelsAvailables(8);
-			String models = "Disponible en: ";
-			for (String string : modelsAvailables) {
-				models = models + string + ", ";
-			}
-			this.cbPinturaMetal.setToolTipText(models);
 		}
-		
+				
 		JLabel lblPrecioBase = new JLabel(language.labelBasePrice());
 		lblPrecioBase.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 		lblPrecioBase.setFont(new Font("Tahoma", Font.BOLD, 14));
-		
-		double precioBase = this.model.getPriceSelected() + this.engine.getPrice();
+
+		double precioBase = this.model.getPrice() + this.engine.getPrice();
 		JLabel lblMostrarPrecioBase = new JLabel(String.valueOf(precioBase));
-		
+
 		this.lblAumento = new JLabel(language.labelIncreasePrice());
 		this.lblAumento.setFont(new Font("Tahoma", Font.BOLD, 14));
-				
+
 		JLabel lblMostrarAumento = new JLabel(String.valueOf(Aumento));
-		
+
 		this.lblTotalPrecio = new JLabel(language.labelTotalPrice());
 		this.lblTotalPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
 		this.lblTotalPrecio.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-		
+
 		TotalPrecio = Double.parseDouble(lblMostrarAumento.getText()) + Double.parseDouble(lblMostrarPrecioBase.getText());
 		JLabel lblMostrarTotalPrecio = new JLabel(String.valueOf(TotalPrecio));
 		lblMostrarTotalPrecio.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-		
+
 		this.btnAtras = new JButton(language.btnBack());
 		this.btnAtras.setBackground(new Color(215,18,43));
 		this.btnAtras.setForeground(new Color(255,255,255));
@@ -229,6 +192,8 @@ public class Purchase_Accessories extends JFrame{
 		this.btnFinalizar.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
+		
+
 
 		this.btnAtras.addActionListener(new ActionListener() {
 			
@@ -251,35 +216,35 @@ public class Purchase_Accessories extends JFrame{
 					String accesoriesSelected = "";
 					
 					if(cbElevadurasElectricas.isSelected()) {
-						accesoriesSelected = accesoriesSelected + "\n" + accessory.getElevators();
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getAccessory(1);
 					}
 					
 					if(cbNavegador.isSelected()) {
-						accesoriesSelected = accesoriesSelected + "\n" + accessory.getNavegator();
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getAccessory(2);
 					}
 					
 					if (cbLlantasAl.isSelected()) {
-						accesoriesSelected = accesoriesSelected + "\n" + accessory.getTires();
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getAccessory(3);
 					}
 					
 					if(cbAsientosCal.isSelected()) {
-						accesoriesSelected = accesoriesSelected + "\n" + accessory.getSeating();
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getAccessory(4);
 					}
 					
 					if(cbVelCrucero.isSelected()) {
-						accesoriesSelected = accesoriesSelected + "\n" + accessory.getSpeedCruise();
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getAccessory(5);
 					}
 					
 					if(cbAparcamietnoAuto.isSelected()) {
-						accesoriesSelected = accesoriesSelected + "\n" + accessory.getAutoParking();
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getAccessory(6);
 					}
 					
 					if(cbConectorUSB.isSelected()) {
-						accesoriesSelected = accesoriesSelected + "\n" + accessory.getUSB();
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getAccessory(7);
 					}
 					
 					if(cbPinturaMetal.isSelected()) {
-						accesoriesSelected = accesoriesSelected + "\n" + accessory.getMetallicPaint();
+						accesoriesSelected = accesoriesSelected + "\n" + accessory.getAccessory(8);
 					}
 					bw.newLine();
 					bw.write("[Accesorios]");
@@ -303,159 +268,159 @@ public class Purchase_Accessories extends JFrame{
 				new Albaran(configLoad, language, username, client);
 			}
 		});
-		
-		cbElevadurasElectricas.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				double priceElevators = accessory.getPriceElevators();
-				if(cbElevadurasElectricas.isSelected()) {
-					System.out.println("[INFO] - Elevaduras Seleccionado");
-					Aumento = Aumento + priceElevators;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio + priceElevators;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}else{
-					Aumento = Aumento - priceElevators;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio - priceElevators;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}
-			}
-		});
-		
-		cbNavegador.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				double pricesNavegador = accessory.getPriceNavegador();
-				if(cbNavegador.isSelected()) {
-					System.out.println("[INFO] - Navegador Seleccionado");
-					Aumento = Aumento + pricesNavegador;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio + pricesNavegador;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}else{
-					Aumento = Aumento - pricesNavegador;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio - pricesNavegador;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}
-			}
-		});
-		
-		cbLlantasAl.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				double pricesTires = accessory.getPriceTires();
-				if(cbLlantasAl.isSelected()) {
-					System.out.println("[INFO] - Llantas Seleccionado");
-					Aumento = Aumento + pricesTires;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio + pricesTires;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}else{
-					Aumento = Aumento - pricesTires;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio - pricesTires;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}
-			}
-		});
-		
-		cbAsientosCal.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				double priceSeating = accessory.getPriceSeating();
-				if(cbAsientosCal.isSelected()) {
-					System.out.println("[INFO] - Asientos Seleccionado");
-					Aumento = Aumento + priceSeating;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio + priceSeating;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}else{
-					Aumento = Aumento - priceSeating;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio - priceSeating;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}
-			}
-		});
-		
-		cbVelCrucero.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				double priceSpeedCruise = accessory.getPriceSpeedCruise();
-				if(cbVelCrucero.isSelected()) {
-					System.out.println("[INFO] - Velocidad Seleccionado");
-					Aumento = Aumento + priceSpeedCruise;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio + priceSpeedCruise;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}else{
-					Aumento = Aumento - priceSpeedCruise;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio - priceSpeedCruise;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}
-			}
-		});
-		
-		cbAparcamietnoAuto.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				double priceAutoParking = accessory.getPriceAutoParking();
-				if(cbAparcamietnoAuto.isSelected()) {
-					System.out.println("[INFO] - Aparcamiento Seleccionado");
-					Aumento = Aumento + priceAutoParking;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio + priceAutoParking;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}else{
-					Aumento = Aumento - priceAutoParking;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio - priceAutoParking;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}
-			}
-		});
-		
-		cbConectorUSB.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				double priceUSB = accessory.getPriceUSB();
-				if(cbConectorUSB.isSelected()) {
-					System.out.println("[INFO] - Conector Seleccionado");
-					Aumento = Aumento + priceUSB;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio + priceUSB;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}else{
-					Aumento = Aumento - priceUSB;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio - priceUSB;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}
-			}
-		});
-		
-		cbPinturaMetal.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				double metallicPaint = accessory.getPriceMetallicPaint();
-				if(cbPinturaMetal.isSelected()) {
-					System.out.println("[INFO] - Pintura Seleccionado");
-					Aumento = Aumento + metallicPaint;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio + metallicPaint;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}else{
-					Aumento = Aumento - metallicPaint;
-					lblMostrarAumento.setText(String.valueOf(Aumento));
-					TotalPrecio = TotalPrecio - metallicPaint;
-					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-				}
-			}
-		});
-		
+//		
+//		cbElevadurasElectricas.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {
+//				double priceElevators = accessory.getPriceElevators();
+//				if(cbElevadurasElectricas.isSelected()) {
+//					System.out.println("[INFO] - Elevaduras Seleccionado");
+//					Aumento = Aumento + priceElevators;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio + priceElevators;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}else{
+//					Aumento = Aumento - priceElevators;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio - priceElevators;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}
+//			}
+//		});
+//		
+//		cbNavegador.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				double pricesNavegador = accessory.getPriceNavegador();
+//				if(cbNavegador.isSelected()) {
+//					System.out.println("[INFO] - Navegador Seleccionado");
+//					Aumento = Aumento + pricesNavegador;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio + pricesNavegador;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}else{
+//					Aumento = Aumento - pricesNavegador;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio - pricesNavegador;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}
+//			}
+//		});
+//		
+//		cbLlantasAl.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				double pricesTires = accessory.getPriceTires();
+//				if(cbLlantasAl.isSelected()) {
+//					System.out.println("[INFO] - Llantas Seleccionado");
+//					Aumento = Aumento + pricesTires;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio + pricesTires;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}else{
+//					Aumento = Aumento - pricesTires;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio - pricesTires;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}
+//			}
+//		});
+//		
+//		cbAsientosCal.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				double priceSeating = accessory.getPriceSeating();
+//				if(cbAsientosCal.isSelected()) {
+//					System.out.println("[INFO] - Asientos Seleccionado");
+//					Aumento = Aumento + priceSeating;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio + priceSeating;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}else{
+//					Aumento = Aumento - priceSeating;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio - priceSeating;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}
+//			}
+//		});
+//		
+//		cbVelCrucero.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				double priceSpeedCruise = accessory.getPriceSpeedCruise();
+//				if(cbVelCrucero.isSelected()) {
+//					System.out.println("[INFO] - Velocidad Seleccionado");
+//					Aumento = Aumento + priceSpeedCruise;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio + priceSpeedCruise;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}else{
+//					Aumento = Aumento - priceSpeedCruise;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio - priceSpeedCruise;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}
+//			}
+//		});
+//		
+//		cbAparcamietnoAuto.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				double priceAutoParking = accessory.getPriceAutoParking();
+//				if(cbAparcamietnoAuto.isSelected()) {
+//					System.out.println("[INFO] - Aparcamiento Seleccionado");
+//					Aumento = Aumento + priceAutoParking;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio + priceAutoParking;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}else{
+//					Aumento = Aumento - priceAutoParking;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio - priceAutoParking;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}
+//			}
+//		});
+//		
+//		cbConectorUSB.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				double priceUSB = accessory.getPriceUSB();
+//				if(cbConectorUSB.isSelected()) {
+//					System.out.println("[INFO] - Conector Seleccionado");
+//					Aumento = Aumento + priceUSB;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio + priceUSB;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}else{
+//					Aumento = Aumento - priceUSB;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio - priceUSB;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}
+//			}
+//		});
+//		
+//		cbPinturaMetal.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				double metallicPaint = accessory.getPriceMetallicPaint();
+//				if(cbPinturaMetal.isSelected()) {
+//					System.out.println("[INFO] - Pintura Seleccionado");
+//					Aumento = Aumento + metallicPaint;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio + metallicPaint;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}else{
+//					Aumento = Aumento - metallicPaint;
+//					lblMostrarAumento.setText(String.valueOf(Aumento));
+//					TotalPrecio = TotalPrecio - metallicPaint;
+//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+//				}
+//			}
+//		});
+//		
 		this.panel.add(lblTitulo);
 		this.panel.add(this.username, "wrap, align right");
 		this.panel.add(lblModeloCoche, "wrap, align left");

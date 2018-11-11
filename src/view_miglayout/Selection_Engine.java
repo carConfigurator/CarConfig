@@ -10,14 +10,9 @@ import idao.IEngine;
 import idao.ILanguage;
 import idao.IModel;
 import model.Client;
-<<<<<<< HEAD
 import model.Engine;
-import model.Engine_woDAO;
-//import model.Model_woDAO;
-import idao.IModel;
-=======
+//import idao.IModel;
 import model.Model;
->>>>>>> 4e7e4cd9c5af02a6b346e6bed234749a5e0cd0d3
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -42,12 +37,10 @@ public class Selection_Engine extends JFrame {
 	private ILanguage language;
 	private String username;
 	private Client client;
-<<<<<<< HEAD
-	private IModel model;
-=======
+//	private IModel model;
 	private Model model;
->>>>>>> 4e7e4cd9c5af02a6b346e6bed234749a5e0cd0d3
 	private IEngine engine;
+	private Engine engineSel;
 	private File temp;
 	private JList list;
 	
@@ -56,21 +49,14 @@ public class Selection_Engine extends JFrame {
 	private JButton btn_Anterior, btn_Siguiente;	
 	
 	// Constructores de la vista:
-<<<<<<< HEAD
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model, Engine_woDAO engine) {
-=======
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, IEngine engine) {
->>>>>>> 4e7e4cd9c5af02a6b346e6bed234749a5e0cd0d3
+	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, Engine engine) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
 		this.client = client;
 		this.model = model;
-<<<<<<< HEAD
 		this.engine = new EngineDAO_XML();
-=======
-		this.engine = engine;
->>>>>>> 4e7e4cd9c5af02a6b346e6bed234749a5e0cd0d3
+		this.engineSel = engine;
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		FileWriter fw;
@@ -101,21 +87,13 @@ public class Selection_Engine extends JFrame {
 		onCreate();
 	}
 	
-<<<<<<< HEAD
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model) {
-=======
 	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model) {
->>>>>>> 4e7e4cd9c5af02a6b346e6bed234749a5e0cd0d3
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
 		this.client = client;
 		this.model = model;
-<<<<<<< HEAD
 		this.engine = new EngineDAO_XML();
-=======
-		this.engine = new EngineDAO_XML(this.configLoad);
->>>>>>> 4e7e4cd9c5af02a6b346e6bed234749a5e0cd0d3
 		
 		onCreate();
 	}
@@ -139,18 +117,8 @@ public class Selection_Engine extends JFrame {
 		this.list = new JList();
 		DefaultListModel modelo = new DefaultListModel(); // Sirve para introducir elementos de forma indirecta (Ej: Haciendo un bucle para añadir elementos).
 		// Llamo al metodo loadEngines() y le paso el id que el usuario ha seleccionado.
-<<<<<<< HEAD
-		this.engine.loadEngines(1);
-		ArrayList<Engine> engines = this.engine.getEngines();
-=======
 		this.engine.loadEngines(this.model.getId());
-		// Obtengo todos los submodelos disponibles del modelo seleccionado.
-
-//		this.getEngines.add(this.name + ", " + this.description + ", " + this.price + "€");
-		
-		ArrayList<String> engines = this.engine.getEngines();
-		// Y los printo en la vista.
->>>>>>> 4e7e4cd9c5af02a6b346e6bed234749a5e0cd0d3
+		ArrayList<Engine> engines = this.engine.getEngines();
 		
 		for (Engine engine : engines) {
 			modelo.addElement(engine.toString());
@@ -210,14 +178,13 @@ public class Selection_Engine extends JFrame {
 	
 	protected void nextActionPerformed() {
 		setVisible(false);
-		
+		Engine engineObj = this.engine.getEngine(this.list.getSelectedIndex());
 		try {
-			Engine engine = this.engine.getEngine(this.list.getSelectedIndex() + 1);
 			FileWriter fw = new FileWriter(this.temp, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.newLine();
 			bw.write("[Motor] ");
-			bw.write(engine.toString());
+			bw.write(engineObj.toString());
 			bw.newLine();
 			bw.write("------");
 			bw.close();
@@ -225,7 +192,6 @@ public class Selection_Engine extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		new Purchase_Accessories(this.configLoad, this.language, this.username, this.client, this.model, engine);
+		new Purchase_Accessories(this.configLoad, this.language, this.username, this.client, this.model, engineObj);
 	}
 }

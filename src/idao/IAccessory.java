@@ -12,7 +12,9 @@ public interface IAccessory {
 	public ArrayList<Accessory> accesories = new ArrayList<Accessory>();
 		
 	// Métodos de la Interfaz:
-	public void loadAccesories();
+	public void loadAccesories(int model);
 	public ArrayList<Accessory> getAccesories();
 	public Accessory getAccessory(int id);
+	public boolean checkAccessory(int accessoryId);
+	public ArrayList<String> getModelsAvailables(int id);
 }

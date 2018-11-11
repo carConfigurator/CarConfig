@@ -73,12 +73,13 @@ public class Selection_Model extends JFrame{
 	 * Añado los componentes del concesionaro del coche (parte 12)
 	 */
 	
-	public Selection_Model(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model) {
+	public Selection_Model(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model) {
 		this.configLoad = configLoad;
 		this.language = language;
 		this.client = client;
 		this.username = username;
-		this.model = model;
+		this.modelSelected = model;
+		this.model = new ModelDAO_XML();
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		FileWriter fw;
@@ -103,7 +104,7 @@ public class Selection_Model extends JFrame{
 		}
 
 		onCreate();
-		listBotones.get(modelSelected.getId()).requestFocus();
+		listBotones.get(modelSelected.getId()-1).requestFocus();
 	}
 	
 	public Selection_Model(ConfigurationLoader configLoad, ILanguage language, String username, Client client){

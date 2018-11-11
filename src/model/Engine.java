@@ -74,7 +74,6 @@ public class Engine {
 
 	@Override
 	public String toString() {
-		return "Engine [id=" + id + ", name=" + name + ", descritpion=" + descritpion + ", image_name=" + image_name
-				+ ", price=" + price + ", models_available=" + Arrays.toString(models_available) + "]";
+		return name + ", " + descritpion + ", " + price + "€";
 	}
 }

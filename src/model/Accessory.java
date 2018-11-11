@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public class Accessory {
 
 	// Atributos de la Clase
@@ -70,5 +72,10 @@ public class Accessory {
 	public void setModels_available(String[] models_available) {
 		this.models_available = models_available;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Accessory [id=" + id + ", name=" + name + ", description=" + description + ", image_name=" + image_name
+				+ ", price=" + price + ", models_available=" + Arrays.toString(models_available) + "]";
+	}
 }
