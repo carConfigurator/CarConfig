@@ -316,7 +316,7 @@ public class Selection_Model extends JFrame{
 
 	private void anteriorActionPerformed() {
 		setVisible(false);
-		new Data_Clients(configLoad, language, username, client);
+		new Data_Clients(configLoad, language, username, client, true);
 	}
 	
 	private void siguienteActionPerformed() {

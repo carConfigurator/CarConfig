@@ -75,7 +75,6 @@ public class Accessory {
 
 	@Override
 	public String toString() {
-		return "Accessory [id=" + id + ", name=" + name + ", description=" + description + ", image_name=" + image_name
-				+ ", price=" + price + ", models_available=" + Arrays.toString(models_available) + "]";
+		return id + ", " + name + ", " + description + ", " + price;
 	}
 }

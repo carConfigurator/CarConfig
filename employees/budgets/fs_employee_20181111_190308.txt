@@ -1,0 +1,16 @@
+[Empleado] alexis.mengual
+------
+[Cliente] a,a,a,a,a@a.com,Desconocido,null
+------
+[Modelo] 3,SEAT Nuevo Arona,Observaciones del SEAT Nuevo Arona,15239.1
+------
+[Motor] 1, Ibiza 1.6 TDI CR 70 KW (95 CV), Diesel / 5 Velocidades Manual, 18.59
+------
+[Accesorios]
+3, Llantas de Aleación, Llantas de Aleación, 120.0
+4, Asientos calefactados, Asientos calefactados, 350.0
+6, Aparcamiento automatico, Aparcamiento automatico, 530.0
+7, Conectores USB, Conectores USB, 200.0
+8, Pintura metalizada, Pintura metalizada, 500.0
+------
+12206,15

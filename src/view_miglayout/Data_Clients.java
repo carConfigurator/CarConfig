@@ -3,8 +3,11 @@ package view_miglayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -27,6 +30,7 @@ import com.toedter.calendar.JDateChooser;
 import config.ConfigurationLoader;
 import idao.ILanguage;
 import model.Client;
+import model.Model;
 import net.miginfocom.swing.MigLayout;
 import view_miglayout.Selection_Model;
 
@@ -48,17 +52,28 @@ public class Data_Clients extends JFrame{
 	private JDateChooser dc_birthdate;
 	private JButton btn_save, btn_next;
 	
-	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username, Client client) {
+	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username, Client client, boolean writer) {
 		System.out.println("[INFO] - Mostrando nuevamente el Frame de Datos Clientes...");
 		System.out.println("[INFO] - Recuperando información...");
 		this.client = client;
+		System.out.println(this.client.toString());
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
 		this.temp = new File(this.configLoad.getTemporalPathFile());
-		
+		createFrame();
+	}
+	
+	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username) {
+		System.out.println("[INFO] - Mostrando nuevo Frame...");
+		this.client = new Client();
+		this.language = language;
+		this.configLoad = configLoad;
+		this.username = username;
+		this.temp = new File(this.configLoad.getTemporalPathFile());
+		FileWriter fw;
 		try {
-			FileWriter fw = new FileWriter(this.temp);
+			fw = new FileWriter(this.temp);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write("Datos Temporales");
 			bw.newLine();
@@ -71,27 +86,7 @@ public class Data_Clients extends JFrame{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 		createFrame();
-		setInformation();
-	}
-	
-	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username) {
-		System.out.println("[INFO] - Mostrando nuevo Frame...");
-		this.client = new Client();
-		this.language = language;
-		this.configLoad = configLoad;
-		this.username = username;
-		this.temp = new File(this.configLoad.getTemporalPathFile());
-		// Comprobará siempre si el archivo existe, en caso de que exista lo eliminará para generarlo desde 0.
-		if(this.temp.exists()) {
-			if(this.temp.length() > 0) {
-				JOptionPane.showMessageDialog(null, "Hay datos en el archivo temporal", "INFO", JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
-		createFrame();
-		
 	}
 	
 	private void createFrame() {
@@ -129,6 +124,7 @@ public class Data_Clients extends JFrame{
 		this.label_client_first_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
 		this.tfield_client_first_lastname = new JTextField(30);
+		System.out.println("Recuperando Primer Apellido: " + this.client.getFirst_last_name());
 		this.tfield_client_first_lastname.setText(this.client.getFirst_last_name());
 		this.tfield_client_first_lastname.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
@@ -206,6 +202,7 @@ public class Data_Clients extends JFrame{
 		this.label_client_birthdate.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 5));
 		
 		this.dc_birthdate = new JDateChooser();
+		System.out.println(client.getBirthdate());
 		if(client.getBirthdate() != null) {
 			this.dc_birthdate = new JDateChooser();
 			DateFormat df = new SimpleDateFormat("dd-MM-yyyy");		
@@ -215,6 +212,7 @@ public class Data_Clients extends JFrame{
 				e1.printStackTrace();
 			}
 		}
+		
 		this.dc_birthdate.setDateFormatString("dd-MM-yyyy");
 		this.dc_birthdate.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		this.dc_birthdate.setBackground(new Color(255, 255, 255));
@@ -276,17 +274,6 @@ public class Data_Clients extends JFrame{
 		
 		addFrame(configLoad, panel, language, language.dataClientsTitle());
 		windowsListener(language);
-	}
-	
-	/*
-	 * 
-	 */
-	private void setInformation() {
-		tfield_client_name.setText(client.getName());
-		tfield_client_first_lastname.setText(client.getFirst_last_name());
-		tfield_client_second_lastname.setText(client.getSecond_last_name());
-		tfield_client_address.setText(client.getAddress());
-		tfield_client_email.setText(client.getEmail());
 	}
 
 	protected void nextActionPerformed() {

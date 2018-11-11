@@ -160,23 +160,10 @@ public class Login extends JFrame{
 			if (pass) {//si la contraseña ha ido bien cambia de ventana
 				System.out.println("[INFO] - Conexión Establecida. Cambiando de Frame...\n\t Enviando configuración, idioma y nombre de usuario...");
 				System.out.println("[INFO] - Escribiendo en el fichero temporal.");
-				try {
-					FileWriter fw = new FileWriter(this.temp);
-					BufferedWriter bw = new BufferedWriter(fw);
-					bw.write("Datos Temporales");
-					bw.newLine();
-					bw.write("[Empleado] ");
-					bw.write(username);
-					bw.newLine();
-					bw.write("------");
-					bw.close();
-					fw.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
 				// Oculto este Frame y llamo al siguiente:
 				setVisible(false);
-				new Data_Clients(this.configLoad, this.language, username);
+				System.out.println("Me sigo cagando en tu puta madre");
+				new check(this.configLoad, this.language, username);
 			}else {//si la contraseña era invalida saltara un error de la contraseña
 				System.out.println("[ERROR] - El usuario/contraseña es incorrecto");
 				JOptionPane.showMessageDialog(null,language.errorLoginPassword(),language.errorLoginPasswordTitle(), JOptionPane.ERROR_MESSAGE);

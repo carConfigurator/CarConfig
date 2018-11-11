@@ -74,6 +74,6 @@ public class Engine {
 
 	@Override
 	public String toString() {
-		return name + ", " + descritpion + ", " + price + "€";
+		return id + ", " + name + ", " + descritpion + ", " + price;
 	}
 }
