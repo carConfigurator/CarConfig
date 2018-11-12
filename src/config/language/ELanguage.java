@@ -81,7 +81,7 @@ public enum ELanguage {
 	labelDescription,
 	labelImg_Name,
 	labelPrice,
-	rrorParseDouble,
+	errorParseDouble,
 	errorParseDoubleTitle,
 	errorPriceNull,
 	errorPriceNullTitle,

@@ -28,7 +28,8 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import config.ConfigurationLoader;
-import idao.ILanguage;
+import config.language.ELanguage;
+import config.language.Language;
 import model.Client;
 import model.Model;
 import net.miginfocom.swing.MigLayout;
@@ -37,7 +38,7 @@ import view_miglayout.Selection_Model;
 public class Data_Clients extends JFrame{
 
 	// Atributos de la Clase:
-	private ILanguage language;
+	private Language language;
 	private ConfigurationLoader configLoad;
 	private File temp;
 	private Client client;
@@ -52,7 +53,7 @@ public class Data_Clients extends JFrame{
 	private JDateChooser dc_birthdate;
 	private JButton btn_save, btn_next;
 	
-	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username, Client client, boolean writer) {
+	public Data_Clients(ConfigurationLoader configLoad, Language language, String username, Client client, boolean writer) {
 		System.out.println("[INFO] - Mostrando nuevamente el Frame de Datos Clientes...");
 		System.out.println("[INFO] - Recuperando información...");
 		this.client = client;
@@ -64,7 +65,7 @@ public class Data_Clients extends JFrame{
 		createFrame();
 	}
 	
-	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username) {
+	public Data_Clients(ConfigurationLoader configLoad, Language language, String username) {
 		System.out.println("[INFO] - Mostrando nuevo Frame...");
 		this.client = new Client();
 		this.language = language;
@@ -101,13 +102,13 @@ public class Data_Clients extends JFrame{
 		this.panel.setLayout(new MigLayout("insets 20"));
 		this.panel.setBackground(new Color(255,255,255));
 		
-		this.label_client_title = new JLabel(this.language.labelClientTitle());
+		this.label_client_title = new JLabel(this.language.getText(ELanguage.labelClientTitle));
 		this.label_client_title.setFont(new java.awt.Font("Tahoma", 0, 16));
 		
-		this.label_username = new JLabel(this.language.labelAuthIn() + username);
+		this.label_username = new JLabel(this.language.getText(ELanguage.labelAuthIn) + username);
 		this.label_username.setFont(new java.awt.Font("Tahoma", 0, 10));
 		
-		this.label_client_name = new JLabel(this.language.labelClientName());
+		this.label_client_name = new JLabel(this.language.getText(ELanguage.labelClientName));
 		this.label_client_name.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
 		this.label_client_name.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
@@ -119,7 +120,7 @@ public class Data_Clients extends JFrame{
 				));
 		this.tfield_client_name.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
-		this.label_client_first_lastname = new JLabel(this.language.labelClientFirstLastName());
+		this.label_client_first_lastname = new JLabel(this.language.getText(ELanguage.labelClientFirstLastName));
 		this.label_client_first_lastname.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
 		this.label_client_first_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
@@ -132,7 +133,7 @@ public class Data_Clients extends JFrame{
 				));
 		this.tfield_client_first_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
-		this.label_client_second_lastname = new JLabel(this.language.labelClientSecondLastName());
+		this.label_client_second_lastname = new JLabel(this.language..getText(ELanguage.labelClientSecondLastName));
 		this.label_client_second_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.label_client_second_lastname.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
 		

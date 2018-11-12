@@ -20,14 +20,15 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextArea;
 
 import config.ConfigurationLoader;
-import idao.ILanguage;
+import config.language.ELanguage;
+import config.language.Language;
 import model.Client;
 import model.PresupuestoXML;
 
 public class Albaran extends JFrame {
 
 	// Atributos globales.
-	private ILanguage language;
+	private Language language;
 	private ConfigurationLoader configLoad;
 	private Client client;
 	private String username;
@@ -42,7 +43,7 @@ public class Albaran extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Albaran(ConfigurationLoader configLoad, ILanguage language, String username, Client client) {
+	public Albaran(ConfigurationLoader configLoad, Language language, String username, Client client) {
 		this.configLoad = configLoad;
 		this.language = language;
 		this.username = username;
@@ -50,7 +51,7 @@ public class Albaran extends JFrame {
 		this.contentPane = new JPanel();
 		this.contentPane.setLayout(new MigLayout("insets 30"));
 		this.contentPane.setBackground(new Color(255, 255, 255));
-		this.btn_GoClient = new JButton(language.btnStart());
+		this.btn_GoClient = new JButton(language.getText(ELanguage.btnStart));
 		this.btn_GoClient.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.btn_GoClient.setBackground(new Color(215,18,43));
 		this.btn_GoClient.setForeground(new Color(255,255,255));
@@ -104,7 +105,7 @@ public class Albaran extends JFrame {
 			}
 		});
 		
-		addFrame(configLoad, contentPane, language, language.deliveryNoteTitle());
+		addFrame(configLoad, contentPane, language, language.getText(ELanguage.deliveryNoteTitle));
 	}
 	
 	private void generateXMLBudget() {

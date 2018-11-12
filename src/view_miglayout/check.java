@@ -14,7 +14,8 @@ import config.ConfigurationLoader;
 import daoImpl.EngineDAO_XML;
 import daoImpl.ModelDAO_XML;
 import idao.IEngine;
-import idao.ILanguage;
+import config.language.ELanguage;
+import config.language.Language;
 import idao.IModel;
 import model.Client;
 import model.Engine;
@@ -24,7 +25,7 @@ public class check extends JFrame{
 
 	File temp;
 	
-	public check(ConfigurationLoader configLoad, ILanguage language, String username) {
+	public check(ConfigurationLoader configLoad, Language language, String username) {
 		System.out.println("HDP");
 		// Comprobará siempre si el archivo existe, en caso de que exista lo eliminará para generarlo desde 0.
 		this.temp = new File(configLoad.getTemporalPathFile());		
