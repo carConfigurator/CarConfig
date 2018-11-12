@@ -57,7 +57,7 @@ public class Login extends JFrame{
 		ConfigurationLoader configLoad2 = ConfigurationLoader.getConfigurationLoaderInstance();
 		System.out.println("[INFO] - Obteniendo idioma del Archivo de Configuración...");
 		System.out.println("\t [DEMO] - El idioma para este sprint será únicamente en Castellano,\n\t pero está planteado para multilenguajes.");
-		this.language = LanguageFactory.getLanguage(this.configLoad);
+		this.language = (ILanguage) LanguageFactory.getLanguage(this.configLoad);
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		// Comprobará siempre si el archivo existe, en caso de que exista lo eliminará para generarlo desde 0.

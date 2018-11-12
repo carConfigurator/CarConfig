@@ -1,5 +1,0 @@
-Datos Temporales
-[Empleado] dario.delcore
-------
-[Cliente] gvu,ugc,uy,gvyu,gyvu@asdf.co,Desconocido,null
-------
