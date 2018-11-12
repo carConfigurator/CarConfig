@@ -61,7 +61,6 @@ public class Selection_Model extends JFrame{
 	private JMenuBar pMenu;
 	private JMenu menu;
 	private List<JMenuItem> lMenuItem;
-	private JSeparator menuSeparator;
 	
 	private List<Image> listImg;
 	private File temp;
@@ -130,8 +129,6 @@ public class Selection_Model extends JFrame{
 		pMenu.setBackground(new Color(215,18,43));
 		menu=new JMenu(language.getText(ELanguage.menu));
 		menu.setForeground(new Color(255,255,255));
-		menuSeparator=new JSeparator();
-		menuSeparator.setBackground(Color.RED);
 		lMenuItem=new ArrayList<JMenuItem>();
 		lMenuItem.add(new JMenuItem(language.getText(ELanguage.menuItemAdd)));
 		lMenuItem.add(new JMenuItem(language.getText(ELanguage.menuItemDelete)));
