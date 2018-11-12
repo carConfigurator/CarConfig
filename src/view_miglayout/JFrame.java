@@ -11,16 +11,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import config.ConfigurationLoader;
-import idao.ILanguage;
+import config.language.ELanguage;
+import config.language.Language;
 
 public class JFrame extends javax.swing.JFrame {
 
 	/**
 	 * Create the frame.
 	 */
-	public void addFrame(ConfigurationLoader configLoad, JPanel panel, ILanguage language, String title) {
+	public void addFrame(ConfigurationLoader configLoad, JPanel panel, Language language, String title) {
 		add(panel);
-		setTitle(language.titleDefault()+" - "+title);
+		setTitle(language.getText(ELanguage.titleDefault)+" - "+title);
 		setIconImage(getIconImage(configLoad));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600,600);
@@ -33,7 +34,7 @@ public class JFrame extends javax.swing.JFrame {
 		setJMenuBar(jmBar);
 	}
 	
-	public void windowsListener(ILanguage language) {
+	public void windowsListener(Language language) {
 		addWindowListener(new WindowListener() {
 			
 			@Override
@@ -50,7 +51,7 @@ public class JFrame extends javax.swing.JFrame {
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int dialogButton = JOptionPane.showConfirmDialog(null, language.btnSaveInfo(), language.btnSaveInfo(), JOptionPane.YES_NO_CANCEL_OPTION);
+				int dialogButton = JOptionPane.showConfirmDialog(null, language.getText(ELanguage.btnSaveInfo), language.getText(ELanguage.btnSaveInfo), JOptionPane.YES_NO_CANCEL_OPTION);
 				if(dialogButton == JOptionPane.YES_OPTION) {
 					System.out.println("[INFO] - Guardando los datos del cliente...");
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

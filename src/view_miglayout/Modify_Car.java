@@ -13,14 +13,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import config.ConfigurationLoader;
-import idao.ILanguage;
+import config.language.ELanguage;
+import config.language.Language;
 import idao.IModel;
 import model.Client;
 import net.miginfocom.swing.MigLayout;
 
 public class Modify_Car extends JFrame{
 
-	private ILanguage language;
+	private Language language;
 	private ConfigurationLoader configLoad;
 	private Client client;
 	private String username;
@@ -31,7 +32,7 @@ public class Modify_Car extends JFrame{
 	private JTextField tfId, tfName, tfDescription, tfImg_Name, tfPrice;
 	private JButton btnSave, btnBack;
 	
-	public Modify_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model, int idSelected){
+	public Modify_Car(ConfigurationLoader configLoad, Language language, String username, Client client, IModel model, int idSelected){
 		this.configLoad = configLoad;
 		this.language = language;
 		this.username = username;
@@ -44,7 +45,7 @@ public class Modify_Car extends JFrame{
 		this.panelMig.setLayout(new MigLayout("insets 20 50 50 50, fillx, filly"));
 		this.panelMig.setBackground(new Color(255, 255, 255));
 
-		this.lId = new JLabel(this.language.labelId());
+		this.lId = new JLabel(this.language.getText(ELanguage.labelId));
 		this.lId.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.tfId = new JTextField(30);
 		this.tfId.setBorder(BorderFactory.createCompoundBorder(
@@ -52,28 +53,28 @@ public class Modify_Car extends JFrame{
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
 				));
 		this.tfId.setEditable(false);
-		this.lName = new JLabel(this.language.labelName());
+		this.lName = new JLabel(this.language.getText(ELanguage.labelName));
 		this.lName.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.tfName = new JTextField(30);
 		this.tfName.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
 				));
-		this.lDescription = new JLabel(this.language.labelDescription());
+		this.lDescription = new JLabel(this.language.getText(ELanguage.labelDescription));
 		this.lDescription.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.tfDescription = new JTextField(30);
 		this.tfDescription.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
 				));
-		this.lImg_Name = new JLabel(this.language.labelImg_Name());
+		this.lImg_Name = new JLabel(this.language.getText(ELanguage.labelImg_Name));
 		this.lImg_Name.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.tfImg_Name = new JTextField(30);
 		this.tfImg_Name.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
 				));
-		this.lPrice = new JLabel(this.language.labelPrice());
+		this.lPrice = new JLabel(this.language.getText(ELanguage.labelPrice));
 		this.lPrice.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.tfPrice = new JTextField(30);
 		this.tfPrice.setBorder(BorderFactory.createCompoundBorder(
@@ -81,14 +82,14 @@ public class Modify_Car extends JFrame{
 				BorderFactory.createEmptyBorder(5, 0, 5, 0)
 				));
 		
-		this.btnSave = new JButton(language.btnSave());
+		this.btnSave = new JButton(language.getText(ELanguage.btnSave));
 		this.btnSave.setBackground(new Color(215,18,43));
 		this.btnSave.setForeground(new Color(255,255,255));
 		this.btnSave.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)
 				));
-		this.btnBack = new JButton(language.btnBack());
+		this.btnBack = new JButton(language.getText(ELanguage.btnBack));
 		this.btnBack.setBackground(new Color(215,18,43));
 		this.btnBack.setForeground(new Color(255,255,255));
 		this.btnBack.setBorder(BorderFactory.createCompoundBorder(
@@ -131,16 +132,16 @@ public class Modify_Car extends JFrame{
 								setVisible(false);
 								backActionPerformed(e);
 							}catch(NumberFormatException ex) {
-								JOptionPane.showMessageDialog(panelMig, language.errorParseDouble(), language.errorParseDoubleTitle(), JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(panelMig, language.getText(ELanguage.errorParseDouble), language.getText(ELanguage.errorParseDoubleTitle), JOptionPane.ERROR_MESSAGE);
 							}
 						}else {
-							JOptionPane.showMessageDialog(panelMig, language.errorPriceNull(), language.errorPriceNullTitle(), JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(panelMig, language.getText(ELanguage.errorPriceNull), language.getText(ELanguage.errorPriceNullTitle), JOptionPane.ERROR_MESSAGE);
 						}
 					}else {
-						JOptionPane.showMessageDialog(panelMig, language.errorImgName(), language.errorImgNameTitle(), JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(panelMig, language.getText(ELanguage.errorImgName), language.getText(ELanguage.errorImgNameTitle), JOptionPane.ERROR_MESSAGE);
 					}
 				}else {
-					JOptionPane.showMessageDialog(panelMig, language.errorImgNameNull(), language.errorImgNameNullTitle(), JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(panelMig, language.getText(ELanguage.errorImgNameNull), language.getText(ELanguage.errorImgNameNullTitle), JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}
@@ -154,7 +155,7 @@ public class Modify_Car extends JFrame{
 			}
 		});
 		
-		addFrame(configLoad, panelMig, language, language.titleDefault());
+		addFrame(configLoad, panelMig, language, language.getText(ELanguage.titleDefault));
 	}
 	
 	private void backActionPerformed(ActionEvent ae) {

@@ -5,9 +5,10 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import config.ConfigurationLoader;
+import config.language.ELanguage;
+import config.language.Language;
 import daoImpl.EngineDAO_XML;
 import idao.IEngine;
-import idao.ILanguage;
 import model.Client;
 import model.Engine;
 import model.Model;
@@ -30,7 +31,7 @@ import javax.swing.DefaultListModel;
 public class Selection_Engine extends JFrame {
 
 	private ConfigurationLoader configLoad;
-	private ILanguage language;
+	private Language language;
 	private String username;
 	private Client client;
 //	private IModel model;
@@ -45,7 +46,7 @@ public class Selection_Engine extends JFrame {
 	private JButton btn_Anterior, btn_Siguiente;	
 	
 	// Constructores de la vista:
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, Engine engine) {
+	public Selection_Engine(ConfigurationLoader configLoad, Language language, String username, Client client, Model model, Engine engine) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
@@ -72,7 +73,6 @@ public class Selection_Engine extends JFrame {
 			bw.write("[Modelo] ");
 			bw.write(this.model.toString());
 			bw.write("------");
-			bw.newLine();
 			bw.close();
 			fw.close();
 		} catch (IOException e) {
@@ -82,7 +82,7 @@ public class Selection_Engine extends JFrame {
 		onCreate();
 	}
 	
-	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model) {
+	public Selection_Engine(ConfigurationLoader configLoad, Language language, String username, Client client, Model model) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
@@ -103,10 +103,10 @@ public class Selection_Engine extends JFrame {
 		this.panel.setBackground(new Color(255,255,255));
 		
 		// Elementos del JPanel
-		this.lblTitulo = new JLabel(language.labelEngineTitle());
+		this.lblTitulo = new JLabel(language.getText(ELanguage.labelEngineTitle));
 		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		this.lblUsername = new JLabel(this.language.labelAuthIn() + this.username);
+		this.lblUsername = new JLabel(this.language.getText(ELanguage.labelAuthIn) + this.username);
 		this.lblUsername.setFont(new Font("Tahoma", 0, 11));
 		 
 		this.list = new JList();
@@ -126,7 +126,7 @@ public class Selection_Engine extends JFrame {
 		list.setBackground(new Color(157, 157, 157));
 		list.setBorder(BorderFactory.createEmptyBorder(10, 25, 10, 25));
 		
-		this.btn_Anterior = new JButton(language.btnBack());
+		this.btn_Anterior = new JButton(language.getText(ELanguage.btnBack));
 		this.btn_Anterior.setFont(new Font("Tahoma", 0, 12));
 		this.btn_Anterior.setBackground(new Color(215,18,43));
 		this.btn_Anterior.setForeground(new Color(255,255,255));
@@ -134,7 +134,7 @@ public class Selection_Engine extends JFrame {
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
 		
-		this.btn_Siguiente = new JButton(language.btnNext());
+		this.btn_Siguiente = new JButton(language.getText(ELanguage.btnNext));
 		this.btn_Siguiente.setFont(new Font("Tahoma", 0, 12));
 		this.btn_Siguiente.setBackground(new Color(215,18,43));
 		this.btn_Siguiente.setForeground(new Color(255,255,255));
@@ -167,13 +167,21 @@ public class Selection_Engine extends JFrame {
 		this.panel.add(this.btn_Anterior, "span 2, align left");
 		this.panel.add(this.btn_Siguiente, "align right");
 		
-		addFrame(this.configLoad, panel, language, language.seleccionEngineTitle());
+		addFrame(this.configLoad, panel, language, language.getText(ELanguage.seleccionEngineTitle));
 	}
 	
 	
 	protected void nextActionPerformed() {
 		setVisible(false);
-		Engine engineObj = this.engine.getEngine(this.list.getSelectedIndex());
+		this.engine.getEngines();
+		Engine engineObj = new Engine();
+		
+		for (Engine engine : this.engine.getEngines()) {
+			if(engine.toString().equals(this.list.getSelectedValue())) {
+				engineObj = engine;
+			}
+		}
+		
 		try {
 			FileWriter fw = new FileWriter(this.temp, true);
 			BufferedWriter bw = new BufferedWriter(fw);

@@ -19,15 +19,16 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import config.ConfigurationLoader;
+import config.language.ELanguage;
+import config.language.Language;
 import daoImplFactory.LanguageFactory;
-import idao.ILanguage;
 import net.miginfocom.swing.MigLayout;
 import view_miglayout.Data_Clients;
 
 public class Login extends JFrame{
 	
 	private ConfigurationLoader configLoad;
-	private ILanguage language;
+	private Language language;
 	private File temp;
 	
 	// Atributos de la Clase.
@@ -54,7 +55,7 @@ public class Login extends JFrame{
 		ConfigurationLoader configLoad2 = ConfigurationLoader.getConfigurationLoaderInstance();
 		System.out.println("[INFO] - Obteniendo idioma del Archivo de Configuración...");
 		System.out.println("\t [DEMO] - El idioma para este sprint será únicamente en Castellano,\n\t pero está planteado para multilenguajes.");
-		this.language = (ILanguage) LanguageFactory.getLanguage(this.configLoad);
+		this.language = new Language(configLoad.getLanguage_files_path()+configLoad.getLanguage_default()+configLoad.getPostfix_language_file_name());
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		// Volvemos a generar el fichero txt:
@@ -68,9 +69,9 @@ public class Login extends JFrame{
 		// Añado el Layout al Panel y le indico que este haga un padding de 20 en el Panel.
 		this.panel.setLayout(new MigLayout("insets 20"));
 		this.panel.setBackground(new Color(255,255,255));
-		this.label_username = new JLabel(language.labelUsername());
+		this.label_username = new JLabel(language.getText(ELanguage.labelUsername));
 		this.label_username.setFont(new java.awt.Font("Tahoma", 0, 12));
-		this.label_password = new JLabel(language.labelPassword());
+		this.label_password = new JLabel(language.getText(ELanguage.labelPassword));
 		this.label_password.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.label_password.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 		this.tfield_username = new JTextField(30);
@@ -86,7 +87,7 @@ public class Login extends JFrame{
 				));
 		this.pfield_password.setMargin(new Insets(0, 10, 10, 10));
 		this.pfield_password.setFont(new java.awt.Font("Tahoma", 0, 12));
-		this.btn_login = new JButton(language.btnLogin());
+		this.btn_login = new JButton(language.getText(ELanguage.btnLogin));
 		this.btn_login.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.btn_login.setBackground(new Color(215,18,43));
 		this.btn_login.setForeground(new Color(255,255,255));
@@ -129,7 +130,7 @@ public class Login extends JFrame{
 			}
 		});
 		
-		addFrame(configLoad, panel, language, language.loginTitle());
+		addFrame(configLoad, panel, language, language.getText(ELanguage.loginTitle));
 	}
 	
 	/*
@@ -166,10 +167,10 @@ public class Login extends JFrame{
 				new check(this.configLoad, this.language, username);
 			}else {//si la contraseña era invalida saltara un error de la contraseña
 				System.out.println("[ERROR] - El usuario/contraseña es incorrecto");
-				JOptionPane.showMessageDialog(null,language.errorLoginPassword(),language.errorLoginPasswordTitle(), JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null,language.getText(ELanguage.errorLoginPassword),language.getText(ELanguage.errorLoginPasswordTitle), JOptionPane.ERROR_MESSAGE);
 			}
 		}else {//si el usuario era invalido saltara un error de usuario invalido
-			JOptionPane.showMessageDialog(null,language.errorLoginUser(),language.errorLoginUserTitle(), JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,language.getText(ELanguage.errorLoginUser),language.getText(ELanguage.errorLoginUserTitle), JOptionPane.ERROR_MESSAGE);
 			System.out.println("[ERROR] - El usuario no existe.");
 		}
 	}

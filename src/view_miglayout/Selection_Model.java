@@ -31,15 +31,16 @@ import javax.swing.JSeparator;
 import javax.swing.JTextPane;
 
 import config.ConfigurationLoader;
+import config.language.ELanguage;
+import config.language.Language;
 import daoImpl.ModelDAO_XML;
-import idao.ILanguage;
 import idao.IModel;
 import model.Client;
 import model.Model;
 import net.miginfocom.swing.MigLayout;
 
 public class Selection_Model extends JFrame{	
-	private ILanguage language;
+	private Language language;
 	private ConfigurationLoader configLoad;
 	private Client client;
 	private String username;
@@ -69,7 +70,7 @@ public class Selection_Model extends JFrame{
 	 * Añado los componentes del concesionaro del coche (parte 12)
 	 */
 	
-	public Selection_Model(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model) {
+	public Selection_Model(ConfigurationLoader configLoad, Language language, String username, Client client, Model model) {
 		this.configLoad = configLoad;
 		this.language = language;
 		this.client = client;
@@ -103,7 +104,7 @@ public class Selection_Model extends JFrame{
 		listBotones.get(modelSelected.getId()-1).requestFocus();
 	}
 	
-	public Selection_Model(ConfigurationLoader configLoad, ILanguage language, String username, Client client){
+	public Selection_Model(ConfigurationLoader configLoad, Language language, String username, Client client){
 		this.configLoad = configLoad;
 		this.language = language;
 		this.client = client;
@@ -127,14 +128,14 @@ public class Selection_Model extends JFrame{
 		pMenu=new JMenuBar();
 		pMenu.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
 		pMenu.setBackground(new Color(215,18,43));
-		menu=new JMenu(language.menu());
+		menu=new JMenu(language.getText(ELanguage.menu));
 		menu.setForeground(new Color(255,255,255));
 		menuSeparator=new JSeparator();
 		menuSeparator.setBackground(Color.RED);
 		lMenuItem=new ArrayList<JMenuItem>();
-		lMenuItem.add(new JMenuItem(language.menuItemAdd()));
-		lMenuItem.add(new JMenuItem(language.menuItemDelete()));
-		lMenuItem.add(new JMenuItem(language.menuItemModify()));
+		lMenuItem.add(new JMenuItem(language.getText(ELanguage.menuItemAdd)));
+		lMenuItem.add(new JMenuItem(language.getText(ELanguage.menuItemDelete)));
+		lMenuItem.add(new JMenuItem(language.getText(ELanguage.menuItemModify)));
 		for (JMenuItem item : lMenuItem) {
 			menu.add(item);
 			item.setBackground(new Color(255, 255, 255));
@@ -142,9 +143,9 @@ public class Selection_Model extends JFrame{
 		pMenu.add(menu);
 		
 		//iniciamos los componentes
-		this.lTitle=new JLabel(language.labelSelectTitle());
+		this.lTitle=new JLabel(language.getText(ELanguage.labelSelectTitle));
 		this.lTitle.setFont(new java.awt.Font("Tahoma", 0, 16));
-		this.lUser=new JLabel(this.language.labelAuthIn() + username);
+		this.lUser=new JLabel(this.language.getText(ELanguage.labelAuthIn) + username);
 		this.lUser.setFont(new java.awt.Font("Tahoma", 0, 10));
 		this.carPane=new JTextPane();
 			carPane.setContentType("text/html");
@@ -152,7 +153,7 @@ public class Selection_Model extends JFrame{
 		this.infoPane=new JTextPane();
 			infoPane.setContentType("text/html");
 			infoPane.setEditable(false);
-		this.btnBack=new JButton(language.btnPrevious());
+		this.btnBack=new JButton(language.getText(ELanguage.btnPrevious));
 		this.btnBack.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.btnBack.setBackground(new Color(215,18,43));
 		this.btnBack.setForeground(new Color(255,255,255));
@@ -160,7 +161,7 @@ public class Selection_Model extends JFrame{
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)
 				));
-		this.btnNext=new JButton(language.btnNext());
+		this.btnNext=new JButton(language.getText(ELanguage.btnNext));
 		this.btnNext.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.btnNext.setBackground(new Color(215,18,43));
 		this.btnNext.setForeground(new Color(255,255,255));
@@ -252,7 +253,7 @@ public class Selection_Model extends JFrame{
 		});
 
 		addMenuBar(pMenu);
-		addFrame(configLoad, panelMig, language, language.titleDefault());
+		addFrame(configLoad, panelMig, language, language.getText(ELanguage.titleDefault));
 	}
 	
 	private void createButton() {
@@ -330,6 +331,7 @@ public class Selection_Model extends JFrame{
 			bw.write(id+","+name+","+description+","+price);
 			bw.newLine();
 			bw.write("------");
+			bw.newLine();
 			bw.close();
 			fw.close();
 		} catch (IOException e) {

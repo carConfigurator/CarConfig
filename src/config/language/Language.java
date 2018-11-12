@@ -30,8 +30,8 @@ public class Language {
 	private ELanguage eLan;
 	private HashMap<ELanguage, String> hLanguage = new HashMap<ELanguage, String>();
 	
-	public Language(ConfigurationLoader configLoad) {
-		this.languageFile = new File(configLoad.getLanguage_files_path()+configLoad.getLanguage_default()+configLoad.getPostfix_language_file_name());
+	public Language(String pathLanguage) {
+		this.languageFile = new File(pathLanguage);
 		
 		String line="";
 		

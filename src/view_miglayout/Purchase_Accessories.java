@@ -6,9 +6,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import config.ConfigurationLoader;
+import config.language.ELanguage;
+import config.language.Language;
 import daoImpl.AccessoryDAO_XML;
 import idao.IAccessory;
-import idao.ILanguage;
 import model.Accessory;
 import model.Client;
 import model.Engine;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
 public class Purchase_Accessories extends JFrame{
 
 	// Atributos de la Clase:
-	private ILanguage language;
+	private Language language;
 	private ConfigurationLoader configLoad;
 	private Client client;
 	private Model model;
@@ -50,7 +51,7 @@ public class Purchase_Accessories extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public Purchase_Accessories(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, Engine engine) {
+	public Purchase_Accessories(ConfigurationLoader configLoad, Language language, String username, Client client, Model model, Engine engine) {
 		this.language = language;
 		this.configLoad = configLoad;
 		this.client = client;
@@ -61,7 +62,7 @@ public class Purchase_Accessories extends JFrame{
 		this.Aumento = 0;
 		this.TotalPrecio = 0;
 		
-		this.username = new JLabel(this.language.labelAuthIn() + username);
+		this.username = new JLabel(this.language.getText(ELanguage.labelAuthIn) + username);
 		this.username.setFont(new Font("Tahoma", 0, 11));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,10 +72,10 @@ public class Purchase_Accessories extends JFrame{
 		this.panel.setBackground(new Color(255,255,255));
 		this.panel.setLayout(new MigLayout("insets 35"));
 		
-		this.lblTitulo = new JLabel(language.purchaseAccessoriesTitle());
+		this.lblTitulo = new JLabel(language.getText(ELanguage.purchaseAccessoriesTitle));
 		this.lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		this.lblModeloCoche = new JLabel(language.labelModelCar());
+		this.lblModeloCoche = new JLabel(language.getText(ELanguage.labelModelCar));
 		this.lblModeloCoche.setFont(new Font("Tahoma", 2, 12));
 		
 		this.lblMostrarModelo = new JLabel(this.engine.toString());
@@ -85,7 +86,7 @@ public class Purchase_Accessories extends JFrame{
 		ArrayList<Accessory> accessoryList = this.accessory.getAccesories();
 		Accessory accessoryObj = this.accessory.getAccessory(1);
 		
-		this.cbElevadurasElectricas = new JCheckBox(language.checkBoxElectricElevation());
+		this.cbElevadurasElectricas = new JCheckBox(language.getText(ELanguage.checkBoxElectricElevation));
 		this.cbElevadurasElectricas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbElevadurasElectricas.setBackground(new Color(255,255,255));
 		this.cbElevadurasElectricas.setFocusable(false);
@@ -94,7 +95,7 @@ public class Purchase_Accessories extends JFrame{
 			this.cbElevadurasElectricas.setEnabled(false);
 		}
 
-		this.cbNavegador = new JCheckBox(language.checkBoxBrowser());
+		this.cbNavegador = new JCheckBox(language.getText(ELanguage.checkBoxBrowser));
 		this.cbNavegador.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbNavegador.setBackground(new Color(255,255,255));
 		this.cbNavegador.setFocusable(false);
@@ -103,7 +104,7 @@ public class Purchase_Accessories extends JFrame{
 			this.cbNavegador.setEnabled(false);
 		}
 		
-		this.cbLlantasAl = new JCheckBox(language.checkBoxTires());
+		this.cbLlantasAl = new JCheckBox(language.getText(ELanguage.checkBoxTires));
 		this.cbLlantasAl.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbLlantasAl.setBackground(new Color(255,255,255));
 		this.cbLlantasAl.setFocusable(false);
@@ -112,7 +113,7 @@ public class Purchase_Accessories extends JFrame{
 			this.cbLlantasAl.setEnabled(false);
 		}
 
-		this.cbAsientosCal = new JCheckBox(language.checkBoxHeatedSeats());
+		this.cbAsientosCal = new JCheckBox(language.getText(ELanguage.checkBoxHeatedSeats));
 		this.cbAsientosCal.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbAsientosCal.setBackground(new Color(255,255,255));
 		this.cbAsientosCal.setFocusable(false);
@@ -121,7 +122,7 @@ public class Purchase_Accessories extends JFrame{
 			this.cbAsientosCal.setEnabled(false);
 		}
 				
-		this.cbVelCrucero = new JCheckBox(language.checkBoxCruisingSpeed());
+		this.cbVelCrucero = new JCheckBox(language.getText(ELanguage.checkBoxCruisingSpeed));
 		this.cbVelCrucero.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbVelCrucero.setBackground(new Color(255,255,255));
 		this.cbVelCrucero.setFocusable(false);
@@ -130,7 +131,7 @@ public class Purchase_Accessories extends JFrame{
 			this.cbVelCrucero.setEnabled(false);
 		}
 				
-		this.cbAparcamietnoAuto = new JCheckBox(language.checkBoxAutomaticParking());
+		this.cbAparcamietnoAuto = new JCheckBox(language.getText(ELanguage.checkBoxAutomaticParking));
 		this.cbAparcamietnoAuto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbAparcamietnoAuto.setBackground(new Color(255,255,255));
 		this.cbAparcamietnoAuto.setFocusable(false);
@@ -139,7 +140,7 @@ public class Purchase_Accessories extends JFrame{
 			this.cbAparcamietnoAuto.setEnabled(false);
 		}
 
-		this.cbConectorUSB = new JCheckBox(language.checkBoxUsbConnectors());
+		this.cbConectorUSB = new JCheckBox(language.getText(ELanguage.checkBoxUsbConnectors));
 		this.cbConectorUSB.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbConectorUSB.setBackground(new Color(255,255,255));
 		this.cbConectorUSB.setFocusable(false);
@@ -148,7 +149,7 @@ public class Purchase_Accessories extends JFrame{
 			this.cbConectorUSB.setEnabled(false);
 		}
 				
-		this.cbPinturaMetal = new JCheckBox(language.checkBoxMetallizedPaint());
+		this.cbPinturaMetal = new JCheckBox(language.getText(ELanguage.checkBoxMetallizedPaint));
 		this.cbPinturaMetal.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.cbPinturaMetal.setBackground(new Color(255,255,255));
 		this.cbPinturaMetal.setFocusable(false);
@@ -157,19 +158,19 @@ public class Purchase_Accessories extends JFrame{
 			this.cbPinturaMetal.setEnabled(false);
 		}
 				
-		JLabel lblPrecioBase = new JLabel(language.labelBasePrice());
+		JLabel lblPrecioBase = new JLabel(language.getText(ELanguage.labelBasePrice));
 		lblPrecioBase.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 		lblPrecioBase.setFont(new Font("Tahoma", Font.BOLD, 14));
 
 		double precioBase = this.model.getPrice() + this.engine.getPrice();
 		JLabel lblMostrarPrecioBase = new JLabel(String.valueOf(precioBase));
 
-		this.lblAumento = new JLabel(language.labelIncreasePrice());
+		this.lblAumento = new JLabel(language.getText(ELanguage.labelIncreasePrice));
 		this.lblAumento.setFont(new Font("Tahoma", Font.BOLD, 14));
 
 		JLabel lblMostrarAumento = new JLabel(String.valueOf(Aumento));
 
-		this.lblTotalPrecio = new JLabel(language.labelTotalPrice());
+		this.lblTotalPrecio = new JLabel(language.getText(ELanguage.labelTotalPrice));
 		this.lblTotalPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
 		this.lblTotalPrecio.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 
@@ -177,14 +178,14 @@ public class Purchase_Accessories extends JFrame{
 		JLabel lblMostrarTotalPrecio = new JLabel(String.valueOf(TotalPrecio));
 		lblMostrarTotalPrecio.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 
-		this.btnAtras = new JButton(language.btnBack());
+		this.btnAtras = new JButton(language.getText(ELanguage.btnBack));
 		this.btnAtras.setBackground(new Color(215,18,43));
 		this.btnAtras.setForeground(new Color(255,255,255));
 		this.btnAtras.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
 		
-		this.btnFinalizar = new JButton(language.btnEnd());
+		this.btnFinalizar = new JButton(language.getText(ELanguage.btnEnd));
 		this.btnFinalizar.setBackground(new Color(215,18,43));
 		this.btnFinalizar.setForeground(new Color(255,255,255));
 		this.btnFinalizar.setBorder(BorderFactory.createCompoundBorder(
