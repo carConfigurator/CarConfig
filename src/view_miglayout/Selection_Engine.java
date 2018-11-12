@@ -72,7 +72,9 @@ public class Selection_Engine extends JFrame {
 			bw.newLine();
 			bw.write("[Modelo] ");
 			bw.write(this.model.toString());
+			bw.newLine();
 			bw.write("------");
+			bw.newLine();
 			bw.close();
 			fw.close();
 		} catch (IOException e) {

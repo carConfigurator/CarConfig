@@ -93,6 +93,7 @@ public class Selection_Model extends JFrame{
 			bw.write(this.client.toString());
 			bw.newLine();
 			bw.write("------");
+//			bw.newLine();
 			bw.close();
 			fw.close();
 		} catch (IOException e) {
