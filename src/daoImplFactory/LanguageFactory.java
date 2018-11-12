@@ -2,8 +2,6 @@ package daoImplFactory;
 
 import java.io.File;
 import config.ConfigurationLoader;
-import daoImpl.LanguageDAO;
-import idao.ILanguage;
 
 public class LanguageFactory {
 	

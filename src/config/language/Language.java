@@ -38,13 +38,9 @@ public class Language {
 		try {
 			fr = new FileReader(this.languageFile);
 			br = new BufferedReader(fr);
-			
 			try {
-				//leemos la info y la guardamos en variables
-				while((line = br.readLine()) != null) {
-					for (ELanguage e : eLan.values()) {
-						hLanguage.put(e, line.split("\"")[1]);
-					}
+				for (ELanguage e : eLan.values()) {
+					hLanguage.put(e, br.readLine().split("\"")[1]);
 				}
 			}catch(IOException e) {
 				System.out.println("[ERROR] - Error al leer el lenguaje");

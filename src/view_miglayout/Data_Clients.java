@@ -133,7 +133,7 @@ public class Data_Clients extends JFrame{
 				));
 		this.tfield_client_first_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
-		this.label_client_second_lastname = new JLabel(this.language..getText(ELanguage.labelClientSecondLastName));
+		this.label_client_second_lastname = new JLabel(this.language.getText(ELanguage.labelClientSecondLastName));
 		this.label_client_second_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.label_client_second_lastname.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
 		
@@ -145,7 +145,7 @@ public class Data_Clients extends JFrame{
 				));
 		this.tfield_client_second_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
-		this.label_client_address = new JLabel(this.language.labelClientAddress());
+		this.label_client_address = new JLabel(this.language.getText(ELanguage.labelClientAddress));
 		this.label_client_address.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.label_client_address.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
 		
@@ -157,7 +157,7 @@ public class Data_Clients extends JFrame{
 				));
 		this.tfield_client_address.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
-		this.label_client_email = new JLabel(this.language.labelClientEmail());
+		this.label_client_email = new JLabel(this.language.getText(ELanguage.labelClientEmail));
 		this.label_client_email.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.label_client_email.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
 		
@@ -169,17 +169,17 @@ public class Data_Clients extends JFrame{
 				));
 		this.tfield_client_email.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
-		this.label_client_gender = new JLabel(this.language.labelClientGender());
+		this.label_client_gender = new JLabel(this.language.getText(ELanguage.labelClientGender));
 		this.label_client_gender.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.label_client_gender.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 5));
 		
-		this.rb_male = new JRadioButton(this.language.radioGenderMale());
+		this.rb_male = new JRadioButton(this.language.getText(ELanguage.radioGenderMale));
 		this.rb_male.setBackground(new Color(255,255,255));
 		this.rb_male.setFont(new java.awt.Font("Tahoma", 0, 12));
-		this.rb_female = new JRadioButton(this.language.radioGenderFemale());
+		this.rb_female = new JRadioButton(this.language.getText(ELanguage.radioGenderFemale));
 		this.rb_female.setBackground(new Color(255,255,255));
 		this.rb_female.setFont(new java.awt.Font("Tahoma", 0, 12));
-		this.rb_unknown = new JRadioButton(this.language.radioGenderUnknown());
+		this.rb_unknown = new JRadioButton(this.language.getText(ELanguage.radioGenderUnknown));
 		this.rb_unknown.setBackground(new Color(255,255,255));
 		this.rb_unknown.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.bg_gender = new ButtonGroup();
@@ -190,15 +190,15 @@ public class Data_Clients extends JFrame{
 		
 		String getGender = this.client.getGender();
 		
-		if(getGender.equals(language.radioGenderMale())) {
+		if(getGender.equals(language.getText(ELanguage.radioGenderMale))) {
 			this.rb_male.setSelected(true);
-		}else if(getGender.equals(language.radioGenderFemale())) {
+		}else if(getGender.equals(language.getText(ELanguage.radioGenderFemale))) {
 			this.rb_female.setSelected(true);
-		}else if(getGender.equals(null) || getGender.equals(language.radioGenderUnknown())) {
+		}else if(getGender.equals(null) || getGender.equals(language.getText(ELanguage.radioGenderUnknown))) {
 			this.rb_unknown.setSelected(true);	
 		}
 		
-		this.label_client_birthdate = new JLabel(this.language.labelClientBirhdate());
+		this.label_client_birthdate = new JLabel(this.language.getText(ELanguage.labelClientBirhdate));
 		this.label_client_birthdate.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.label_client_birthdate.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 5));
 		
@@ -218,7 +218,7 @@ public class Data_Clients extends JFrame{
 		this.dc_birthdate.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		this.dc_birthdate.setBackground(new Color(255, 255, 255));
 		
-		this.btn_save = new JButton(this.language.btnSave());
+		this.btn_save = new JButton(this.language.getText(ELanguage.btnSave));
 		this.btn_save.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.btn_save.setBackground(new Color(215,18,43));
 		this.btn_save.setForeground(new Color(255,255,255));
@@ -227,7 +227,7 @@ public class Data_Clients extends JFrame{
 				BorderFactory.createEmptyBorder(5,10,5,10)
 				));
 		
-		this.btn_next = new JButton(this.language.btnNext());
+		this.btn_next = new JButton(this.language.getText(ELanguage.btnNext));
 		this.btn_next.setFont(new java.awt.Font("Tahoma", 0, 12));
 		this.btn_next.setBackground(new Color(215,18,43));
 		this.btn_next.setForeground(new Color(255,255,255));
@@ -273,7 +273,7 @@ public class Data_Clients extends JFrame{
 		this.panel.add(btn_save, "skip, align right, split 2");
 		this.panel.add(btn_next);
 		
-		addFrame(configLoad, panel, language, language.dataClientsTitle());
+		addFrame(configLoad, panel, language, language.getText(ELanguage.dataClientsTitle));
 		windowsListener(language);
 	}
 
@@ -332,7 +332,7 @@ public class Data_Clients extends JFrame{
 		tfield_client_email.setText(tfield_client_email.getText().replaceAll("^\\s*", ""));
 		
 		if (tfield_client_name.getText().length() == 0 || tfield_client_first_lastname.getText().length() == 0 || tfield_client_second_lastname.getText().length() == 0 || tfield_client_address.getText().length() == 0 || tfield_client_email.getText().length() == 0 ){
-            JOptionPane.showMessageDialog(null, this.language.errorNullField(), this.language.errorNullFieldTitle(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, this.language.getText(ELanguage.errorNullField), this.language.getText(ELanguage.errorNullFieldTitle), JOptionPane.ERROR_MESSAGE);
             return false;
         }else {
     		//  Filtro para que el correo sea valido buscando en el contenido de este un "@".
@@ -342,7 +342,7 @@ public class Data_Clients extends JFrame{
             Matcher matcher = pattern.matcher(email);
 
             if (matcher.find() == false) {
-                JOptionPane.showMessageDialog(null, this.language.errorEmail(), this.language.errorEmailTitle(), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, this.language.getText(ELanguage.errorEmail), this.language.getText(ELanguage.errorEmailTitle), JOptionPane.ERROR_MESSAGE);
                 tfield_client_email.setText("");
                 return false;
             }else {

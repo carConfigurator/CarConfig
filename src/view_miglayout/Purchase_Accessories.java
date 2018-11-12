@@ -441,7 +441,7 @@ public class Purchase_Accessories extends JFrame{
 		this.panel.add(this.btnAtras, "align left");
 		this.panel.add(btnFinalizar, "align right");
 		
-		addFrame(this.configLoad, this.panel, this.language, this.language.purchaseAccessoriesTitle());
+		addFrame(this.configLoad, this.panel, this.language, this.language.getText(ELanguage.purchaseAccessoriesTitle));
 		
 	}
 }

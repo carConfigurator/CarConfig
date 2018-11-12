@@ -27,7 +27,6 @@ import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
 import config.ConfigurationLoader;
-import idao.ILanguage;
 import view_miglayout.Selection_Model;
 
 public class Model_woDAO {
@@ -205,7 +204,7 @@ public class Model_woDAO {
 	}
 	
 	//metodo para añadir un coche
-	public void addCar(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Document documentOld, JTextField tfId, JTextField tfName, JTextField tfDescription, JTextField tfImg_Name, JTextField tfPrice) {
+	public void addCar(ConfigurationLoader configLoad, Language language, String username, Client client, Document documentOld, JTextField tfId, JTextField tfName, JTextField tfDescription, JTextField tfImg_Name, JTextField tfPrice) {
 		Document documentNew;
 		
 		String nombre_archivo = "CarConfiguration";
@@ -274,7 +273,7 @@ public class Model_woDAO {
 	}
 	
 	//metodo para eliminar un coche
-	public void deleteCar(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Document documentOld) {
+	public void deleteCar(ConfigurationLoader configLoad, Language language, String username, Client client, Document documentOld) {
 		Document documentNew;
 		
 		String nombre_archivo = "CarConfiguration";
@@ -338,7 +337,7 @@ public class Model_woDAO {
 	}
 	
 	//metodo para modificar un coche
-	public void modifyCar(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Document documentOld, JTextField tfId, JTextField tfName, JTextField tfDescription, JTextField tfImg_Name, JTextField tfPrice) {
+	public void modifyCar(ConfigurationLoader configLoad, Language language, String username, Client client, Document documentOld, JTextField tfId, JTextField tfName, JTextField tfDescription, JTextField tfImg_Name, JTextField tfPrice) {
 		Document documentNew;
 		
 		String nombre_archivo = "CarConfiguration";

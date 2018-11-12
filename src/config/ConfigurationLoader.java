@@ -157,7 +157,12 @@ public class ConfigurationLoader {
 	private String loadIconImage() {
 		NodeList nList = document.getElementsByTagName("icon_image");
 		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		String archivo = "";
+		for (int i = 0; i < nNode.getTextContent().split(";").length; i++) {
+			archivo = archivo + nNode.getTextContent().split(";")[i] + File.separator;
+		}
+		File file = new File(archivo);
+		return file.getPath();
 	}
 	
 	public String getLanguage() {
