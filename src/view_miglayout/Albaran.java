@@ -4,13 +4,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-//import java.io.BufferedReader;
-//IMPORT JAVA.IO.BUFFEREDWRITER;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-//import java.io.FileReader;
-//import java.io.FileWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -179,7 +177,6 @@ public class Albaran extends JFrame {
 	}
 	
 	private void deleteTemp() {
-<<<<<<< HEAD
         if (this.temp.exists()) {
             try {
                 FileReader fr = new FileReader(this.temp);
@@ -202,36 +199,11 @@ public class Albaran extends JFrame {
                 e.printStackTrace();
             }
         }
-    }
-=======
-		if (this.temp.exists()) {
-			try {
-				FileReader fr = new FileReader(this.temp);
-				BufferedReader br = new BufferedReader(fr);
-				FileWriter fw = new FileWriter(this.temp);
-				BufferedWriter bw = new BufferedWriter(fw);
-				String line = br.readLine();
-				
-				while((line = br.readLine()) != null) {
-					bw.write("");
-				}
-				
-				br.close();
-				fr.close();
-				bw.close();
-				fw.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 	}
->>>>>>> f78a29b8db72bec050bfc00c823edae070e90cd2
 	
 	private void loginActionPerformed(ActionEvent e) {
 		deleteTemp();
 		setVisible(false);
-		new Data_Clients(this.configLoad, this.language, this.username, new Client());
+		new Data_Clients(this.configLoad, this.language, this.username, new Client(), false);
 	}
 }
