@@ -15,5 +15,5 @@
 		<specifications_file_path>src\\config\\specifications</specifications_file_path>
 		<temporal_path_file>employees\\temp\\fs_employee.txt</temporal_path_file>
 		<budget_path_file>employees\\budgets\\</budget_path_file>
-		<icon_image>src\\config\\favicon.png</icon_image></configuration>
+	</configuration>
 </ConfigurationLoader>
