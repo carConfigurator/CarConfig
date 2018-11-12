@@ -185,7 +185,6 @@ public class Selection_Engine extends JFrame {
 		try {
 			FileWriter fw = new FileWriter(this.temp, true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			bw.newLine();
 			bw.write("[Motor] ");
 			bw.write(engineObj.toString());
 			bw.newLine();

@@ -252,7 +252,11 @@ public class Purchase_Accessories extends JFrame{
 					bw.write("------");
 					System.out.println("[INFO] - Aplicando descuento de empleado...");
 					bw.newLine();
+					System.out.println(configLoad.getDiscount());
+					System.out.println(100-configLoad.getDiscount());
+					System.out.println((100 - configLoad.getDiscount())/100);
 					double precioFinal = TotalPrecio * ((100 - configLoad.getDiscount()) /100);
+					System.out.println(String.format("%.2f", precioFinal));
 					bw.write(String.format("%.2f", precioFinal));
 					bw.close();
 					fw.close();

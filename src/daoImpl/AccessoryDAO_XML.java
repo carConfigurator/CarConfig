@@ -72,7 +72,6 @@ public class AccessoryDAO_XML implements IAccessory{
 
 	@Override
 	public Accessory getAccessory(int id) {
-//		return accesories.get(id);
 		for (Accessory accessory : accesories) {
 			if(accessory.getId() == id) {
 				return accessory;

@@ -1,0 +1,13 @@
+[Empleado] dario.delcore
+------
+[Cliente] sdf,sdf,ghDSFFDS,sadf,sdf@sfd.sos,Desconocido,null
+------
+[Modelo] 2,SEAT Ateca,Observaciones del SEAT Ateca,11368.1
+------
+[Motor] 1, Ibiza 1.6 TDI CR 70 KW (95 CV), Diesel / 5 Velocidades Manual, 18.59
+------
+[Accesorios]
+6, Aparcamiento automatico, Aparcamiento automatico, 530.0
+8, Pintura metalizada, Pintura metalizada, 500.0
+------
+0,00
