@@ -252,10 +252,7 @@ public class Purchase_Accessories extends JFrame{
 					bw.write("------");
 					System.out.println("[INFO] - Aplicando descuento de empleado...");
 					bw.newLine();
-					double decimalPerc = 100 - configLoad.getDiscount();
-					double percentage = decimalPerc / 100;
-					System.out.println(percentage);
-					double precioFinal = TotalPrecio * percentage;
+					double precioFinal = TotalPrecio * (100-configLoad.getDiscount())/100;
 					System.out.println(String.format("%.2f", precioFinal));
 					bw.write(String.format("%.2f", precioFinal));
 					bw.close();

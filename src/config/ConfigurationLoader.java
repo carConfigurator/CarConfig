@@ -23,7 +23,7 @@ public class ConfigurationLoader {
 	
 	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path, car_image_path, temporal_path_file, budget_path_file, icon_image;
 	private String[] employee_list,employee_password;
-	private int discount;
+	private double discount;
 	
 	/*
 	 * Constructor de la Clase
@@ -124,7 +124,7 @@ public class ConfigurationLoader {
 		return nNode.getTextContent().split(",");
 	}
 	
-	private int loadDiscount() {
+	private double loadDiscount() {
 		NodeList nList = document.getElementsByTagName("discount");
 		Node nNode = nList.item(0);
 		if (Integer.parseInt(nNode.getTextContent())>21 || Integer.parseInt(nNode.getTextContent())<0) {
@@ -199,7 +199,7 @@ public class ConfigurationLoader {
 		return employee_list;
 	}
 
-	public int getDiscount() {
+	public double getDiscount() {
 		return discount;
 	}
 
