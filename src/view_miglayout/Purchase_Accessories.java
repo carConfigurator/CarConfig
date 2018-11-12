@@ -263,159 +263,159 @@ public class Purchase_Accessories extends JFrame{
 				new Albaran(configLoad, language, username, client);
 			}
 		});
-//		
-//		cbElevadurasElectricas.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				double priceElevators = accessory.getPriceElevators();
-//				if(cbElevadurasElectricas.isSelected()) {
-//					System.out.println("[INFO] - Elevaduras Seleccionado");
-//					Aumento = Aumento + priceElevators;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio + priceElevators;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}else{
-//					Aumento = Aumento - priceElevators;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio - priceElevators;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}
-//			}
-//		});
-//		
-//		cbNavegador.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				double pricesNavegador = accessory.getPriceNavegador();
-//				if(cbNavegador.isSelected()) {
-//					System.out.println("[INFO] - Navegador Seleccionado");
-//					Aumento = Aumento + pricesNavegador;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio + pricesNavegador;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}else{
-//					Aumento = Aumento - pricesNavegador;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio - pricesNavegador;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}
-//			}
-//		});
-//		
-//		cbLlantasAl.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				double pricesTires = accessory.getPriceTires();
-//				if(cbLlantasAl.isSelected()) {
-//					System.out.println("[INFO] - Llantas Seleccionado");
-//					Aumento = Aumento + pricesTires;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio + pricesTires;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}else{
-//					Aumento = Aumento - pricesTires;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio - pricesTires;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}
-//			}
-//		});
-//		
-//		cbAsientosCal.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				double priceSeating = accessory.getPriceSeating();
-//				if(cbAsientosCal.isSelected()) {
-//					System.out.println("[INFO] - Asientos Seleccionado");
-//					Aumento = Aumento + priceSeating;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio + priceSeating;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}else{
-//					Aumento = Aumento - priceSeating;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio - priceSeating;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}
-//			}
-//		});
-//		
-//		cbVelCrucero.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				double priceSpeedCruise = accessory.getPriceSpeedCruise();
-//				if(cbVelCrucero.isSelected()) {
-//					System.out.println("[INFO] - Velocidad Seleccionado");
-//					Aumento = Aumento + priceSpeedCruise;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio + priceSpeedCruise;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}else{
-//					Aumento = Aumento - priceSpeedCruise;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio - priceSpeedCruise;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}
-//			}
-//		});
-//		
-//		cbAparcamietnoAuto.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				double priceAutoParking = accessory.getPriceAutoParking();
-//				if(cbAparcamietnoAuto.isSelected()) {
-//					System.out.println("[INFO] - Aparcamiento Seleccionado");
-//					Aumento = Aumento + priceAutoParking;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio + priceAutoParking;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}else{
-//					Aumento = Aumento - priceAutoParking;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio - priceAutoParking;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}
-//			}
-//		});
-//		
-//		cbConectorUSB.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				double priceUSB = accessory.getPriceUSB();
-//				if(cbConectorUSB.isSelected()) {
-//					System.out.println("[INFO] - Conector Seleccionado");
-//					Aumento = Aumento + priceUSB;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio + priceUSB;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}else{
-//					Aumento = Aumento - priceUSB;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio - priceUSB;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}
-//			}
-//		});
-//		
-//		cbPinturaMetal.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				double metallicPaint = accessory.getPriceMetallicPaint();
-//				if(cbPinturaMetal.isSelected()) {
-//					System.out.println("[INFO] - Pintura Seleccionado");
-//					Aumento = Aumento + metallicPaint;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio + metallicPaint;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}else{
-//					Aumento = Aumento - metallicPaint;
-//					lblMostrarAumento.setText(String.valueOf(Aumento));
-//					TotalPrecio = TotalPrecio - metallicPaint;
-//					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
-//				}
-//			}
-//		});
-//		
+		
+		cbElevadurasElectricas.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				double priceElevators = accessory.getAccessory(1).getPrice();
+				if(cbElevadurasElectricas.isSelected()) {
+					System.out.println("[INFO] - Elevaduras Seleccionado");
+					Aumento = Aumento + priceElevators;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio + priceElevators;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}else{
+					Aumento = Aumento - priceElevators;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio - priceElevators;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}
+			}
+		});
+		
+		cbNavegador.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				double pricesNavegador = accessory.getAccessory(2).getPrice();
+				if(cbNavegador.isSelected()) {
+					System.out.println("[INFO] - Navegador Seleccionado");
+					Aumento = Aumento + pricesNavegador;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio + pricesNavegador;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}else{
+					Aumento = Aumento - pricesNavegador;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio - pricesNavegador;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}
+			}
+		});
+		
+		cbLlantasAl.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				double pricesTires = accessory.getAccessory(3).getPrice();
+				if(cbLlantasAl.isSelected()) {
+					System.out.println("[INFO] - Llantas Seleccionado");
+					Aumento = Aumento + pricesTires;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio + pricesTires;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}else{
+					Aumento = Aumento - pricesTires;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio - pricesTires;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}
+			}
+		});
+		
+		cbAsientosCal.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				double priceSeating = accessory.getAccessory(4).getPrice();
+				if(cbAsientosCal.isSelected()) {
+					System.out.println("[INFO] - Asientos Seleccionado");
+					Aumento = Aumento + priceSeating;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio + priceSeating;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}else{
+					Aumento = Aumento - priceSeating;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio - priceSeating;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}
+			}
+		});
+		
+		cbVelCrucero.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				double priceSpeedCruise = accessory.getAccessory(5).getPrice();
+				if(cbVelCrucero.isSelected()) {
+					System.out.println("[INFO] - Velocidad Seleccionado");
+					Aumento = Aumento + priceSpeedCruise;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio + priceSpeedCruise;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}else{
+					Aumento = Aumento - priceSpeedCruise;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio - priceSpeedCruise;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}
+			}
+		});
+		
+		cbAparcamietnoAuto.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				double priceAutoParking = accessory.getAccessory(6).getPrice();
+				if(cbAparcamietnoAuto.isSelected()) {
+					System.out.println("[INFO] - Aparcamiento Seleccionado");
+					Aumento = Aumento + priceAutoParking;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio + priceAutoParking;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}else{
+					Aumento = Aumento - priceAutoParking;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio - priceAutoParking;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}
+			}
+		});
+		
+		cbConectorUSB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				double priceUSB = accessory.getAccessory(7).getPrice();
+				if(cbConectorUSB.isSelected()) {
+					System.out.println("[INFO] - Conector Seleccionado");
+					Aumento = Aumento + priceUSB;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio + priceUSB;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}else{
+					Aumento = Aumento - priceUSB;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio - priceUSB;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}
+			}
+		});
+		
+		cbPinturaMetal.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				double metallicPaint = accessory.getAccessory(8).getPrice();
+				if(cbPinturaMetal.isSelected()) {
+					System.out.println("[INFO] - Pintura Seleccionado");
+					Aumento = Aumento + metallicPaint;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio + metallicPaint;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}else{
+					Aumento = Aumento - metallicPaint;
+					lblMostrarAumento.setText(String.valueOf(Aumento));
+					TotalPrecio = TotalPrecio - metallicPaint;
+					lblMostrarTotalPrecio.setText(String.valueOf(TotalPrecio));
+				}
+			}
+		});
+		
 		this.panel.add(lblTitulo);
 		this.panel.add(this.username, "wrap, align right");
 		this.panel.add(lblModeloCoche, "wrap, align left");

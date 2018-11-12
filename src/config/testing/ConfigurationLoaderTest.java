@@ -14,8 +14,6 @@ public class ConfigurationLoaderTest {
 		System.out.println(configLoad.toString());
 		
 		
-		
-		
 		System.out.println("");
 		System.out.println("Ruta config coche: "+configLoad.getCar_configuration_path());
 		System.out.println("Nombre fichero coche: "+configLoad.getCar_configuration_file_name());
@@ -24,7 +22,6 @@ public class ConfigurationLoaderTest {
 		System.out.println("Ruta archivo especificaciones: "+configLoad.getSpecifications_file_path());
 		System.out.println("");
 		System.out.println("Version: "+configLoad.getVersion());
-		System.out.println("Version de empleado: "+configLoad.getEmployee_version());
+		System.out.println("Version de empleado: "+configLoad.getDiscount());
 	}
-	
 }
