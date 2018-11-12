@@ -330,6 +330,7 @@ public class Selection_Model extends JFrame{
 			bw.write(id+","+name+","+description+","+price);
 			bw.newLine();
 			bw.write("------");
+			bw.newLine();
 			bw.close();
 			fw.close();
 		} catch (IOException e) {

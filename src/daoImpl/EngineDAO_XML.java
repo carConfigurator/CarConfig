@@ -71,7 +71,12 @@ public class EngineDAO_XML implements IEngine{
 
 	@Override
 	public Engine getEngine(int id) {
-		return engines.get(id);
+		for (Engine engine : engines) {
+			if(engine.getId() == id) {
+				return engine;
+			}
+		}
+		return null;
 	}
 	
 }

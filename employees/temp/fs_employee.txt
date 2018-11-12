@@ -1,7 +1,10 @@
 Datos Temporales
 [Empleado] alexis.mengual
 ------
-[Cliente] a,a,a,a,a@a.com,Hombre,15-11-2018
+[Cliente] alexis.mengual,fasdkj,dfjaslñ,dsfsa,dfa@a.com,Desconocido,null
 ------
 [Modelo] 1,SEAT Mii P5,Observaciones del SEAT Mii 5P,7726.21
+------
+
+[Motor] 2, Mii 1.0 55 KW (75 CV), Gasolina / 5 Velocidades Manual, 9.59
 ------

@@ -30,10 +30,8 @@ public class check extends JFrame{
 		this.temp = new File(configLoad.getTemporalPathFile());		
 		if(this.temp.exists()) {
 			if(this.temp.length() > 0) {
-				System.out.println("Tengo información muy valiosa");
 				// Crear variables para este JOptionPane de Language
-				System.out.println("Yo me cago en tu puta madre");
-				int dialogButton = JOptionPane.showConfirmDialog(null, "¿Desea recuperar los datos temporales?", "¿Desea recuperar los datos temporales?", JOptionPane.YES_NO_CANCEL_OPTION);
+				int dialogButton = JOptionPane.showConfirmDialog(null, "¿Desea recuperar los datos temporales?", "¿Desea recuperar los datos temporales?", JOptionPane.YES_NO_OPTION);
 				if(dialogButton == JOptionPane.YES_OPTION) {
 					Client client = new Client();
 					Model model = new Model();
@@ -44,6 +42,7 @@ public class check extends JFrame{
 						String line;
 						try {
 							while((line = br.readLine())!=null) {
+								// Si en el archivo .txt 
 								if(line.contains("[Cliente]")) {
 									String cliente = line.substring(10);
 									client.setName(cliente.split(",")[0]);
@@ -52,9 +51,7 @@ public class check extends JFrame{
 									client.setAddress(cliente.split(",")[3]);
 									client.setEmail(cliente.split(",")[4]);
 									client.setGender(cliente.split(",")[5]);
-									System.out.println("La fecha es nula: " + cliente.split(",")[6].equals("null"));
 									if(cliente.split(",")[6].equals("null")) {
-										System.out.println("Es null");
 										client.setBirthdate(null);
 									}else {
 										client.setBirthdate(cliente.split(",")[6]);
@@ -64,7 +61,6 @@ public class check extends JFrame{
 								if(line.contains("[Modelo]")) {
 									String modelo = line.substring(9);
 									IModel imodel = new ModelDAO_XML();
-									System.out.println("ID MODELO? " + modelo.split(",")[0]);
 									model = imodel.getModel(Integer.parseInt(modelo.split(",")[0]));
 								}
 								
@@ -72,7 +68,7 @@ public class check extends JFrame{
 									IEngine iengine = new EngineDAO_XML();
 									if(model.getId() != 0) {
 										iengine.loadEngines(model.getId());
-										engine = iengine.getEngine(model.getId()-1);
+										engine = iengine.getEngine(Integer.parseInt(line.substring(8).split(",")[0]));
 									}
 								}
 							}
@@ -82,8 +78,6 @@ public class check extends JFrame{
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					}
-					
-					System.out.println(model.toString());
 					
 					if(client.getName() != null) {
 						if(model.getId() != 0) {
@@ -101,8 +95,6 @@ public class check extends JFrame{
 					
 				}else if(dialogButton == JOptionPane.NO_OPTION){
 					new Data_Clients(configLoad, language, username, new Client(), true);
-				}else if(dialogButton == JOptionPane.CANCEL_OPTION){
-					System.out.println("[INFO] - No se hará nada.");
 				}
 			}else {
 				new Data_Clients(configLoad, language, username);

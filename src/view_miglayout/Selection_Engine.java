@@ -72,7 +72,6 @@ public class Selection_Engine extends JFrame {
 			bw.write("[Modelo] ");
 			bw.write(this.model.toString());
 			bw.write("------");
-			bw.newLine();
 			bw.close();
 			fw.close();
 		} catch (IOException e) {
@@ -173,7 +172,15 @@ public class Selection_Engine extends JFrame {
 	
 	protected void nextActionPerformed() {
 		setVisible(false);
-		Engine engineObj = this.engine.getEngine(this.list.getSelectedIndex());
+		this.engine.getEngines();
+		Engine engineObj = new Engine();
+		
+		for (Engine engine : this.engine.getEngines()) {
+			if(engine.toString().equals(this.list.getSelectedValue())) {
+				engineObj = engine;
+			}
+		}
+		
 		try {
 			FileWriter fw = new FileWriter(this.temp, true);
 			BufferedWriter bw = new BufferedWriter(fw);
