@@ -23,7 +23,7 @@ public class ConfigurationLoader {
 	
 	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path, car_image_path, temporal_path_file, budget_path_file, icon_image;
 	private String[] employee_list,employee_password;
-	private boolean employee_version;
+	private int discount;
 	
 	/*
 	 * Constructor de la Clase
@@ -42,7 +42,7 @@ public class ConfigurationLoader {
 			this.car_configuration_file_name=loadCar_configuration_file_name();
 			this.car_image_path = loadCar_image_path();
 			this.employee_list=loadEmployee_list();
-			this.employee_version=loadEmployee_version();
+			this.discount=loadDiscount();
 			this.employee_password=loadEmployee_password();
 			this.specifications_file_path=loadSpecifications_file_path();
 			this.temporal_path_file = loadTemporalPathFile();
@@ -55,12 +55,6 @@ public class ConfigurationLoader {
 		} catch (IOException e) {
 			System.out.println("[ERROR] - Error de E/S. Más información del error: " + e);
 		}
-	}
-	
-	private String loadBudgetPathFile() {
-		NodeList nList = document.getElementsByTagName("budget_path_file");
-		Node nNode = nList.item(0);
-		return nNode.getTextContent();
 	}
 
 	/*
@@ -103,19 +97,19 @@ public class ConfigurationLoader {
 	private String loadLanguage_files_path() {
 		NodeList nList = document.getElementsByTagName("language_files_path");
 		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return nNode.getTextContent().replace("\\", File.separator);
 	}
 
 	private String loadCar_configuration_path() {
 		NodeList nList = document.getElementsByTagName("car_configuration_path");
 		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return nNode.getTextContent().replace("\\", File.separator);
 	}
 	
 	private String loadCar_image_path() {
 		NodeList nList = document.getElementsByTagName("car_image_path");
 		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return nNode.getTextContent().replace("\\", File.separator);
 	}
 	
 	private String loadCar_configuration_file_name() {
@@ -130,10 +124,13 @@ public class ConfigurationLoader {
 		return nNode.getTextContent().split(",");
 	}
 	
-	private boolean loadEmployee_version() {
-		NodeList nList = document.getElementsByTagName("employee_version");
+	private int loadDiscount() {
+		NodeList nList = document.getElementsByTagName("discount");
 		Node nNode = nList.item(0);
-		return Boolean.valueOf(nNode.getTextContent());
+		if (Integer.parseInt(nNode.getTextContent())>21 || Integer.parseInt(nNode.getTextContent())<0) {
+			return 0;
+		}
+		return Integer.parseInt(nNode.getTextContent());
 	}
 	
 	private String[] loadEmployee_password() {
@@ -145,24 +142,25 @@ public class ConfigurationLoader {
 	private String loadSpecifications_file_path() {
 		NodeList nList = document.getElementsByTagName("specifications_file_path");
 		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return nNode.getTextContent().replace("\\", File.separator);
 	}
 	
 	private String loadTemporalPathFile() {
 		NodeList nList = document.getElementsByTagName("temporal_path_file");
 		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return nNode.getTextContent().replace("\\", File.separator);
+	}
+
+	private String loadBudgetPathFile() {
+		NodeList nList = document.getElementsByTagName("budget_path_file");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent().replace("\\", File.separator);
 	}
 	
 	private String loadIconImage() {
 		NodeList nList = document.getElementsByTagName("icon_image");
 		Node nNode = nList.item(0);
-		String archivo = "";
-		for (int i = 0; i < nNode.getTextContent().split(";").length; i++) {
-			archivo = archivo + nNode.getTextContent().split(";")[i] + File.separator;
-		}
-		File file = new File(archivo);
-		return file.getPath();
+		return nNode.getTextContent().replace("\\", File.separator);
 	}
 	
 	public String getLanguage() {
@@ -201,8 +199,8 @@ public class ConfigurationLoader {
 		return employee_list;
 	}
 
-	public boolean getEmployee_version() {
-		return employee_version;
+	public int getDiscount() {
+		return discount;
 	}
 
 	public String[] getEmployee_password() {
@@ -236,7 +234,7 @@ public class ConfigurationLoader {
 				+ postfix_language_file_name + ", version=" + version + ", language_files_path=" + language_files_path
 				+ ", car_configuration_path=" + car_configuration_path + ", car_configuration_file_name="
 				+ car_configuration_file_name + ", employee_list=" + employee_list + ", employee_version="
-				+ employee_version + ", employee_password=" + employee_password + ", specifications_file_path="
+				+ discount + ", employee_password=" + employee_password + ", specifications_file_path="
 				+ specifications_file_path + "]";
 	}
 }

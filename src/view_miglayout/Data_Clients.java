@@ -91,12 +91,7 @@ public class Data_Clients extends JFrame{
 	}
 	
 	private void createFrame() {
-		boolean descuento = this.configLoad.getEmployee_version();
-		if(descuento) {
-			System.out.println("[INFO] - ¡Se dispondrá de un 20% de descuento en la siguiente compra!");
-		}else {
-			System.out.println("[INFO] - No habrá descuento para la siguiente compra.");
-		}
+		System.out.println("[INFO] - ¡Se dispondrá de un "+this.configLoad.getDiscount()+"% de descuento en la siguiente compra!");
 		// JPanel:
 		this.panel = new JPanel();
 		this.panel.setLayout(new MigLayout("insets 20"));
