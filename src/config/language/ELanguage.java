@@ -81,7 +81,7 @@ public enum ELanguage {
 	labelDescription,
 	labelImg_Name,
 	labelPrice,
-	rrorParseDouble,
+	errorParseDouble,
 	errorParseDoubleTitle,
 	errorPriceNull,
 	errorPriceNullTitle,
@@ -94,7 +94,7 @@ public enum ELanguage {
 	deleteCarTitle,
 	dataDeleteCarTitle,
 
-	// Métodos que se usarán para delete_car.
+	// Métodos que se usarán para modify_car.
 	modifyCarTitle,
 	//los otros metodos son los mismos que los de add
 	
