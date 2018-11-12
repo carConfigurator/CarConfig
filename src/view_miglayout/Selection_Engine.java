@@ -126,7 +126,7 @@ public class Selection_Engine extends JFrame {
 		list.setBackground(new Color(157, 157, 157));
 		list.setBorder(BorderFactory.createEmptyBorder(10, 25, 10, 25));
 		
-		this.btn_Anterior = new JButton("Anterior");
+		this.btn_Anterior = new JButton(language.btnBack());
 		this.btn_Anterior.setFont(new Font("Tahoma", 0, 12));
 		this.btn_Anterior.setBackground(new Color(215,18,43));
 		this.btn_Anterior.setForeground(new Color(255,255,255));
@@ -134,7 +134,7 @@ public class Selection_Engine extends JFrame {
 				BorderFactory.createLineBorder(new Color(215, 18, 43)),
 				BorderFactory.createEmptyBorder(5,10,5,10)));
 		
-		this.btn_Siguiente = new JButton("Siguiente");
+		this.btn_Siguiente = new JButton(language.btnNext());
 		this.btn_Siguiente.setFont(new Font("Tahoma", 0, 12));
 		this.btn_Siguiente.setBackground(new Color(215,18,43));
 		this.btn_Siguiente.setForeground(new Color(255,255,255));
