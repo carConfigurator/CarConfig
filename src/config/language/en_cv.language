@@ -1,95 +1,79 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
-<Lenguage>
-	<btn_login>EN Iniciar Sesión</btn_login>
-	<btn_save>EN Guardar</btn_save>
-	<btn_next>EN Siguiente</btn_next>
-	<btn_save_info>EN ¿Desea Guardar los Cambios?</btn_save_info>
-	<btn_previous>EN Anterior</btn_previous>
-	<btn_back>EN Atrás</btn_back>
-	<btn_end>EN Finalizar Compra</btn_end>
-	<Login>
-		<title>EN SEAT Configurador - Log In</title>
-		<label_username>EN Nombre de Usuario</label_username>
-		<label_password>EN Contraseña</label_password>
-		<error_login_user>EN El usuario introducido no es correcto o no existe</error_login_user>
-		<error_login_user_title>EN [ERROR] - Nombre de Usuario no encontrado</error_login_user_title>
-		<error_login_password>EN [ERROR] - Fallo de Autenticación</error_login_password>
-		<error_login_password_title>EN El usuario o contraseñas no son correctos</error_login_password_title>
-	</Login>
-	<Data_clients>
-		<title>EN SEAT Configurador - Datos Clientes</title>
-		<label_client_title>EN Datos del Cliente</label_client_title>
-		<label_username>EN Usuario: </label_username>
-		<label_client_name>EN Nombre: *</label_client_name>
-		<label_client_first_lastname>EN Primer Apellido: *</label_client_first_lastname>
-		<label_client_second_lastname>EN Segundo Apellido: *</label_client_second_lastname>
-		<label_client_address>EN Dirección: *</label_client_address>
-		<label_client_email>EN Correo Electrónico: *</label_client_email>
-		<label_client_gender>EN Género:</label_client_gender>
-		<rb_male>EN Hombre</rb_male>
-		<rb_female>EN Mujer</rb_female>
-		<rb_unknown>EN Desconocido</rb_unknown>
-		<label_client_birthdate>EN Fecha nacimiento:</label_client_birthdate>
-		<error_null_field>EN Faltan campos por rellenar. Rellene todos los campos obligatorios</error_null_field>
-		<error_null_field_title>EN Informacion Incompleta</error_null_field_title>
-		<error_email>EN El correo no es valido</error_email>
-		<error_email_title>EN Error de correo</error_email_title>
-	</Data_clients>
-	<Selection_model>
-		<title>EN SEAT Configurador - Selección de modelo</title>
-		<label_select_title>EN Seleccionar el Modelo del Coche</label_select_title>
-		<menu>EN Opciones de coches</menu>
-		<menu_item_add>EN Añadir un coche</menu_item_add>
-		<menu_item_delete>EN Suprimir un coche</menu_item_delete>
-		<menu_item_modify>EN Modificar un coche</menu_item_modify>
-	</Selection_model>
-	<Selection_engine>
-		<title>EN SEAT Configurador - Selección de caracteristicas</title>
-		<label_title>EN Seleccion de caracteristicas del modelo</label_title>
-	</Selection_engine>
-	<Purchase_accessories>
-		<title>EN Compra de Accesorios</title>
-		<label_model_car>EN Caracteristicas seleccionadas anteriormetne</label_model_car>
-		<checkBox_electric_elevation>EN Elevaduras electricas</checkBox_electric_elevation>
-		<checkBox_browser>EN Navegador</checkBox_browser>
-		<checkBox_tires>EN Llantas de aleacion</checkBox_tires>
-		<checkBox_heated_seats>EN Asientos calefactados</checkBox_heated_seats>
-		<checkBox_cruising_speed>EN Velocidad de crucero</checkBox_cruising_speed>
-		<checkBox_automatic_parking>EN Aparcamiento automatico</checkBox_automatic_parking>
-		<checkBox_usb_connectors>EN Conectores USB</checkBox_usb_connectors>
-		<checkBox_metallized_paint>EN Pintura metalizada</checkBox_metallized_paint>
-		<label_base_price>EN Precio Base:</label_base_price>
-		<label_increase_price>EN Accesorios:</label_increase_price>
-		<label_total_price>EN Total precio:</label_total_price>
-	</Purchase_accessories>
-	<Add_Car>
-		<title>EN Añadir un nuevo coche</title>
-		<label_id>EN ID: </label_id>
-		<label_name>EN Nombre: </label_name>
-		<label_description>EN Descripción: </label_description>
-		<label_img_name>EN Nombre de la Imagen: </label_img_name>
-		<label_price>EN Precio: </label_price>
-		<error_parse_double>EN El valor del String no se puede formatear a Double</error_parse_double>
-		<error_parse_double_title>EN Error Precio</error_parse_double_title>
-		<error_price_null>EN El precio no se puede dejar vacio</error_price_null>
-		<error_price_null_title>EN Error Precio Vacio</error_price_null_title>
-		<error_img_name>EN La imagen que desea insertar no existe</error_img_name>
-		<error_img_name_title>EN Error Imagen</error_img_name_title>
-		<error_img_name_null>EN Se tiene que poner una imagen</error_img_name_null>
-		<error_img_name_null_title>EN Error Imagen Vacia</error_img_name_null_title>
-	</Add_Car>
-	<Delete_Car>
-		<title>EN Eliminar un coche</title>
-		<label_data_title>EN Estas seguro que queres eliminar el siguiente coche?</label_data_title>
-	</Delete_Car>
-	<Delivery_Note>
-		<label_delivery_note>EN ALBARAN</label_delivery_note>
-		<label_data_title>EN Cliente: </label_data_title>
-		<label_company>EN Empresa: </label_company>
-		<label_company_name>EN SEAT</label_company_name>
-		<lable_employee>EN Empleado: </lable_employee>
-		<label_mail>EN Correo: </label_mail>
-		<table>EN Cantidad,Especificacion,Precio,Informe</table>
-		<tableOne>EN Precio Base,Descuento,Precio Total,IVA(21%)</tableOne>
-	</Delivery_Note>
-</Lenguage>
+title_default:"EN SEAT Configurador"
+btn_login:"EN Iniciar Sesión"
+btn_save:"EN Guardar"
+btn_next:"EN Siguiente"
+btn_save_info:"EN ¿Desea Guardar los Cambios?"
+btn_previous:"EN Anterior"
+btn_back:"EN Atrás"
+btn_end:"EN Finalizar Compra"
+btn_start:"EN Ir al inicio"
+title_login:"EN Log In"
+label_username:"EN Nombre de Usuario"
+label_password:"EN Contraseña"
+error_login_user:"EN El usuario introducido no es correcto o no existe"
+error_login_user_title:"EN [ERROR] - Nombre de Usuario no encontrado"
+error_login_password:"EN [ERROR] - Fallo de Autenticación"
+error_login_password_title:"EN El usuario o contraseñas no son correctos"
+title_clients:"EN Datos Clientes"
+label_client_title:"EN Datos del Cliente"
+label_user:"EN Usuario: "
+label_client_name:"EN Nombre: *"
+label_client_first_lastname:"EN Primer Apellido: *"
+label_client_second_lastname:"EN Segundo Apellido: *"
+label_client_address:"EN Dirección: *"
+label_client_email:"EN Correo Electrónico: *"
+label_client_gender:"EN Género:"EN 
+rb_male:"EN Hombre"
+rb_female:"EN Mujer"
+rb_unknown:"EN Desconocido"
+label_client_birthdate:"EN Fecha nacimiento:"EN 
+error_null_field:"EN Faltan campos por rellenar. Rellene todos los campos obligatorios"
+error_null_field_title:"EN Informacion Incompleta"
+error_email:"EN El correo no es valido"
+error_email_title:"EN Error de correo"
+title_model:"EN Selección de modelo"
+label_select_title:"EN Seleccionar el Modelo del Coche"
+menu:"EN Opciones de coches"
+menu_item_add:"EN Añadir un coche"
+menu_item_delete:"EN Suprimir un coche"
+menu_item_modify:"EN Modificar un coche"
+title_engine:"EN Selección de motor"
+label_title:"EN Seleccion de caracteristicas del modelo"
+title_accessories:"EN Selección de accesorios"
+label_model_car:"EN Caracteristicas seleccionadas anteriormetne"
+checkBox_electric_elevation:"EN Elevaduras electricas"
+checkBox_browser:"EN Navegador"
+checkBox_tires:"EN Llantas de aleacion"
+checkBox_heated_seats:"EN Asientos calefactados"
+checkBox_cruising_speed:"EN Velocidad de crucero"
+checkBox_automatic_parking:"EN Aparcamiento automatico"
+checkBox_usb_connectors:"EN Conectores USB"
+checkBox_metallized_paint:"EN Pintura metalizada"
+label_base_price:"EN Precio Base:"EN 
+label_increase_price:"EN Accesorios:"EN 
+label_total_price:"EN Total precio:"EN 
+title_add_car:"EN Añadir un nuevo coche"
+label_id:"EN ID: "
+label_name:"EN Nombre: "
+label_description:"EN Descripción: "
+label_img_name:"EN Nombre de la Imagen: "
+label_price:"EN Precio: "
+error_parse_double:"EN El valor del String no se puede formatear a Double"
+error_parse_double_title:"EN Error Precio"
+error_price_null:"EN El precio no se puede dejar vacio"
+error_price_null_title:"EN Error Precio Vacio"
+error_img_name:"EN La imagen que desea insertar no existe"
+error_img_name_title:"EN Error Imagen"
+error_img_name_null:"EN Se tiene que poner una imagen"
+error_img_name_null_title:"EN Error Imagen Vacia"
+title_delete_car:"EN Eliminar un coche"
+label_data_title:"EN Estas seguro que queres eliminar el siguiente coche?"
+title_modify_car:"EN Modificar un coche"
+title_delivery_note:"EN ALBARAN"
+label_client:"EN Cliente: "
+label_company:"EN Empresa: "
+label_company_name:"EN SEAT"
+lable_employee:"EN Empleado: "
+label_mail:"EN Correo: "
+table:"EN Cantidad,Especificacion,Precio,Informe"
+tableOne:"EN Precio Base,Descuento,Precio Total,IVA(21%)"

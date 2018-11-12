@@ -1,6 +1,9 @@
 package daoImpl;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -17,850 +20,548 @@ import config.ConfigurationLoader;
 import idao.ILanguage;
 
 public class LanguageDAO implements ILanguage{
-
-	private DocumentBuilderFactory factory;
-	private DocumentBuilder builder;
-	private Document document;
+	
+	private File languageFile;
+	
+	private FileReader fr;
+	private BufferedReader br;
+	
+	private String titleDefault,btnLogin,btnSave,btnNext,btnSaveInfo,btnPrevious,btnBack,btnEnd,btnStart,titleLogin,labelUsername,labelPassword,errorLoginUser,errorLoginUserTitle,
+		errorLoginPassword,errorLoginPasswordTitle,titleClients,labelClientTitle,labelUser,labelClientName,labelClientFirstLastname,labelClientSecondLastname,labelClientAddress,
+		labelClientEmail,labelClientGender,rbMale,rbFemale,rbUnknown,labelClientBirthdate,errorNullField,errorNullFieldTitle,errorEmail,errorEmailTitle,titleModel,labelSelectTitle,
+		menu,menuItemAdd,menuItemDelete,menuItemModify,titleEngine,labelTitle,titleAccessories,labelModelCar,checkBoxElectricElevation,checkBoxBrowser,checkBoxTires,checkBoxHeatedSeats,
+		checkBoxCruisingSpeed,checkBoxAutomaticParking,checkBoxUsbConnectors,checkBoxMetallizedPaint,labelBasePrice,labelIncreasePrice,labelTotalPrice,titleAddCar,labelId,labelName,
+		labelDescription,labelImgName,labelPrice,errorParseDouble,errorParseDoubleTitle,errorPriceNull,errorPriceNullTitle,errorImgName,errorImgNameTitle,errorImgNameNull,
+		errorImgNameNullTitle,titleDeleteCar,labelDataTitle,titleModifyCar,titleDeliveryNote,labelClient,labelCompany,labelCompanyName,lableEmployee,labelMail,table,tableOne;
+	
+	private String[] languageText;
 	
 	public LanguageDAO(ConfigurationLoader configLoad) {
-		this.factory = DocumentBuilderFactory.newInstance();
+		this.languageFile = new File(configLoad.getLanguage_files_path()+configLoad.getLanguage_default()+configLoad.getPostfix_language_file_name());
+		
+		String line="";
+		int contador = 0;
 		try {
-			this.builder = factory.newDocumentBuilder();
-			this.document = builder.parse(new File(configLoad.getLanguage_files_path()+configLoad.getLanguage_default()+configLoad.getPostfix_language_file_name()));
-		} catch (ParserConfigurationException e) {
-			System.out.println("[ERROR] - No se ha podido parsear la configuración. Más información del error: " + e);
-		} catch (SAXException e) {
-			System.out.println("[ERROR] - No se ha podido parsear el archivo XML. Más información del error: " + e);
-		} catch (IOException e) {
-			System.out.println("[ERROR] - Error de E/S. Más información del error: " + e);
+			fr = new FileReader(this.languageFile);
+			br = new BufferedReader(fr);
+			
+			try {
+				//miramos cuantas linias hay en el archivo
+				while (!(line=""+br.readLine()).equals("null")) {
+					contador++;
+				}
+				fr.close();
+				br.close();
+				fr = new FileReader(this.languageFile);
+				br = new BufferedReader(fr);
+				languageText=new String[contador];
+				contador=0;
+				//leemos la info y la guardamos en variables
+				while((line = br.readLine()) != null) {
+					languageText[contador]=line.split("\"")[1];
+					contador++;
+				}
+				
+				titleDefault=languageText[0];
+				btnLogin=languageText[1];
+				btnSave=languageText[2];
+				btnNext=languageText[3];
+				btnSaveInfo=languageText[4];
+				btnPrevious=languageText[5];
+				btnBack=languageText[6];
+				btnEnd=languageText[7];
+				btnStart=languageText[8];
+				titleLogin=languageText[9];
+				labelUsername=languageText[10];
+				labelPassword=languageText[11];
+				errorLoginUser=languageText[12];
+				errorLoginUserTitle=languageText[13];
+				errorLoginPassword=languageText[14];
+				errorLoginPasswordTitle=languageText[15];
+				titleClients=languageText[16];
+				labelClientTitle=languageText[17];
+				labelUsername=languageText[18];
+				labelClientName=languageText[19];
+				labelClientFirstLastname=languageText[20];
+				labelClientSecondLastname=languageText[21];
+				labelClientAddress=languageText[22];
+				labelClientEmail=languageText[23];
+				labelClientGender=languageText[24];
+				rbMale=languageText[25];
+				rbFemale=languageText[26];
+				rbUnknown=languageText[27];
+				labelClientBirthdate=languageText[28];
+				errorNullField=languageText[29];
+				errorNullFieldTitle=languageText[30];
+				errorEmail=languageText[31];
+				errorEmailTitle=languageText[32];
+				titleModel=languageText[33];
+				labelSelectTitle=languageText[34];
+				menu=languageText[35];
+				menuItemAdd=languageText[36];
+				menuItemDelete=languageText[37];
+				menuItemModify=languageText[38];
+				titleEngine=languageText[39];
+				labelTitle=languageText[40];
+				titleAccessories=languageText[41];
+				labelModelCar=languageText[42];
+				checkBoxElectricElevation=languageText[43];
+				checkBoxBrowser=languageText[44];
+				checkBoxTires=languageText[45];
+				checkBoxHeatedSeats=languageText[46];
+				checkBoxCruisingSpeed=languageText[47];
+				checkBoxAutomaticParking=languageText[48];
+				checkBoxUsbConnectors=languageText[49];
+				checkBoxMetallizedPaint=languageText[50];
+				labelBasePrice=languageText[51];
+				labelIncreasePrice=languageText[52];
+				labelTotalPrice=languageText[53];
+				titleAddCar=languageText[54];
+				labelId=languageText[55];
+				labelName=languageText[56];
+				labelDescription=languageText[57];
+				labelImgName=languageText[58];
+				labelPrice=languageText[59];
+				errorParseDouble=languageText[60];
+				errorParseDoubleTitle=languageText[61];
+				errorPriceNull=languageText[62];
+				errorPriceNullTitle=languageText[63];
+				errorImgName=languageText[64];
+				errorImgNameTitle=languageText[65];
+				errorImgNameNull=languageText[66];
+				errorImgNameNullTitle=languageText[67];
+				titleDeleteCar=languageText[68];
+				labelDataTitle=languageText[69];
+				titleModifyCar=languageText[70];
+				titleDeliveryNote=languageText[71];
+				labelDataTitle=languageText[72];
+				labelCompany=languageText[73];
+				labelCompanyName=languageText[74];
+				lableEmployee=languageText[75];
+				labelMail=languageText[76];
+				table=languageText[77];
+				tableOne=languageText[78];
+			}catch(IOException e) {
+				System.out.println("[ERROR] - Error al leer el lenguaje");
+			}
+		}catch(FileNotFoundException ex) {
+			System.out.println("[ERROR] - Error al buscar el fichero de lenguaje");
 		}
+	}
+	
+	//  ------------------------------Default title-------------------------------------
+	@Override
+	public String titleDefault() {
+		return titleDefault;
 	}
 	
 	//	------------------------------Botones----------------------------------
 
 	@Override
 	public String btnLogin() {
-		NodeList nList = document.getElementsByTagName("btn_login");
-		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return btnLogin;
 	}
 	
 	@Override
 	public String btnSave() {
-		NodeList nList = document.getElementsByTagName("btn_save");
-		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return btnSave;
 	}
 
 	@Override
 	public String btnNext() {
-		NodeList nList = document.getElementsByTagName("btn_next");
-		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return btnNext;
 	}
 
 	@Override
 	public String btnSaveInfo() {
-		NodeList nList = document.getElementsByTagName("btn_save_info");
-		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return btnSaveInfo;
 	}
 	
 	@Override
 	public String btnPrevious() {
-		NodeList nList = document.getElementsByTagName("btn_previous");
-		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return btnPrevious;
 	}
 
 	@Override
 	public String btnBack() {
-		NodeList nList = document.getElementsByTagName("btn_back");
-		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return btnBack;
 	}
 
 	@Override
 	public String btnEnd() {
-		NodeList nList = document.getElementsByTagName("btn_end");
-		Node nNode = nList.item(0);
-		return nNode.getTextContent();
+		return btnEnd;
+	}
+
+	@Override
+	public String btnStart() {
+		return btnStart;
 	}
 
 	//		-------------------Métodos que se usarán para el Login.-------------------
 
 	@Override
 	public String loginTitle() {
-		NodeList nList = document.getElementsByTagName("Login");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
-		}
-		return null;
+		return titleLogin;
 	}
 	
 	@Override
 	public String labelUsername() {
-		NodeList nList = document.getElementsByTagName("Login");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_username").item(0).getTextContent();
-		}
-		return null;
+		return labelUsername;
 	}
-
+	
 	@Override
 	public String labelPassword() {
-		NodeList nList = document.getElementsByTagName("Login");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_password").item(0).getTextContent();
-		}
-		return null;
+		return labelPassword;
 	}
 
 	@Override
 	public String errorLoginUser() {
-		NodeList nList = document.getElementsByTagName("Login");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_login_user").item(0).getTextContent();
-		}
-		return null;
+		return errorLoginUser;
 	}
 
 	@Override
 	public String errorLoginUserTitle() {
-		NodeList nList = document.getElementsByTagName("Login");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_login_user_title").item(0).getTextContent();
-		}
-		return null;
+		return errorLoginUserTitle;
 	}
-
+	
 	@Override
 	public String errorLoginPassword() {
-		NodeList nList = document.getElementsByTagName("Login");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_login_password").item(0).getTextContent();
-		}
-		return null;
+		return errorLoginPassword;
 	}
 
 	@Override
 	public String errorLoginPasswordTitle() {
-		NodeList nList = document.getElementsByTagName("Login");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_login_password_title").item(0).getTextContent();
-		}
-		return null;
+		return errorLoginPasswordTitle;
 	}
 	
 	//		-------------------Métodos que se usarán para el Data_Clients.-------------------
 
 	@Override
 	public String dataClientsTitle() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
-		}
-		return null;
+		return titleClients;
 	}
 	
 	@Override
 	public String labelClientTitle() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_client_title").item(0).getTextContent();
-		}
-		return null;
+		return labelClientTitle;
 	}
 
 	@Override
 	public String labelAuthIn() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_username").item(0).getTextContent();
-		}
-		return null;
+		return labelUser;
 	}
 
 	@Override
 	public String labelClientName() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_client_name").item(0).getTextContent();
-		}
-		return null;
+		return labelClientName;
 	}
 
 	@Override
 	public String labelClientFirstLastName() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_client_first_lastname").item(0).getTextContent();
-		}
-		return null;
+		return labelClientFirstLastname;
 	}
 
 	@Override
 	public String labelClientSecondLastName() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_client_second_lastname").item(0).getTextContent();
-		}
-		return null;
+		return labelClientSecondLastname;
 	}
-
+	
 	@Override
 	public String labelClientAddress() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_client_address").item(0).getTextContent();
-		}
-		return null;
+		return labelClientAddress;
 	}
 
 	@Override
 	public String labelClientEmail() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_client_email").item(0).getTextContent();
-		}
-		return null;
+		return labelClientEmail;
 	}
 
 	@Override
 	public String labelClientGender() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_client_gender").item(0).getTextContent();
-		}
-		return null;
+		return labelClientGender;
 	}
 
 	@Override
 	public String radioGenderMale() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("rb_male").item(0).getTextContent();
-		}
-		return null;
+		return rbMale;
 	}
 
 	@Override
 	public String radioGenderFemale() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("rb_female").item(0).getTextContent();
-		}
-		return null;
+		return rbFemale;
 	}
 
 	@Override
 	public String radioGenderUnknown() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("rb_unknown").item(0).getTextContent();
-		}
-		return null;
+		return rbUnknown;
 	}
 
 	@Override
 	public String labelClientBirhdate() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_client_birthdate").item(0).getTextContent();
-		}
-		return null;
+		return labelClientBirthdate;
 	}
 
 	@Override
 	public String errorNullField() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_null_field").item(0).getTextContent();
-		}
-		return null;
+		return errorNullField;
 	}
 
 	@Override
 	public String errorNullFieldTitle() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_null_field_title").item(0).getTextContent();
-		}
-		return null;
+		return errorNullFieldTitle;
 	}
 
 	@Override
 	public String errorEmail() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_email").item(0).getTextContent();
-		}
-		return null;
+		return errorEmail;
 	}
 
 	@Override
 	public String errorEmailTitle() {
-		NodeList nList = document.getElementsByTagName("Data_clients");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_email_title").item(0).getTextContent();
-		}
-		return null;
+		return errorEmailTitle;
 	}
 	
 	//		-------------------Métodos que se usarán para el Selection_model.-------------------
 	
 	@Override
 	public String seleccionModeloTitle() {
-		NodeList nList = document.getElementsByTagName("Selection_model");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
-		}
-		return null;
+		return titleModel;
 	}
 	
 	@Override
 	public String labelSelectTitle() {
-		NodeList nList = document.getElementsByTagName("Selection_model");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_select_title").item(0).getTextContent();
-		}
-		return null;
+		return labelSelectTitle;
 	}
 
 	@Override
 	public String menu() {
-		NodeList nList = document.getElementsByTagName("Selection_model");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("menu").item(0).getTextContent();
-		}
-		return null;
+		return menu;
 	}
 
 	@Override
 	public String menuItemAdd() {
-		NodeList nList = document.getElementsByTagName("Selection_model");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("menu_item_add").item(0).getTextContent();
-		}
-		return null;
+		return menuItemAdd;
 	}
 
 	@Override
 	public String menuItemDelete() {
-		NodeList nList = document.getElementsByTagName("Selection_model");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("menu_item_delete").item(0).getTextContent();
-		}
-		return null;
+		return menuItemDelete;
 	}
 
 	@Override
 	public String menuItemModify() {
-		NodeList nList = document.getElementsByTagName("Selection_model");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("menu_item_modify").item(0).getTextContent();
-		}
-		return null;
+		return menuItemModify;
 	}
 	
 	//		-------------------Métodos que se usarán para Selection_Engine.-------------------
 	
 	@Override
 	public String seleccionEngineTitle() {
-		NodeList nList = document.getElementsByTagName("Selection_engine");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
-		}
-		return null;
+		return titleEngine;
 	}
 
 	@Override
 	public String labelEngineTitle() {
-		NodeList nList = document.getElementsByTagName("Selection_engine");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_title").item(0).getTextContent();
-		}
-		return null;
+		return labelTitle;
 	}
 	
-	//		-------------------Métodos que se usarán para Purchase_accessories.-------------------
+	//		-------------------Métodos que se usarán para PurchaseAccessories.-------------------
 
 	@Override
 	public String purchaseAccessoriesTitle() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
-		}
-		return null;
+		return titleAccessories;
 	}
 
 	@Override
 	public String labelModelCar() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_model_car").item(0).getTextContent();
-		}
-		return null;
+		return labelModelCar;
 	}
 
 	@Override
 	public String checkBoxElectricElevation() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("checkBox_electric_elevation").item(0).getTextContent();
-		}
-		return null;
+		return checkBoxElectricElevation;
 	}
-
+	
 	@Override
 	public String checkBoxBrowser() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("checkBox_browser").item(0).getTextContent();
-		}
-		return null;
+		return checkBoxBrowser;
 	}
 
 	@Override
 	public String checkBoxTires() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("checkBox_tires").item(0).getTextContent();
-		}
-		return null;
+		return checkBoxTires;
 	}
 
 	@Override
 	public String checkBoxHeatedSeats() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("checkBox_heated_seats").item(0).getTextContent();
-		}
-		return null;
+		return checkBoxHeatedSeats;
 	}
 
 	@Override
 	public String checkBoxCruisingSpeed() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("checkBox_cruising_speed").item(0).getTextContent();
-		}
-		return null;
+		return checkBoxCruisingSpeed;
 	}
 
 	@Override
 	public String checkBoxAutomaticParking() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("checkBox_automatic_parking").item(0).getTextContent();
-		}
-		return null;
+		return checkBoxAutomaticParking;
 	}
 
 	@Override
 	public String checkBoxUsbConnectors() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("checkBox_usb_connectors").item(0).getTextContent();
-		}
-		return null;
+		return checkBoxUsbConnectors;
 	}
 
 	@Override
 	public String checkBoxMetallizedPaint() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("checkBox_metallized_paint").item(0).getTextContent();
-		}
-		return null;
+		return checkBoxMetallizedPaint;
 	}
 
 	@Override
 	public String labelBasePrice() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_base_price").item(0).getTextContent();
-		}
-		return null;
+		return labelBasePrice;
 	}
 
 	@Override
 	public String labelIncreasePrice() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_increase_price").item(0).getTextContent();
-		}
-		return null;
+		return labelIncreasePrice;
 	}
 
 	@Override
 	public String labelTotalPrice() {
-		NodeList nList = document.getElementsByTagName("Purchase_accessories");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_total_price").item(0).getTextContent();
-		}
-		return null;
+		return labelTotalPrice;
 	}
 	
 	//		-------------------Métodos que se usarán para Add_Car.-------------------
 
 	@Override
 	public String addCarTitle() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
-		}
-		return null;
+		return titleAddCar;
 	}
 	
 	@Override
 	public String labelId() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_id").item(0).getTextContent();
-		}
-		return null;
+		return labelId;
 	}
 
 	@Override
 	public String labelName() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_name").item(0).getTextContent();
-		}
-		return null;
+		return labelName;
 	}
 
 	@Override
 	public String labelDescription() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_description").item(0).getTextContent();
-		}
-		return null;
+		return labelDescription;
 	}
 
 	@Override
 	public String labelImg_Name() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_img_name").item(0).getTextContent();
-		}
-		return null;
+		return labelImgName;
 	}
 
 	@Override
 	public String labelPrice() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_price").item(0).getTextContent();
-		}
-		return null;
+		return labelPrice;
 	}
 	
 	@Override
 	public String errorParseDouble() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_parse_double").item(0).getTextContent();
-		}
-		return null;
+		return errorParseDouble;
 	}
 
 	@Override
 	public String errorParseDoubleTitle() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_parse_double_title").item(0).getTextContent();
-		}
-		return null;
+		return errorParseDoubleTitle;
 	}
 
 	@Override
 	public String errorPriceNull() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_price_null").item(0).getTextContent();
-		}
-		return null;
+		return errorPriceNull;
 	}
 
 	@Override
 	public String errorPriceNullTitle() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_price_null_title").item(0).getTextContent();
-		}
-		return null;
+		return errorPriceNullTitle;
 	}
 
 	@Override
 	public String errorImgName() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_img_name").item(0).getTextContent();
-		}
-		return null;
+		return errorImgName;
 	}
 
 	@Override
 	public String errorImgNameTitle() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_img_name_title").item(0).getTextContent();
-		}
-		return null;
+		return errorImgNameTitle;
 	}
 
 	@Override
 	public String errorImgNameNull() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_img_name_null").item(0).getTextContent();
-		}
-		return null;
+		return errorImgNameNull;
 	}
 
 	@Override
 	public String errorImgNameNullTitle() {
-		NodeList nList = document.getElementsByTagName("Add_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("error_img_name_null_title").item(0).getTextContent();
-		}
-		return null;
+		return errorImgNameNullTitle;
 	}
 	
 	//		-------------------Métodos que se usarán para Delete_Car.-------------------
 
 	@Override
 	public String deleteCarTitle() {
-		NodeList nList = document.getElementsByTagName("Delete_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("title").item(0).getTextContent();
-		}
-		return null;
+		return titleDeleteCar;
 	}
 
 	@Override
 	public String dataDeleteCarTitle() {
-		NodeList nList = document.getElementsByTagName("Delete_Car");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_data_title").item(0).getTextContent();
-		}
-		return null;
+		return labelDataTitle;
 	}
-
-	//		-------------------Métodos que se usarán para Delete_Car.-------------------
+	
+	//		-------------------Métodos que se usarán para Modify_Car.-------------------
 
 	@Override
-	public String labelDeliveryNote() {
-		NodeList nList = document.getElementsByTagName("Delivery_Note");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_data_title").item(0).getTextContent();
-		}
-		return null;
+	public String modifyCarTitle() {
+		return titleModifyCar;
+	}
+	
+	//		-------------------Métodos que se usarán para Albaran.-------------------
+
+	@Override
+	public String deliveryNoteTitle() {
+		return titleDeliveryNote;
 	}
 
 	@Override
 	public String labelClient() {
-		NodeList nList = document.getElementsByTagName("Delivery_Note");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_data_title").item(0).getTextContent();
-		}
-		return null;
+		return labelClient;
 	}
 
 	@Override
 	public String labelCompany() {
-		NodeList nList = document.getElementsByTagName("Delivery_Note");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_company").item(0).getTextContent();
-		}
-		return null;
+		return labelCompany;
 	}
 
 	@Override
 	public String labelCompanyName() {
-		NodeList nList = document.getElementsByTagName("Delivery_Note");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_company_name").item(0).getTextContent();
-		}
-		return null;
+		return labelCompanyName;
 	}
-
+	
 	@Override
 	public String labelEmployee() {
-		NodeList nList = document.getElementsByTagName("Delivery_Note");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("lable_employee").item(0).getTextContent();
-		}
-		return null;
+		return lableEmployee;
 	}
 
 	@Override
 	public String labelMail() {
-		NodeList nList = document.getElementsByTagName("Delivery_Note");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("label_mail").item(0).getTextContent();
-		}
-		return null;
+		return labelMail;
 	}
 
 	@Override
 	public String table() {
-		NodeList nList = document.getElementsByTagName("Delivery_Note");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("table").item(0).getTextContent();
-		}
-		return null;
+		return table;
 	}
 
 	@Override
 	public String tableOne() {
-		NodeList nList = document.getElementsByTagName("Delivery_Note");
-		Node nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			return ""+eElement.getElementsByTagName("tableOne").item(0).getTextContent();
-		}
-		return null;
+		return tableOne;
 	}
-
-	
 }

@@ -1,17 +1,12 @@
 package view_miglayout;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import com.sun.xml.internal.ws.api.pipe.NextAction;
 
 import config.ConfigurationLoader;
-import daoImplFactory.LanguageFactory;
+import daoImpl.EngineDAO_XML;
+import idao.IEngine;
 import idao.ILanguage;
 import model.Client;
 import model.Engine;
@@ -21,11 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JButton;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -35,8 +26,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 
 public class Selection_Engine extends JFrame {
 
@@ -44,14 +33,16 @@ public class Selection_Engine extends JFrame {
 	private ILanguage language;
 	private String username;
 	private Client client;
+//	private IModel model;
 	private Model model;
-	private Engine engine;
+	private IEngine engine;
+	private Engine engineSel;
 	private File temp;
 	private JList list;
 	
-	JPanel panel;
-	JLabel lblTitulo, lblUsername;
-	JButton btn_Anterior, btn_Siguiente;	
+	private JPanel panel;
+	private JLabel lblTitulo, lblUsername;
+	private JButton btn_Anterior, btn_Siguiente;	
 	
 	// Constructores de la vista:
 	public Selection_Engine(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model, Engine engine) {
@@ -60,7 +51,8 @@ public class Selection_Engine extends JFrame {
 		this.username = username;
 		this.client = client;
 		this.model = model;
-		this.engine = new Engine(this.configLoad);
+		this.engine = new EngineDAO_XML();
+		this.engineSel = engine;
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		FileWriter fw;
@@ -84,8 +76,7 @@ public class Selection_Engine extends JFrame {
 			bw.close();
 			fw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("[ERROR] - Error al intentar añadir el modelo en el fichero temporal");
 		}
 		
 		onCreate();
@@ -97,7 +88,7 @@ public class Selection_Engine extends JFrame {
 		this.username = username;
 		this.client = client;
 		this.model = model;
-		this.engine = new Engine(this.configLoad);
+		this.engine = new EngineDAO_XML();
 		
 		onCreate();
 	}
@@ -121,13 +112,11 @@ public class Selection_Engine extends JFrame {
 		this.list = new JList();
 		DefaultListModel modelo = new DefaultListModel(); // Sirve para introducir elementos de forma indirecta (Ej: Haciendo un bucle para añadir elementos).
 		// Llamo al metodo loadEngines() y le paso el id que el usuario ha seleccionado.
-		this.engine.loadEngines(this.model.getIdSelected());
-		// Obtengo todos los submodelos disponibles del modelo seleccionado.
-		ArrayList<String> engines = this.engine.getEngines();
-		// Y los printo en la vista.
+		this.engine.loadEngines(this.model.getId());
+		ArrayList<Engine> engines = this.engine.getEngines();
 		
-		for (String string : engines) {
-			modelo.addElement(string);
+		for (Engine engine : engines) {
+			modelo.addElement(engine.toString());
 		}
 		
 		// PARA AÑADIR CONTENIDO A LA LISTA DEBE SER CON STRINGS.
@@ -178,19 +167,19 @@ public class Selection_Engine extends JFrame {
 		this.panel.add(this.btn_Anterior, "span 2, align left");
 		this.panel.add(this.btn_Siguiente, "align right");
 		
-		JFrame();
+		addFrame(this.configLoad, panel, language, language.seleccionEngineTitle());
 	}
 	
 	
 	protected void nextActionPerformed() {
 		setVisible(false);
-		
+		Engine engineObj = this.engine.getEngine(this.list.getSelectedIndex());
 		try {
 			FileWriter fw = new FileWriter(this.temp, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.newLine();
 			bw.write("[Motor] ");
-			bw.write(this.engine.getEngineSelected(this.list.getSelectedIndex() + 1));
+			bw.write(engineObj.toString());
 			bw.newLine();
 			bw.write("------");
 			bw.close();
@@ -198,33 +187,6 @@ public class Selection_Engine extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		new Purchase_Accessories(this.configLoad, this.language, this.username, this.client, this.model, this.engine);
+		new Purchase_Accessories(this.configLoad, this.language, this.username, this.client, this.model, engineObj);
 	}
-
-	/*
-	 * Método para configurar la ventana actual.
-	 */
-	private void JFrame() {
-		add(this.panel);
-		setTitle(language.seleccionEngineTitle());
-		setIconImage(getIconImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(600,600);
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
-	}
-	
-	/*
-	 * Método que obtiene la imagen para el JFrame.
-	 * @return La imagen que hay en carpeta.
-	 * @see java.awt.Frame#getIconImage()
-	 */
-	public Image getIconImage() {
-		File image = new File("src/config/favicon.png");
-        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
-        return retValue;
-    }
-
 }

@@ -1,29 +1,24 @@
 package view_miglayout;
 
 import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,8 +29,8 @@ import com.toedter.calendar.JDateChooser;
 
 import config.ConfigurationLoader;
 import idao.ILanguage;
-//import javafx.scene.input.DataFormat;
 import model.Client;
+import model.Model;
 import net.miginfocom.swing.MigLayout;
 import view_miglayout.Selection_Model;
 
@@ -48,26 +43,37 @@ public class Data_Clients extends JFrame{
 	private Client client;
 	private String username;
 	
-	JPanel panel;
-	JLabel label_client_title, label_username, label_client_name, label_client_first_lastname, label_client_second_lastname,
-	label_client_email, label_client_address, label_client_gender, label_client_birthdate;
-	JTextField tfield_client_name, tfield_client_first_lastname, tfield_client_second_lastname, tfield_client_address, tfield_client_email;
-	JRadioButton rb_male, rb_female, rb_unknown;
-	ButtonGroup bg_gender;
-	JDateChooser dc_birthdate;
-	JButton btn_save, btn_next;
+	private JPanel panel;
+	private JLabel label_client_title, label_username, label_client_name, label_client_first_lastname, label_client_second_lastname,
+		label_client_email, label_client_address, label_client_gender, label_client_birthdate;
+	private JTextField tfield_client_name, tfield_client_first_lastname, tfield_client_second_lastname, tfield_client_address, tfield_client_email;
+	private JRadioButton rb_male, rb_female, rb_unknown;
+	private ButtonGroup bg_gender;
+	private JDateChooser dc_birthdate;
+	private JButton btn_save, btn_next;
 	
-	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username, Client client) {
+	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username, Client client, boolean writer) {
 		System.out.println("[INFO] - Mostrando nuevamente el Frame de Datos Clientes...");
-		System.out.println("[INFO] - Recuperando información del cliente añadido anteriormente...");
+		System.out.println("[INFO] - Recuperando información...");
 		this.client = client;
+		System.out.println(this.client.toString());
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
 		this.temp = new File(this.configLoad.getTemporalPathFile());
-		
+		createFrame();
+	}
+	
+	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username) {
+		System.out.println("[INFO] - Mostrando nuevo Frame...");
+		this.client = new Client();
+		this.language = language;
+		this.configLoad = configLoad;
+		this.username = username;
+		this.temp = new File(this.configLoad.getTemporalPathFile());
+		FileWriter fw;
 		try {
-			FileWriter fw = new FileWriter(this.temp);
+			fw = new FileWriter(this.temp);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write("Datos Temporales");
 			bw.newLine();
@@ -80,22 +86,7 @@ public class Data_Clients extends JFrame{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 		createFrame();
-		setInformation();
-	}
-	
-	public Data_Clients(ConfigurationLoader configLoad, ILanguage language, String username) {
-		System.out.println("[INFO] - Mostrando nuevo Frame...");
-		this.client = new Client();
-		this.language = language;
-		this.configLoad = configLoad;
-		this.username = username;
-		this.temp = new File(this.configLoad.getTemporalPathFile());
-		
-		createFrame();
-		
 	}
 	
 	private void createFrame() {
@@ -133,6 +124,7 @@ public class Data_Clients extends JFrame{
 		this.label_client_first_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
 		this.tfield_client_first_lastname = new JTextField(30);
+		System.out.println("Recuperando Primer Apellido: " + this.client.getFirst_last_name());
 		this.tfield_client_first_lastname.setText(this.client.getFirst_last_name());
 		this.tfield_client_first_lastname.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
@@ -197,11 +189,11 @@ public class Data_Clients extends JFrame{
 		
 		String getGender = this.client.getGender();
 		
-		if(getGender.equals("Hombre")) {
+		if(getGender.equals(language.radioGenderMale())) {
 			this.rb_male.setSelected(true);
-		}else if(getGender.equals("Mujer")) {
+		}else if(getGender.equals(language.radioGenderFemale())) {
 			this.rb_female.setSelected(true);
-		}else if(getGender.equals(null) || getGender.equals("Desconocido")) {
+		}else if(getGender.equals(null) || getGender.equals(language.radioGenderUnknown())) {
 			this.rb_unknown.setSelected(true);	
 		}
 		
@@ -210,6 +202,7 @@ public class Data_Clients extends JFrame{
 		this.label_client_birthdate.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 5));
 		
 		this.dc_birthdate = new JDateChooser();
+		System.out.println(client.getBirthdate());
 		if(client.getBirthdate() != null) {
 			this.dc_birthdate = new JDateChooser();
 			DateFormat df = new SimpleDateFormat("dd-MM-yyyy");		
@@ -219,6 +212,7 @@ public class Data_Clients extends JFrame{
 				e1.printStackTrace();
 			}
 		}
+		
 		this.dc_birthdate.setDateFormatString("dd-MM-yyyy");
 		this.dc_birthdate.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		this.dc_birthdate.setBackground(new Color(255, 255, 255));
@@ -277,18 +271,9 @@ public class Data_Clients extends JFrame{
 		this.panel.add(dc_birthdate, "wrap, pushx, growx");
 		this.panel.add(btn_save, "skip, align right, split 2");
 		this.panel.add(btn_next);
-		JFrame();
-	}
-	
-	/*
-	 * 
-	 */
-	private void setInformation() {
-		tfield_client_name.setText(client.getName());
-		tfield_client_first_lastname.setText(client.getFirst_last_name());
-		tfield_client_second_lastname.setText(client.getSecond_last_name());
-		tfield_client_address.setText(client.getAddress());
-		tfield_client_email.setText(client.getEmail());
+		
+		addFrame(configLoad, panel, language, language.dataClientsTitle());
+		windowsListener(language);
 	}
 
 	protected void nextActionPerformed() {
@@ -304,18 +289,25 @@ public class Data_Clients extends JFrame{
 			}else if(rb_unknown.isSelected()) {
 				getGender = rb_unknown.getText();
 			}
-
-			System.out.println(getGender);
 			
-			if(this.dc_birthdate.getDate()==null) {
+			if(this.dc_birthdate.getDate() == null) {
 				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText(), getGender);
 			}else {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 				client = new Client(tfield_client_name.getText(), tfield_client_first_lastname.getText(), tfield_client_second_lastname.getText(), tfield_client_address.getText(), tfield_client_email.getText(), getGender, sdf.format(dc_birthdate.getDate()));
 			}
         	try {
-				FileWriter fw = new FileWriter(this.temp, true);
+        		FileReader fr = new FileReader(this.temp);
+        		BufferedReader br = new BufferedReader(fr);
+        		String line;
+        		FileWriter fw = new FileWriter(this.temp, false);
 				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write("Datos Temporales");
+				bw.newLine();
+				bw.write("[Empleado] ");
+				bw.write(username);
+				bw.newLine();
+				bw.write("------");
 				bw.newLine();
 				bw.write("[Cliente] ");
 				bw.write(client.toString());
@@ -326,8 +318,8 @@ public class Data_Clients extends JFrame{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-        	new Selection_Model(this.configLoad, this.language, this.username, client);
         	setVisible(false);
+        	new Selection_Model(this.configLoad, this.language, this.username, client);
 		}
 	}
 	
@@ -359,7 +351,6 @@ public class Data_Clients extends JFrame{
 	}
 
 	protected void saveActionPerformed() {
-		
 		if(checkData()) {
 			DateFormat format = new SimpleDateFormat(dc_birthdate.getDateFormatString());
 			String getInformation = label_client_name.getText() + tfield_client_name.getText()
@@ -382,61 +373,4 @@ public class Data_Clients extends JFrame{
 			JOptionPane.showMessageDialog(null, getInformation + "\n" + getGender, this.label_client_title.getText(), JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-
-	private void JFrame() {
-		add(this.panel);
-		setSize(600,600);
-		setTitle(language.dataClientsTitle());
-		setIconImage(getIconImage());
-		pack();
-		setLocationRelativeTo(null);
-		addWindowListener(new WindowListener() {
-			
-			@Override
-			public void windowOpened(WindowEvent e) {}
-			
-			@Override
-			public void windowIconified(WindowEvent e) {}
-			
-			@Override
-			public void windowDeiconified(WindowEvent e) {}
-			
-			@Override
-			public void windowDeactivated(WindowEvent e) {}
-			
-			@Override
-			public void windowClosing(WindowEvent e) {
-				int dialogButton = JOptionPane.showConfirmDialog(null, language.btnSaveInfo(), language.btnSaveInfo(), JOptionPane.YES_NO_CANCEL_OPTION);
-				if(dialogButton == JOptionPane.YES_OPTION) {
-					System.out.println("[INFO] - Guardando los datos del cliente...");
-					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				}else if(dialogButton == JOptionPane.NO_OPTION){
-					System.out.println("[INFO] - No se guardarán los cambios...");
-					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				}else if(dialogButton == JOptionPane.CANCEL_OPTION){
-					System.out.println("[INFO] - No se hará nada.");
-					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-				}
-			}
-			
-			@Override
-			public void windowClosed(WindowEvent e) {}
-			
-			@Override
-			public void windowActivated(WindowEvent e) {}
-		});
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
-	}
-	
-	/*
-	 * Método que obtiene la imagen para el JFrame.
-	 * @return La imagen que hay en carpeta.
-	 * @see java.awt.Frame#getIconImage()
-	 */
-	public Image getIconImage() {
-		File image = new File("src/config/favicon.png");
-        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
-        return retValue;
-    }
 }

@@ -34,33 +34,61 @@ public class Client {
 		this.gender = "Desconocido";
 		this.birthdate = null;
 	}
-	
+
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getFirst_last_name() {
 		return first_last_name;
 	}
 
+	public void setFirst_last_name(String first_last_name) {
+		this.first_last_name = first_last_name;
+	}
+
 	public String getSecond_last_name() {
 		return second_last_name;
+	}
+
+	public void setSecond_last_name(String second_last_name) {
+		this.second_last_name = second_last_name;
 	}
 
 	public String getAddress() {
 		return address;
 	}
 
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public String getEmail() {
 		return email;
 	}
-	
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	public String getBirthdate() {
 		return birthdate;
 	}
-	
-	public String getGender() {
-		return gender;
+
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
 	}
 
 	@Override

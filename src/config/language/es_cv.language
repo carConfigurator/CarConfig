@@ -1,95 +1,79 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
-<Lenguage>
-	<btn_login>Iniciar Sesión</btn_login>
-	<btn_save>Guardar</btn_save>
-	<btn_next>Siguiente</btn_next>
-	<btn_save_info>¿Desea Guardar los Cambios?</btn_save_info>
-	<btn_previous>Anterior</btn_previous>
-	<btn_back>Atrás</btn_back>
-	<btn_end>Finalizar Compra</btn_end>
-	<Login>
-		<title>SEAT Configurador - Log In</title>
-		<label_username>Nombre de Usuario</label_username>
-		<label_password>Contraseña</label_password>
-		<error_login_user>El usuario introducido no es correcto o no existe</error_login_user>
-		<error_login_user_title>[ERROR] - Nombre de Usuario no encontrado</error_login_user_title>
-		<error_login_password>[ERROR] - Fallo de Autenticación</error_login_password>
-		<error_login_password_title>El usuario o contraseñas no son correctos</error_login_password_title>
-	</Login>
-	<Data_clients>
-		<title>SEAT Configurador - Datos Clientes</title>
-		<label_client_title>Datos del Cliente</label_client_title>
-		<label_username>Usuario: </label_username>
-		<label_client_name>Nombre: *</label_client_name>
-		<label_client_first_lastname>Primer Apellido: *</label_client_first_lastname>
-		<label_client_second_lastname>Segundo Apellido: *</label_client_second_lastname>
-		<label_client_address>Dirección: *</label_client_address>
-		<label_client_email>Correo Electrónico: *</label_client_email>
-		<label_client_gender>Género:</label_client_gender>
-		<rb_male>Hombre</rb_male>
-		<rb_female>Mujer</rb_female>
-		<rb_unknown>Desconocido</rb_unknown>
-		<label_client_birthdate>Fecha nacimiento:</label_client_birthdate>
-		<error_null_field>Faltan campos por rellenar. Rellene todos los campos obligatorios</error_null_field>
-		<error_null_field_title>Informacion Incompleta</error_null_field_title>
-		<error_email>El correo no es valido</error_email>
-		<error_email_title>Error de correo</error_email_title>
-	</Data_clients>
-	<Selection_model>
-		<title>SEAT Configurador - Selección de modelo</title>
-		<label_select_title>Seleccionar el Modelo del Coche</label_select_title>
-		<menu>Opciones de coches</menu>
-		<menu_item_add>Añadir un coche</menu_item_add>
-		<menu_item_delete>Suprimir un coche</menu_item_delete>
-		<menu_item_modify>Modificar un coche</menu_item_modify>
-	</Selection_model>
-	<Selection_engine>
-		<title>SEAT Configurador - Selección de caracteristicas</title>
-		<label_title>Seleccion de caracteristicas del modelo</label_title>
-	</Selection_engine>
-	<Purchase_accessories>
-		<title>Compra de Accesorios</title>
-		<label_model_car>Caracteristicas seleccionadas anteriormetne</label_model_car>
-		<checkBox_electric_elevation>Elevaduras electricas</checkBox_electric_elevation>
-		<checkBox_browser>Navegador</checkBox_browser>
-		<checkBox_tires>Llantas de aleacion</checkBox_tires>
-		<checkBox_heated_seats>Asientos calefactados</checkBox_heated_seats>
-		<checkBox_cruising_speed>Velocidad de crucero</checkBox_cruising_speed>
-		<checkBox_automatic_parking>Aparcamiento automatico</checkBox_automatic_parking>
-		<checkBox_usb_connectors>Conectores USB</checkBox_usb_connectors>
-		<checkBox_metallized_paint>Pintura metalizada</checkBox_metallized_paint>
-		<label_base_price>Precio Base:</label_base_price>
-		<label_increase_price>Accesorios:</label_increase_price>
-		<label_total_price>Total precio:</label_total_price>
-	</Purchase_accessories>
-	<Add_Car>
-		<title>Añadir un nuevo coche</title>
-		<label_id>ID: </label_id>
-		<label_name>Nombre: </label_name>
-		<label_description>Descripción: </label_description>
-		<label_img_name>Nombre de la Imagen: </label_img_name>
-		<label_price>Precio: </label_price>
-		<error_parse_double>El valor del String no se puede formatear a Double</error_parse_double>
-		<error_parse_double_title>Error Precio</error_parse_double_title>
-		<error_price_null>El precio no se puede dejar vacio</error_price_null>
-		<error_price_null_title>Error Precio Vacio</error_price_null_title>
-		<error_img_name>La imagen que desea insertar no existe</error_img_name>
-		<error_img_name_title>Error Imagen</error_img_name_title>
-		<error_img_name_null>Se tiene que poner una imagen</error_img_name_null>
-		<error_img_name_null_title>Error Imagen Vacia</error_img_name_null_title>
-	</Add_Car>
-	<Delete_Car>
-		<title>Eliminar un coche</title>
-		<label_data_title>Estas seguro que queres eliminar el siguiente coche?</label_data_title>
-	</Delete_Car>
-	<Delivery_Note>
-		<label_delivery_note>ALBARAN</label_delivery_note>
-		<label_data_title>Cliente: </label_data_title>
-		<label_company>Empresa: </label_company>
-		<label_company_name>SEAT</label_company_name>
-		<lable_employee>Empleado: </lable_employee>
-		<label_mail>Correo: </label_mail>
-		<table>Cantidad,Especificacion,Precio,Informe</table>
-		<tableOne>Precio Base,Descuento,Precio Total,IVA(21%)</tableOne>
-	</Delivery_Note>
-</Lenguage>
+title_default:"SEAT Configurador"
+btn_login:"Iniciar Sesión"
+btn_save:"Guardar"
+btn_next:"Siguiente"
+btn_save_info:"¿Desea Guardar los Cambios?"
+btn_previous:"Anterior"
+btn_back:"Atrás"
+btn_end:"Finalizar Compra"
+btn_start:"Ir al inicio"
+title_login:"Log In"
+label_username:"Nombre de Usuario"
+label_password:"Contraseña"
+error_login_user:"El usuario introducido no es correcto o no existe"
+error_login_user_title:"[ERROR] - Nombre de Usuario no encontrado"
+error_login_password:"[ERROR] - Fallo de Autenticación"
+error_login_password_title:"El usuario o contraseñas no son correctos"
+title_clients:"Datos Clientes"
+label_client_title:"Datos del Cliente"
+label_user:"Usuario: "
+label_client_name:"Nombre: *"
+label_client_first_lastname:"Primer Apellido: *"
+label_client_second_lastname:"Segundo Apellido: *"
+label_client_address:"Dirección: *"
+label_client_email:"Correo Electrónico: *"
+label_client_gender:"Género:"
+rb_male:"Hombre"
+rb_female:"Mujer"
+rb_unknown:"Desconocido"
+label_client_birthdate:"Fecha nacimiento:"
+error_null_field:"Faltan campos por rellenar. Rellene todos los campos obligatorios"
+error_null_field_title:"Informacion Incompleta"
+error_email:"El correo no es valido"
+error_email_title:"Error de correo"
+title_model:"Selección de modelo"
+label_select_title:"Seleccionar el Modelo del Coche"
+menu:"Opciones de coches"
+menu_item_add:"Añadir un coche"
+menu_item_delete:"Suprimir un coche"
+menu_item_modify:"Modificar un coche"
+title_engine:"Selección de motor"
+label_title:"Seleccion de caracteristicas del modelo"
+title_accessories:"Selección de accesorios"
+label_model_car:"Caracteristicas seleccionadas anteriormetne"
+checkBox_electric_elevation:"Elevaduras electricas"
+checkBox_browser:"Navegador"
+checkBox_tires:"Llantas de aleacion"
+checkBox_heated_seats:"Asientos calefactados"
+checkBox_cruising_speed:"Velocidad de crucero"
+checkBox_automatic_parking:"Aparcamiento automatico"
+checkBox_usb_connectors:"Conectores USB"
+checkBox_metallized_paint:"Pintura metalizada"
+label_base_price:"Precio Base:"
+label_increase_price:"Accesorios:"
+label_total_price:"Total precio:"
+title_add_car:"Añadir un nuevo coche"
+label_id:"ID: "
+label_name:"Nombre: "
+label_description:"Descripción: "
+label_img_name:"Nombre de la Imagen: "
+label_price:"Precio: "
+error_parse_double:"El valor del String no se puede formatear a Double"
+error_parse_double_title:"Error Precio"
+error_price_null:"El precio no se puede dejar vacio"
+error_price_null_title:"Error Precio Vacio"
+error_img_name:"La imagen que desea insertar no existe"
+error_img_name_title:"Error Imagen"
+error_img_name_null:"Se tiene que poner una imagen"
+error_img_name_null_title:"Error Imagen Vacia"
+title_delete_car:"Eliminar un coche"
+label_data_title:"Estas seguro que queres eliminar el siguiente coche?"
+title_modify_car:"Modificar un coche"
+title_delivery_note:"ALBARAN"
+label_client:"Cliente: "
+label_company:"Empresa: "
+label_company_name:"SEAT"
+lable_employee:"Empleado: "
+label_mail:"Correo: "
+table:"Cantidad,Especificacion,Precio,Informe"
+tableOne:"Precio Base,Descuento,Precio Total,IVA(21%)"

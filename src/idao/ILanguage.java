@@ -2,6 +2,9 @@ package idao;
 
 public interface ILanguage {
 
+	// Default Title
+	String titleDefault();
+	
 	//BOTONES
 	String btnLogin();
 	String btnSave();
@@ -10,6 +13,7 @@ public interface ILanguage {
 	String btnPrevious();
 	String btnBack();
 	String btnEnd();
+	String btnStart();
 	
 	// Métodos que se usarán para el Login.
 	String loginTitle();
@@ -86,8 +90,12 @@ public interface ILanguage {
 	String deleteCarTitle();
 	String dataDeleteCarTitle();
 
+	// Métodos que se usarán para delete_car.
+	String modifyCarTitle();
+	//los otros metodos son los mismos que los de add
+	
 	// Métodos que se usarán para albaran.
-	String labelDeliveryNote();
+	String deliveryNoteTitle();
 	String labelClient();
 	String labelCompany();
 	//name in data_clients

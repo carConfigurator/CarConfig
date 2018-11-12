@@ -1,0 +1,8 @@
+=======
+Datos Temporales
+[Empleado] alexis.mengual
+------
+[Cliente] a,a,a,a,a@a.com,Hombre,15-11-2018
+------
+[Modelo] 1,SEAT Mii P5,Observaciones del SEAT Mii 5P,7726.21
+------

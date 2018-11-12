@@ -1,59 +1,22 @@
 package view_miglayout;
 
 import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.InternationalFormatter;
-import javax.swing.text.MaskFormatter;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
-import org.xml.sax.SAXException;
-
-import com.sun.org.apache.xpath.internal.operations.Mod;
 
 import config.ConfigurationLoader;
 import idao.ILanguage;
-import model.Accessory;
+import idao.IModel;
 import model.Client;
-import model.Engine;
-import model.Model;
 import net.miginfocom.swing.MigLayout;
-import sun.awt.AWTAccessor.SystemColorAccessor;
 
 public class Add_Car extends JFrame{
 
@@ -61,35 +24,19 @@ public class Add_Car extends JFrame{
 	private ConfigurationLoader configLoad;
 	private Client client;
 	private String username;
-	private Model model;
-	
-	private DocumentBuilderFactory factory;
-	private DocumentBuilder builder;
-	private Document documentOld;
+	private IModel model;
 	
 	private JPanel panelMig;
 	private JLabel lId, lName, lDescription, lImg_Name, lPrice;
 	private JTextField tfId, tfName, tfDescription, tfImg_Name, tfPrice;
 	private JButton btnSave, btnBack;
 	
-	public Add_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, Model model){
+	public Add_Car(ConfigurationLoader configLoad, ILanguage language, String username, Client client, IModel model){
 		this.configLoad = configLoad;
 		this.language = language;
 		this.username = username;
 		this.client = client;
 		this.model = model;
-		
-		this.factory = DocumentBuilderFactory.newInstance();
-		try {
-			this.builder = factory.newDocumentBuilder();
-			this.documentOld = builder.parse(new File(configLoad.getCar_configuration_path()+configLoad.getCar_configuration_file_name()));
-		} catch (ParserConfigurationException e) {
-			System.out.println("[ERROR] - No se ha podido parsear la configuración. Más información del error: " + e);
-		} catch (SAXException e) {
-			System.out.println("[ERROR] - No se ha podido parsear el archivo XML. Más información del error: " + e);
-		} catch (IOException e) {
-			System.out.println("[ERROR] - Error de E/S. Más información del error: " + e);
-		}
 
 		// Configuracion de los Componentes:
 		// Añado el Layout al Panel y le indico que este haga un padding de 20 en el Panel.
@@ -165,7 +112,7 @@ public class Add_Car extends JFrame{
 		this.panelMig.add(btnSave, "align right"); // Alineo el componente a la derecha de la fila, sería como un float.
 				
 		// Ponemos el id que le toque al siguiente coche
-		tfId.setText(""+(model.getId().length+1));
+		tfId.setText(""+(model.getModel(model.getModels().size()).getId()+1));
 		
 		btnSave.addActionListener(new ActionListener() {
 			
@@ -176,8 +123,9 @@ public class Add_Car extends JFrame{
 						if (!tfPrice.getText().equals("")) {
 							try {
 								Double.parseDouble(tfPrice.getText());
-								model.addCar(configLoad, language, username, client, documentOld, tfId, tfName, tfDescription, tfImg_Name, tfPrice);
+								model.addCar(tfId, tfName, tfDescription, tfImg_Name, tfPrice);
 								setVisible(false);
+								backActionPerformed(e);
 							}catch(NumberFormatException ex) {
 								JOptionPane.showMessageDialog(panelMig, language.errorParseDouble(), language.errorParseDoubleTitle(), JOptionPane.ERROR_MESSAGE);
 							}
@@ -202,33 +150,11 @@ public class Add_Car extends JFrame{
 			}
 		});
 		
-		JFrame();
-	}
-	
-	private void JFrame() {
-		add(panelMig);
-		setTitle(language.addCarTitle());
-		setIconImage(getIconImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(400,400);
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
+		addFrame(configLoad, panelMig, language, language.addCarTitle());
 	}
 	
 	private void backActionPerformed(ActionEvent ae) {
 		setVisible(false);
 		new Selection_Model(this.configLoad, this.language, this.username, this.client);
 	}
-	
-	/*
-	 * Método que obtiene la imagen para el JFrame.
-	 * @return La imagen que hay en carpeta.
-	 * @see java.awt.Frame#getIconImage()
-	 */
-	public Image getIconImage() {
-		File image = new File("src/config/favicon.png");
-        Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
-        return retValue;
-    }
 }

@@ -21,7 +21,7 @@ public class ConfigurationLoader {
 	private DocumentBuilder builder;
 	private Document document;
 	
-	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path, car_image_path, temporal_path_file, budget_path_file;
+	private String language,language_default,postfix_language_file_name,version,language_files_path,car_configuration_path,car_configuration_file_name,specifications_file_path, car_image_path, temporal_path_file, budget_path_file, icon_image;
 	private String[] employee_list,employee_password;
 	private boolean employee_version;
 	
@@ -47,6 +47,7 @@ public class ConfigurationLoader {
 			this.specifications_file_path=loadSpecifications_file_path();
 			this.temporal_path_file = loadTemporalPathFile();
 			this.budget_path_file = loadBudgetPathFile();
+			this.icon_image = loadIconImage();
 		} catch (ParserConfigurationException e) {
 			System.out.println("[ERROR] - No se ha podido parsear la configuración. Más información del error: " + e);
 		} catch (SAXException e) {
@@ -68,11 +69,10 @@ public class ConfigurationLoader {
 	 */
 	public static ConfigurationLoader getConfigurationLoaderInstance() {
 		if(configLoad == null) {
-			System.out.println("[INFO] - Generando instancia...");
+			System.out.println("[INFO] - Generando nueva instancia...");
 			return configLoad = new ConfigurationLoader();
 		}else {
-			System.out.println("[ERROR] - No puedes volver a generar una instancia, comprueba tú código.");
-			return null;
+			return configLoad;
 		}
 	}
 
@@ -154,6 +154,12 @@ public class ConfigurationLoader {
 		return nNode.getTextContent();
 	}
 	
+	private String loadIconImage() {
+		NodeList nList = document.getElementsByTagName("icon_image");
+		Node nNode = nList.item(0);
+		return nNode.getTextContent();
+	}
+	
 	public String getLanguage() {
 		return language;
 	}
@@ -208,6 +214,10 @@ public class ConfigurationLoader {
 	
 	public String getBudgetPathFile() {
 		return budget_path_file;
+	}
+	
+	public String getIconImage() {
+		return icon_image;
 	}
 	
 	/*
