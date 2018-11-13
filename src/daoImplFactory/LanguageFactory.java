@@ -1,6 +1,10 @@
 package daoImplFactory;
 
 import java.io.File;
+import java.util.Locale;
+
+import javax.swing.JOptionPane;
+
 import config.ConfigurationLoader;
 
 public class LanguageFactory {
@@ -23,12 +27,14 @@ public class LanguageFactory {
 			File archivo = new File(path+conjunto);
 			if(archivo.exists()) {
 				for (int j = 0; j < conjuntos.length; j++) {
+					JOptionPane.setDefaultLocale(new Locale(lenguage));
 					return path+conjunto;
 				}
 			}else {
 				System.out.println("[ERROR] - El archivo " + conjuntos[i] + " no existe.");
 			}
 		}
+		JOptionPane.setDefaultLocale(new Locale(lengDef));
 		return path+lengDef+postfix;
 	}
 

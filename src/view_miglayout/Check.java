@@ -21,17 +21,17 @@ import model.Client;
 import model.Engine;
 import model.Model;
 
-public class check extends JFrame{
+public class Check extends JFrame{
 
 	File temp;
 	
-	public check(ConfigurationLoader configLoad, Language language, String username) {
+	public Check(ConfigurationLoader configLoad, Language language, String username) {
 		// Comprobará siempre si el archivo existe, en caso de que exista lo eliminará para generarlo desde 0.
 		this.temp = new File(configLoad.getTemporalPathFile());		
 		if(this.temp.exists()) {
 			if(this.temp.length() > 0) {
 				// Crear variables para este JOptionPane de Language
-				int dialogButton = JOptionPane.showConfirmDialog(null, "¿Desea recuperar los datos temporales?", "¿Desea recuperar los datos temporales?", JOptionPane.YES_NO_OPTION);
+				int dialogButton = JOptionPane.showConfirmDialog(null, language.getText(ELanguage.jopRecoverTitle), language.getText(ELanguage.jopRecover), JOptionPane.YES_NO_OPTION);
 				if(dialogButton == JOptionPane.YES_OPTION) {
 					Client client = new Client();
 					Model model = new Model();

@@ -1,0 +1,13 @@
+[Empleado] dario.delcore
+------
+[Cliente] ads,adsff,asd,ads,dsdf@asd.foss,Desconocido,null
+------
+[Modelo] 1,SEAT Mii P5,Observaciones del SEAT Mii 5P,7726.21
+------
+[Motor] 2, Mii 1.0 55 KW (75 CV), Gasolina / 5 Velocidades Manual, 195.9
+------
+[Accesorios]
+2, Navegador, Navegador, 70.0
+8, Pintura metalizada, Pintura metalizada, 500.0
+------
+8492,11

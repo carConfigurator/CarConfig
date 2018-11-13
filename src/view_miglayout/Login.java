@@ -163,7 +163,7 @@ public class Login extends JFrame{
 				System.out.println("[INFO] - Escribiendo en el fichero temporal.");
 				// Oculto este Frame y llamo al siguiente:
 				setVisible(false);
-				new check(this.configLoad, this.language, username);
+				new Check(this.configLoad, this.language, username);
 			}else {//si la contraseña era invalida saltara un error de la contraseña
 				System.out.println("[ERROR] - El usuario/contraseña es incorrecto");
 				JOptionPane.showMessageDialog(null,language.getText(ELanguage.errorLoginPassword),language.getText(ELanguage.errorLoginPasswordTitle), JOptionPane.ERROR_MESSAGE);
