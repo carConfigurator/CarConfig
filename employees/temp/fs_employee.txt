@@ -1,5 +1,8 @@
-Datos Temporales
 [Empleado] dario.delcore
 ------
 [Cliente] ewrg,dsfg,asf,sdfg,fdsg@sad.fso,Desconocido,null
+------
+[Modelo] 1, SEAT Mii P5, Observaciones del SEAT Mii 5P, Mii_5P.jpeg, 1, 7726.21
+------
+[Motor] 2, Mii 1.0 55 KW (75 CV), Gasolina / 5 Velocidades Manual, 195.9
 ------

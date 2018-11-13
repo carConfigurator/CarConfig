@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Purchase_Accessories extends JFrame{
 
@@ -93,6 +94,7 @@ public class Purchase_Accessories extends JFrame{
 		// Compruebo si esta disponible el Accesorio "Elevaduras Electricas":
 		if(!this.accessory.checkAccessory(1)) {
 			this.cbElevadurasElectricas.setEnabled(false);
+			this.cbElevadurasElectricas.setToolTipText(accessory.getModelsAvailables(1).toString().substring(1, accessory.getModelsAvailables(1).toString().length()-1));
 		}
 
 		this.cbNavegador = new JCheckBox(language.getText(ELanguage.checkBoxBrowser));
@@ -102,6 +104,7 @@ public class Purchase_Accessories extends JFrame{
 		// Compruebo si esta disponible el Accesorio "Navegador":
 		if(!this.accessory.checkAccessory(2)) {
 			this.cbNavegador.setEnabled(false);
+			this.cbNavegador.setToolTipText(accessory.getModelsAvailables(2).toString().substring(1, accessory.getModelsAvailables(2).toString().length()-1));
 		}
 		
 		this.cbLlantasAl = new JCheckBox(language.getText(ELanguage.checkBoxTires));
@@ -111,6 +114,7 @@ public class Purchase_Accessories extends JFrame{
 		// Compruebo si esta disponible el Accesorio "Llantas de Aleación":
 		if(!this.accessory.checkAccessory(3)) {
 			this.cbLlantasAl.setEnabled(false);
+			this.cbLlantasAl.setToolTipText(accessory.getModelsAvailables(3).toString().substring(1, accessory.getModelsAvailables(3).toString().length()-1));
 		}
 
 		this.cbAsientosCal = new JCheckBox(language.getText(ELanguage.checkBoxHeatedSeats));
@@ -120,6 +124,7 @@ public class Purchase_Accessories extends JFrame{
 		// Compruebo si esta disponible el Accesorio "Asientos Calefactados":
 		if(!this.accessory.checkAccessory(4)) {
 			this.cbAsientosCal.setEnabled(false);
+			this.cbAsientosCal.setToolTipText(accessory.getModelsAvailables(4).toString().substring(1, accessory.getModelsAvailables(4).toString().length()-1));
 		}
 				
 		this.cbVelCrucero = new JCheckBox(language.getText(ELanguage.checkBoxCruisingSpeed));
@@ -129,6 +134,7 @@ public class Purchase_Accessories extends JFrame{
 		// Compruebo si esta disponible el Accesorio "Velocidad Crucero":
 		if(!this.accessory.checkAccessory(5)) {
 			this.cbVelCrucero.setEnabled(false);
+			this.cbVelCrucero.setToolTipText(accessory.getModelsAvailables(5).toString().substring(1, accessory.getModelsAvailables(5).toString().length()-1));
 		}
 				
 		this.cbAparcamietnoAuto = new JCheckBox(language.getText(ELanguage.checkBoxAutomaticParking));
@@ -138,6 +144,7 @@ public class Purchase_Accessories extends JFrame{
 		// Compruebo si esta disponible el Accesorio "Aparcamiento Automatico":
 		if(!this.accessory.checkAccessory(6)) {
 			this.cbAparcamietnoAuto.setEnabled(false);
+			this.cbAparcamietnoAuto.setToolTipText(accessory.getModelsAvailables(6).toString().substring(1, accessory.getModelsAvailables(6).toString().length()-1));
 		}
 
 		this.cbConectorUSB = new JCheckBox(language.getText(ELanguage.checkBoxUsbConnectors));
@@ -147,6 +154,7 @@ public class Purchase_Accessories extends JFrame{
 		// Compruebo si esta disponible el Accesorio "Conector USB":
 		if(!this.accessory.checkAccessory(7)) {
 			this.cbConectorUSB.setEnabled(false);
+			this.cbConectorUSB.setToolTipText(accessory.getModelsAvailables(7).toString().substring(1, accessory.getModelsAvailables(7).toString().length()-1));
 		}
 				
 		this.cbPinturaMetal = new JCheckBox(language.getText(ELanguage.checkBoxMetallizedPaint));
@@ -156,6 +164,7 @@ public class Purchase_Accessories extends JFrame{
 		// Compruebo si esta disponible el Accesorio "Pintura Metalizada":
 		if(!this.accessory.checkAccessory(8)) {
 			this.cbPinturaMetal.setEnabled(false);
+			this.cbPinturaMetal.setToolTipText(accessory.getModelsAvailables(8).toString().substring(1, accessory.getModelsAvailables(8).toString().length()-1));
 		}
 				
 		JLabel lblPrecioBase = new JLabel(language.getText(ELanguage.labelBasePrice));
