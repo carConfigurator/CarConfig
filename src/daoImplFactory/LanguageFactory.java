@@ -9,7 +9,7 @@ import config.ConfigurationLoader;
 
 public class LanguageFactory {
 	
-	public static /*File*/ String getLanguage(ConfigurationLoader configLoad) {
+	public static String getLanguage(ConfigurationLoader configLoad) {
 		String idioma = configLoad.getLanguage(); // Recoger la clave del archivo XML.
 		String[] idiomas = idioma.split(",") ; // Crear un array de Strings para añadir la clave del XML.
 		String path = configLoad.getLanguage_files_path(); // Recoger la ruta donde estan los archivos. 

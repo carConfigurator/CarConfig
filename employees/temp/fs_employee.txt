@@ -1,9 +1,5 @@
 Datos Temporales
 [Empleado] dario.delcore
 ------
-[Cliente] gyu,gyi,uyg,iuiu,sfd@asdf.so,Desconocido,null
-------
-[Modelo] 3,SEAT Nuevo Arona,Observaciones del SEAT Nuevo Arona,15239.1
-------
-[Motor] 1, Ibiza 1.6 TDI CR 70 KW (95 CV), Diesel / 5 Velocidades Manual, 285.9
+[Cliente] ewrg,dsfg,asf,sdfg,fdsg@sad.fso,Desconocido,null
 ------
