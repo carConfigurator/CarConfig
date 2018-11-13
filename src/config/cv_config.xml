@@ -10,7 +10,7 @@
 		<car_image_path>src\\config\\car\\images\\</car_image_path>
 		<car_configuration_file_name>car_config.xml</car_configuration_file_name>
 		<employee_list>alexis.mengual,dario.delcore,david.uson</employee_list>
-		<discount>22</discount>
+		<discount>20</discount>
 		<employee_password>1234,5678,1234</employee_password>
 		<specifications_file_path>src\\config\\specifications</specifications_file_path>
 		<temporal_path_file>employees\\temp\\fs_employee.txt</temporal_path_file>

@@ -21,15 +21,17 @@ import model.Client;
 import model.Engine;
 import model.Model;
 
-public class Check extends JFrame{
+public class CheckFileTemp extends JFrame{
 
 	File temp;
 	
-	public Check(ConfigurationLoader configLoad, Language language, String username) {
+	public CheckFileTemp(ConfigurationLoader configLoad, Language language, String username) {
 		// Comprobará siempre si el archivo existe, en caso de que exista lo eliminará para generarlo desde 0.
 		this.temp = new File(configLoad.getTemporalPathFile());		
 		if(this.temp.exists()) {
+			System.out.println("[INFO] - El Archivo Temporal existe!");
 			if(this.temp.length() > 0) {
+				System.out.println("[INFO] - Se han encontrado datos en el Archivo Temporal, cargando JOptionPane...");
 				// Crear variables para este JOptionPane de Language
 				int dialogButton = JOptionPane.showConfirmDialog(null, language.getText(ELanguage.jopRecoverTitle), language.getText(ELanguage.jopRecover), JOptionPane.YES_NO_OPTION);
 				if(dialogButton == JOptionPane.YES_OPTION) {
@@ -82,14 +84,18 @@ public class Check extends JFrame{
 					if(client.getName() != null) {
 						if(model.getId() != 0) {
 							if(engine.getId() != 0) {
+								System.out.println("[INFO] - Cargando los datos del Motor...");
 								new Selection_Engine(configLoad, language, username, client, model, engine);
 							}else {
+								System.out.println("[INFO] - Cargando los datos del Modelo...");
 								new Selection_Model(configLoad, language, username, client, model);
 							}
 						}else {
+							System.out.println("[INFO] - Cargando los datos de Cliente...");
 							new Data_Clients(configLoad, language, username, client, false);
 						}
 					}else {
+						System.out.println("[INFO] - Los datos son insuficientes, cargando vista normal...");
 						new Data_Clients(configLoad, language, username);
 					}
 					

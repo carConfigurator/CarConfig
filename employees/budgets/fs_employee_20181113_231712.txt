@@ -1,0 +1,14 @@
+[Empleado] alexis.mengual
+------
+[Cliente] a,a,a,a,a@a.com,Hombre,06-02-1998
+------
+[Modelo] 2,SEAT Ateca,Observaciones del SEAT Ateca,11368.1
+------
+[Motor] 2, Mii 1.0 55 KW (75 CV), Gasolina / 5 Velocidades Manual, 195.9
+------
+[Accesorios]
+2, Navegador, Navegador, 70.0
+4, Asientos calefactados, Asientos calefactados, 350.0
+8, Pintura metalizada, Pintura metalizada, 500.0
+------
+9987,20

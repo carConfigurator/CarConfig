@@ -181,14 +181,13 @@ public class Data_Clients extends JFrame{
 		this.bg_gender.add(rb_female);
 		this.bg_gender.add(rb_unknown);
 		
-		String getGender = this.client.getGender();
+		String getGender = this.client.getGender();		
+		this.rb_unknown.setSelected(true);
 		
 		if(getGender.equals(language.getText(ELanguage.radioGenderMale))) {
 			this.rb_male.setSelected(true);
 		}else if(getGender.equals(language.getText(ELanguage.radioGenderFemale))) {
 			this.rb_female.setSelected(true);
-		}else if(getGender.equals(null) || getGender.equals(language.getText(ELanguage.radioGenderUnknown))) {
-			this.rb_unknown.setSelected(true);	
 		}
 		
 		this.label_client_birthdate = new JLabel(this.language.getText(ELanguage.labelClientBirhdate));

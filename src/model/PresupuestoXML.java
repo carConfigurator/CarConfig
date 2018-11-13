@@ -257,7 +257,7 @@ public class PresupuestoXML {
 	private void createXML() {
 		Source source = new DOMSource(document);
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-		Result result = new StreamResult(new File("employees\\budgets\\presupuesto_"+timeStamp+".xml")); //nombre del archivo
+		Result result = new StreamResult(new File("employees"+File.separator+"budgets"+File.separator+"presupuesto_"+timeStamp+".xml")); //nombre del archivo
 		Transformer transformer;
 		
 		try {

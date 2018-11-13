@@ -21,6 +21,7 @@ public class JFrame extends javax.swing.JFrame {
 	 */
 	public void addFrame(ConfigurationLoader configLoad, JPanel panel, Language language, String title) {
 		add(panel);
+		System.out.println("[INFO] - Cargando titulo del Frame");
 		setTitle(language.getText(ELanguage.titleDefault)+" - "+title);
 		setIconImage(getIconImage(configLoad));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,6 +79,7 @@ public class JFrame extends javax.swing.JFrame {
 	 * @see java.awt.Frame#getIconImage()
 	 */
 	private Image getIconImage(ConfigurationLoader configLoader) {
+		System.out.println("[INFO] - Cargando favicon...");
 		File image = new File(configLoader.getIconImage());
         Image retValue = Toolkit.getDefaultToolkit().getImage(image.getAbsolutePath());
         return retValue;

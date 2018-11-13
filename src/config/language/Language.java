@@ -50,6 +50,11 @@ public class Language {
 		}
 	}
 	
+	/*
+	 * Recupero el String a partir de la clave
+	 * @param Paso el Enum para poder obtener el texto.
+	 * @return Obtengo el texto deseado.
+	 */
 	public String getText(Enum enumText) {
 		return hLanguage.get(enumText);
 	}

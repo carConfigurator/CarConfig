@@ -115,7 +115,7 @@ public class Albaran extends JFrame {
 			int i = 0;
 			String line;
 			
-			//creamos el xml del presupuesti
+			//Creamos el XML del Presupuesto
 			PresupuestoXML xml = new PresupuestoXML();
 			
 			try {
@@ -141,16 +141,14 @@ public class Albaran extends JFrame {
 						while(!(line = br.readLine()).contains("------")) {
 							xml.setAccessories(line);
 						}
-						//PRICE
+						// Precio:
 						line = br.readLine();
 						xml.setPrice(Double.parseDouble(line.replace(',', '.')));
 					}
 				}
-				System.out.println(xml.toString());
 				fr.close();
 				br.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			xml.headerXML();
@@ -200,6 +198,7 @@ public class Albaran extends JFrame {
                 fr.close();
                 bw.close();
                 fw.close();
+                
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -209,7 +208,9 @@ public class Albaran extends JFrame {
 	}
 	
 	private void loginActionPerformed(ActionEvent e) {
+		System.out.println("[INFO] - Vaciando el Archivo Temporal");
 		deleteTemp();
+		System.out.println("[INFO] - Preparando vista para generar un nuevo Presupuesto");
 		setVisible(false);
 		new Data_Clients(this.configLoad, this.language, this.username, new Client(), false);
 	}
