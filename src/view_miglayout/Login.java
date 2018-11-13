@@ -55,7 +55,7 @@ public class Login extends JFrame{
 		ConfigurationLoader configLoad2 = ConfigurationLoader.getConfigurationLoaderInstance();
 		System.out.println("[INFO] - Obteniendo idioma del Archivo de Configuración...");
 		System.out.println("\t [DEMO] - El idioma para este sprint será únicamente en Castellano,\n\t pero está planteado para multilenguajes.");
-		this.language = new Language(configLoad.getLanguage_files_path()+configLoad.getLanguage_default()+configLoad.getPostfix_language_file_name());
+		this.language = new Language(LanguageFactory.getLanguage(configLoad));
 		this.temp = new File(this.configLoad.getTemporalPathFile());
 		
 		// Volvemos a generar el fichero txt:
@@ -163,7 +163,6 @@ public class Login extends JFrame{
 				System.out.println("[INFO] - Escribiendo en el fichero temporal.");
 				// Oculto este Frame y llamo al siguiente:
 				setVisible(false);
-				System.out.println("Me sigo cagando en tu puta madre");
 				new check(this.configLoad, this.language, username);
 			}else {//si la contraseña era invalida saltara un error de la contraseña
 				System.out.println("[ERROR] - El usuario/contraseña es incorrecto");

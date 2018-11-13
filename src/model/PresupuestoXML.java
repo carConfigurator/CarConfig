@@ -47,10 +47,8 @@ public class PresupuestoXML {
 		}
 
 		this.implementation = builder.getDOMImplementation();
-		
-//		this.transformer = null;
+	
 		accessories = new ArrayList<String>();
-//		headerXML();
 	}
 
 	public String getEmployee() {
@@ -199,20 +197,20 @@ public class PresupuestoXML {
 		//cogemos la informacion de los motores (la separamos por , por lo tanto lo recogemos por posicion)
 		this.element = document.createElement("Engine");
 		//no le pasamos el id, por lo tanto peta
-//				this.node = document.createElement("id");
-//					text = document.createTextNode(getEngine().split(",")[0]);
-//				this.node.appendChild(text);//añadimos el texto al node
-//			this.element.appendChild(this.node);//añadimos el node al element
+				this.node = document.createElement("id");
+					text = document.createTextNode(getEngine().split(",")[0]);
+				this.node.appendChild(text);//añadimos el texto al node
+			this.element.appendChild(this.node);//añadimos el node al element
 				this.node = document.createElement("name");
-					text = document.createTextNode(getEngine().split(",")[0]);//1
+					text = document.createTextNode(getEngine().split(",")[1]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
 				this.node = document.createElement("description");
-					text = document.createTextNode(getEngine().split(",")[1]);//2
+					text = document.createTextNode(getEngine().split(",")[2]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
 				this.node = document.createElement("price");
-					text = document.createTextNode(getEngine().split(",")[2]);//3
+					text = document.createTextNode(getEngine().split(",")[3]);
 				this.node.appendChild(text);//añadimos el texto al node
 			this.element.appendChild(this.node);//añadimos el node al element
 		raiz.appendChild(element);//añadimos el element en la raiz

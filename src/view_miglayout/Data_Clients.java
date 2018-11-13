@@ -57,7 +57,6 @@ public class Data_Clients extends JFrame{
 		System.out.println("[INFO] - Mostrando nuevamente el Frame de Datos Clientes...");
 		System.out.println("[INFO] - Recuperando información...");
 		this.client = client;
-		System.out.println(this.client.toString());
 		this.language = language;
 		this.configLoad = configLoad;
 		this.username = username;
@@ -120,7 +119,6 @@ public class Data_Clients extends JFrame{
 		this.label_client_first_lastname.setFont(new java.awt.Font("Tahoma", 0, 12));
 		
 		this.tfield_client_first_lastname = new JTextField(30);
-		System.out.println("Recuperando Primer Apellido: " + this.client.getFirst_last_name());
 		this.tfield_client_first_lastname.setText(this.client.getFirst_last_name());
 		this.tfield_client_first_lastname.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(157, 157, 157)),
@@ -198,7 +196,6 @@ public class Data_Clients extends JFrame{
 		this.label_client_birthdate.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 5));
 		
 		this.dc_birthdate = new JDateChooser();
-		System.out.println(client.getBirthdate());
 		if(client.getBirthdate() != null) {
 			this.dc_birthdate = new JDateChooser();
 			DateFormat df = new SimpleDateFormat("dd-MM-yyyy");		

@@ -26,7 +26,6 @@ public class check extends JFrame{
 	File temp;
 	
 	public check(ConfigurationLoader configLoad, Language language, String username) {
-		System.out.println("HDP");
 		// Comprobará siempre si el archivo existe, en caso de que exista lo eliminará para generarlo desde 0.
 		this.temp = new File(configLoad.getTemporalPathFile());		
 		if(this.temp.exists()) {
@@ -83,7 +82,6 @@ public class check extends JFrame{
 					if(client.getName() != null) {
 						if(model.getId() != 0) {
 							if(engine.getId() != 0) {
-								System.out.println("P: " + engine.getId());
 								new Selection_Engine(configLoad, language, username, client, model, engine);
 							}else {
 								new Selection_Model(configLoad, language, username, client, model);

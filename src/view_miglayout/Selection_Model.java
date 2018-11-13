@@ -251,7 +251,7 @@ public class Selection_Model extends JFrame{
 		});
 
 		addMenuBar(pMenu);
-		addFrame(configLoad, panelMig, language, language.getText(ELanguage.titleDefault));
+		addFrame(configLoad, panelMig, language, language.getText(ELanguage.seleccionModeloTitle));
 	}
 	
 	private void createButton() {
