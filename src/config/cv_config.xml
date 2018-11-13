@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf8" standalone="no"?>
 <ConfigurationLoader>
 	<configuration>
-		<language>es,ca,en</language>
+		<language>ca,es,en</language>
 		<language_default>es</language_default>
 		<postfix_language_file_name>_cv.language</postfix_language_file_name>
 		<version>0.0.0</version>
