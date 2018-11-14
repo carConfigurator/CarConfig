@@ -82,6 +82,7 @@ public class Selection_Engine extends JFrame {
 		}
 		
 		onCreate();
+		list.setSelectedIndex(engine.getId()-1);
 	}
 	
 	public Selection_Engine(ConfigurationLoader configLoad, Language language, String username, Client client, Model model) {
